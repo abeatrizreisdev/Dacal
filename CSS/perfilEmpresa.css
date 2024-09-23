@@ -204,6 +204,14 @@ nav {
 padding-top: 2vh;
 }
 
+.infoGerais{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.parteGeral p{
+    text-align: justify;
+}
 .dadosGerais{
     width: 45vw;
     height: 75vh;
@@ -265,6 +273,7 @@ padding-top: 2vh;
 .input{
     height: 4vh;
     width: 18vw;
+    border: 0.5vh solid;
   }
   
 
