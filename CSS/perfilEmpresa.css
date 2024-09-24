@@ -60,7 +60,7 @@ nav {
     height: 4vh;
     width: 100vw;
     text-align: center;
-    
+
 }
 
 .informativo_superior p {
@@ -136,7 +136,7 @@ nav {
     align-items: center;
 }
 
-.abas{
+.abas {
     background-color: #ffffff;
     height: 20vh;
     width: 20vw;
@@ -146,12 +146,15 @@ nav {
     align-items: center;
     justify-content: space-evenly;
 }
-#nomeEmpresa{
+
+#nomeEmpresa {
     font-weight: bold;
 }
-.tituloAbas{
+
+.tituloAbas {
     font-weight: bold;
 }
+
 .imgPerfil {
     height: 9vh;
 }
@@ -186,50 +189,72 @@ nav {
     font-family: "Poppins";
     display: flex;
     flex-direction: row;
-    justify-content: space-between;     
+    justify-content: space-between;
 }
 
 
-.geral{
+.geral {
     align-items: center;
 
 
 }
-.infoConta{
- display: flex;
- flex-direction: row;
- justify-content: space-around;
- width: 75vw;
- display: flex;
-padding-top: 2vh;
+
+.infoConta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 75vw;
+    display: flex;
+    padding-top: 2vh;
 }
 
-.infoGerais{
+.infoGerais {
     display: flex;
     justify-content: space-evenly;
 }
 
-.parteGeral p{
+.parteGeral p {
     text-align: justify;
 }
-.dadosGerais{
+
+.dadosGerais {
     width: 45vw;
     height: 75vh;
     border-radius: 3vh;
     border-color: #000000;
     border: 0.5vh solid;
     text-align: center;
-    
+
 }
 
-#titulo{
+.formDados {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.endereço {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-family: "Poppins";
+    font-size: 3vh;
+}
+
+.inputAPI {
+    height: 4vh;
+    width: 12vw;
+    border: 0.5vh solid;
+}
+
+#titulo {
     font-family: "Poppins";
     font-size: 1.7vw;
     font-weight: 700;
-    
+
 }
 
-.alterarDados{
+.alterarDados {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -241,7 +266,7 @@ padding-top: 2vh;
 }
 
 
-.alterarEmail{
+.alterarEmail {
     width: 20vw;
     height: 25vh;
     border-radius: 3vh;
@@ -253,7 +278,7 @@ padding-top: 2vh;
     justify-content: space-evenly;
 }
 
-.alterarSenha{
+.alterarSenha {
     width: 20vw;
     height: 25vh;
     border-radius: 3vh;
@@ -265,19 +290,20 @@ padding-top: 2vh;
     justify-content: space-evenly;
 }
 
-.tituloAlterar{
+.tituloAlterar {
     text-align: center;
     font-size: 1.7vw;
     font-weight: 700;
 }
-.input{
+
+.input {
     height: 4vh;
     width: 18vw;
     border: 0.5vh solid;
-  }
-  
+}
 
 #btnLogin {
+    align-items: center;
     background-color: #7ed957;
     width: 18vw;
     height: 6vh;
@@ -286,8 +312,19 @@ padding-top: 2vh;
     font-family: "Poppins";
     font-weight: 700;
     cursor: pointer;
-  }
+}
 
+#btnSalvar {
+    align-items: center;
+    background-color: #7ed957;
+    width: 40vw;
+    height: 6vh;
+    border-radius: 1vh;
+    font-size: 3vh;
+    font-family: "Poppins";
+    font-weight: 700;
+    cursor: pointer;
+}
 
 
 

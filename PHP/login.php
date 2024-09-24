@@ -10,34 +10,55 @@
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/login.css">
 </head>
+<script>
+    function metodosLogin(type) {
+        const loginEmpresa = document.getElementById('loginEmpresa');
+        const loginFuncionario = document.getElementById('loginFuncionario');
+        if (type === 'empresa') {
+            loginEmpresa.style.display = 'block';
+            loginFuncionario.style.display = 'none';
+        } else {
+            loginEmpresa.style.display = 'none';
+            loginFuncionario.style.display = 'block';
+        }
+    }
+</script>
+<php?
+function entradaBanco{
+    if (metodosLogin = 'empresa'){
 
+    }else{
+        
+    }
+}
+
+?>
 <header>
 
 </header>
-
-
 <body>
     <div id="homeGeral">
         <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
         <form action="" class="formularioLogin">
             <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
-
             <h1 id="titulo">Tipo de Acesso</h1>
-            <br>
             <div class="container">
-                <a class="btn" href="../PHP/loginEmpresa.php">Empresa</a>
-                <a class="btn" href="../PHP/loginFuncionario.php">Funcionário</a>
+                <a class="btn" href="#" onclick="metodosLogin('empresa')">Empresa</a>
+                <a class="btn" href="#" onclick="metodosLogin('funcionario')">Funcionário</a>
             </div>
-            <br>
             <div class="formularioInterior">
-                <p class="formularioNomes">CNPJ</p>
-                <input type="text" id="cnpj" name="cnpj" class="input">
+                <div id="loginEmpresa" style="display:block;">
+                    <p class="formularioNomes">CNPJ</p>
+                    <input type="text" id="cnpj" name="cnpj" class="input">
+                </div>
+                <div id="loginFuncionario" style="display:none;">
+                    <p class="formularioNomes">CPF</p>
+                    <input type="text" id="cpf" name="cpf" class="input">
+                </div>
                 <p class="formularioNomes">Senha</p>
                 <input type="password" id="senha" name="senha" class="input">
                 <p>Ainda não tem conta? <a id="cadastro" href="#">Cadastre-se Aqui.</a></p>
             </div>
-            <br>
-            <br>
             <button type="submit" id="btnLogin">Login</button>
         </form>
     </div>
@@ -46,4 +67,5 @@
 
 <footer id="footer">
 </footer>
+
 </html>

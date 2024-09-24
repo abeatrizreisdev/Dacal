@@ -79,41 +79,57 @@
             </a>
         </div>
         <div class="quadrado">
-        <div class="geral">
-            <div class="infoConta">
-                <div class="dadosGerais">
-                    <p id="titulo">Dados da Conta</p>
-                    <form class="formDados">
-                        <div class="infoGerais">
-                            <div class="parteGeral">
-                            <p>CNPJ da Empresa</p>
-                            <input type="password" id="trocarSenha" name="senha" class="input">
-                        </div>
-                        <div class="parteGeral">
-                            <p>Razão Social</p>
-                            <input type="password" id="trocarSenha" name="senha" class="input">
-                        </div>
-                        </div>
-                        <div class="Endereço">
-                            
-                        </div>
-                        <button type="submit" id="btnLogin">Salvar Alterções</button>
-                    </form>
-                </div>
-                <div class="alterarDados">
-                    <div class="alterarEmail">
-                        <p class="tituloAlterar">E-mail</p>
-                        <input type="password" id="trocarSenha" name="senha" class="input">
-                        <button type="submit" id="btnLogin">Alterar E-mail</button>
+            <div class="geral">
+                <div class="infoConta">
+                    <div class="dadosGerais">
+                        <p id="titulo">Dados da Conta</p>
+                        <form class="formDados">
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>CNPJ da Empresa</p>
+                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>Razão Social</p>
+                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                </div>
+                            </div>
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Inscrição Estadual</p>
+                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>Telefone</p>
+                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="endereço">
+                            <p id="">Endereço</p>
+                            <input type="text" id="razaoSocial" name="razaoSocial" class="inputAPI">
+                            <input type="text" id="razaoSocial" name="razaoSocial" class="inputAPI">
+                            </div>
+                            <div class="btn">
+                                <br>
+                                <button type="submit" id="btnSalvar">Salvar Alterações</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="alterarSenha">
-                        <p class="tituloAlterar">Senha</p>
-                        <input type="password" id="trocarSenha" name="senha" class="input">
-                        <button type="submit" id="btnLogin">Alterar Senha</button>
+                    <div class="alterarDados">
+                        <div class="alterarEmail">
+                            <p class="tituloAlterar">E-mail</p>
+                            <input type="password" id="trocarSenha" name="senha" class="input">
+                            <button type="submit" id="btnLogin">Alterar E-mail</button>
+                        </div>
+                        <div class="alterarSenha">
+                            <p class="tituloAlterar">Senha</p>
+                            <input type="password" id="trocarSenha" name="senha" class="input">
+                            <button type="submit" id="btnLogin">Alterar Senha</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 
