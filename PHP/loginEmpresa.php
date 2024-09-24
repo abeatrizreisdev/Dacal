@@ -8,7 +8,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="/CSS/login.css">
+    <link rel="stylesheet" href="../CSS/login.css">
 </head>
 
 <header>
@@ -18,17 +18,16 @@
 
 <body>
     <div id="homeGeral">
-        <img src="/IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
+        <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
         <form action="" class="formularioLogin">
-            <img src="/IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
-
+            <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
             <h1 id="titulo">Tipo de Acesso</h1>
-            <br>
+            </br>
             <div class="container">
-                <a class="btn" href="/PHP/loginEmpresa.html">Empresa</a>
+                <a class="btnAtivado" href="/PHP/loginEmpresa.html">Empresa</a>
                 <a class="btn" href="/PHP/loginFuncionario.html">Funcionário</a>
             </div>
-            <br>
+            </br>
             <div class="formularioInterior">
                 <p class="formularioNomes">CNPJ</p>
                 <input type="text" id="cnpj" name="cnpj" class="input">
@@ -36,14 +35,12 @@
                 <input type="password" id="senha" name="senha" class="input">
                 <p>Ainda não tem conta? <a id="cadastro" href="#">Cadastre-se Aqui.</a></p>
             </div>
-            <br>
-            <br>
+            </br>
+            </br>
             <button type="submit" id="btnLogin">Login</button>
         </form>
     </div>
 </body>
-
-
 <footer id="footer">
 </footer>
 </html>
