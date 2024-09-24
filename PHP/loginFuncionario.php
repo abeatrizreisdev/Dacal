@@ -24,8 +24,8 @@
             <h1 id="titulo">Tipo de Acesso</h1>
             </br>
             <div class="container">
-                <a class="btn" href="/PHP/loginEmpresa.html">Empresa</a>
-                <a class="btnAtivado" href="/PHP/loginFuncionario.html">Funcionário</a>
+                <a class="btn" href="...DACAL/PHP/loginEmpresa.php">Empresa</a>
+                <a class="btnAtivado" href="...DACAL/PHP/loginFuncionario.php">Funcionário</a>
             </div>
             </br>
             <div class="formularioInterior">
