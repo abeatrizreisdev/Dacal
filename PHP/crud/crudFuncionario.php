@@ -39,6 +39,36 @@
 
         }
 
+        public function autenticarUsuario($cpf, $senha) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE cpf = :cpf AND senha = :senha";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cpf' => $cpf, 'senha' => $senha]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+                    echo "<br>Funcionário encontrado com sucesso.";
+
+                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    echo "<br>Nenhum funcionário encontrado com esse cpf e senha informados.";
+
+                    return null;
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+
+            }
+
+        }
 
         public function buscarInfoFuncionario($idFuncionario) {
 

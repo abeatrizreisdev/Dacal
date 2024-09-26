@@ -1,5 +1,7 @@
 <?php 
 
+    require "/xampp/htdocs/Dacal/PHP/crud/crud.php";
+
     class CrudCliente extends Crud {
 
         public function __construct($conexao) {
@@ -41,6 +43,36 @@
 
         }
 
+        public function autenticarCliente($cnpj, $senha) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj AND senha = :senha";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj, 'senha' => $senha]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+                    echo "<br>Cliente encontrado com sucesso.";
+
+                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    echo "<br>Nenhum cliente encontrado com esse cnpj e senha informada.";
+
+                    return null;
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+
+            }
+
+        }
 
         public function buscarInfoCliente($idCliente) {
 

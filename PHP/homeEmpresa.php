@@ -1,3 +1,9 @@
+<?php 
+
+    session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -40,7 +46,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa">EMPRESA FANTASIA</p>
+                    <p id="nomeEmpresa"> <?php echo $_SESSION['nomeEmpresa'] ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -80,7 +86,7 @@
         <div class="quadrado">
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong>EMPRESA FANTASIA</strong> </p>
+                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $_SESSION['nomeEmpresa'] ?></strong> </p>
                     <br>
                     <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
                         sua

@@ -19,7 +19,7 @@
 <body>
     <div id="homeGeral">
         <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-        <form action="" class="formularioLogin">
+        <form action="/xampp/htdocs/Dacal/PHP/autenticaco/autenticacaoFuncionario.php" method="post" class="formularioLogin">
             <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
             <h1 id="titulo">Tipo de Acesso</h1>
             </br>
@@ -30,7 +30,7 @@
             </br>
             <div class="formularioInterior">
                 <p class="formularioNomes">CPF</p>
-                <input type="text" id="cnpj" name="cnpj" class="input">
+                <input type="text" id="cnpj" name="cpf" class="input">
                 <p class="formularioNomes">Senha</p>
                 <input type="password" id="senha" name="senha" class="input">
             </div>

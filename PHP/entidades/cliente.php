@@ -42,7 +42,7 @@
         private $municipio;
         private $numeroEndereco;
 
-        public function __construct($dados) {
+        public function __construct() {
             
         }
 
@@ -222,11 +222,11 @@
 
         public function setMunicipio($municipio) {
 
-            if (empty($cidade)) {
+            if (empty($municipio)) {
 
                 throw new Exception("Erro. O Municipio do cliente não pode ser vazio.");
 
-            } elseif (!is_string($cidade)) {
+            } elseif (!is_string($municipio)) {
 
                 throw new Exception("Erro. O Municipio do cliente deve ser do tipo texto.");
 
@@ -304,7 +304,7 @@
             return $this->id;
         }
 
-        public function geNome() {
+        public function getNome() {
             return $this->nome;
         }
 
