@@ -1,6 +1,6 @@
 <?php 
 
-    require "/xampp/htdocs/Dacal/PHP/crud/crud.php";
+    require "../crud/crud.php";
 
     class CrudCliente extends Crud {
 
@@ -171,6 +171,75 @@
 
         }
 
+        public function editarEmailCliente($idCliente, $novoEmail) {
+
+            try {
+
+                // Comando sql para editar as informações do funcionário.
+                $sql = "UPDATE {$this->tabela} SET email = :novoEmail WHERE idCliente = :idCliente";
+        
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['novoEmail' => $novoEmail, 'idCliente' => $idCliente]);
+                
+                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+                if ($resultadoConsulta > 0) {
+
+                    echo "<br>Email do cliente editado com sucesso.";
+
+                    return true;
+
+                } else {
+
+                    echo "<br>Cliente não encontrado.";
+
+                    return false;
+
+                }
+        
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na edição do email do cliente: " . $excecao->getMessage();
+                
+                return false;
+
+            }
+
+
+        }
+
+        public function editarSenhaCliente($idCliente, $novaSenha) {
+
+            try {
+
+                // Comando sql para editar as informações do funcionário.
+                $sql = "UPDATE {$this->tabela} SET senha = :novaSenha WHERE idCliente = :idCliente";
+        
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['novaSenha' => $novaSenha, 'idCliente' => $idCliente]);
+                
+                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+                if ($resultadoConsulta > 0) {
+
+                    echo "<br>Senha do cliente editada com sucesso.";
+
+                    return true;
+
+                } else {
+
+                    echo "<br>Cliente não encontrado.";
+
+                    return false;
+
+                }
+        
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na edição da senha do cliente: " . $excecao->getMessage();
+                
+                return false;
+
+            }
+
+        }
+
         public function excluirCliente($idCliente) {
 
             try {
@@ -195,6 +264,8 @@
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na exclusão do cliente: " . $excecao->getMessage();
+
+                return null;
 
             }
 

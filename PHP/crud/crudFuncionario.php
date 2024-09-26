@@ -1,5 +1,7 @@
 <?php 
 
+    require "../crud/crud.php";
+    
     class CrudFuncionario extends Crud {
 
         public function __construct($conexao) {

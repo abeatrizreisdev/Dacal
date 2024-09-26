@@ -1,3 +1,13 @@
+<?php
+
+require './sessao/sessao.php';
+
+    $sessao = new Sessao();
+    $erro = $sessao->getValorSessao('erro');
+    $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,6 +39,7 @@
             </div>
             </br>
             <div class="formularioInterior">
+                <p><?php echo $erro ?></p>
                 <p class="formularioNomes">CNPJ</p>
                 <input type="text" id="cnpj" name="cnpj" class="input">
                 <p class="formularioNomes">Senha</p>

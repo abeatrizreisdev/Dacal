@@ -236,7 +236,7 @@
             return $this->id;
         }
 
-        public function geNome() {
+        public function getNome() {
             return $this->nome;
         }
 

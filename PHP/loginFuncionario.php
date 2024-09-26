@@ -19,7 +19,7 @@
 <body>
     <div id="homeGeral">
         <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-        <form action="/xampp/htdocs/Dacal/PHP/autenticaco/autenticacaoFuncionario.php" method="post" class="formularioLogin">
+        <form action="./autenticacao/autenticacaoFuncionario.php" method="post" class="formularioLogin">
             <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
             <h1 id="titulo">Tipo de Acesso</h1>
             </br>

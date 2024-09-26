@@ -1,6 +1,8 @@
 <?php 
 
-    session_start();
+    require "./sessao/sessao.php";
+
+    $sessaoCliente = new Sessao();
 
 ?>
 
@@ -30,9 +32,11 @@
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
-            <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
+            <a href="./autenticacao/logout.php">
+                <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
                 <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
             </button>
+            </a>
         </ul>
     </nav>
 </header>
@@ -46,7 +50,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $_SESSION['nomeEmpresa'] ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -58,7 +62,7 @@
             <a class="abas">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
-                    <p class="tituloAbas">Meu Perfil</p>
+                    <p class="tituloAbas"> Meu Perfil</p>
                     <p class="descricaoAbas">Visualize e altere seus</p>
                     <p class="descricaoAbas">dados.</p>
                 </div>

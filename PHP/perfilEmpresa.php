@@ -1,3 +1,11 @@
+<?php 
+
+    require "./sessao/sessao.php";
+
+    $sessaoCliente = new Sessao();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,9 +33,11 @@
         </ul>
 
         <ul class="icons">
-            <button class="sair" href="../IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+            <a href="./autenticacao/logout.php">
+                <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
+            </a>
         </ul>
     </nav>
 </header>
@@ -41,7 +51,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa">EMPRESA FANTASIA</p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -83,25 +93,25 @@
                 <div class="infoConta">
                     <div class="dadosGerais">
                         <p id="titulo">Dados da Conta</p>
-                        <form class="formDados">
+                        <form action="#" method="" class="formDados">
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
-                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" value="<?php echo $sessaoCliente->getValorSessao('cnpj') ?>">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Razão Social</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input" value="<?php echo $sessaoCliente->getValorSessao('razaoSocial'); ?>">
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Inscrição Estadual</p>
-                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" value="<?php echo $sessaoCliente->getValorSessao('inscricaoEstadual'); ?>" >
                                 </div>
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input" value="<?php echo $sessaoCliente->getValorSessao('telefone'); ?>">
                                 </div>
                             </div>
                             <br>
@@ -117,16 +127,16 @@
                         </form>
                     </div>
                     <div class="alterarDados">
-                        <div class="alterarEmail">
+                        <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST" class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
-                            <input type="password" id="trocarSenha" name="senha" class="input">
+                            <input type="email" id="trocarSenha" name="email" class="input" value="<?php echo $sessaoCliente->getValorSessao('email'); ?> ">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
-                        </div>
-                        <div class="alterarSenha">
+                        </form>
+                        <form action="./edicoesDeDadosCliente/editarSenhaCliente.php" method="POST" class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
-                            <input type="password" id="trocarSenha" name="senha" class="input">
+                            <input type="password" id="trocarSenha" name="senha" class="input" value="<?php echo $sessaoCliente->getValorSessao('senha'); ?>">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

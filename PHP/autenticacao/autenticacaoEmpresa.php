@@ -1,8 +1,9 @@
 <?php 
 
-    require "/xampp/htdocs/Dacal/PHP/conexaoBD/conexaoBD.php";
-    require "/xampp/htdocs/Dacal/PHP/crud/crudCliente.php";
-    require "/xampp/htdocs/Dacal/PHP/entidades/cliente.php";
+    require "../conexaoBD/conexaoBD.php";
+    require "../crud/crudCliente.php";
+    require "../entidades/cliente.php";
+    require "../sessao/sessao.php";
 
     $conexao = new ConexaoBD();
     $conexao->setEschemaBD("dacal");
@@ -12,10 +13,10 @@
     $conexao->setSenhaBD("96029958va");
     $conexao->setUsuarioBD("root");
     $conexao->getConexao();
+
+    
     
     $crudCliente = new CrudCliente($conexao);
-    
-    session_start();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -27,11 +28,17 @@
         switch ($resultadoAutenticacao) {
 
             case null :
+
+                $sessao = new Sessao();
     
-                return "Nenhum Cliente encontrado com este cnpj e senha informada.";
+                $sessao->setChaveEValorSessao('erro', 'CNPJ ou senha incorretos.');
+                header('Location: ../loginEmpresa.php');
+                exit();
     
             default :
-    
+
+                $sessao = new Sessao();
+                
                 // Instanciando o cliente que fez a autenticação.
                 $clienteAutenticado = new Cliente();
     
@@ -52,13 +59,21 @@
                 $clienteAutenticado->setCep($resultadoAutenticacao['cep']);
                 $clienteAutenticado->setNumeroEndereco($resultadoAutenticacao['numeroEndereco']);
     
-    
                 // Passando os dados do funcionário autenticado para criar sua sessão no site.
-                $_SESSION['idCliente'] = $clienteAutenticado->getId();
-                $_SESSION['nomeEmpresa'] = $clienteAutenticado->getNome();
-                $_SESSION['razaoSocial'] = $clienteAutenticado->getRazaoSocial();
-                $_SESSION['cnpj'] = $clienteAutenticado->getCnpj();
-                $_SESSION['inscricaoEstadual'] = $clienteAutenticado->getInscricaoEstadual();
+                $sessao->setChaveEValorSessao('idCliente', $clienteAutenticado->getId());
+                $sessao->setChaveEValorSessao('nomeEmpresa', $clienteAutenticado->getNome());
+                $sessao->setChaveEValorSessao('email', $clienteAutenticado->getEmail());
+                $sessao->setChaveEValorSessao('senha', $clienteAutenticado->getSenha());
+                $sessao->setChaveEValorSessao('razaoSocial', $clienteAutenticado->getRazaoSocial());
+                $sessao->setChaveEValorSessao('cnpj', $clienteAutenticado->getCnpj());
+                $sessao->setChaveEValorSessao('inscricaoEstadual', $clienteAutenticado->getInscricaoEstadual());
+                $sessao->setChaveEValorSessao('telefone', $clienteAutenticado->getTelefone());
+                $sessao->setChaveEValorSessao('estado', $clienteAutenticado->getEstado());
+                $sessao->setChaveEValorSessao('municipio', $clienteAutenticado->getMunicipio());
+                $sessao->setChaveEValorSessao('bairro', $clienteAutenticado->getBairro());
+                $sessao->setChaveEValorSessao('cep', $clienteAutenticado->getCep());
+                $sessao->setChaveEValorSessao('logradouro', $clienteAutenticado->getLogradouro());
+                $sessao->setChaveEValorSessao('numeroEndereco', $clienteAutenticado->getNumeroEndereco());
     
                 header("Location: ../homeEmpresa.php");
 
