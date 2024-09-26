@@ -1,0 +1,175 @@
+<?php 
+
+    class CrudCliente extends Crud {
+
+        public function __construct($conexao) {
+            parent::__construct($conexao, "cliente");
+        }
+
+        public function cadastrarCliente($dados) {
+
+            $camposTabela = $this->organizarCamposDaTabela($dados);
+            $valores = $this->organizarValoresParaTabela($dados);
+
+            try {
+
+                $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+
+                $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $dados);
+
+                if ($resultadoCadastro > 0) {
+
+                    echo "<br>Cadastro de cliente realizado com sucesso.";
+
+                    return true;
+
+                } else {
+
+                    echo "<br>Cadastro de cliente não realizado.";
+
+                    return false;
+
+                }
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro no cadastro do cliente: " . $excecao->getMessage();
+
+                return false;
+
+            }
+
+        }
+
+
+        public function buscarInfoCliente($idCliente) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE idCliente = :id";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idCliente]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+                    echo "<br>Busca por cliente realizada com sucesso.";
+
+                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    echo "<br>Nenhum cliente encontrado.";
+
+                    return null;
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações do cliente: " . $excecao->getMessage();
+
+            }
+
+        }
+
+        public function buscarInfoTodosClientes() {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela}";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    echo "<br>A busca pelos clientes cadastrados foi realizado com sucesso.";
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    echo "<br>Nenhum cliente encontrado.";
+
+                }
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações dos clientes: " . $excecao->getMessage();
+
+            }
+
+
+        }
+
+        public function editarCliente($idCliente, $dados) {
+            
+            try {
+
+                // Instanciando uma lista para armazenar os campos da tabela.
+                $campos = $this->inserirCamposTabelaEmUmaLista($dados);
+
+                // Comando sql para editar as informações do funcionário.
+                $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE idCliente = :id";
+        
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idCliente]));
+                
+                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+                if ($resultadoConsulta > 0) {
+
+                    echo "<br>Cliente editado com sucesso.";
+
+                    return true;
+
+                } else {
+
+                    echo "<br>Cliente não encontrado.";
+
+                    return false;
+
+                }
+        
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na edição do cliente: " . $excecao->getMessage();
+                
+                return false;
+
+            }
+
+        }
+
+        public function excluirCliente($idCliente) {
+
+            try {
+
+                $sql = "DELETE FROM {$this->tabela} WHERE idCliente = :id";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idCliente]);
+                
+                if ($resultadoConsulta > 0) {
+                    
+                    echo "<br>Cliente excluido com sucesso.";
+
+                    return $resultadoConsulta;
+
+                } else {
+
+                    return null;
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na exclusão do cliente: " . $excecao->getMessage();
+
+            }
+
+
+        }
+
+
+    }
+
+?>
