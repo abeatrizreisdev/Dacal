@@ -27,7 +27,7 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="">Homepage</li></a>
+            <li><a href="./homeFuncionario.php">Homepage</li></a>
             <li><a href="">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -59,7 +59,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a class="abas" href="./perfilFuncionario.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
