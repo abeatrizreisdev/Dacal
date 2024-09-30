@@ -30,9 +30,9 @@
             </br>
             <div class="formularioInterior">
                 <p class="formularioNomes">CPF</p>
-                <input type="text" id="cnpj" name="cpf" class="input">
+                <input type="text" id="cnpj" name="cpf" class="input" required>
                 <p class="formularioNomes">Senha</p>
-                <input type="password" id="senha" name="senha" class="input">
+                <input type="password" id="senha" name="senha" class="input" required>
             </div>
             </br>
             </br>

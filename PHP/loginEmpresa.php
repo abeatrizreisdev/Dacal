@@ -41,9 +41,9 @@ require './sessao/sessao.php';
             <div class="formularioInterior">
                 <p><?php echo $erro ?></p>
                 <p class="formularioNomes">CNPJ</p>
-                <input type="text" id="cnpj" name="cnpj" class="input">
+                <input type="text" id="cnpj" name="cnpj" class="input" required>
                 <p class="formularioNomes">Senha</p>
-                <input type="password" id="senha" name="senha" class="input">
+                <input type="password" id="senha" name="senha" class="input" required>
                 <p>Ainda não tem conta? <a id="cadastro" href="#">Cadastre-se Aqui.</a></p>
             </div>
             </br>
