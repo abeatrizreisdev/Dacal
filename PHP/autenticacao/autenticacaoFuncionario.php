@@ -44,7 +44,7 @@
                 $funcionarioAutenticado->setNome($resultadoAutenticacao['nome']);
                 $funcionarioAutenticado->setEmail($resultadoAutenticacao['email']);
                 $funcionarioAutenticado->setSenha($resultadoAutenticacao['senha']);
-                $funcionarioAutenticado->setTelefone($resultadoAutenticacao['senha']);
+                $funcionarioAutenticado->setTelefone($resultadoAutenticacao['telefone']);
                 $funcionarioAutenticado->setTipoConta($resultadoAutenticacao['tipoConta']);
                 $funcionarioAutenticado->setCpf($resultadoAutenticacao['cpf']);
                 $funcionarioAutenticado->setEstado(($resultadoAutenticacao['estado']));
@@ -56,6 +56,14 @@
                 // Passando os dados do funcionário autenticado para criar sua sessão no site.
                 $sessao->setChaveEValorSessao('id', $funcionarioAutenticado->getId());
                 $sessao->setChaveEValorSessao('nome', $funcionarioAutenticado->getNome());
+                $sessao->setChaveEValorSessao('cpf', $funcionarioAutenticado->getCpf());
+                $sessao->setChaveEValorSessao('email', $funcionarioAutenticado->getEmail());
+                $sessao->setChaveEValorSessao('telefone', $funcionarioAutenticado->getTelefone());
+                $sessao->setChaveEValorSessao('estado', $funcionarioAutenticado->getEstado());
+                $sessao->setChaveEValorSessao('cidade', $funcionarioAutenticado->getCidade());
+                $sessao->setChaveEValorSessao('bairro', $funcionarioAutenticado->getBairro());
+                $sessao->setChaveEValorSessao('logradouro', $funcionarioAutenticado->getLogradouro());
+                $sessao->setChaveEValorSessao('cep', $funcionarioAutenticado->getCep());
 
                 header("Location: ../homeFuncionario.php");
 
