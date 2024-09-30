@@ -57,7 +57,7 @@
                 $sessao->setChaveEValorSessao('id', $funcionarioAutenticado->getId());
                 $sessao->setChaveEValorSessao('nome', $funcionarioAutenticado->getNome());
 
-                header("Location: ../homeEmpresa.php");
+                header("Location: ../homeFuncionario.php");
 
                 exit();
 
