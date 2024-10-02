@@ -79,7 +79,7 @@
                         <a href=""> <h2> Gerenciar catálogo </h2> </a>
                     </div>
                     <div class="containerFuncionalidades">
-                        <a href=""> <h2> Cadastrar produtos </h2> </a>
+                        <a href="./cadastrarProduto.php"> <h2> Cadastrar produtos </h2> </a>
                     </div>
                     <div class="containerFuncionalidades">
                         <a href=""> <h2> Visualizar orçamentos </h2> </a>

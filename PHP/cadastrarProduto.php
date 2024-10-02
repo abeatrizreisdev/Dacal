@@ -70,29 +70,31 @@
         </div>
         <section class="quadrado">
         
-                <form action="" enctype="multipart/form-data" class="containerForm">
+                <form action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroProduto.php" method="post" enctype="multipart/form-data" class="containerFormulario">
 
-                    <div class="form-content">
+                    <div class="containerImagemNomeEValor">
                             <label for="imagem" class="upload-container">
-                                <img src="placeholder.jpg" alt="Clique aqui para carregar a imagem do produto.">
-                                <input type="file" id="imagem" name="imagem" accept="image/*">
+                                <img src="" id="imagemPreview">
+                                <input type="file" id="imagem" name="imagem" accept="image/*" required>
+                                <span class="iconeUpload">+</span>
+                                
                             </label>
                             <div class="input-group">
                                 <label for="nomeProduto">Nome:</label>
                                 <input type="text" name="nome" id="nomeProduto" placeholder="Nome do produto." required>
 
                                 <label for="valorProduto">Valor:</label>
-                                <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required>
+                                <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required min="1">
                             </div>
                     </div>
 
                     <div class="descricao-field">
                         <label for="descricaoProduto">Descrição:</label>
-                        <textarea name="descricao" id="descricaoProduto"></textarea>
+                        <textarea name="descricao" id="descricaoProduto" required></textarea>
                     </div>
 
                     <div class="form-buttons">
-                        <a href="" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
+                        <a href="./homeFuncionario.php" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
                         <button type="submit" id="botaoCadastrarProduto">Cadastrar produto</button>
                     </div>
 
@@ -101,6 +103,7 @@
         </section>
     </div>
 
+    <script src="../JS/scriptCadastroDeProduto.js"></script>
 
 </body>
 
