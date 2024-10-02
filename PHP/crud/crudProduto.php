@@ -1,5 +1,7 @@
 <?php 
 
+    require "crud.php";
+
     class CrudProduto extends Crud {
 
         public function __construct($conexao) {
@@ -18,19 +20,6 @@
             $valores = $this->organizarValoresParaTabela($produto);
 
             try {
-
-                // Verificar se uma imagem foi enviada.
-                if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-
-                    $imagem = $_FILES['imagem']['tmp_name'];
-                    $imagemBlob = file_get_contents($imagem);
-
-                    // Adicionar o campo da imagem aos campos da tabela e valores.
-                    $camposTabela .= ", imagem_blob";
-                    $valores .= ", :imagem_blob";
-                    $produto['imagem_blob'] = $imagemBlob;
-
-                }
 
                 $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
 
