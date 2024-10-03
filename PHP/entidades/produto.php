@@ -10,13 +10,18 @@
         - nome: String
         - valor: Double
         - descricao: String
-        - imagem: String */
+        - imagem: Blob
+        - categoria: Int
+        
+        */
 
         private $id;
         private $nome;
         private $valor;
         private $descricao;
+        private $categoria;
         private $imagem;
+    
 
 
         public function __construct() {
@@ -94,13 +99,25 @@
 
         public function setImagem($imagem) {
 
-            if ($imagem !== null && !is_string($imagem)) {
+            if ($imagem == null) {
 
                 throw new Exception("Imagem do produto inválida.");
 
             }
 
             $this->imagem = $imagem;
+
+        }
+
+        public function setCategoria($categoria) {
+
+            if ($categoria == null or !is_numeric($categoria)) {
+
+                throw new Exception("Categoria do produto inválida.");
+
+            }
+
+            $this->categoria = $categoria;
 
         }
 
@@ -124,6 +141,10 @@
             return $this->imagem;
         }
 
+        public function getCategoria() {
+            return $this->categoria;
+        }
+
         /*
         Métodos: 
 
@@ -136,7 +157,8 @@
         + getNome(): String
         + getValor(): Double
         + getDescricao(): String
-        + getImagem(): String
+        + getImagem(): Blob
+        + getCategoria(): Int
         
         */
 

@@ -27,12 +27,10 @@
 
                 if ($resultadoCadastro > 0) {
 
-                    echo "<br>Cadastro de produto realizado com sucesso.";
                     return true;
 
                 } else {
 
-                    echo "<br>Cadastro de produto não realizado.";
                     return false;
 
                 }
@@ -56,13 +54,10 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Busca por produto realizada com sucesso.";
-
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum produto encontrado com este id {$idProduto}.";
 
                     return null;
 
@@ -87,13 +82,11 @@
 
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    echo "<br>A busca pelos produtos cadastrados foi realizada com sucesso.";
 
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum produto cadastrado.";
 
                     return null;
 
@@ -105,6 +98,34 @@
 
             }
 
+
+        }
+
+        public function buscarProdutosPorCategoria($categoriaProduto) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE categoria = :categoria";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['categoria' => $categoriaProduto]);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+
+                    return null;
+
+                }
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca por produtos cadastrados: " . $excecao->getMessage();
+
+            }
 
         }
 
@@ -124,13 +145,11 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Produto editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Produto não encontrado.";
 
                     return false;
 
@@ -155,13 +174,11 @@
                 
                 if ($resultadoConsulta > 0) {
                     
-                    echo "<br>Produto excluido com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>O produto não foi encontrado.";
 
                     return false;
 

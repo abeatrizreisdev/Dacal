@@ -46,16 +46,19 @@
                     $produto->setNome($nomeProduto);
                     $produto->setValor($valorProduto);
                     $produto->setDescricao($descricaoProduto);
+                    $produto->setCategoria(5);
 
                     // Chamando o método de cadastro do produto
                     $crudProduto->cadastrarProduto([
                         'nomeProduto' => $produto->getNome(),
                         'imagemProduto' => $produto->getImagem(),
                         'valorProduto' => $produto->getValor(),
-                        'descricaoProduto' => $produto->getDescricao()
+                        'descricaoProduto' => $produto->getDescricao(),
+                        'categoria' => $produto->getCategoria()
                     ]);
 
-                    echo 'Produto cadastrado com sucesso!';
+                    header("Location: ../homeFuncionario.php");
+                    exit();
 
                 } catch (Exception $excecao) {
 
