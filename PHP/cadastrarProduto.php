@@ -74,9 +74,8 @@
 
                     <div class="containerImagemNomeEValor">
                             <label for="imagem" class="upload-container">
-                                <img src="" id="imagemPreview">
+                                <img src="../IMAGENS/CadastrarProduto/iconeAdcionarImagemProduto.png" id="imagemPreview">
                                 <input type="file" id="imagem" name="imagem" accept="image/*" required>
-                                <span class="iconeUpload">+</span>
                                 
                             </label>
                             <div class="input-group">
