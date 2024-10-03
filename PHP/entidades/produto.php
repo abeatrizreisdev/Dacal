@@ -58,14 +58,18 @@
 
         public function setValor($valor) {
 
-            if (is_numeric($valor) && $valor -= 0) {
-
-                throw new Exception("Erro. O valor do produto não pode ser igual ou menor que 0.");
-
-            } elseif (!is_numeric($valor)) {
+            // Verifica se o valor é numérico.
+            if (!is_numeric($valor)) {
 
                 throw new Exception("Erro. Valor do produto inválido.");
+                
+            }
 
+            // Verifica se o valor é menor ou igual a zero.
+            if ($valor <= 0) {
+
+                throw new Exception("Erro. O valor do produto não pode ser igual ou menor que 0.");
+                
             }
 
             $this->valor = $valor;
