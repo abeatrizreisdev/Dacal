@@ -90,6 +90,7 @@ $sessaoCliente = new Sessao();
         </div>
         <div class="quadrado">
             <div class="geral">
+                <p id="tituloInfo">Informações da Conta</p>
                 <div class="infoConta">
                     <div class="dadosGerais">
                         <p id="titulo">Dados da Conta</p>
@@ -109,31 +110,43 @@ $sessaoCliente = new Sessao();
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Inscrição Estadual</p>
-                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input"
+                                    <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" class="input"
                                         value="<?php echo $sessaoCliente->getValorSessao('inscricaoEstadual'); ?>">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input"
+                                    <input type="text" id="telefone" name="telefone" class="input"
                                         value="<?php echo $sessaoCliente->getValorSessao('telefone'); ?>">
                                 </div>
                             </div>
                             <br>
                             <div class="endereço">
                                 <p id="">Endereço</p>
-                                <input type="text" id="razaoSocial" name="razaoSocial" class="inputAPI">
-                                <input type="text" id="razaoSocial" name="razaoSocial" class="inputAPI">
+                                <input type="text" id="estado" name="estado" class="inputAPI">
+                                <input type="text" id="municipio" name="municipio" class="inputAPI">
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Logradouro</p>
-                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input"
-                                        value="<?php echo $sessaoCliente->getValorSessao('inscricaoEstadual'); ?>">
+                                    <input type="text" id="logradouro" name="logradouro" class="input"
+                                        value="<?php echo $sessaoCliente->getValorSessao('logradouro'); ?>">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Nº</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input"
-                                        value="<?php echo $sessaoCliente->getValorSessao('telefone'); ?>">
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" class="input"
+                                        value="<?php echo $sessaoCliente->getValorSessao('numeroEndereco'); ?>">
+                                </div>
+                            </div>
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Bairro</p>
+                                    <input type="text" id="bairro" name="bairro" class="input"
+                                        value="<?php echo $sessaoCliente->getValorSessao('bairro'); ?>">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>CEP</p>
+                                    <input type="text" id="cep" name="cep" class="input"
+                                        value="<?php echo $sessaoCliente->getValorSessao('cep'); ?>">
                                 </div>
                             </div>
                             <div class="btn">
@@ -146,7 +159,7 @@ $sessaoCliente = new Sessao();
                         <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST"
                             class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
-                            <input type="email" id="trocarSenha" name="email" class="input"
+                            <input type="email" id="trocarEmail" name="email" class="input"
                                 value="<?php echo $sessaoCliente->getValorSessao('email'); ?> ">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
                         </form>

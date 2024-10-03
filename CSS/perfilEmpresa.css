@@ -219,12 +219,20 @@ nav {
 
 .dadosGerais {
     width: 45vw;
-    height: 75vh;
+    height: 65vh;
     border-radius: 3vh;
     border-color: #000000;
     border: 0.5vh solid;
     text-align: center;
 
+}
+
+#tituloInfo {
+    text-align: center;
+    font-family: 'Poppins';
+    padding-top: 0.5vw;
+    font-size: 2vw;
+    font-weight: 700;
 }
 
 .formDados {
@@ -243,7 +251,7 @@ nav {
 
 .inputAPI {
     height: 4vh;
-    width: 12vw;
+    width: 13vw;
     border: 0.5vh solid;
 }
 
@@ -298,9 +306,38 @@ nav {
 
 .input {
     height: 4vh;
-    width: 18vw;
     border: 0.5vh solid;
 }
+
+#cnpjEmpresa,
+#razaoSocial {
+    width: 18vw;
+}
+
+#inscricaoEstadual {
+    width: 21vw;
+}
+
+#telefone {
+    width: 15vw;
+}
+
+#logradouro {
+    width: 30.5vw;
+}
+
+#numeroEndereco {
+    width: 5.5vw;
+}
+
+#bairro {
+    width: 24vw;
+}
+
+#cep {
+    width: 12vw;
+}
+
 
 #btnLogin {
     align-items: center;
