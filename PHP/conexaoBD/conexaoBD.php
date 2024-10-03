@@ -61,7 +61,6 @@
 
                 $this->conexao->exec("set names utf8mb4");
 
-                echo "Conexão realizada com sucesso.";
 
             } catch (PDOException $excecao) {
 
@@ -79,10 +78,11 @@
 
                 $this->conexao = null;
 
-                echo "Conexão encerrada com sucesso.";
+                return true;
+
             } else {
 
-                echo "A conexão com o banco não estava ativa.";
+                return false;
 
             }
 

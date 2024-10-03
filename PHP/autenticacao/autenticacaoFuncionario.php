@@ -12,7 +12,7 @@
     $conexao->setEschemaBD("dacal");
     $conexao->setSenhaBD("96029958va");
     $conexao->setUsuarioBD("root");
-    $conexao->getConexao(); // Iniciando a conexão com o banco.
+    $conexao->getConexao(); 
 
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {

@@ -28,7 +28,7 @@
 
         <ul class="nav-list">
             <li><a href="./homeFuncionario.php">Homepage</li></a>
-            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
+            <li><a href="">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
@@ -69,27 +69,23 @@
             </a>
         </div>
         <section class="quadrado">
-            <div id="textoPrincipal">
-                <div id="infoPrincipal">
-                    
-                    <h1 id="tituloFuncionalidades"> Funcionalidades </h1>
-                    <br>
 
-                    <div class="containerFuncionalidades">
-                        <a href="./catalogoProdutos.php"> <h2> Gerenciar catálogo </h2> </a>
-                    </div>
-                    <div class="containerFuncionalidades">
-                        <a href="./cadastrarProduto.php"> <h2> Cadastrar produtos </h2> </a>
-                    </div>
-                    <div class="containerFuncionalidades">
-                        <a href=""> <h2> Visualizar orçamentos </h2> </a>
-                    </div>
-                    
-                </div>
+            <ul>
+                <li><a href="#" onclick="carregarProdutos(1)">Móveis</a></li>
+                <li><a href="#" onclick="carregarProdutos(2)">Cadeiras</a></li>
+                <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
+                <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
+                <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
+                <!-- Adicione mais categorias conforme necessário -->
+                </ul>
+            <div id="produtos">
+                <!-- Produtos serão carregados aqui -->
             </div>
+           
         </section>
     </div>
 
+    <script src="../JS/carregarProdutos.js"></script>
 
 </body>
 
