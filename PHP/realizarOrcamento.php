@@ -90,13 +90,13 @@
         <section class="quadrado">
             
                 <div class="container">
-                    <div class="tabs">
-                        <button class="tablinks" onclick="openStep(event, 'step1')" id="defaultOpen">1 - Catálogo de itens</button>
-                        <button class="tablinks" onclick="openStep(event, 'step2')"> 2 - Revisar orçamento</button>
-                        <button class="tablinks" onclick="openStep(event, 'step3')"> 3 - Confirmar orçamento</button>
+                    <div class="tabelas"> 
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo1')" id="passoPadrao">1 - Catálogo de itens</button> 
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo2')"> 2 - Revisar orçamento</button>
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo3')"> 3 - Confirmar orçamento</button>
                     </div>
                 
-                    <div id="step1" class="tabcontent">
+                    <div id="passo1" class="conteudoPassoAPasso">
 
                         <div class="containerPesquisar">
                             <p>teste</p>
@@ -108,23 +108,23 @@
                                 <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
                                 <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
                                 <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
-                                <!-- Adicione mais categorias conforme necessário -->
                             </ul>
                         </nav>
             
                         <div id="containerProdutos">
-                            <!-- Produtos serão carregados aqui -->
+                            <!-- Os produtos cadastrados, dependendo da sua categoria, serão exibidos aqui, por meio do arquivo "realizarOrcamento.js" e "buscarProdutosPorCategoria" na pasta "buscarProdutos". -->
                         </div>
+                        
                     </div>
                 
-                    <div id="step2" class="tabcontent">
+                    <div id="passo2" class="conteudoPassoAPasso">
                         <h2>Passo 2: Revisão dos Produtos Selecionados</h2>
-                        <!-- Produtos selecionados para revisão -->
+                        <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
                     </div>
                 
-                    <div id="step3" class="tabcontent">
+                    <div id="passo3" class="conteudoPassoAPasso">
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
-                        <!-- Formulário para enviar o orçamento -->
+                        <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
                     </div>
                 </div>
 

@@ -217,14 +217,14 @@ a:hover {
     padding: 2vh;
 }
   
-.tabs {
+.tabelas {
     display: flex;
     justify-content: flex-start;
     margin-left: 8vw;
     margin-bottom: 2vh;
 }
   
-.tablinks {
+.linksTabela {
     background-color: #d9d9d9;
     color: black;
     font-size: 2.8vh;
@@ -237,7 +237,7 @@ a:hover {
     width: 25vw;
 }
   
-.tablinks:hover, .tablinks.active {
+.linksTabela:hover, .linksTabela.ativo {
     background-color: #ffffff;
 }
   
@@ -246,7 +246,7 @@ a:hover {
     width: 100%;
 }
   
-.tabcontent.active {
+.tabcontent.ativo {
     display: flex;
     width: 100%;
 }

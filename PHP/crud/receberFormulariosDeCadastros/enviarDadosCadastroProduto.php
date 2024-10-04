@@ -46,6 +46,7 @@
                     $produto->setNome($nomeProduto);
                     $produto->setValor($valorProduto);
                     $produto->setDescricao($descricaoProduto);
+                    // está caracterizado como a categoria 5, pois estava testando o banco como deve ser, se o catalogo de produtos forem separados por categorias.
                     $produto->setCategoria(5);
 
                     // Chamando o método de cadastro do produto

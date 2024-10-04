@@ -28,7 +28,7 @@
 
         <ul class="nav-list">
             <li><a href="">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
@@ -68,7 +68,7 @@
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a href="./realizarOrcamento.php" class="abas">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
