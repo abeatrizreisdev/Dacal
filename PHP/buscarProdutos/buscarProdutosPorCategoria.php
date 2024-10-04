@@ -25,13 +25,22 @@
 
             foreach ($produtos as $produto) {
 
-                $imagem_base64 = base64_encode($produto['imagemProduto']); // Converte o BLOB em base64
-                echo "<div>";
-                echo "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'>";
+
+                $idProduto = $produto['codigoProduto'];
+
+                $imagem_base64 = base64_encode($produto['imagemProduto']); // Converte a imagem do produto que está salva no banco de dados no formato BLOB para base64.
+
+                echo "<div class='produtoEspecifico'>";
+                echo "<a class='linkDoProduto' href='./buscarProdutos/detalhesProduto.php?id=$idProduto'>" . "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'> </a>";
+                echo "<a class='visualizarDetalhes' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar Detalhes" . "</button>"  . "</a>";
                 echo "</div>";
+
             }
+
         } else {
+
             echo "<div>Nenhum produto encontrado para esta categoria.</div>";
+
         }
         
     }

@@ -16,7 +16,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
+    <link rel="stylesheet" href="../CSS/catalogoProdutos.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -69,16 +69,20 @@
             </a>
         </div>
         <section class="quadrado">
-
-            <ul>
-                <li><a href="#" onclick="carregarProdutos(1)">Móveis</a></li>
-                <li><a href="#" onclick="carregarProdutos(2)">Cadeiras</a></li>
-                <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
-                <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
-                <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
-                <!-- Adicione mais categorias conforme necessário -->
+            
+            <nav>
+                <ul class="containerCategorias">
+                    <li><a href="#" onclick="carregarProdutos(1)">Móveis</a></li>
+                    <li><a href="#" onclick="carregarProdutos(2)">Cadeiras</a></li>
+                    <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
+                    <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
+                    <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
+                    <!-- Adicione mais categorias conforme necessário -->
                 </ul>
-            <div id="produtos">
+            </nav>
+            
+
+            <div id="containerProdutos">
                 <!-- Produtos serão carregados aqui -->
             </div>
            
