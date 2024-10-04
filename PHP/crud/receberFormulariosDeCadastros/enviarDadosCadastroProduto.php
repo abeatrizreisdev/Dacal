@@ -57,7 +57,7 @@
                         'categoria' => $produto->getCategoria()
                     ]);
 
-                    header("Location: ../homeFuncionario.php");
+                    header("Location: .../homeFuncionario.php");
                     exit();
 
                 } catch (Exception $excecao) {
