@@ -1,6 +1,6 @@
 <?php 
 
-    require "../entidades/pessoa.php";
+    require "pessoa.php";
 
     class Funcionario extends Pessoa {
 

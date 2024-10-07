@@ -64,8 +64,8 @@
                 } catch (Exception $excecao) {
 
                     echo "Erro ao cadastrar o produto: " . $excecao->getMessage();
-
                     exit();
+
                 }
 
             } else {

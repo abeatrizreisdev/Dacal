@@ -1,6 +1,6 @@
 <?php 
 
-    require "../crud/crud.php";
+    require "crud.php";
     
     class CrudFuncionario extends Crud {
 
@@ -103,6 +103,34 @@
 
         }
 
+        public function buscarFuncionarioPeloCpf($cpf) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE cpf = :cpf";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cpf' => $cpf]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;           
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+                return null;
+                
+            }
+
+        }
+
         public function buscarInfoTodosFuncionarios() {
 
             try {
@@ -113,19 +141,18 @@
 
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    echo "<br>A busca pelos funcionários cadastrados foi realizado com sucesso.";
-
                     return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum funcionário encontrado.";
+                    throw new Exception("<br>Nenhum funcionário encontrado.");
 
                 }
 
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações dos funcionários: " . $excecao->getMessage();
+                return null;
 
             }
 
