@@ -19,7 +19,6 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os as suas variáveis.
-        $id = $_POST['id'];
         $nome = $_POST['nome'];
         $razaoSocial = $_POST['razaoSocial'];
         $cnpj = $_POST['cnpj'];
