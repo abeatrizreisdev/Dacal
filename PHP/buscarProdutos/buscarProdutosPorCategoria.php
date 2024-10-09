@@ -2,16 +2,15 @@
 
     require '../conexaoBD/conexaoBD.php'; 
     require "../crud/crudProduto.php";
+    require "../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
-
-    $conexao->setEschemaBD("dacal");
-    $conexao->setHostBD("localhost");
-    $conexao->setPortaBD(3306);
-    $conexao->setEschemaBD("dacal");
-    $conexao->setSenhaBD("96029958va");
-    $conexao->setUsuarioBD("root");
-    $conexao->getConexao(); 
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD( BD_USERNAME);
+    $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudProduto = new CrudProduto($conexao);
 

@@ -84,7 +84,7 @@ $sessaoFuncionario = new Sessao();
                             <img src="../IMAGENS/homeFuncionario/cadastrarProduto.png" class="imgIcons">
                         </div>
                     </a>
-                    <a href="./orcamentosFuncionario.php">
+                    <a href="testeCarregarOrcamentos.php">
                         <div class="containerFuncionalidades">
                             <h2> Visualizar orçamentos </h2>
                             <img src="../IMAGENS/homeFuncionario/visualizarOrcamentos.png" class="imgIcons">

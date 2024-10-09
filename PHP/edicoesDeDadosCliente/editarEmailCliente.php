@@ -4,15 +4,15 @@
     require "../crud/crudCliente.php";
     require "../entidades/cliente.php";
     require "../sessao/sessao.php";
+    require "../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
-    $conexao->setEschemaBD("dacal");
-    $conexao->setHostBD("localhost");
-    $conexao->setPortaBD(3306);
-    $conexao->setEschemaBD("dacal");
-    $conexao->setSenhaBD("96029958va");
-    $conexao->setUsuarioBD("root");
-    $conexao->getConexao();
+    $conexao->setHostBD(host: BD_HOST);
+    $conexao->setPortaBD(porta: BD_PORTA);
+    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
+    $conexao->setSenhaBD(senha: BD_PASSWORD);
+    $conexao->setUsuarioBD(user: BD_USERNAME);
+    $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudCliente = new CrudCliente($conexao);
 

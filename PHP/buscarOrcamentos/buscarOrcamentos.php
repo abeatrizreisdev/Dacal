@@ -24,23 +24,10 @@
 
         echo json_encode($orcamentos);
 
-        header("Location: ../homeFuncionario.php");
-
-        exit();
-
     } else {
 
         echo json_encode(['mensagem' => 'Nenhum orcamento encontrado']);
 
-        header("Location: ../homeFuncionario.php");
-
-        exit();
-
     };
-
-
-    
-
-    
 
 ?>

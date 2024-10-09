@@ -3,6 +3,7 @@
 fetch('../PHP/crud/retornarDados/retornarTodosFuncionarios.php')
   .then(resposta => resposta.json())
   .then(dados => {
+    
     // Aqui você terá os dados dos funcionários em formato JSON na variável 'data'
     console.log(dados); // Para verificar os dados no console do navegador
     // ... Código para renderizar os dados na página ...
