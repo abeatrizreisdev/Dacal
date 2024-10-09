@@ -19,7 +19,7 @@
 
     if ($orcamentos) {
 
-        // Retorne os orçamentos em formato JSON
+        // Retorna os orçamentos em formato JSON para o front.
         header('Content-Type: application/json');
 
         echo json_encode($orcamentos);
