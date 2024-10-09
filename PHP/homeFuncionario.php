@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+$sessaoFuncionario = new Sessao();
 
 ?>
 
@@ -34,8 +34,8 @@
         <ul class="icons">
             <a href="./autenticacao/logout.php">
                 <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
             </a>
         </ul>
     </nav>
@@ -71,20 +71,25 @@
         <section class="quadrado">
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
-                    
-                    <h1 id="tituloFuncionalidades"> Funcionalidades </h1>
                     <br>
-
-                    <div class="containerFuncionalidades">
-                        <a href="./catalogoProdutos.php"> <h2> Gerenciar catálogo </h2> </a>
-                    </div>
-                    <div class="containerFuncionalidades">
-                        <a href="./cadastrarProduto.php"> <h2> Cadastrar produtos </h2> </a>
-                    </div>
-                    <div class="containerFuncionalidades">
-                        <a href=""> <h2> Visualizar orçamentos </h2> </a>
-                    </div>
-                    
+                    <a href="./catalogoProdutos.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Gerenciar catálogo </h2>
+                            <img src="../IMAGENS/homeFuncionario/gerenciarCatalogo.png" class="imgIcons">
+                        </div>
+                    </a>
+                    <a href="./cadastrarProduto.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Cadastrar produtos </h2>
+                            <img src="../IMAGENS/homeFuncionario/cadastrarProduto.png" class="imgIcons">
+                        </div>
+                    </a>
+                    <a href="./orcamentosFuncionario.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Visualizar orçamentos </h2>
+                            <img src="../IMAGENS/homeFuncionario/visualizarOrcamentos.png" class="imgIcons">
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
