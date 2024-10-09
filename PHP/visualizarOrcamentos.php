@@ -69,33 +69,13 @@ $sessaoFuncionario = new Sessao();
             </a>
         </div>
         <section class="quadrado">
-            <div id="textoPrincipal">
-                <div id="infoPrincipal">
-                    <br>
-                    <a href="./catalogoProdutos.php">
-                        <div class="containerFuncionalidades">
-                            <h2> Gerenciar catálogo </h2>
-                            <img src="../IMAGENS/homeFuncionario/gerenciarCatalogo.png" class="imgIcons">
-                        </div>
-                    </a>
-                    <a href="./cadastrarProduto.php">
-                        <div class="containerFuncionalidades">
-                            <h2> Cadastrar produtos </h2>
-                            <img src="../IMAGENS/homeFuncionario/cadastrarProduto.png" class="imgIcons">
-                        </div>
-                    </a>
-                    <a href="visualizarOrcamentos.php">
-                        <div class="containerFuncionalidades">
-                            <h2> Visualizar orçamentos </h2>
-                            <img src="../IMAGENS/homeFuncionario/visualizarOrcamentos.png" class="imgIcons">
-                        </div>
-                    </a>
-                </div>
-            </div>
+            
+            <div id="orcamentos"></div>
+        
         </section>
     </div>
 
-
+    <script src="../JS/carregarOrcamentos.js"></script>
 </body>
 
 </html>

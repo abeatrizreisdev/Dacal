@@ -22,8 +22,6 @@
         private $categoria;
         private $imagem;
     
-
-
         public function __construct() {
             
         }

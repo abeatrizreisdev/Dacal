@@ -46,7 +46,7 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE numeroOrcamento = :id";
+                $sql = "SELECT * FROM {$this->tabela}, itens_orcamento, cliente WHERE orcamentos.numeroOrcamento = :id AND orcamentos.numeroOrcamento = itens_orcamento.numeroOrcamento AND orcamento.";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
                 
@@ -76,7 +76,17 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela}";
+                $sql = "SELECT 
+                        orcamentos.numeroOrcamento, 
+                        orcamentos.valorOrcamento, 
+                        orcamentos.dataCriacao, 
+                        orcamentos.status, 
+                        cliente.nomeEmpresa AS nomeCliente, 
+                        (SELECT SUM(itens_orcamento.quantidade) 
+                        FROM itens_orcamento 
+                        WHERE itens_orcamento.numeroOrcamento = orcamentos.numeroOrcamento) AS quantidadeTotal 
+                        FROM orcamentos, cliente 
+                        WHERE orcamentos.idCliente = cliente.idCliente";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
 

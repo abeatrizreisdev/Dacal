@@ -12,7 +12,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Itera sobre cada orçamento no array
                 dados.forEach(orcamento => {
 
-                    saida += `<li>Orçamento ${orcamento.numeroOrcamento}: ${orcamento.detalhes}</li>`;
+                    saida += `<li>
+                        Orçamento ${orcamento.numeroOrcamento}: 
+                        Cliente: ${orcamento.nomeCliente}, 
+                        Valor: ${orcamento.valorOrcamento}, 
+                        Data: ${orcamento.dataCriacao}, 
+                        Status: ${orcamento.status}, 
+                        Quantidade Total: ${orcamento.quantidadeTotal}</li>`;
+
 
                 });
 
