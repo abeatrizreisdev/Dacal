@@ -46,21 +46,30 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela}, itens_orcamento, cliente WHERE orcamentos.numeroOrcamento = :id AND orcamentos.numeroOrcamento = itens_orcamento.numeroOrcamento AND orcamento.";
-
+                $sql = " SELECT 
+                    {$this->tabela}.numeroOrcamento, 
+                    {$this->tabela}.valorOrcamento, 
+                    {$this->tabela}.dataCriacao, 
+                    {$this->tabela}.status, 
+                    cliente.nomeEmpresa AS nomeCliente, 
+                    itens_orcamento.idProduto, 
+                    itens_orcamento.quantidade
+                    FROM {$this->tabela}, itens_orcamento, cliente 
+                    WHERE {$this->tabela}.numeroOrcamento = :id 
+                    AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
+                    AND {$this->tabela}.idCliente = cliente.idCliente";
+        
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
                 
                 if ($resultadoConsulta->rowCount() > 0) {
-                    
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
-
 
                     return null;
 
                 }
-
 
             } catch (PDOException $excecao) {
 
@@ -71,22 +80,23 @@
             }
 
         }
+        
 
         public function buscarTodosOrcamentos() {
 
             try {
 
                 $sql = "SELECT 
-                        orcamentos.numeroOrcamento, 
-                        orcamentos.valorOrcamento, 
-                        orcamentos.dataCriacao, 
-                        orcamentos.status, 
+                        {$this->tabela}.numeroOrcamento, 
+                        {$this->tabela}.valorOrcamento, 
+                        {$this->tabela}.dataCriacao, 
+                        {$this->tabela}.status, 
                         cliente.nomeEmpresa AS nomeCliente, 
                         (SELECT SUM(itens_orcamento.quantidade) 
                         FROM itens_orcamento 
-                        WHERE itens_orcamento.numeroOrcamento = orcamentos.numeroOrcamento) AS quantidadeTotal 
+                        WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
                         FROM orcamentos, cliente 
-                        WHERE orcamentos.idCliente = cliente.idCliente";
+                        WHERE {$this->tabela}.idCliente = cliente.idCliente";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
 

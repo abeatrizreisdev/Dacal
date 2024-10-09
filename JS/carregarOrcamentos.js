@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         Valor: ${orcamento.valorOrcamento}, 
                         Data: ${orcamento.dataCriacao}, 
                         Status: ${orcamento.status}, 
-                        Quantidade Total: ${orcamento.quantidadeTotal}</li>`;
+                        Quantidade total de itens: ${orcamento.quantidadeTotal}</li>`;
 
 
                 });
