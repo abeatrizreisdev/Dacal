@@ -1,7 +1,7 @@
-// Carregar funcionário especifico pesquisado pelo cpf.
 document.getElementById('buscar').addEventListener('click', () => {
     
     const cpf = document.getElementById('inputCpf').value;
+    console.log('CPF digitado:', cpf); // Log para depuração
     const container = document.getElementById('container-funcionarios');
     const mensagemErro = document.getElementById('mensagem-erro');
 
@@ -9,24 +9,28 @@ document.getElementById('buscar').addEventListener('click', () => {
     mensagemErro.textContent = '';
 
     fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
-        .then(resposta => resposta.json())
+        .then(resposta => {
+            
+            return resposta.json();
+
+        })
         .then(dados => {
 
             const div = document.createElement('div');
             div.classList.add('funcionario');
 
-            if (dados.length > 0) {
+            if (dados && dados.cpf) { // Verifica se os dados têm a propriedade cpf.
                 
-                const funcionario = dados[0];
                 div.innerHTML = `
-                    <p>Nome: ${funcionario.nome}</p>
-                    <p>CPF: ${funcionario.cpf}</p>
-                    <p>Usuário: ${funcionario.tipoConta}</p>
+                    <p>Nome: ${dados.nome}</p>
+                    <p>CPF: ${dados.cpf}</p>
+                    <p>Usuário: ${dados.tipoConta}</p>
                 `;
 
             } else {
 
                 div.innerHTML = '<p>Funcionário não encontrado.</p>';
+
             }
 
             container.appendChild(div);
@@ -37,5 +41,5 @@ document.getElementById('buscar').addEventListener('click', () => {
             mensagemErro.textContent = 'Ocorreu um erro ao buscar o funcionário. Por favor, tente novamente mais tarde.';
 
         });
-
+        
 });

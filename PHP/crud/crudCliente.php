@@ -105,6 +105,37 @@
 
         }
 
+        public function buscarClientePeloNome($nomeCliente) {
+
+            try {
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE nomeEmpresa = :nome";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['nome' => $nomeCliente]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+
+                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                } else {
+
+
+                    return null;
+
+                }
+
+
+            } catch (PDOException $excecao) {
+
+                echo "<br>Erro na busca de informações do cliente: " . $excecao->getMessage();
+
+                return null;
+
+            }
+
+        }
+
         public function buscarInfoTodosClientes() {
 
             try {
