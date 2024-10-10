@@ -68,6 +68,8 @@
 
                 echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
 
+                return null;
+
             }
 
         }

@@ -14,6 +14,7 @@
     $conexao->setUsuarioBD(user: BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
+    $sessao = new Sessao();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -30,12 +31,16 @@
 
             case null :
 
-                return null;
+                $sessao->setChaveEValorSessao( 'erro', "Login ou senha inválida.");
+
+
+                header("Location: ../login.php");
+
+                exit();
 
             default :
 
-                $sessao = new Sessao();
-
+                echo "Usuário autenticado.";
                 // Instanciando um funcionário.
                 $funcionarioAutenticado = new Funcionario();
 
@@ -59,6 +64,7 @@
                 $sessao->setChaveEValorSessao('cpf', $funcionarioAutenticado->getCpf());
                 $sessao->setChaveEValorSessao('email', $funcionarioAutenticado->getEmail());
                 $sessao->setChaveEValorSessao('telefone', $funcionarioAutenticado->getTelefone());
+                $sessao->setChaveEValorSessao('tipoConta', $funcionarioAutenticado->getTipoConta());
                 $sessao->setChaveEValorSessao('estado', $funcionarioAutenticado->getEstado());
                 $sessao->setChaveEValorSessao('cidade', $funcionarioAutenticado->getCidade());
                 $sessao->setChaveEValorSessao('bairro', $funcionarioAutenticado->getBairro());

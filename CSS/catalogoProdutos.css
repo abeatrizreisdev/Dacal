@@ -230,10 +230,10 @@ a:hover {
 #containerProdutos {
 
     display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Cria 4 colunas de largura igual */
-  gap: 3vw; /* Espaço entre os produtos */
-  padding: 0 5vw; /* Espaçamento nas laterais */
-margin-bottom: 5vh;
+    grid-template-columns: repeat(4, 1fr); /* Cria 4 colunas de largura igual */
+    gap: 3vw; /* Espaço entre os produtos */
+    padding: 0 5vw; /* Espaçamento nas laterais */
+    margin-bottom: 5vh;
 
 
 }
@@ -263,6 +263,24 @@ margin-bottom: 5vh;
     align-items: center;
 }
 
+.botoesProduto {
+    display: flex;
+    width: 100%;
+    margin-top: 2vh;
+}
+
+.botao {
+
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+    height: 6vh;
+    
+}
+
+
 .visualizarDetalhes {
     width: 100%;
     display: flex;
@@ -272,6 +290,30 @@ margin-bottom: 5vh;
     cursor: pointer;
     margin-top: 2vh;
     height: 6vh;
+}
+
+.botoesProduto button {
+    border: none;
+    border-radius: 3vh;
+    width: 100%;
+    transition: 0.3s;
+    cursor: pointer;
+    font-size: 2vh;
+}
+
+#botaoVisualizar button {
+    background-color: #7ed957;
+}
+
+
+#botaoRemover button {
+    background-color: rgb(167, 165, 165);
+    margin-left: 0.8vh;
+}
+
+#botaoEditar button {
+    background-color: #acd2ff;
+    margin-left: 0.9vh;
 }
 
 .visualizarDetalhes button {

@@ -50,7 +50,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -59,7 +59,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a href="perfilEmpresa.php" class="abas">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -90,7 +90,7 @@
         <div class="quadrado">
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $_SESSION['nomeEmpresa'] ?></strong> </p>
+                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $_SESSION['nome'] ?></strong> </p>
                     <br>
                     <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
                         sua

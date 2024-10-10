@@ -15,6 +15,7 @@
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudCliente = new CrudCliente($conexao);
+    $sessao = new Sessao();
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -27,15 +28,11 @@
 
             case null :
 
-                $sessao = new Sessao();
-    
-                $sessao->setChaveEValorSessao('erro', 'CNPJ ou senha incorretos.');
-                header('Location: ../loginEmpresa.php');
+                $sessao->setChaveEValorSessao('erro', 'Login ou senha inválida.');
+                header('Location: ../login.php');
                 exit();
     
             default :
-
-                $sessao = new Sessao();
                 
                 // Instanciando o cliente que fez a autenticação.
                 $clienteAutenticado = new Cliente();
@@ -59,7 +56,7 @@
     
                 // Passando os dados do funcionário autenticado para criar sua sessão no site.
                 $sessao->setChaveEValorSessao('idCliente', $clienteAutenticado->getId());
-                $sessao->setChaveEValorSessao('nomeEmpresa', $clienteAutenticado->getNome());
+                $sessao->setChaveEValorSessao('nome', $clienteAutenticado->getNome());
                 $sessao->setChaveEValorSessao('email', $clienteAutenticado->getEmail());
                 $sessao->setChaveEValorSessao('senha', $clienteAutenticado->getSenha());
                 $sessao->setChaveEValorSessao('razaoSocial', $clienteAutenticado->getRazaoSocial());

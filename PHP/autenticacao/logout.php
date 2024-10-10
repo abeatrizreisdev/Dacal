@@ -6,7 +6,7 @@
 
     $sessao->encerrarSessao();
 
-    header("Location: ../loginEmpresa.php");
+    header("Location: ../login.php");
 
     exit();
 

@@ -2,7 +2,7 @@
 
     require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+    $sessao = new Sessao();
 
 ?>
 
@@ -50,7 +50,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoFuncionario->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessao->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -77,11 +77,9 @@
                     <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
                     <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
                     <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
-                    <!-- Adicione mais categorias conforme necessário -->
                 </ul>
             </nav>
             
-
             <div id="containerProdutos">
                 <!-- Produtos serão carregados aqui -->
             </div>

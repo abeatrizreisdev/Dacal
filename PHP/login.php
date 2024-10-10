@@ -22,16 +22,21 @@ require './sessao/sessao.php';
 </head>
 <script>
     function metodosLogin(type) {
+
+        const actionFormulario = document.getElementById('formLogin');
         const loginEmpresa = document.getElementById('loginEmpresa');
         const loginFuncionario = document.getElementById('loginFuncionario');
+
         if (type === 'empresa') {
             loginEmpresa.style.display = 'block';
             loginFuncionario.style.display = 'none';
             cadastroOpcao.style.display = 'block';
+            actionFormulario.action = 'autenticacao/autenticacaoEmpresa.php';
         } else {
             loginEmpresa.style.display = 'none';
             loginFuncionario.style.display = 'block';
             cadastroOpcao.style.display = 'none';
+            actionFormulario.action = 'autenticacao/autenticacaoFuncionario.php';
         }
     }
 </script>
@@ -53,13 +58,15 @@ function entradaBanco{
     <body>
         <div id="homeGeral">
             <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-            <form action="" class="formularioLogin">
+            <form action="" method="post" id ="formLogin" class="formularioLogin">
                 <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
                 <h1 id="titulo">Tipo de Acesso</h1>
                 <div class="container">
                     <a class="btn" href="#" onclick="metodosLogin('empresa')">Empresa</a>
                     <a class="btn" href="#" onclick="metodosLogin('funcionario')">Funcionário</a>
                 </div>
+
+                <p> <?php echo $erro; ?> </p>
                 <div class="formularioInterior">
                     <div id="loginEmpresa" style="display:block;">
                         <p class="formularioNomes">CNPJ</p>
@@ -71,8 +78,8 @@ function entradaBanco{
                     </div>
                     <p class="formularioNomes">Senha</p>
                     <input type="password" id="senha" name="senha" class="input">
-                    <p id="cadastroOpcao" style="display:'block';">Ainda não tem conta? <a id="cadastro"
-                            href="#">Cadastre-se Aqui.</a></p>
+                    <p id="cadastroOpcao" style="display:'block';">Ainda não tem conta? 
+                    <a id="cadastro"href="#">Cadastre-se Aqui.</a></p>
                 </div>
                 <br>
                 <button type="submit" id="btnLogin">Login</button>
