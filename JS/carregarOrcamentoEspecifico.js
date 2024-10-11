@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             detalhes += `</ul>`;
 
-            detalhes += `<a> <button> Editar status do orçamento </button> </a>`
+            detalhes += `<a href='../PHP/editarStatusOrcamento.php?numeroOrcamento=${numeroOrcamento}'> <button id="editarStatus"> Editar status do orçamento </button> </a>`
+
 
             document.getElementById('detalhesOrcamento').innerHTML = detalhes;
 

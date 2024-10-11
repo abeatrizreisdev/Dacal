@@ -66,6 +66,7 @@
                 $orcamentoDetalhes = $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
                 
                 if ($orcamentoDetalhes) {
+
                     $orcamento = [
                         "numeroOrcamento" => $orcamentoDetalhes[0]['numeroOrcamento'],
                         "valorOrcamento" => $orcamentoDetalhes[0]['valorOrcamento'],
@@ -81,49 +82,40 @@
                             ];
                         }, $orcamentoDetalhes)
                     ];
+
                     return $orcamento;
+
                 } else {
+
                     return null;
+
                 }
             } catch (Exception $excecao) {
+
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
                 return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
+
+            }
+
+        }
+        
+        public function atualizarStatusOrcamento($numeroOrcamento, $status) {
+
+            try {
+
+                $sql = "UPDATE {$this->tabela} SET status = :status WHERE numeroOrcamento = :numeroOrcamento";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['numeroOrcamento' => $numeroOrcamento, 'status' => $status]);
+
+                return $resultadoConsulta;
+        
+                
+            } catch (Exception $excecao) {
+                error_log('Erro: ' . $excecao->getMessage());
+                return false;
             }
         }
         
-        
-        /*
-        public function buscarInfoOrcamento($idOrcamento) {
-
-            try {
-                $sql = "SELECT 
-                            {$this->tabela}.numeroOrcamento, 
-                            {$this->tabela}.valorOrcamento, 
-                            {$this->tabela}.dataCriacao, 
-                            {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente, 
-                            itens_orcamento.idProduto, 
-                            itens_orcamento.quantidade
-                        FROM 
-                            {$this->tabela}, itens_orcamento, cliente 
-                        WHERE 
-                            {$this->tabela}.numeroOrcamento = :id 
-                            AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
-                            AND {$this->tabela}.idCliente = cliente.idCliente";
-        
-                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
-                
-                if ($resultadoConsulta && $resultadoConsulta->rowCount() > 0) {
-                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
-                } else {
-                    return null;
-                }
-            } catch (Exception $excecao) {
-                error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
-                return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
-            }
-
-        } */
         
 
         public function buscarTodosOrcamentos() {
