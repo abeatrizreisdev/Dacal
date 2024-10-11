@@ -18,7 +18,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         Valor: ${orcamento.valorOrcamento}, 
                         Data: ${orcamento.dataCriacao}, 
                         Status: ${orcamento.status}, 
-                        Quantidade total de itens: ${orcamento.quantidadeTotal}</li>`;
+                        Quantidade total de itens: ${orcamento.quantidadeTotal}</li>
+                        <a href='../PHP/verInformacoesOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
+                        `;
 
 
                 });

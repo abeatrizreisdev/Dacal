@@ -43,43 +43,87 @@
         }
 
         public function buscarInfoOrcamento($idOrcamento) {
+            try {
+                $sql = "SELECT 
+                            {$this->tabela}.numeroOrcamento, 
+                            {$this->tabela}.valorOrcamento, 
+                            {$this->tabela}.dataCriacao, 
+                            {$this->tabela}.status, 
+                            cliente.nomeEmpresa AS nomeCliente, 
+                            itens_orcamento.idProduto, 
+                            itens_orcamento.quantidade, 
+                            produto.nomeProduto
+                        FROM 
+                            {$this->tabela}, itens_orcamento, cliente, produto
+                        WHERE 
+                            {$this->tabela}.numeroOrcamento = :id 
+                            AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
+                            AND {$this->tabela}.idCliente = cliente.idCliente
+                            AND itens_orcamento.idProduto = produto.codigoProduto";
+        
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
+        
+                $orcamentoDetalhes = $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+                
+                if ($orcamentoDetalhes) {
+                    $orcamento = [
+                        "numeroOrcamento" => $orcamentoDetalhes[0]['numeroOrcamento'],
+                        "valorOrcamento" => $orcamentoDetalhes[0]['valorOrcamento'],
+                        "dataCriacao" => $orcamentoDetalhes[0]['dataCriacao'],
+                        "status" => $orcamentoDetalhes[0]['status'],
+                        "nomeCliente" => $orcamentoDetalhes[0]['nomeCliente'],
+                        "quantidadeTotal" => array_sum(array_column($orcamentoDetalhes, 'quantidade')),
+                        "itens" => array_map(function($item) {
+                            return [
+                                "idProduto" => $item['idProduto'],
+                                "quantidade" => $item['quantidade'],
+                                "nomeProduto" => $item['nomeProduto']
+                            ];
+                        }, $orcamentoDetalhes)
+                    ];
+                    return $orcamento;
+                } else {
+                    return null;
+                }
+            } catch (Exception $excecao) {
+                error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
+                return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
+            }
+        }
+        
+        
+        /*
+        public function buscarInfoOrcamento($idOrcamento) {
 
             try {
-
-                $sql = " SELECT 
-                    {$this->tabela}.numeroOrcamento, 
-                    {$this->tabela}.valorOrcamento, 
-                    {$this->tabela}.dataCriacao, 
-                    {$this->tabela}.status, 
-                    cliente.nomeEmpresa AS nomeCliente, 
-                    itens_orcamento.idProduto, 
-                    itens_orcamento.quantidade
-                    FROM {$this->tabela}, itens_orcamento, cliente 
-                    WHERE {$this->tabela}.numeroOrcamento = :id 
-                    AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
-                    AND {$this->tabela}.idCliente = cliente.idCliente";
+                $sql = "SELECT 
+                            {$this->tabela}.numeroOrcamento, 
+                            {$this->tabela}.valorOrcamento, 
+                            {$this->tabela}.dataCriacao, 
+                            {$this->tabela}.status, 
+                            cliente.nomeEmpresa AS nomeCliente, 
+                            itens_orcamento.idProduto, 
+                            itens_orcamento.quantidade
+                        FROM 
+                            {$this->tabela}, itens_orcamento, cliente 
+                        WHERE 
+                            {$this->tabela}.numeroOrcamento = :id 
+                            AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
+                            AND {$this->tabela}.idCliente = cliente.idCliente";
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
                 
-                if ($resultadoConsulta->rowCount() > 0) {
-
+                if ($resultadoConsulta && $resultadoConsulta->rowCount() > 0) {
                     return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
-
                 } else {
-
                     return null;
-
                 }
-
-            } catch (PDOException $excecao) {
-
-                echo "<br>Erro na busca de informações do orçamento: " . $excecao->getMessage();
-
-                return null;
-
+            } catch (Exception $excecao) {
+                error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
+                return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
             }
 
-        }
+        } */
         
 
         public function buscarTodosOrcamentos() {

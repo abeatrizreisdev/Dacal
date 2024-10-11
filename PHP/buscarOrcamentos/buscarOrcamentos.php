@@ -1,33 +1,42 @@
 <?php 
-ini_set('display_errors', 0); // Desativar exibição de erros em produção
+    ini_set('display_errors', 0); // Desativar exibição de erros em produção
 
-require "../conexaoBD/conexaoBD.php";
-require "../conexaoBD/configBanco.php";
-require "../crud/crudOrcamento.php";
-require "../entidades/orcamento.php";
+    require "../conexaoBD/conexaoBD.php";
+    require "../conexaoBD/configBanco.php";
+    require "../crud/crudOrcamento.php";
+    require "../entidades/orcamento.php";
 
-try {
-    $conexao = new ConexaoBD();
-    $conexao->setHostBD(BD_HOST);
-    $conexao->setPortaBD(BD_PORTA);
-    $conexao->setEschemaBD(BD_ESCHEMA);
-    $conexao->setSenhaBD(BD_PASSWORD);
-    $conexao->setUsuarioBD(BD_USERNAME);
-    $conexao->getConexao(); // Iniciando a conexão com o banco.
+    try {
 
-    $crudOrcamento = new CrudOrcamento($conexao);
+        $conexao = new ConexaoBD();
+        $conexao->setHostBD(BD_HOST);
+        $conexao->setPortaBD(BD_PORTA);
+        $conexao->setEschemaBD(BD_ESCHEMA);
+        $conexao->setSenhaBD(BD_PASSWORD);
+        $conexao->setUsuarioBD(BD_USERNAME);
+        $conexao->getConexao(); // Iniciando a conexão com o banco.
 
-    $orcamentos = $crudOrcamento->buscarTodosOrcamentos();
+        $crudOrcamento = new CrudOrcamento($conexao);
 
-    header('Content-Type: application/json');
-    
-    if ($orcamentos) {
-        echo json_encode($orcamentos);
-    } else {
-        echo json_encode(['mensagem' => 'Nenhum orçamento encontrado']);
+        $orcamentos = $crudOrcamento->buscarTodosOrcamentos();
+
+        header('Content-Type: application/json');
+        
+        if ($orcamentos) {
+
+            echo json_encode($orcamentos);
+
+        } else {
+
+            echo json_encode(['mensagem' => 'Nenhum orçamento encontrado']);
+
+        }
+
+    } catch (Exception $excecao) {
+
+        header('Content-Type: application/json');
+        echo json_encode(['erro' => 'Erro na busca por orçamentos cadastrados: ' . $excecao->getMessage()]);
+
     }
-} catch (Exception $excecao) {
-    header('Content-Type: application/json');
-    echo json_encode(['erro' => 'Erro na busca por orçamentos cadastrados: ' . $excecao->getMessage()]);
-}
+
 ?>
