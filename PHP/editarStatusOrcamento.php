@@ -71,20 +71,38 @@ $sessaoFuncionario = new Sessao();
         <section class="quadrado">
             
             <h2>Editar Status do Orçamento</h2>
+
             <form id="formEditarStatus">
+
                 <input type="hidden" id="numeroOrcamento" name="numeroOrcamento">
+
+                <p>Cliente: <span id="nomeCliente"></span></p>
+
+                <p>Valor: <span id="valorOrcamento"></span></p>
+
+                <p>Data: <span id="dataCriacao"></span></p>
+
+                <p>Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
+
+                <h3>Itens do Orçamento:</h3>
+
+                <ul id="itens"></ul>
+
                 <label for="status">Novo Status:</label>
                 <select id="status" name="status">
                     <option value="pendente">Pendente</option>
                     <option value="finalizado">Finalizado</option>
                     <option value="negado">Negado</option>
                 </select>
+
                 <button type="submit">Atualizar Status</button>
+
             </form>
-            <p id="mensagemSucesso" style="color: green;"></p>
-            <p id="mensagemErro" style="color: red;"></p>
+
+            <p id="mensagemSucesso" ></p>
+            <p id="mensagemErro"></p>
             
-        
+
         </section>
     </div>
 

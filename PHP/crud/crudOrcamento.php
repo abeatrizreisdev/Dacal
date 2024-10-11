@@ -111,9 +111,12 @@
         
                 
             } catch (Exception $excecao) {
+
                 error_log('Erro: ' . $excecao->getMessage());
                 return false;
+                
             }
+
         }
         
         
