@@ -85,9 +85,9 @@
 
         div.classList.add('funcionario');
         div.innerHTML = `
-            <p>Nome: ${funcionario.nome}</p>
-            <p>CPF: ${formatarCPF(funcionario.cpf)}</p>
-            <p>Usuário: ${funcionario.tipoConta}</p>
+            <p>${funcionario.nome}</p>
+            <button> Excluir Conta </button>
+            <button> Editar Perfil </button>
         `;
 
         container.appendChild(div);

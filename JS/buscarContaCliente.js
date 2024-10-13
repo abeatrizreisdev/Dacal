@@ -7,7 +7,7 @@
             <button id="buscarNome">Nome</button>
             <input type="text" id="inputNome" placeholder="Digite o nome">   
         `;
-        
+
         document.getElementById('buscarNome').addEventListener('click', buscarEmpresaPorNome);
 
     };
@@ -94,13 +94,9 @@
 
         div.classList.add('empresa');
         div.innerHTML = `
-            <p>Nome: ${empresa.nomeEmpresa}</p>
-            <p>Razão Social: ${empresa.razaoSocial}</p>
-            <p>Cnpj: ${formatarCNPJ(empresa.cnpj)}</p>
-            <p>Inscrição Estadual: ${formatarIE(empresa.inscricaoEstadual)}</p>
-            <p>Telefone: ${formatarTelefone(empresa.telefone)}</p>
-            <p>Email: ${empresa.email}</p>
-            <p>Endereço: ${empresa.logradouro}, ${empresa.numeroEndereco} - ${empresa.bairro}, ${empresa.municipio} - ${empresa.estado}, ${formatarCEP(empresa.cep)}</p>
+            <p>${empresa.nomeEmpresa}</p>
+            <button> Excluir Conta </button>
+            <button> Editar Perfil </button>
         `;
 
         container.appendChild(div);
