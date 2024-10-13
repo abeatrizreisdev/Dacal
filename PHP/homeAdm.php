@@ -27,7 +27,7 @@ $sessaoFuncionario = new Sessao();
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="./homeAdm.php">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>

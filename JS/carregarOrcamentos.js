@@ -26,7 +26,7 @@
                     let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
 
                     // Itera sobre cada orçamento no array.
-                    dados.forEach(orcamento => {
+                    dadosOrcamento.forEach(orcamento => {
 
                         saida += `<li>
                             Orçamento ${orcamento.numeroOrcamento}: 

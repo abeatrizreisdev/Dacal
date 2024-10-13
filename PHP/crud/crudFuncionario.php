@@ -21,12 +21,10 @@
 
                 if ($resultadoCadastro > 0) {
 
-                    echo "<br>Cadastro de funcionário realizado com sucesso.";
                     return true;
 
                 } else {
 
-                    echo "<br>Cadastro de funcionário não realizado.";
                     return false;
 
                 }
@@ -51,13 +49,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Funcionário encontrado com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum funcionário encontrado com esse cpf e senha informados.";
 
                     return null;
 
