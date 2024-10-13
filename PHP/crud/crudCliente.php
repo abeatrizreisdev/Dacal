@@ -146,19 +146,20 @@
 
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    echo "<br>A busca pelos clientes cadastrados foi realizado com sucesso.";
 
                     return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum cliente encontrado.";
+                    return null;
 
                 }
 
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações dos clientes: " . $excecao->getMessage();
+
+                return null;
 
             }
 

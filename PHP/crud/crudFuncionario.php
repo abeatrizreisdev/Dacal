@@ -84,13 +84,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Busca por funcionário realizada com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum funcionário encontrado.";
 
                     return null;
 
@@ -147,13 +145,14 @@
 
                 } else {
 
-                    throw new Exception("<br>Nenhum funcionário encontrado.");
+                    return null;
 
                 }
 
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações dos funcionários: " . $excecao->getMessage();
+
                 return null;
 
             }
