@@ -3,7 +3,7 @@
 
         const buscaContainer = document.getElementById('busca-container');
         buscaContainer.innerHTML = `
-            <button id="buscarCpf">Buscar CPF</button>
+            <button id="buscarCpf">Buscar via CPF</button>
             <input type="text" id="inputCpf" placeholder="Digite o CPF">
         `;
         document.getElementById('buscarCpf').addEventListener('click', buscarFuncionarioPorCpf);
@@ -18,6 +18,7 @@
         const mensagemErro = document.getElementById('mensagem-erro');
         container.innerHTML = '';
         mensagemErro.textContent = '';
+        
         fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
             .then(resposta => resposta.json())
             .then(dados => {

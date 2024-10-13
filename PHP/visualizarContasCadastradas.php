@@ -90,7 +90,7 @@ $sessaoFuncionario = new Sessao();
             <p id="mensagem-erro"></p>
 
             <!-- Inserir a página de cadastro do funcionário dentro do href. -->
-            <a href=""> <button>Cadastrar Conta</button> </a>
+            <a href=""> <button>Cadastrar Funcionário</button> </a>
             
         </section>
     </div>

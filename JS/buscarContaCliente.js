@@ -96,12 +96,49 @@
         div.innerHTML = `
             <p>${empresa.nomeEmpresa}</p>
             <button> Excluir Conta </button>
-            <button> Editar Perfil </button>
+            <button onclick="editarPerfilEmpresa('${empresa.nomeEmpresa}')"> Editar Perfil </button>
         `;
 
         container.appendChild(div);
 
     };
+
+    // Função para navegar até a página de edição do funcionário.
+    function editarPerfilEmpresa(nome) {
+
+        fetch(`../PHP/buscarCliente/buscarClientePeloNome.php?nome=${nome}`)
+            .then(resposta => resposta.json())
+            .then(dados => {
+
+                const url = new URL('../Dacal/PHP/editarViaAdmContaCliente.php', window.location.origin);
+
+                url.searchParams.set('idEmpresa', dados.idCliente);
+                url.searchParams.set('nomeEmpresa', dados.nomeEmpresa);
+                url.searchParams.set('inscricaoEstadual', dados.inscricaoEstadual);
+                url.searchParams.set('razaoSocial', dados.razaoSocial);
+                url.searchParams.set('cnpjEmpresa', dados.cnpj);
+                url.searchParams.set('emailEmpresa', dados.email);
+                url.searchParams.set('senhaEmpresa', dados.senha);
+                url.searchParams.set('telefoneEmpresa', dados.telefone);
+                url.searchParams.set('estadoEmpresa', dados.estado);
+                url.searchParams.set('municipioEmpresa', dados.municipio);
+                url.searchParams.set('bairroEmpresa', dados.bairro);
+                url.searchParams.set('logradouroEmpresa', dados.logradouro);
+                url.searchParams.set('cepEmpresa', dados.cep);
+                url.searchParams.set('numeroEnderecoEmpresa', dados.numeroEndereco);
+
+                window.location.href = url.toString();
+
+            })
+            .catch(erro => {
+
+                console.error('Erro ao buscar os dados do funcionário:', erro); // Log para depuração.
+                
+            });
+
+    };
+
+    
 
     document.getElementById('empresa').addEventListener('click', () => {
 
