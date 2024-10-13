@@ -16,7 +16,7 @@ $sessaoFuncionario = new Sessao();
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/visualizarContasCadastradas.css">
+    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -78,34 +78,33 @@ $sessaoFuncionario = new Sessao();
             </a>
         </div>
         <section class="quadrado">
-
-            <h1> Tipo de Conta </h1>
-
-            <button id="empresa" class="selecionado">Empresa</button>
-            <button id="funcionario">Funcionário</button>
-            <div id="busca-container">
-                <!-- Input de busca para empresa será inserido aqui -->
+            <div id="textoPrincipal">
+                <div id="infoPrincipal">
+                    <br>
+                    <a href="./catalogoProdutos.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Gerenciar catálogo </h2>
+                            <img src="../IMAGENS/homeFuncionario/gerenciarCatalogo.png" class="imgIcons">
+                        </div>
+                    </a>
+                    <a href="./cadastrarProduto.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Cadastrar produtos </h2>
+                            <img src="../IMAGENS/homeFuncionario/cadastrarProduto.png" class="imgIcons">
+                        </div>
+                    </a>
+                    <a href="visualizarOrcamentos.php">
+                        <div class="containerFuncionalidades">
+                            <h2> Visualizar orçamentos </h2>
+                            <img src="../IMAGENS/homeFuncionario/visualizarOrcamentos.png" class="imgIcons">
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div id="container-funcionarios"></div>
-            <p id="mensagem-erro"></p>
-            
         </section>
     </div>
 
-    <script src="../JS/formatacoes.js"></script>
-    <script src="../JS/buscarContaCliente.js"></script>
-    <script src="../JS/buscarContaFuncionario.js"></script>
-    <script>
-
-        // Exibindo por padrão na página todas as contas dos clientes cadastrados.
-        configurarBuscaEmpresa()
-        buscarTodasEmpresas()
-
-    </script>
 
 </body>
 
 </html>
-
-
-
