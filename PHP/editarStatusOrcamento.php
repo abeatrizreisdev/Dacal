@@ -77,10 +77,21 @@ $sessaoFuncionario = new Sessao();
                 <input type="hidden" id="numeroOrcamento" name="numeroOrcamento">
 
                 <p>Cliente: <span id="nomeCliente"></span></p>
+                <p>Razão Social: <span id="razaoSocial"></span></p>
+                <p>CNPJ: <span id="cnpj"></span></p>
+                <p>Inscricao Estadual: <span id="inscricaoEstadual"></span></p>
+                <p>Telefone: <span id="telefone"></span></p>
+                <p>Email: <span id="email"></span></p>
+                <p>Municipio: <span id="municipio"></span></p>
+                <p>Estado: <span id="estado"></span></p>
+                <p>Bairro: <span id="bairro"></span></p>
+                <p>Logradouro: <span id="logradouro"></span></p>
+                <p>Número do Endereço: <span id="numeroEndereco"></span></p>
+                <p>Cep: <span id="cep"></span></p>
+                <p>Data do Orçamento: <span id="dataCriacao"></span></p>
+                <p>Valor Total: <span id="valorOrcamento"></span></p>
+                <p>Status Atual: <span id="statusAtual"></span></p>
 
-                <p>Valor: <span id="valorOrcamento"></span></p>
-
-                <p>Data: <span id="dataCriacao"></span></p>
 
                 <p>Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
 

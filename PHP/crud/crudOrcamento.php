@@ -43,13 +43,26 @@
         }
 
         public function buscarInfoOrcamento($idOrcamento) {
+
             try {
+
                 $sql = "SELECT 
                             {$this->tabela}.numeroOrcamento, 
                             {$this->tabela}.valorOrcamento, 
                             {$this->tabela}.dataCriacao, 
                             {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente, 
+                            cliente.nomeEmpresa AS nomeCliente,
+                            cliente.razaoSocial AS razaoSocial,
+                            cliente.cnpj AS cnpj,
+                            cliente.inscricaoEstadual AS inscricaoEstadual,
+                            cliente.telefone AS telefone,
+                            cliente.email AS email,
+                            cliente.logradouro AS logradouro,
+                            cliente.bairro AS bairro,
+                            cliente.cep AS cep,
+                            cliente.estado AS estado,
+                            cliente.municipio AS municipio,
+                            cliente.numeroEndereco AS numeroEndereco, 
                             itens_orcamento.idProduto, 
                             itens_orcamento.quantidade, 
                             produto.nomeProduto
@@ -73,14 +86,29 @@
                         "dataCriacao" => $orcamentoDetalhes[0]['dataCriacao'],
                         "status" => $orcamentoDetalhes[0]['status'],
                         "nomeCliente" => $orcamentoDetalhes[0]['nomeCliente'],
+                        "razaoSocial" => $orcamentoDetalhes[0]['razaoSocial'],
+                        "cnpj" => $orcamentoDetalhes[0]['cnpj'],
+                        "inscricaoEstadual" => $orcamentoDetalhes[0]['inscricaoEstadual'],
+                        "telefone" => $orcamentoDetalhes[0]['telefone'],
+                        "email" => $orcamentoDetalhes[0]['email'],
+                        "logradouro" => $orcamentoDetalhes[0]['logradouro'],
+                        "bairro" => $orcamentoDetalhes[0]['bairro'],
+                        "cep" => $orcamentoDetalhes[0]['cep'],
+                        "estado" => $orcamentoDetalhes[0]['estado'],
+                        "municipio" => $orcamentoDetalhes[0]['municipio'],
+                        "numeroEndereco" => $orcamentoDetalhes[0]['numeroEndereco'],
+
                         "quantidadeTotal" => array_sum(array_column($orcamentoDetalhes, 'quantidade')),
                         "itens" => array_map(function($item) {
+
                             return [
                                 "idProduto" => $item['idProduto'],
                                 "quantidade" => $item['quantidade'],
                                 "nomeProduto" => $item['nomeProduto']
                             ];
+                            
                         }, $orcamentoDetalhes)
+
                     ];
 
                     return $orcamento;
@@ -90,6 +118,7 @@
                     return null;
 
                 }
+
             } catch (Exception $excecao) {
 
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração

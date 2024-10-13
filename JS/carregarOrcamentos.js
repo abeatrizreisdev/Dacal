@@ -1,42 +1,59 @@
-document.addEventListener("DOMContentLoaded", function() {
+    // Função para formatar a data no formato brasileiro
+    function formatarData(data) {
 
-    // Faz uma solicitação para o servidor para buscar os orçamentos
-    fetch('../PHP/buscarOrcamentos/buscarOrcamentos.php')
-        .then(resposta => resposta.json()) // Converte a resposta para JSON.
-        .then(dados => {
+        const dataObj = new Date(data);
+        return dataObj.toLocaleDateString('pt-BR');
 
-            if (Array.isArray(dados)) { // Verifica se a resposta é um array.
+    };
 
-                let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
+    // Função para formatar o valor em formato brasileiro
+    function formatarValor(valor) {
 
-                // Itera sobre cada orçamento no array
-                dados.forEach(orcamento => {
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-                    saida += `<li>
-                        Orçamento ${orcamento.numeroOrcamento}: 
-                        Cliente: ${orcamento.nomeCliente}, 
-                        Valor: ${orcamento.valorOrcamento}, 
-                        Data: ${orcamento.dataCriacao}, 
-                        Status: ${orcamento.status}, 
-                        Quantidade total de itens: ${orcamento.quantidadeTotal}</li>
-                        <a href='../PHP/verInformacoesOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
-                        `;
+    };
 
 
-                });
+    document.addEventListener("DOMContentLoaded", function() {
 
-                saida += "</ul>";
+        // Faz uma solicitação para o servidor para buscar os orçamentos
+        fetch('../PHP/buscarOrcamentos/buscarOrcamentos.php')
+            .then(resposta => resposta.json()) // Converte a resposta para JSON.
+            .then(dadosOrcamento => {
 
-                // Insere a lista de orçamentos no elemento HTML com id 'orcamentos'.
-                document.getElementById('orcamentos').innerHTML = saida;
+                if (Array.isArray(dadosOrcamento)) { // Verifica se a resposta é um array com os orçamentos.
 
-            } else {
+                    let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
 
-                // Se a resposta não for um array, mostra uma mensagem de erro.
-                document.getElementById('orcamentos').innerHTML = `<p>${dados.mensagem || 'Erro ao carregar orçamentos.'}</p>`;
+                    // Itera sobre cada orçamento no array.
+                    dados.forEach(orcamento => {
 
-            };
+                        saida += `<li>
+                            Orçamento ${orcamento.numeroOrcamento}: 
+                            Cliente: ${orcamento.nomeCliente}, 
+                            Valor: ${formatarValor(orcamento.valorOrcamento)}, 
+                            Data: ${formatarData(orcamento.dataCriacao)}, 
+                            Status: ${orcamento.status}, 
+                            Quantidade total de itens: ${orcamento.quantidadeTotal}</li>
+                            <a href='../PHP/verInformacoesOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
+                            `;
 
-        })
-        .catch(erro => console.error('Erro:', erro)); // Lida com erros na solicitação.
-});
+
+                    });
+
+                    saida += "</ul>";
+
+                    // Insere a lista de orçamentos no elemento HTML com id 'orcamentos'.
+                    document.getElementById('orcamentos').innerHTML = saida;
+
+                } else {
+
+                    // Se a resposta não for um array, mostra uma mensagem de erro.
+                    document.getElementById('orcamentos').innerHTML = `<p>${dados.mensagem || 'Erro ao carregar orçamentos.'}</p>`;
+
+                };
+
+            })
+            .catch(erro => console.error('Erro:', erro)); // Lida com erros na solicitação.
+            
+    });
