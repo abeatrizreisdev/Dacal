@@ -28,8 +28,45 @@ const formatarCEP = (cep) => {
     return cep.replace(/^(\d{5})(\d{3})$/, "$1-$2");
 };
 
+// Função para desformatar CNPJ
+const desformatarCNPJ = (cnpj) => {
+    return cnpj.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+};
+
+// Função para desformatar Inscrição Estadual
+const desformatarIE = (inscricaoEstadual) => {
+    return inscricaoEstadual.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+};
+
+// Função para desformatar Telefone
+const desformatarTelefone = (telefone) => {
+    return telefone.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+};
+
+// Função para desformatar CEP
+const desformatarCEP = (cep) => {
+    return cep.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+};
 
 
+document.getElementById('formEditarConta').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Obter os campos do formulário
+    const cnpjInput = document.getElementById('cnpjEmpresa');
+    const inscricaoEstadualInput = document.getElementById('inscricaoEstadual');
+    const telefoneInput = document.getElementById('telefone');
+    const cepInput = document.getElementById('cep');
+
+    // Desformatar os valores
+    cnpjInput.value = desformatarCNPJ(cnpjInput.value);
+    inscricaoEstadualInput.value = desformatarIE(inscricaoEstadualInput.value);
+    telefoneInput.value = desformatarTelefone(telefoneInput.value);
+    cepInput.value = desformatarCEP(cepInput.value);
+
+    // Submeter o formulário
+    this.submit();
+});
 
     // Este arquivo js é responsável por carregar os dados de uma conta cliente
     // Para que somente o adm possa editar esses dados
@@ -66,6 +103,7 @@ const formatarCEP = (cep) => {
 
         const dados = obterParametrosDaUrlEmpresa();
 
+        document.getElementById('idCliente').value = dados.id;
         document.getElementById('razaoSocial').value = dados.razaoSocial;
         document.getElementById('inscricaoEstadual').value = formatarIE(dados.inscricaoEstadual);
         document.getElementById('cnpjEmpresa').value =  formatarCNPJ(dados.cnpj);
@@ -78,7 +116,6 @@ const formatarCEP = (cep) => {
         document.getElementById('logradouro').value = dados.logradouro;
         document.getElementById('numeroEndereco').value = dados.numeroEndereco;
         document.getElementById('cep').value = formatarCEP(dados.cep);
-        document.getElementById('idFuncionarioExcluir').value = dados.id;
 
     }
 

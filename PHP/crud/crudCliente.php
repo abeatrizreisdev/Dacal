@@ -84,13 +84,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Busca por cliente realizada com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum cliente encontrado.";
 
                     return null;
 
@@ -100,6 +98,8 @@
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações do cliente: " . $excecao->getMessage();
+
+                return null;
 
             }
 
@@ -175,19 +175,28 @@
 
                 // Comando sql para editar as informações do funcionário.
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE idCliente = :id";
+
+                // Debug: Print SQL and parameters
+                echo "SQL: $sql<br>";
+                print_r(array_merge($dados, ['id' => $idCliente]));
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idCliente]));
+
+                // Check the result of the query
+                if ($resultadoConsulta === false) {
+                    echo "<br>Erro na execução da consulta.";
+                } else {
+                    echo "<br>Número de linhas afetadas: $resultadoConsulta";
+                }
                 
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Cliente editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
@@ -215,13 +224,11 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Email do cliente editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
@@ -250,13 +257,11 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Senha do cliente editada com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
@@ -282,7 +287,6 @@
                 
                 if ($resultadoConsulta > 0) {
                     
-                    echo "<br>Cliente excluido com sucesso.";
 
                     return $resultadoConsulta;
 

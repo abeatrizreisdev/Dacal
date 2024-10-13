@@ -94,7 +94,10 @@ $sessaoCliente = new Sessao();
                 <div class="infoConta">
                     <div class="dadosGerais">
                         <p id="titulo">Dados da Conta</p>
-                        <form action="#" method="" class="formDados">
+                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados" id="formEditarConta">
+
+                            <input type="hidden" name="idCliente" id="idCliente">
+
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>

@@ -95,7 +95,7 @@
         div.classList.add('empresa');
         div.innerHTML = `
             <p>${empresa.nomeEmpresa}</p>
-            <button> Excluir Conta </button>
+            <button onclick="excluirPerfilEmpresa('${empresa.idCliente}')"> Excluir Conta </button>
             <button onclick="editarPerfilEmpresa('${empresa.nomeEmpresa}')"> Editar Perfil </button>
         `;
 
@@ -137,6 +137,59 @@
             });
 
     };
+
+
+    // Função para excluir o perfil do funcionário.
+    function excluirPerfilEmpresa(id) {
+
+        const formData = new FormData();
+        formData.append('idFuncionario', id);
+
+        fetch('../PHP/excluirFuncionario/excluirFuncionario.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(resposta => {
+
+            if (!resposta.ok) {
+
+                throw new Error('Erro na requisição');
+
+            }
+
+            return resposta.json();
+
+        })
+        .then(dados => {
+
+            const mensagemFeedback = document.getElementById('mensagemFeedback');
+
+            if (dados.status === 'success') {
+
+                mensagemFeedback.textContent = dados.message;
+                mensagemFeedback.style.color = 'green';
+
+                // Redireciona após 2 segundos
+                setTimeout(() => {
+                    window.location.href = '../PHP/visualizarContasCadastradas.php';
+                }, 2000);
+
+            } else {
+
+                mensagemFeedback.textContent = dados.message;
+                mensagemFeedback.style.color = 'red';
+
+            }
+
+            mensagemFeedback.style.display = 'block';
+
+        })
+        .catch(error => {
+
+            console.error('Erro:', error);
+
+        });
+    }
 
     
 

@@ -1,7 +1,7 @@
 <?php 
 
     require "../conexaoBD/conexaoBD.php";
-    require "../crud/crudFuncionario.php";
+    require "../crud/crudCliente.php";
     require "../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
@@ -12,13 +12,13 @@
     $conexao->setUsuarioBD(user: BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
-    $crudFuncionario = new CrudFuncionario($conexao);
+    $crudFuncionario = new CrudCliente($conexao);
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
-        $idFuncionario = $_POST['idFuncionario'];
+        $idCliente = $_POST['idCliente'];
         
-        $resultadoExclusao = $crudFuncionario->excluirFuncionario($idFuncionario);
+        $resultadoExclusao = $crudCliente->excluirCliente($idCliente);
 
         if ($resultadoExclusao > 0) {
 
