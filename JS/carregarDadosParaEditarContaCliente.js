@@ -63,6 +63,7 @@
         document.getElementById('inputBairro').value = dados.bairro;
         document.getElementById('inputLogradouro').value = dados.logradouro;
         document.getElementById('inputCep').value = formatarCEP(dados.cep);
+        document.getElementById('idFuncionarioExcluir').value = dados.id;
 
     }
 

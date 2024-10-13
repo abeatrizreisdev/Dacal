@@ -161,9 +161,12 @@
 
                         <a href="visualizarContasCadastradas.php"> <button>Página Anterior</button> </a>
 
-                        <form action="">
-                            <button>Excluir Conta</button>
+                        <form id="formExcluirConta" method="POST">
+                            <input type="hidden" name="idFuncionario" id="idFuncionarioExcluir">
+                            <button type="submit">Excluir Conta</button>
                         </form>
+
+                        <div id="mensagemFeedback" class="mensagem-feedback"></div>
 
                     </div>
                 </div>
@@ -172,6 +175,7 @@
     </div>
 
     <script src="../JS/carregarDadosParaEditarContaCliente.js"></script>
+    <script src="../JS/excluirContaFuncionario.js"></script>
 </body>
 
 </html>

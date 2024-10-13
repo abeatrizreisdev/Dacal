@@ -245,6 +245,12 @@ nav {
 }
 
 
+.mensagem-feedback {
+    display: none;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
 
 
 #btnLogin {

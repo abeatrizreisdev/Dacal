@@ -203,7 +203,6 @@
                 
                 if ($resultadoConsulta > 0) {
                     
-                    echo "<br>Funcionário excluido com sucesso.";
 
                     return $resultadoConsulta;
 
@@ -217,6 +216,8 @@
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na exclusão do funcionário: " . $excecao->getMessage();
+
+                return null;
 
             }
 
