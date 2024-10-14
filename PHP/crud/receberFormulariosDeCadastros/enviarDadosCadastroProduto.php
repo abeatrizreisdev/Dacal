@@ -4,7 +4,7 @@
     require "../crudProduto.php";
     require "../../sessao/sessao.php";
     require "../../entidades/produto.php";
-    require "../conexaoBD/configBanco.php";
+    require "../../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
     $conexao->setHostBD(host: BD_HOST);
@@ -57,10 +57,22 @@
                         'descricaoProduto' => $produto->getDescricao(),
                         'categoria' => $produto->getCategoria()
                     ]);
+                    
+                    $sessao = new Sessao();
 
-                    header("Location: .../homeFuncionario.php");
-                    exit();
+                    $tipoConta = $sessao->getValorSessao('tipoConta');
 
+                    if ($tipoConta == 'funcionario') {
+
+                        header('Location: ../../homeFuncionario.php');
+                        exit();
+
+                    } elseif ($tipoConta == 'admin') {
+
+                        header('Location: ../../homeAdm.php');
+                        exit();
+                    }
+                    
                 } catch (Exception $excecao) {
 
                     echo "Erro ao cadastrar o produto: " . $excecao->getMessage();
@@ -73,11 +85,13 @@
                 echo 'O caminho do arquivo está vazio.';
 
             }
+
         } else {
 
             echo 'O campo imagem não foi enviado ou ocorreu um erro no upload.';
 
         }
+
     } else {
 
         echo 'Requisição inválida.';
