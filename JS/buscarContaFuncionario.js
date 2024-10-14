@@ -12,22 +12,28 @@
 
     // Função para buscar um funcionário pelo CPF.
     function buscarFuncionarioPorCpf() {
-
+        
         const cpf = document.getElementById('inputCpf').value;
         const container = document.getElementById('container-funcionarios');
         const mensagemErro = document.getElementById('mensagem-erro');
         container.innerHTML = '';
         mensagemErro.textContent = '';
-        
+
         fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
             .then(resposta => resposta.json())
             .then(dados => {
-                exibirFuncionario(dados, container);
+                if (dados && dados.nome) {
+                    exibirFuncionario(dados, container);
+                } else {
+                    mensagemErro.textContent = 'Funcionário(a) não encontrado(a).';
+                }
             })
             .catch(erro => {
-                mensagemErro.textContent = 'Funcionário(a) não encontrado(a).';
+                mensagemErro.textContent = 'Erro ao buscar os dados do funcionário.';
+                console.error('Erro ao buscar os dados do funcionário:', erro);
             });
     }
+
 
     // Função para buscar todos os funcionários cadastrados.
     function buscarTodosFuncionarios() {
@@ -64,7 +70,7 @@
             .catch(erro => {
 
                 console.error('Erro ao buscar os funcionários:', erro); // Log para depuração.
-                mensagemErro.textContent = 'Ocorreu um erro ao buscar os funcionários. Por favor, tente novamente mais tarde.';
+                mensagemErro.textContent = 'Nenhum funcionário cadastrado no sistema.';
 
             });
 

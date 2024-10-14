@@ -24,16 +24,17 @@
 
         fetch(`../PHP/buscarCliente/buscarClientePeloNome.php?nome=${nome}`)
             .then(resposta => resposta.text())
-            .then(texto => {
+            .then(dados => {
+                
+                // Verificando se o cliente pesquisado pelo nome foi encontrado.
+                if (dados && dados.nome) {
 
-                try {
-
-                    const dados = JSON.parse(texto);
                     exibirEmpresa(dados, container);
 
-                } catch (erro) {
+                } else {
 
                     mensagemErro.textContent = 'Cliente não encontrado.';
+
                 }
 
             })
@@ -81,7 +82,7 @@
             .catch(erro => {
 
                 console.error('Erro ao buscar as empresas:', erro); // Log para depuração.
-                mensagemErro.textContent = 'Ocorreu um erro ao buscar as empresas. Por favor, tente novamente mais tarde.';
+                mensagemErro.textContent = 'Nenhum cliente cadastrado no sistema.';
 
             });
 
