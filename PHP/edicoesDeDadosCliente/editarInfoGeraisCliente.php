@@ -73,9 +73,14 @@
                 
                 if ($tipoConta == 'admin' ) {
 
-                    header("Location: ../visualizarContasCadastradas.php?status=sucesso");
+                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=sucesso");
                     exit();
 
+                } else {
+
+                    header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
+                    exit();
+                    
                 }
                     
 
@@ -83,10 +88,15 @@
 
                 if ($tipoConta == 'admin' ) {
 
-                    header("Location: ../visualizarContasCadastradas.php?status=erro");
+                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
                     exit();
 
-                } 
+                } else {
+
+                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
+                    exit();
+
+                }
 
         }
 
