@@ -61,22 +61,14 @@
                     
                     $sessao = new Sessao();
 
-                    $tipoConta = $sessao->getValorSessao('tipoConta');
-
-                    if ($tipoConta == 'funcionario') {
-
-                        header('Location: ../../homeFuncionario.php');
-                        exit();
-
-                    } elseif ($tipoConta == 'admin') {
-
-                        header('Location: ../../homeAdm.php');
-                        exit();
-                    }
+                    header("Location: ../../catalogoProdutos.php?statusCadastroProduto=sucesso");
+                    exit();
                     
                 } catch (Exception $excecao) {
 
                     echo "Erro ao cadastrar o produto: " . $excecao->getMessage();
+                    header("Location: ../../catalogoProdutos.php?statusCadastroProduto=erro");
+                        exit();
                     exit();
 
                 }
