@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoCliente = new Sessao();
+$sessaoCliente = new Sessao();
 
 ?>
 
@@ -16,7 +16,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeEmpresa.css">
+    <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -28,14 +28,15 @@
 
         <ul class="nav-list">
             <li><a href="">Homepage</li></a>
-            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
+            <li><a href="">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
+
         <ul class="icons">
             <a href="./autenticacao/logout.php">
                 <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
             </a>
         </ul>
     </nav>
@@ -88,35 +89,10 @@
             </a>
         </div>
         <div class="quadrado">
-            <div id="textoPrincipal">
-                <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $_SESSION['nome'] ?></strong> </p>
-                    <br>
-                    <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
-                        sua
-                        empresa de forma automatizada, dando a liberdade que você precisa para fazer os pedidos quando
-                        quiser e da forma que desejar.
-                        <br>
-                        Não sabe ainda como usar a nossa plataforma? Temos o tutorial logo abaixo:
-                        <br>
-                        Na aba <strong>Cadastro</strong>, você terá acesso aos seus dados cadastrais como CNPJ, E-mail, Telefone,
-                        Endereço,
-                        Senha
-                        e também será possível fazer a atualização dos mesmos.<br>
-                        Na aba <strong>Orçamentos</strong>, você terá acesso a todos os orçamentos que já foram feitos pela sua empresa
-                        nesse
-                        site e será onde ira iniciar novos orçamentos.<br>
-                        Na aba <strong>Atendimento</strong>, você terá acesso a tickets que já tenha aberto na plataforma ou contato
-                        direto
-                        com
-                        algum funcionário da nossa empresa.
-                    </p>
-                </div>
+            <div class="geral">
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>

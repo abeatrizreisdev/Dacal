@@ -48,11 +48,11 @@ $sessaoCliente = new Sessao();
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="./homeEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -61,16 +61,16 @@ $sessaoCliente = new Sessao();
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a class="abas" href="./perfilEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
-                    <p class="tituloAbas">Meu Perfil</p>
+                    <p class="tituloAbas"> Meu Perfil</p>
                     <p class="descricaoAbas">Visualize e altere seus</p>
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas" href="./orcamentosEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
@@ -80,7 +80,7 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
