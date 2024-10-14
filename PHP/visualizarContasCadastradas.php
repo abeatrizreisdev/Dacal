@@ -95,6 +95,7 @@
             <a href=""> <button>Cadastrar Funcionário</button> </a>
             
         </section>
+        
     </div>
 
     <script src="../JS/formatacoes.js"></script>

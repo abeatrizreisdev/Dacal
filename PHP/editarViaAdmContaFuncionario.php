@@ -17,6 +17,7 @@
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/editarPerfilFuncionarioAdm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -161,12 +162,9 @@
 
                         <a href="visualizarContasCadastradas.php"> <button>Página Anterior</button> </a>
 
-                        <form id="formExcluirConta" method="POST">
-                            <input type="hidden" name="idFuncionario" id="idFuncionarioExcluir">
-                            <button type="submit">Excluir Conta</button>
-                        </form>
-
-                        <div id="mensagemFeedback" class="mensagem-feedback"></div>
+                        
+                        <button id="botaoExcluirConta">Excluir Conta</button>
+                    
 
                     </div>
                 </div>
@@ -174,8 +172,10 @@
         </section>
     </div>
 
-    <script src="../JS/carregarDadosParaEditarContaCliente.js"></script>
-    <script src="../JS/excluirContaFuncionario.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="../JS/carregarDadosParaEditarContaFuncionario.js"></script>
 </body>
 
 </html>

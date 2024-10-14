@@ -118,6 +118,7 @@
     };
 
     function excluirPerfil(id) {
+        
         const formData = new FormData();
         formData.append('idFuncionario', id);
         fetch('../PHP/excluirFuncionario/excluirFuncionario.php', {
