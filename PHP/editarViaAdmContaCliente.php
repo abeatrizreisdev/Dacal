@@ -93,12 +93,20 @@ $sessaoCliente = new Sessao();
                 <p id="tituloInfo">Informações da Conta</p>
                 <div class="infoConta">
                     <div class="dadosGerais">
-                        <p id="titulo">Dados da Conta</p>
-                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados" id="formEditarConta">
 
+                        <p id="titulo">Dados da Conta</p>
+
+                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados" id="formEditarConta">
+                            
                             <input type="hidden" name="idCliente" id="idCliente">
 
                             <div class="infoGerais">
+
+                                <div class="parteGeral">
+                                    <p>Nome da Empresa</p>
+                                    <input type="text" id="nome" name="nome" class="input">
+                                </div>
+
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
                                     <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">

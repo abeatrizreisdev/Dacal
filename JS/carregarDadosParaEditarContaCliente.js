@@ -103,7 +103,14 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
 
         const dados = obterParametrosDaUrlEmpresa();
 
+        console.log(dados.id);
+        console.log(dados.nome);
+        console.log(dados.razaoSocial);
+        console.log(dados.inscricaoEstadual);
+        console.log(dados)
+
         document.getElementById('idCliente').value = dados.id;
+        document.getElementById('nome').value = dados.nome;        
         document.getElementById('razaoSocial').value = dados.razaoSocial;
         document.getElementById('inscricaoEstadual').value = formatarIE(dados.inscricaoEstadual);
         document.getElementById('cnpjEmpresa').value =  formatarCNPJ(dados.cnpj);
@@ -121,3 +128,6 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
 
     // Chama a função para preencher os campos quando a página é carregada.
     document.addEventListener('DOMContentLoaded', preencherCamposDeEdicaoEmpresa);
+
+
+    
