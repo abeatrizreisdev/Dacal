@@ -59,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('inputBairro').value = dados.bairro;
         document.getElementById('inputLogradouro').value = dados.logradouro;
         document.getElementById('inputCep').value = formatarCEP(dados.cep);
+        document.getElementById('idOcultoFunc').value = dados.id;
     }
 
     // Função para excluir perfil

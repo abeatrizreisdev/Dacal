@@ -152,9 +152,10 @@
 
                         <div class="parteGeral">
                             
-                            <form action="">
+                            <form action="editarContaFuncionario/editarSenhaFuncionario.php" method="post">
                                 <p>Senha</p>
                                 <input type="password" id="inputSenha" name="senha" class="input" required >
+                                <input type="hidden" id="idOcultoFunc" name="idOcultoFunc">
                                 <button type="submit">AlterarSenha</button>
                             </form>
                                     
