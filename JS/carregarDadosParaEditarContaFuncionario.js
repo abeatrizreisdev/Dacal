@@ -1,7 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     function formatarTelefone(telefone) {
+
+        // Remove espaços
+        telefone = telefone.replace(/\s+/g, '');
+
         return telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+
     }
+    
 
     function formatarCEP(cep) {
         return cep.replace(/^(\d{5})(\d{3})$/, "$1-$2");
@@ -10,6 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatarCPF(cpf) {
         return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
     }
+
+    
+    // Função para desformatar Telefone
+    function desformatarTelefone(telefone) {
+        return telefone.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+    };
+
+    // Função para desformatar CEP
+    function desformatarCEP(cep) {
+        return cep.replace(/[^\d]/g, ''); // Remove todos os caracteres que não são dígitos
+    };
 
     function obterParametrosDaUrl() {
         const parametros = new URLSearchParams(window.location.search);

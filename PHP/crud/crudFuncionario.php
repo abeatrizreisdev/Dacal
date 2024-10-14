@@ -171,19 +171,16 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Funcionário editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Funcionário não encontrado.";
-
                     return false;
 
                 }
         
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na edição do funcionário: " . $excecao->getMessage();
                 

@@ -19,10 +19,15 @@ const formatarCPF = (cpf) => {
 };
 
 // Função para formatar o telefone
-const formatarTelefone = (telefone) => {
-    return telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
-};
+function formatarTelefone(telefone) {
 
+    // Remove espaços
+    telefone = telefone.replace(/\s+/g, '');
+
+
+    return telefone.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+    
+}
 // Função para formatar o CEP
 const formatarCEP = (cep) => {
     return cep.replace(/^(\d{5})(\d{3})$/, "$1-$2");

@@ -88,7 +88,7 @@
                     <div class="dadosGerais">
                         <h2 id="subtitulo"> Dados gerais </h2>
 
-                        <form action="#" method="" class="formDados">
+                        <form action="editarContaFuncionario/editarContaFuncionario.php" method="post" class="formDados">
                             <div class="infoGerais">
 
                                 <div class="parteGeral">
