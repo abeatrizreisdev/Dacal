@@ -1,8 +1,8 @@
 <?php
 
-require "./sessao/sessao.php";
+    require "./sessao/sessao.php";
 
-$sessaoFuncionario = new Sessao();
+    $sessaoFuncionario = new Sessao();
 
 ?>
 
@@ -17,6 +17,8 @@ $sessaoFuncionario = new Sessao();
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/visualizarContasCadastradas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 <header>
     <div class="informativo_superior">
@@ -98,13 +100,9 @@ $sessaoFuncionario = new Sessao();
     <script src="../JS/formatacoes.js"></script>
     <script src="../JS/buscarContaCliente.js"></script>
     <script src="../JS/buscarContaFuncionario.js"></script>
-    <script>
-
-        // Exibindo por padrão na página todas as contas dos clientes cadastrados.
-        configurarBuscaEmpresa()
-        buscarTodasEmpresas()
-
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/scriptParaVerificarStatusDasContasCadastradas.js"></script>
 
 </body>
 

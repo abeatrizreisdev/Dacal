@@ -297,7 +297,7 @@
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na exclusão do cliente: " . $excecao->getMessage();
 
