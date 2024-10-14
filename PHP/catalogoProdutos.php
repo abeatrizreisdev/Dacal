@@ -110,6 +110,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/verificarStatusCadastroProduto.js"></script>
+    <script src="../JS/verificarStatusEdicaoProduto.js"></script>
+    <script src="../JS/excluirProduto.js"></script>
     <script src="../JS/carregarProdutos.js"></script>
 
 </body>

@@ -1,95 +1,128 @@
-<?php 
+<?php
+require './conexaoBD/conexaoBD.php';
+require "./crud/crudProduto.php";
+require "./conexaoBD/configBanco.php";
+require "./sessao/sessao.php";
 
-    require "../../conexaoBD/conexaoBD.php";
-    require "../crudProduto.php";
-    require "../../sessao/sessao.php";
-    require "../../entidades/produto.php";
-    require "../conexaoBD/configBanco.php";
+$conexao = new ConexaoBD();
+$conexao->setHostBD(BD_HOST);
+$conexao->setPortaBD(BD_PORTA);
+$conexao->setEschemaBD(BD_ESCHEMA);
+$conexao->setSenhaBD(BD_PASSWORD);
+$conexao->setUsuarioBD(BD_USERNAME);
+$conexao->getConexao(); // Iniciando a conexão com o banco.
 
-    $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: BD_HOST);
-    $conexao->setPortaBD(porta: BD_PORTA);
-    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
-    $conexao->setSenhaBD(senha: BD_PASSWORD);
-    $conexao->setUsuarioBD(user: BD_USERNAME);
-    $conexao->getConexao(); // Iniciando a conexão com o banco.
-    
-    $crudProduto = new CrudProduto($conexao);
+$crudProduto = new CrudProduto($conexao);
 
-    // Verifica se o ID do produto foi passado na URL.
-    if (isset($_GET['id'])) {
-        $idProduto = $_GET['id'];
-    }
-
-    // Verifica se o método de requisição é POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Verifica se o arquivo de imagem foi enviado
-        if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-            
-            echo 'Erro no upload: ' . $_FILES['imagem']['error'];
-            $imagemProduto = $_FILES['imagem'];
-
-            // Verifica se o caminho temporário do arquivo não está vazio
-            if (!empty($imagemProduto['tmp_name'])) {
-
-                // Lê o conteúdo do arquivo
-                $conteudoImagem = file_get_contents($imagemProduto['tmp_name']);
-                
-                // Processa os outros campos do formulário
-                $nomeProduto = $_POST['nome'];
-                $valorProduto = floatval(str_replace(',', '.', $_POST['valor']));
-                $descricaoProduto = $_POST['descricao'];
-
-                try {
-
-                    // Cria uma nova instância do Produto
-                    $produto = new Produto();
-                    
-                    // Define os atributos do produto
-                    $produto->setImagem($conteudoImagem); // Armazena a imagem como BLOB
-                    $produto->setNome($nomeProduto);
-                    $produto->setValor($valorProduto);
-                    $produto->setDescricao($descricaoProduto);
-                    $produto->setId($idProduto);
-                    // está caracterizado como a categoria 5, pois estava testando o banco como deve ser, se o catalogo de produtos forem separados por categorias.
-                    $produto->setCategoria(5);
-
-                    // Chamando o método de cadastro do produto
-                    $crudProduto->editarProduto($produto->getId(), [
-                        'nomeProduto' => $produto->getNome(),
-                        'imagemProduto' => $produto->getImagem(),
-                        'valorProduto' => $produto->getValor(),
-                        'descricaoProduto' => $produto->getDescricao(),
-                        'categoria' => $produto->getCategoria()
-                    ]);
-
-                    header("Location: .../homeFuncionario.php");
-                    exit();
-
-                } catch (Exception $excecao) {
-
-                    echo "Erro ao editar o produto: " . $excecao->getMessage();
-                    exit();
-
-                }
-
-            } else {
-
-                echo 'O caminho do arquivo está vazio.';
-
-            }
-        } else {
-
-            echo 'O campo imagem não foi enviado ou ocorreu um erro no upload.';
-
-        }
-    } else {
-
-        echo 'Requisição inválida.';
-
-    }
-
-    
-
+if (isset($_GET['id'])) {
+    $idProduto = $_GET['id'];
+    $produtoEncontrado = $crudProduto->buscarInfoProduto($idProduto);
+}
+$sessaoFuncionario = new Sessao();
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Beatriz Reis e Valter Filho">
+    <meta name="description" content="Site de automoção da Dacal">
+    <title>Dacal</title>
+    <link rel="stylesheet" href="../CSS/cadastrarProduto.css">
+</head>
+<header>
+    <div class="informativo_superior">
+        <p>A EMPRESA QUE AUTOMATIZA O PEDIDO DOS SEUS ORÇAMENTOS</p>
+    </div>
+    <nav class="nav-superior">
+        <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
+        <ul class="nav-list">
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</a></li>
+            <li><a href="#">Catálogo</a></li>
+            <li><a href="#">Sobre Nós</a></li>
+        </ul>
+        <ul class="icons">
+            <a href="./autenticacao/logout.php">
+                <button class="sair">
+                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
+            </a>
+        </ul>
+    </nav>
+</header>
+<body class="fundo">
+    <div class="homepage">
+        <div class="menu">
+            <br><br>
+            <a class="abas">
+                <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
+                <div id="info">
+                    <p>Bem-vindo(a),</p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoFuncionario->getValorSessao('nome'); ?> </p>
+                    <button class="sairInfo">
+                        <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
+                    </button>
+                </div>
+            </a>
+            <br>
+            <hr id="linhaMenu">
+            <br>
+            <a class="abas" href="./perfilFuncionario.php">
+                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <div id="info">
+                    <p class="tituloAbas">Meu Perfil</p>
+                    <p class="descricaoAbas">Visualize e altere seus dados.</p>
+                </div>
+            </a>
+            <?php 
+                if ($tipoContaAutenticada == "admin") {
+                    echo '<br>';
+                    echo '<a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                    <div id="info">';
+                    echo '<p class="tituloAbas">Gerenciar Contas</p>
+                    <p class="descricaoAbas">Gerenciar contas funcionários e empresas</p>
+                </div>';
+                    echo '</a>';
+                }
+            ?>
+        </div>
+        <section class="quadrado">
+            <form action="./crud/receberFormulariosDeCadastros/enviarDadosEdicaoProduto.php" method="post" enctype="multipart/form-data" class="containerFormulario">
+                <div class="containerImagemNomeEValor">
+                    <label for="imagem" class="upload-container">
+                        <img src="<?php echo isset($produtoEncontrado['imagemProduto']) ? 'data:image/png;base64,' . base64_encode($produtoEncontrado['imagemProduto']) : '../IMAGENS/CadastrarProduto/iconeAdcionarImagemProduto.png'; ?>" id="imagemPreview">
+                        <input type="file" id="imagem" name="imagem" accept="image/*">
+                    </label>
+                    <div class="input-group">
+                        <label for="nomeProduto">Nome:</label>
+                        <input type="text" name="nome" id="nomeProduto" placeholder="Nome do produto." value="<?php echo isset($produtoEncontrado['nomeProduto']) ? $produtoEncontrado['nomeProduto'] : ''; ?>" required>
+                        <label for="valorProduto">Valor:</label>
+                        <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." value="<?php echo isset($produtoEncontrado['valorProduto']) ? $produtoEncontrado['valor'] : ''; ?>" required min="1">
+                        <label for="categoriaProduto">Categoria:</label>
+                        <select name="categoriaProduto" id="CategoriaProduto">
+                            <option value="1" <?php echo isset($produtoEncontrado['categoria']) && $produtoEncontrado['categoria'] == 1 ? 'selected' : ''; ?>>Móveis</option>
+                            <option value="2" <?php echo isset($produtoEncontrado['categoria']) && $produtoEncontrado['categoria'] == 2 ? 'selected' : ''; ?>>Cadeiras</option>
+                            <option value="3" <?php echo isset($produtoEncontrado['categoria']) && $produtoEncontrado['categoria'] == 3 ? 'selected' : ''; ?>>Cozinha</option>
+                            <option value="4" <?php echo isset($produtoEncontrado['categoria']) && $produtoEncontrado['categoria'] == 4 ? 'selected' : ''; ?>>Utensílios</option>
+                            <option value="5" <?php echo isset($produtoEncontrado['categoria']) && $produtoEncontrado['categoria'] == 5 ? 'selected' : ''; ?>>Aparelhos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="descricao-field">
+                    <label for="descricaoProduto">Descrição:</label>
+                    <textarea name="descricao" id="descricaoProduto" required><?php echo isset($produtoEncontrado['descricao']) ? $produtoEncontrado['descricaoProduto'] : ''; ?></textarea>
+                </div>
+                <div class="form-buttons">
+                    <a href="./homeFuncionario.php" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
+                    <button type="submit" id="botaoCadastrarProduto">Salvar Alterações</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script src="../JS/scriptCadastroDeProduto.js"></script>
+</body>
+</html>
