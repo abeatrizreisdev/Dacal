@@ -3,6 +3,7 @@
     require "./sessao/sessao.php";
 
     $sessaoFuncionario = new Sessao();
+    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -29,7 +30,7 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>

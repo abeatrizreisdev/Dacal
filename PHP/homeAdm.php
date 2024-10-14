@@ -59,7 +59,7 @@ $sessaoFuncionario = new Sessao();
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin'? 'perfilADM.php' : 'perfilFuncionario.php'; ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>

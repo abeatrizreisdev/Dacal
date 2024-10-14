@@ -4,6 +4,8 @@
 
     $sessao = new Sessao();
 
+    $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +29,8 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
+            <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
@@ -67,6 +69,23 @@
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
+
+            <?php 
+
+                if ($tipoContaAutenticada == "admin") {
+                   echo '<br>';
+                   echo '<a class="abas" href="./visualizarContasCadastradas.php">
+                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <div id="info">';
+                    echo '<p class="tituloAbas"> Gerenciar Contas</p>
+                    <p class="descricaoAbas">Gerenciar contas</p>
+                    <p class="descricaoAbas">funcionários e empresas</p>
+                </div>';
+                echo '</a>';
+                }
+
+            ?>
+            
         </div>
         <section class="quadrado">
             

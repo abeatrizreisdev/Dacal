@@ -4,6 +4,8 @@
 
     $sessaoFuncionario = new Sessao();
 
+    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
