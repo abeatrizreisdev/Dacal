@@ -80,7 +80,8 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
             <br>
-            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+            <a class="abas"
+                href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -171,6 +172,12 @@ $sessaoCliente = new Sessao();
                                 value="<?php echo $sessaoCliente->getValorSessao('senha'); ?>">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
                         </form>
+                        <div class="btnApagarConta">
+                            <button type="submit" id="btnApagar">
+                                <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" id="imgApagar">
+                                <p id=""
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
