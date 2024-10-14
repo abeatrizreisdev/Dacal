@@ -79,7 +79,6 @@
             <p>${funcionario.nome}</p>
             <button onclick="excluirPerfil(${funcionario.id})">Excluir Conta</button>
             <button onclick="editarPerfil(${funcionario.cpf})">Editar Perfil</button>
-            <p id="mensagemFeedback"> Feedback Exclusão </p>
         `;
         container.appendChild(div);
 
@@ -118,57 +117,42 @@
 
     };
 
-    // Função para excluir o perfil do funcionário.
     function excluirPerfil(id) {
-
         const formData = new FormData();
         formData.append('idFuncionario', id);
-
         fetch('../PHP/excluirFuncionario/excluirFuncionario.php', {
             method: 'POST',
             body: formData
         })
         .then(resposta => {
-
             if (!resposta.ok) {
-
                 throw new Error('Erro na requisição');
-
             }
-
-            return resposta.json();
-
+            return resposta.text(); // Obter texto para depuração
         })
-        .then(dados => {
-
-            const mensagemFeedback = document.getElementById('mensagemFeedback');
-
-            if (dados.status === 'success') {
-
-                mensagemFeedback.textContent = dados.message;
-                mensagemFeedback.style.color = 'green';
-
-                // Redireciona após 2 segundos
-                setTimeout(() => {
-                    window.location.href = '../PHP/visualizarContasCadastradas.php';
-                }, 2000);
-
-            } else {
-
-                mensagemFeedback.textContent = dados.message;
-                mensagemFeedback.style.color = 'red';
-
+        .then(texto => {
+            console.log('Resposta do servidor:', texto); // Exibir resposta no console
+            try {
+                const dados = JSON.parse(texto); // Tentar converter para JSON
+                if (dados.status === 'success') {
+                    toastr.success(dados.message);
+                    setTimeout(() => {
+                        window.location.href = '../PHP/visualizarContasCadastradas.php';
+                    }, 2000);
+                } else {
+                    toastr.error(dados.message);
+                }
+            } catch (erro) {
+                console.error('Erro ao analisar JSON:', erro);
+                toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
             }
-
-            mensagemFeedback.style.display = 'block';
-
         })
         .catch(error => {
-
+            toastr.error('Ocorreu um erro ao excluir a conta');
             console.error('Erro:', error);
-
         });
     }
+    
 
     document.getElementById('funcionario').addEventListener('click', () => {
 
