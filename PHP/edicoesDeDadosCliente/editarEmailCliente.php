@@ -16,28 +16,63 @@
 
     $crudCliente = new CrudCliente($conexao);
 
+    $sessaoAtiva = new Sessao(); 
+        
+    $tipoConta = $sessaoAtiva->getValorSessao('tipoConta');
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
+        $idCliente = $_POST['idClienteEmail'];
         $novoEmail = $_POST['email'];
 
-        $sessaoCliente = new Sessao(); 
-        
-        $resultadoEdicao = $crudCliente->editarEmailCliente($sessaoCliente->getValorSessao('idCliente'), $novoEmail);
+        try {
 
-        switch ($resultadoEdicao) {
+            $resultadoEdicao = $crudCliente->editarEmailCliente($idCliente, $novoEmail);
 
-            case true :
+            switch ($resultadoEdicao) {
+    
+                case true :
+    
+                    if ($tipoConta == "admin") {
+    
+                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=sucesso");
+                        exit();
+    
+                    } else {
+    
+                        header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
+                        exit();
+    
+                    }
+                    
+    
+                case false :
+    
+                    if ($tipoConta == "admin") {
+                        
+                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
+                        exit();
+    
+                    } else {
+    
+                        header("Location: ../perfilEmpresa.php?statusEdicaoContaCliente=erro");
+                        exit();
+    
+                    }
+    
+            }
 
-                header("Location: ../homeEmpresa.php");
-                exit();
 
-            case false :
+        } catch(Exception $excecao) {
 
-                header("Location: ../perfilEmpresa.php");
-                exit();
+
+            echo "Erro ao editar o cliente: " . $excecao->getMessage();
 
         }
+
+    } else {
+
+        echo "Método de requisição inválido.";
 
     }
 

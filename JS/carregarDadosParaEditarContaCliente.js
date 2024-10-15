@@ -109,6 +109,8 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
         const dados = obterParametrosDaUrlEmpresa();
 
         document.getElementById('idCliente').value = dados.id;
+        document.getElementById('idClienteSenha').value = dados.id;
+        document.getElementById('idClienteEmail').value = dados.id;
         document.getElementById('nome').value = dados.nome;        
         document.getElementById('razaoSocial').value = dados.razaoSocial;
         document.getElementById('inscricaoEstadual').value = formatarIE(dados.inscricaoEstadual);

@@ -263,9 +263,9 @@
 
                 }
         
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
-                echo "<br>Erro na edição da senha do cliente: " . $excecao->getMessage();
+                echo "Erro na edição da senha do cliente: " . $excecao->getMessage();
                 
                 return false;
 

@@ -159,15 +159,16 @@ $sessaoCliente = new Sessao();
                         </form>
                     </div>
                     <div class="alterarDados">
-                        <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST"
-                            class="alterarEmail">
+                        <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST" class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
+                            <input type="hidden" name="idClienteEmail" id="idClienteEmail">
                             <input type="email" id="trocarEmail" name="email" class="input">
                             <button type="submit" class="btnAlterarEmail">Alterar E-mail</button>
                         </form>
                         <form action="./edicoesDeDadosCliente/editarSenhaCliente.php" method="POST"
                             class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
+                            <input type="hidden" name="idClienteSenha" id="idClienteSenha">
                             <input type="password" id="trocarSenha" name="senha" class="input">
                             <button type="submit" class="btnAlterarSenha">Alterar Senha</button>
                         </form>
