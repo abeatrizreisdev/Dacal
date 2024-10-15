@@ -27,8 +27,8 @@ $sessaoCliente = new Sessao();
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="homeEmpresa.php">Homepage</li></a>
+            <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
 
@@ -51,7 +51,7 @@ $sessaoCliente = new Sessao();
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>

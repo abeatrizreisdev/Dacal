@@ -30,7 +30,7 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : ($tipoContaAutenticada == 'funcionario' ? 'homeFuncionario.php' : 'homeEmpresa.php'); ?>">Homepage</li></a>
             <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -62,7 +62,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin' ? 'perfilADM.php' : ($tipoContaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -73,6 +73,7 @@
 
             <?php 
 
+                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
                 if ($tipoContaAutenticada == "admin") {
                    echo '<br>';
                    echo '<a class="abas" href="./visualizarContasCadastradas.php">
@@ -86,6 +87,36 @@
                 }
 
             ?>
+
+            <?php 
+
+                // Se a conta autenticada for um cliente, então vai renderizar as opções de "Orcamento" "Atendimento" na esquerda da tela.
+                if ($tipoContaAutenticada != "admin" or $tipoContaAutenticada != "funcionario") {
+
+
+                    echo '<br> 
+                        <a class="abas" href="./orcamentosEmpresa.php">
+                            <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
+                        <div id="info">
+                            <p class="tituloAbas">Orçamentos</p>
+                            <p class="descricaoAbas">Confira todos os seus</p>
+                            <p class="descricaoAbas">orçamentos.</p>
+                        </div>
+                        </a>
+                        <br>
+                        <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+                            <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
+                            <div id="info">
+                                <p class="tituloAbas">Atendimento</p>
+                                <p class="descricaoAbas">Precisando de ajuda?</p>
+                                <p class="descricaoAbas">Clique aqui..</p>
+                            </div>
+                        </a>';
+
+                }
+            
+            ?>
+
             
         </div>
         <section class="quadrado">
