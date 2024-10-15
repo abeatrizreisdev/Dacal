@@ -79,7 +79,7 @@ function entradaBanco{
                     <p class="formularioNomes">Senha</p>
                     <input type="password" id="senha" name="senha" class="input">
                     <p id="cadastroOpcao" style="display:'block';">Ainda não tem conta? 
-                    <a id="cadastro"href="#">Cadastre-se Aqui.</a></p>
+                    <a id="cadastro"href="cadastroEmpresa.php">Cadastre-se Aqui.</a></p>
                 </div>
                 <br>
                 <button type="submit" id="btnLogin">Login</button>

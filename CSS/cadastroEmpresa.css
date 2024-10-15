@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins";
+}
+
+#homeGeral {
+    display: flex;
+}
+
+#imagemInicial {
+    width: 50vw;
+    height: 100vh;
+}
+
+#logoDacal {
+    width: 20vw;
+}
+
+#titulo {
+    font-family: "Open sans";
+    font-weight: 700;
+}
+
+
+#btnCadastro {
+    background-color: #7ed957;
+    width: 15vw;
+    height: 7vh;
+    border-radius: 4vh;
+    border-color: #7ed957;
+    font-size: 4vh;
+    font-family: "Poppins";
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.infoConta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 2vh;
+    width: 50vw;
+}
+
+.infoGerais {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.parteGeral p {
+    text-align: justify;
+}
+
+.dadosGerais {
+    width: 45vw;
+    text-align: center;
+}
+
+#tituloInfo {
+    text-align: center;
+    font-family: 'Poppins';
+    padding-top: 0.5vw;
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+.formDados {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.endereço {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-family: "Poppins";
+    font-size: 3vh;
+}
+
+.inputAPI {
+    height: 4vh;
+    width: 13vw;
+    border: 0.5vh solid;
+}
+
+#titulo {
+    font-family: "Poppins";
+    font-size: 1.7vw;
+    font-weight: 700;
+
+}
+
+.input {
+    height: 4vh;
+    border: 0.5vh solid;
+}
+
+#cnpjEmpresa,
+#razaoSocial {
+    width: 18vw;
+}
+
+#inscricaoEstadual {
+    width: 21vw;
+}
+
+#telefone {
+    width: 15vw;
+}
+
+#logradouro {
+    width: 30.5vw;
+}
+
+#numeroEndereco {
+    width: 5.5vw;
+}
+
+#bairro {
+    width: 24vw;
+}
+
+#cep {
+    width: 12vw;
+}
