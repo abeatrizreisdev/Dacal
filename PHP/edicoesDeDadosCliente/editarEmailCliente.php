@@ -39,7 +39,8 @@
                         exit();
     
                     } else {
-    
+                        
+                        $sessaoAtiva->setChaveEValorSessao('email', $novoEmail);
                         header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
                         exit();
     

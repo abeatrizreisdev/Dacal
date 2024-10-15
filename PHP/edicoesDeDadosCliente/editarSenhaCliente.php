@@ -43,7 +43,8 @@
                         exit();
     
                     } else {
-    
+                        
+                        $sessaoAtiva->setChaveEValorSessao('senha', $novaSenha);
                         header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
                         exit();
     
