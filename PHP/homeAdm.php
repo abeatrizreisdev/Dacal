@@ -46,7 +46,7 @@ $sessaoFuncionario = new Sessao();
         <div class="menu">
             <br>
             <br>
-            <a class="abas" href="homeAdm.php">
+            <a class="abas" href="../PHP/homeAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
@@ -59,7 +59,7 @@ $sessaoFuncionario = new Sessao();
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin'? 'perfilADM.php' : 'perfilFuncionario.php'; ?>">
+            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin'? 'perfilAdm.php' : 'perfilFuncionario.php'; ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -69,7 +69,7 @@ $sessaoFuncionario = new Sessao();
             </a>
             <br>
             <a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
                     <p class="descricaoAbas">Gerenciar funcionários</p>

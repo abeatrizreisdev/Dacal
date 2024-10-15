@@ -1,9 +1,9 @@
 <?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
-    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+$sessaoFuncionario = new Sessao();
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -30,7 +30,8 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage
+            </li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -49,7 +50,7 @@
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="../PHP/homeAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
@@ -62,7 +63,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="./perfilAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -72,7 +73,7 @@
             </a>
             <br>
             <a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
                     <p class="descricaoAbas">Gerenciar contas</p>
@@ -94,9 +95,9 @@
 
             <!-- Inserir a página de cadastro do funcionário dentro do href. -->
             <a href=""> <button>Cadastrar Funcionário</button> </a>
-            
+
         </section>
-        
+
     </div>
 
     <script src="../JS/formatacoes.js"></script>
@@ -109,6 +110,3 @@
 </body>
 
 </html>
-
-
-
