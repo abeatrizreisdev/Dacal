@@ -6,6 +6,10 @@
     require "../sessao/sessao.php";
     require "../conexaoBD/configBanco.php";
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     $conexao = new ConexaoBD();
     $conexao->setHostBD(host: BD_HOST);
     $conexao->setPortaBD(porta: BD_PORTA);
@@ -29,8 +33,10 @@
             case null :
 
                 $sessao->setChaveEValorSessao('erro', 'Login ou senha inválida.');
-                header('Location: ../login.php');
-                exit();
+
+                echo $resultadoAutenticacao;
+               // header('Location: ../login.php');
+                //exit();
     
             default :
                 

@@ -26,7 +26,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
 <body>
     <div id="homeGeral">
         <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-        <form action="" method="post" id="formLogin" class="formularioLogin">
+        <form action="crud/receberFormulariosDeCadastros/enviarDadosCadastroCliente.php" method="post" id="formLogin" class="formularioLogin">
             <div class="infoConta">
                 <div class="dadosGerais">
                     <br>
@@ -35,47 +35,57 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>CNPJ da Empresa</p>
-                            <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                            <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>Razão Social</p>
-                            <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                            <input type="text" id="razaoSocial" name="razaoSocial" class="input" required>
                         </div>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Inscrição Estadual</p>
-                            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" class="input">
+                            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>Telefone</p>
-                            <input type="text" id="telefone" name="telefone" class="input">
+                            <input type="text" id="telefone" name="telefone" class="input" required>
                         </div>
                     </div>
                     <br>
+                    <div class="parteGeral">
+                            <p>Email</p>
+                            <input type="text" id="email" name="email" class="input" required>
+                    </div>
+                    <div class="parteGeral">
+                            <p>Senha</p>
+                            <input type="text" id="senha" name="senha" class="input" required>
+                    </div>
+
+                    <br>    
                     <div class="endereço">
                         <p id="">Endereço</p>
-                        <input type="text" id="estado" name="estado" class="inputAPI">
-                        <input type="text" id="municipio" name="municipio" class="inputAPI">
+                        <input type="text" id="estado" name="estado" class="inputAPI" required>
+                        <input type="text" id="municipio" name="municipio" class="inputAPI" required>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Logradouro</p>
-                            <input type="text" id="logradouro" name="logradouro" class="input">
+                            <input type="text" id="logradouro" name="logradouro" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>Nº</p>
-                            <input type="text" id="numeroEndereco" name="numeroEndereco" class="input">
+                            <input type="text" id="numeroEndereco" name="numeroEndereco" class="input" required>
                         </div>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Bairro</p>
-                            <input type="text" id="bairro" name="bairro" class="input">
+                            <input type="text" id="bairro" name="bairro" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>CEP</p>
-                            <input type="text" id="cep" name="cep" class="input">
+                            <input type="text" id="cep" name="cep" class="input" required>
                         </div>
                     </div>
                     <br>

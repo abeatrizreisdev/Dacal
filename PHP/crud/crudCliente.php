@@ -1,6 +1,6 @@
 <?php 
 
-    require "../crud/crud.php";
+    require "crud.php";
 
     class CrudCliente extends Crud {
 
@@ -21,19 +21,15 @@
 
                 if ($resultadoCadastro > 0) {
 
-                    echo "<br>Cadastro de cliente realizado com sucesso.";
-
                     return true;
 
                 } else {
-
-                    echo "<br>Cadastro de cliente não realizado.";
 
                     return false;
 
                 }
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro no cadastro do cliente: " . $excecao->getMessage();
 

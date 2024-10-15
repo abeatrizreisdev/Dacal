@@ -68,7 +68,6 @@
 
                     echo "Erro ao cadastrar o produto: " . $excecao->getMessage();
                     header("Location: ../../catalogoProdutos.php?statusCadastroProduto=erro");
-                        exit();
                     exit();
 
                 }
