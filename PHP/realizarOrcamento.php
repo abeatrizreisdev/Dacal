@@ -64,7 +64,7 @@ function exibirOrcamento() {
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/realizarOrcamento.css">
-    <script src="../JS/scriptParaPasso2DeOrcamento/removerItem.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -209,7 +209,13 @@ function exibirOrcamento() {
 
         </section>
 
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="../JS/scriptParaPasso2DeOrcamento/removerItem.js"></script>
         <script src="../JS/realizarOrcamento.js"></script>
+        
 
 </body>
 

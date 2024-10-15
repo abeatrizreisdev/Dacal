@@ -19,6 +19,7 @@ $sessao = new Sessao();
 
 // Verifica se o ID do produto foi passado na URL
 if (isset($_GET['id'])) {
+    
     $produto_id = $_GET['id'];
     $crudProduto = new CrudProduto($conexao);
     $resultadoBuscaDoProduto = $crudProduto->buscarInfoProduto($produto_id);
@@ -48,7 +49,9 @@ if (isset($_GET['id'])) {
     echo "ID do produto não fornecido.";
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
+
     $produto = new Produto();
     $produto->setId($_POST['produto_id']);
     $produto->setNome($_POST['nomeProduto']);
@@ -58,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
     $quantidade = $_POST['quantidade'];
 
     $orcamento_serializado = $sessao->getValorSessao('orcamento');
+    
     if ($orcamento_serializado && is_string($orcamento_serializado)) {
         error_log("Unserializing orcamento: $orcamento_serializado"); // Logging
         $orcamento = unserialize($orcamento_serializado);
@@ -68,7 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
 
     $orcamento->adicionarProduto($produto, $quantidade);
     $sessao->setChaveEValorSessao('orcamento', serialize($orcamento));
+
     echo "<p>Produto adicionado ao orçamento.</p>";
+    echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css'>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'></script>
+          <script>
+            toastr.success('Produto adicionado ao orçamento!');
+            setTimeout(function() {
+                window.location.href = '../realizarOrcamento.php';
+            }, 1500);
+          </script>";
+
 }
 
 ?>
