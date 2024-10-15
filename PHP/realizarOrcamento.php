@@ -176,7 +176,7 @@ function exibirOrcamento() {
                     <div id="passo3" class="conteudoPassoAPasso">
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
                         <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
-                        <form id="formOrcamento" action="enviarOrcamento.php" method="post">
+                        <form id="formOrcamento" action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroOrcamento.php" method="post">
                             <?php
                                 // Recuperar o orçamento da sessão e gerar inputs ocultos
                                 $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
