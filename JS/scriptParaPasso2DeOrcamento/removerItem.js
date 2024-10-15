@@ -5,6 +5,35 @@ console.log('realizarOrcamento.js carregado');
 // Teste do Toastr
 toastr.info('Toastr está funcionando!');
 
+// Função para recalcular e atualizar dinamicamente o valor total e a quantidade total
+// Função para recalcular e atualizar dinamicamente o valor total e a quantidade total
+function atualizarTotais() {
+    console.log('Chamando atualizarTotais'); // Log de depuração
+    const totalElemento = document.getElementById('total');
+    const quantidadeTotalElemento = document.getElementById('quantidadeTotal');
+    console.log('totalElemento:', totalElemento); // Log de depuração
+    console.log('quantidadeTotalElemento:', quantidadeTotalElemento); // Log de depuração
+    let total = 0;
+    let quantidadeTotal = 0;
+
+    document.querySelectorAll('.produto').forEach(produto => {
+        const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+        if (produtoQuantidadeInput) {
+            const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
+            const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
+            total += produtoQuantidade * produtoValor;
+            quantidadeTotal += produtoQuantidade;
+        }
+    });
+
+    console.log('Total:', total); // Log de depuração
+    console.log('Quantidade Total:', quantidadeTotal); // Log de depuração
+
+    totalElemento.textContent = total.toFixed(2);
+    quantidadeTotalElemento.textContent = quantidadeTotal;
+}
+
+
 function removerProduto(produtoId) {
     fetch(`../PHP/arquivosParaRealizarOrcamento/removerProdutoOrcamento.php`, {
         method: 'POST',
@@ -18,6 +47,7 @@ function removerProduto(produtoId) {
         if (dados.success) {
             toastr.success('Produto removido com sucesso!');
             document.getElementById(`produto-${produtoId}`).remove();
+            atualizarTotais(); // Atualiza os totais após remover o produto
 
             const totalElemento = document.getElementById('total');
             let total = 0;
@@ -63,6 +93,7 @@ function alterarQuantidade(produtoId, delta) {
     .then(data => {
         if (data.success) {
 
+            atualizarTotais(); // Atualiza os totais após alterar a quantidade
             // Atualiza o valor total dinamicamente
             const valorProduto = parseFloat(document.querySelector(`#produto-${produtoId} .valor`).textContent.trim());
             const totalElemento = document.getElementById('total');

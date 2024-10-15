@@ -22,11 +22,12 @@ function exibirOrcamento() {
         return;
     }
 
-    echo "<div id='orcamento'>";
     $total = 0;
+    $quantidadeTotal = 0;
     foreach ($orcamento->getProdutos() as $produto) {
         $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
         $total += $produto->getValor() * $quantidade;
+        $quantidadeTotal += $quantidade;
         $imagem_base64 = base64_encode($produto->getImagem());
         echo "<div class='produto' id='produto-" . $produto->getId() . "'>
                 <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
@@ -43,11 +44,11 @@ function exibirOrcamento() {
                 <button class='btn-visualizar' onclick=\"visualizarProduto('" . $produto->getId() . "')\">Visualizar Produto</button>
               </div>";
     }
-    echo "</div>";
-
     echo "<h3>Total: R$ <span id='total'>" . htmlspecialchars($total) . "</span></h3>";
+    echo "<h3>Quantidade Total de Itens: <span id='quantidadeTotal'>" . htmlspecialchars($quantidadeTotal) . "</span></h3>";
     echo "<button onclick=\"avancarParaPasso3()\">Avançar para o Passo 3</button>";
 }
+
 
 
 
@@ -176,32 +177,38 @@ function exibirOrcamento() {
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
                         <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
                         <form id="formOrcamento" action="enviarOrcamento.php" method="post">
-                        <?php
-                            // Recuperar o orçamento da sessão e gerar inputs ocultos
-                            $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
-                            if ($orcamento_serializado && is_string($orcamento_serializado)) {
-                                $orcamento = unserialize($orcamento_serializado);
-                                foreach ($orcamento->getProdutos() as $produto) {
-                                    $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
-                                    echo "<div class='produto'>
-                                            <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
-                                            <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
-                                            <img class='produto-imagem' src='data:image/jpeg;base64," . base64_encode($produto->getImagem()) . "' alt='Produto'>
-                                            <p class='produto-quantidade'>Quantidade: 
-                                                <input type='number' name='quantidades[]' value='" . htmlspecialchars($quantidade) . "' min='1' required readonly>
-                                            </p>
-                                            <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
-                                            <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
-                                            <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
-                                        </div>";
+                            <?php
+                                // Recuperar o orçamento da sessão e gerar inputs ocultos
+                                $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
+                                if ($orcamento_serializado && is_string($orcamento_serializado)) {
+                                    $orcamento = unserialize($orcamento_serializado);
+                                    $quantidadeTotal = 0; // Definir a variável $quantidadeTotal
 
-                                }
-                                echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
-                            } else {
-                                echo '<p>Nenhum produto no orçamento.</p>';
-                            }
+                                    foreach ($orcamento->getProdutos() as $produto) {
+                                        $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
+                                        $quantidadeTotal += $quantidade; // Calcular a quantidade total
+                                        echo "<div class='produto'>
+                                                <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
+                                                <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
+                                                <img class='produto-imagem' src='data:image/jpeg;base64," . base64_encode($produto->getImagem()) . "' alt='Produto'>
+                                                <p class='produto-quantidade'>Quantidade: 
+                                                    <input type='number' name='quantidades[]' value='" . htmlspecialchars($quantidade) . "' min='1' required readonly>
+                                                </p>
+                                                <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
+                                                <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
+                                                <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
+                                            </div>";
+                                    }
+                                    echo '<p class="produto-valor"> Valor Total: R$ ' . htmlspecialchars($orcamento->getValor()) . ' </p>';
+                                    echo '<h3>Quantidade Total de Itens: ' . htmlspecialchars($quantidadeTotal) . '</h3>';
+                                    echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
+                                } else {
+                                    echo '<p>Nenhum produto no orçamento.</p>';
+                                }   
                             ?>
-                            <button type="submit">Confirmar e Enviar Orçamento</button>
+                            <a href="homeEmpresa.php"> <button>Cancelar</button></a>
+                            <button> Voltar Página</button>
+                            <button type="submit">Enviar Orçamento</button>
                         </form>
                     
                     </div>
