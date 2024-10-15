@@ -97,7 +97,7 @@ $sessaoCliente = new Sessao();
                 <div class="infoConta">
                     <div class="dadosGerais">
                         <p id="titulo">Dados da Conta</p>
-                        <form action="#" method="" class="formDados">
+                        <form action="./edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="POST" class="formDados">
 
                             <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
                             <div class="infoGerais">

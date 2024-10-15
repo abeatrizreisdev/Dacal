@@ -16,14 +16,13 @@
 
     $crudCliente = new CrudCliente($conexao);
 
-    $sessao = new Sessao();
+    $sessaoAtiva = new Sessao();
 
-    $tipoConta = $sessao->getValorSessao('tipoConta');
+    $tipoConta = $sessaoAtiva->getValorSessao('tipoConta');
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST" && $tipoConta == "admin") {
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         $id = $_POST['idCliente'];
-        $nome = $_POST['nome'];
         $razaoSocial = $_POST['razaoSocial'];
         $estado = $_POST['estado'];
         $municipio = $_POST['municipio'];
@@ -41,7 +40,6 @@
         $cliente = new Cliente();
     
         $cliente->setIdCliente($id);
-        $cliente->setNome($nome);
         $cliente->setCnpj($cnpj);
         $cliente->setRazaoSocial($razaoSocial);
         $cliente->setInscricaoEstadual($inscricaoEstadual);
@@ -54,7 +52,7 @@
         $cliente->setCep($cep);
         
         $resultadoEdicao = $crudCliente->editarCliente(
-            $cliente->getId(),['nomeEmpresa' => $cliente->getNome(), 
+            $cliente->getId(),[
             'razaoSocial' => $cliente->getRazaoSocial(), 
             'cnpj' => $cliente->getCnpj(), 
             'inscricaoEstadual' => $cliente->getInscricaoEstadual(),
@@ -78,6 +76,19 @@
 
                 } else {
 
+                    // Passando os dados do funcionário autenticado para editar os dados da sua sessão no site, após a realização da edição dos dados gerais.
+                    $sessaoAtiva->setChaveEValorSessao('idCliente', $cliente->getId());
+                    $sessaoAtiva->setChaveEValorSessao('razaoSocial', $cliente->getRazaoSocial());
+                    $sessaoAtiva->setChaveEValorSessao('cnpj', $cliente->getCnpj());
+                    $sessaoAtiva->setChaveEValorSessao('inscricaoEstadual', $cliente->getInscricaoEstadual());
+                    $sessaoAtiva->setChaveEValorSessao('telefone', $cliente->getTelefone());
+                    $sessaoAtiva->setChaveEValorSessao('estado', $cliente->getEstado());
+                    $sessaoAtiva->setChaveEValorSessao('municipio', $cliente->getMunicipio());
+                    $sessaoAtiva->setChaveEValorSessao('bairro', $cliente->getBairro());
+                    $sessaoAtiva->setChaveEValorSessao('cep', $cliente->getCep());
+                    $sessaoAtiva->setChaveEValorSessao('logradouro', $cliente->getLogradouro());
+                    $sessaoAtiva->setChaveEValorSessao('numeroEndereco', $cliente->getNumeroEndereco());
+
                     header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
                     exit();
                     
@@ -93,8 +104,10 @@
 
                 } else {
 
-                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
-                    exit();
+                    header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=erro");
+                    //exit();
+
+                    echo $resultadoEdicao;
 
                 }
 
