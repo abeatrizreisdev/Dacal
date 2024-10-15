@@ -99,7 +99,7 @@ function exibirOrcamento() {
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -199,19 +199,24 @@ function exibirOrcamento() {
                                                 <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
                                             </div>";
                                     }
+                                    
                                     echo '<p class="produto-valor"> Valor Total: R$ ' . htmlspecialchars($orcamento->getValor()) . ' </p>';
                                     echo '<h3>Quantidade Total de Itens: ' . htmlspecialchars($quantidadeTotal) . '</h3>';
                                     echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
+
                                 } else {
                                     echo '<p>Nenhum produto no orçamento.</p>';
                                 }   
+
                             ?>
-                            <a href="homeEmpresa.php"> <button>Cancelar</button></a>
-                            <button> Voltar Página</button>
+                            
                             <button type="submit">Enviar Orçamento</button>
                         </form>
-                    
+                        <button onclick="cancelarOrcamento()">Cancelar</button>
+                        <button type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar</button>
+
                     </div>
+
                 </div>
 
         </section>

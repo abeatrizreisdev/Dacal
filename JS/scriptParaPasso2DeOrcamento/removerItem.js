@@ -119,6 +119,56 @@ function alterarQuantidade(produtoId, delta) {
     .catch(error => console.error('Erro ao atualizar a quantidade:', error));
 }
 
+// Função para abrir o passo correspondente
+function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
+    var indice, conteudoTabela, linksTabela;
+
+    // Pegando todos os elementos que possuem esssa classe.
+    conteudoTabela = document.getElementsByClassName("conteudoPassoAPasso");
+    // Iterando sobre cada um dos elementos que tem a classe "conteudoTabela".
+    for (indice = 0; indice < conteudoTabela.length; indice++) {
+        // E ocultando da tela o seu conteudo.
+        conteudoTabela[indice].style.display = "none";
+    }
+
+    // Pegando todos os elementos que tem essa classe.
+    linksTabela = document.getElementsByClassName("linksTabela");
+    // Iterando sobre todos os elementos que foram pegos com a classe "linksTabela".
+    for (indice = 0; indice < linksTabela.length; indice++) {
+        // E adcionando uma nova classe com o nome "ativo", para poder exibir o conteudo dela, o que significa que o cliente clicou naquele passo em especifico.
+        linksTabela[indice].className = linksTabela[indice].className.replace(" ativo", "");
+    }
+
+    document.getElementById(nomeDoPassoAPassoCorrespondente).style.display = "block";
+    evento.currentTarget.className += " ativo";
+}
+
+// Função para cancelar o orçamento e redirecionar para a página inicial
+function cancelarOrcamento() {
+    fetch('../PHP/excluirOrcamento/excluirOrcamento.php', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            toastr.success('Orçamento cancelado com sucesso!');
+            setTimeout(() => {
+                window.location.href = 'homeEmpresa.php';
+            }, 1500);
+        } else {
+            toastr.error('Erro ao cancelar o orçamento.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao cancelar o orçamento:', error);
+        toastr.error('Erro ao cancelar o orçamento.');
+    });
+}
+
+function voltarParaPasso2() {
+    // Redirecionar para o passo 2 sem excluir o orçamento
+    window.location.href = 'realizarOrcamento.php#passo2';
+}
 
 function visualizarProduto(produtoId) {
     window.location.href = '../PHP/buscarProdutos/detalhesProduto.php?id=' + produtoId;
