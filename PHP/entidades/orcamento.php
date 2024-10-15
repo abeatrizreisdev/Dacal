@@ -125,72 +125,66 @@
             return $this->quantidadeProdutos;
         }
 
-        // Método para adicionar um produto
-        public function adicionarProduto($produto) {
+        // Método para adicionar um produto com quantidade
+        public function adicionarProduto($produto, $quantidade) {
 
-            $this->produtos[] = $produto;
-
-            // Verificando se o produto já foi inserido no array associativo "quantidadeProdutos" do orçamento.
-            if (isset($this->quantidadeProdutos[$produto])) {
-
-                // Incrementa a quantidade desse produto em 1.
-                $this->quantidadeProdutos[$produto]++;
-
-            } else { // Se o produto não existe...
+            // Usar o ID do produto como chave no array associativo
+            $produtoId = $produto->getId();
+            
+            if (isset($this->quantidadeProdutos[$produtoId])) {
                 
-                // Adiciona o produto ao array associativo quantidadeProdutos com a quantidade inicial de 1.
-                $this->quantidadeProdutos[$produto] = 1;
+                // Incrementar a quantidade do produto existente
+                $this->quantidadeProdutos[$produtoId] += $quantidade;
+
+            } else {
+
+                // Adicionar o produto com a quantidade inicial
+                $this->quantidadeProdutos[$produtoId] = $quantidade;
+                $this->produtos[] = $produto;
 
             }
 
             $this->calcularValorOrcamento();
 
         }
+        
 
         // Método para remover um produto
-        public function removerProduto($produto) {
+        public function removerProduto($produtoId) {
 
-            // Usa "array_search" para encontrar a chave do produto no array associativo "produtos" do orçamento.
-            if (($key = array_search($produto, $this->produtos)) !== false) {
+            if (isset($this->quantidadeProdutos[$produtoId])) {
 
-                // Remove o produto do array associativo produtos usando "unset".
-                unset($this->produtos[$key]);
+                unset($this->quantidadeProdutos[$produtoId]); // Remove a quantidade do produto
+    
+                foreach ($this->produtos as $index => $produto) {
 
-                // Verifica se o produto existe no array associativo "quantidadeProdutos".
-                if (isset($this->quantidadeProdutos[$produto])) {
-
-                    // Decrementa a quantidade do produto que foi removido do orçamento em 1.
-                    $this->quantidadeProdutos[$produto]--;
-
-                    // E se a quantidade do produto for menor ou igual a 0, remove o produto do array quantidadeProdutos usando unset.
-                    if ($this->quantidadeProdutos[$produto] <= 0) {
-
-                        unset($this->quantidadeProdutos[$produto]);
-
+                    if ($produto->getId() == $produtoId) {
+                        unset($this->produtos[$index]); // Remove o produto da lista de produtos
+                        break;
                     }
 
                 }
-
-                // Chama "calcularValorOrcamento" para recalcular o valor total do orçamento depois da remoção feita.
+    
+                // Recalcular o valor total do orçamento
                 $this->calcularValorOrcamento();
-
             }
+        }
 
+        // novo método para adcionar no diagrama de classes.
+        public function atualizarQuantidadeProduto($produtoId, $novaQuantidade) {
+            if (isset($this->quantidadeProdutos[$produtoId])) {
+                $this->quantidadeProdutos[$produtoId] = $novaQuantidade;
+                $this->calcularValorOrcamento();
+            }
         }
 
         // Método para calcular o valor total do orçamento
         public function calcularValorOrcamento() {
-            
             $this->valor = 0.0;
-
-            // Itera sobre cada produto no array produtos.
             foreach ($this->produtos as $produto) {
-
-                // Para cada produto, multiplica o preço do produto ($produto->getPreco()) pela quantidade do produto ($this->quantidadeProdutos[$produto]) e adciona no atributo "valor" do orçamento.
-                $this->valor += $produto->getPreco() * $this->quantidadeProdutos[$produto];
-
+                $produtoId = $produto->getId();
+                $this->valor += $produto->getValor() * $this->quantidadeProdutos[$produtoId];
             }
-
         }
 
         /*

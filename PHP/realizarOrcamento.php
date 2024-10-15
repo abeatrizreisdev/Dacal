@@ -1,8 +1,55 @@
 <?php 
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
+require_once "./entidades/orcamento.php";
+require "./entidades/produto.php";
 
-    $sessaoCliente = new Sessao();
+$sessaoCliente = new Sessao();
+
+function exibirOrcamento() {
+    global $sessaoCliente;
+    $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
+    if ($orcamento_serializado && is_string($orcamento_serializado)) {
+        error_log("Unserializing orcamento: $orcamento_serializado");
+        $orcamento = unserialize($orcamento_serializado);
+    } else {
+        error_log("Orcamento not found or not a serialized string. Creating new Orcamento.");
+        $orcamento = new Orcamento();
+    }
+
+    if (empty($orcamento->getProdutos())) {
+        echo '<p>Nenhum produto adicionado ao orçamento.</p>';
+        return;
+    }
+
+    echo "<div id='orcamento'>";
+    $total = 0;
+    foreach ($orcamento->getProdutos() as $produto) {
+        $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
+        $total += $produto->getValor() * $quantidade;
+        $imagem_base64 = base64_encode($produto->getImagem());
+        echo "<div class='produto' id='produto-" . $produto->getId() . "'>
+                <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
+                <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
+                <img class='produto-imagem' src='data:image/jpeg;base64," . $imagem_base64 . "' alt='Produto'>
+                <p class='produto-quantidade'>
+                    Quantidade: 
+                    <button type='button' onclick='alterarQuantidade(" . $produto->getId() . ", -1)'>-</button>
+                    <input type='number' name='quantidades[]' data-produto-id='" . $produto->getId() . "' value='" . htmlspecialchars($quantidade) . "' min='1' readonly>
+                    <button type='button' onclick='alterarQuantidade(" . $produto->getId() . ", 1)'>+</button>
+                </p>
+                <p class='produto-valor'>Valor: R$ <span class='valor'>" . htmlspecialchars($produto->getValor()) . "</span></p>
+                <button class='btn-remover' onclick=\"removerProduto('" . $produto->getId() . "')\">Remover Produto</button>
+                <button class='btn-visualizar' onclick=\"visualizarProduto('" . $produto->getId() . "')\">Visualizar Produto</button>
+              </div>";
+    }
+    echo "</div>";
+
+    echo "<h3>Total: R$ <span id='total'>" . htmlspecialchars($total) . "</span></h3>";
+    echo "<button onclick=\"avancarParaPasso3()\">Avançar para o Passo 3</button>";
+}
+
+
 
 ?>
 
@@ -17,6 +64,7 @@
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/realizarOrcamento.css">
+    <script src="../JS/scriptParaPasso2DeOrcamento/removerItem.js"></script>
 </head>
 <header>
     <div class="informativo_superior">
@@ -120,11 +168,42 @@
                     <div id="passo2" class="conteudoPassoAPasso">
                         <h2>Passo 2: Revisão dos Produtos Selecionados</h2>
                         <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
+                        <?php exibirOrcamento(); ?>
+                   
                     </div>
                 
                     <div id="passo3" class="conteudoPassoAPasso">
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
                         <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
+                        <form id="formOrcamento" action="enviarOrcamento.php" method="post">
+                        <?php
+                            // Recuperar o orçamento da sessão e gerar inputs ocultos
+                            $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
+                            if ($orcamento_serializado && is_string($orcamento_serializado)) {
+                                $orcamento = unserialize($orcamento_serializado);
+                                foreach ($orcamento->getProdutos() as $produto) {
+                                    $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
+                                    echo "<div class='produto'>
+                                            <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
+                                            <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
+                                            <img class='produto-imagem' src='data:image/jpeg;base64," . base64_encode($produto->getImagem()) . "' alt='Produto'>
+                                            <p class='produto-quantidade'>Quantidade: 
+                                                <input type='number' name='quantidades[]' value='" . htmlspecialchars($quantidade) . "' min='1' required readonly>
+                                            </p>
+                                            <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
+                                            <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
+                                            <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
+                                        </div>";
+
+                                }
+                                echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
+                            } else {
+                                echo '<p>Nenhum produto no orçamento.</p>';
+                            }
+                            ?>
+                            <button type="submit">Confirmar e Enviar Orçamento</button>
+                        </form>
+                    
                     </div>
                 </div>
 

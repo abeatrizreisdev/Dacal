@@ -64,7 +64,7 @@
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na busca de informações do produto: " . $excecao->getMessage();
 
@@ -185,7 +185,7 @@
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na exclusão do produto: " . $excecao->getMessage();
 
