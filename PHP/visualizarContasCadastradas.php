@@ -100,12 +100,11 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
     </div>
 
-    <script src="../JS/formatacoes.js"></script>
-    <script src="../JS/buscarContaCliente.js"></script>
-    <script src="../JS/buscarContaFuncionario.js"></script>
+    <script src="../JS/scriptsParaPagVisualizarContasCadastradas/buscarContaCliente.js"></script>
+    <script src="../JS/scriptsParaPagVisualizarContasCadastradas/buscarContaFuncionario.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/scriptParaVerificarStatusDasContasCadastradas.js"></script>
+    <script src="../JS/scriptsParaPagVisualizarContasCadastradas/scriptParaVerificarStatusDasContasCadastradas.js"></script>
 
 </body>
 

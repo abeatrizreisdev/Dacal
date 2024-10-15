@@ -179,7 +179,8 @@ $sessaoCliente = new Sessao();
     </div>
 
 
-    <script src="../JS/carregarDadosParaEditarContaCliente.js"></script>
+    <script src="../JS/scriptsParaPagEditarViaAdmContaCliente/carregarDadosParaEditarContaCliente.js"></script>
+    
 </body>
 
 </html>

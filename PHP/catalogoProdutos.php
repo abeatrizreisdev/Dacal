@@ -75,15 +75,15 @@
 
                 // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
                 if ($tipoContaAutenticada == "admin") {
-                   echo '<br>';
-                   echo '<a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
-                <div id="info">';
-                    echo '<p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
-                </div>';
-                echo '</a>';
+                    echo '<br>
+                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">
+                        <p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>
+                </a>';
                 }
 
             ?>
@@ -91,7 +91,7 @@
             <?php 
 
                 // Se a conta autenticada for um cliente, então vai renderizar as opções de "Orcamento" "Atendimento" na esquerda da tela.
-                if ($tipoContaAutenticada != "admin" or $tipoContaAutenticada != "funcionario") {
+                if (!$tipoContaAutenticada == "admin" or !$tipoContaAutenticada == "funcionario") {
 
 
                     echo '<br> 
@@ -140,10 +140,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/verificarStatusCadastroProduto.js"></script>
-    <script src="../JS/verificarStatusEdicaoProduto.js"></script>
-    <script src="../JS/excluirProduto.js"></script>
-    <script src="../JS/carregarProdutos.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/verificarStatusCadastroProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/verificarStatusEdicaoProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/excluirProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/carregarProdutos.js"></script>
 
 </body>
 

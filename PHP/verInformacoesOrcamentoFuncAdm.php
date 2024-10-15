@@ -1,10 +1,10 @@
 <?php
 
-require "./sessao/sessao.php";
+    require "./sessao/sessao.php";
 
-$sessaoFuncionario = new Sessao();
+    $sessaoFuncionario = new Sessao();
 
-$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -72,16 +72,17 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
             <?php 
 
+                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
                 if ($tipoContaAutenticada == "admin") {
-                echo '<br>';
-                echo '<a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
-                <div id="info">';
-                    echo '<p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
-                </div>';
-                echo '</a>';
+                    echo '<br>
+                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">
+                        <p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>
+                </a>';
                 }
 
             ?>
@@ -89,12 +90,15 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         </div>
         <section class="quadrado">
             
-            <div id="orcamentos"></div>
+            <h2>Detalhes do Orçamento</h2>
+            <div id="detalhesOrcamento">Carregando...</div>
+            
+            <script src="../JS/scriptsParaPagVerInformacoesOrcamentoFuncAdm/carregarOrcamentoEspecifico.js"></script>
         
         </section>
     </div>
 
-    <script src="../JS/carregarOrcamentos.js"></script>
 </body>
 
 </html>
+

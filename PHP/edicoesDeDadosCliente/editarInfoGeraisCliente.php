@@ -105,7 +105,7 @@
                 } else {
 
                     header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=erro");
-                    //exit();
+                    exit();
 
                     echo $resultadoEdicao;
 

@@ -72,16 +72,17 @@
 
             <?php 
 
+                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
                 if ($tipoContaAutenticada == "admin") {
-                   echo '<br>';
-                   echo '<a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
-                <div id="info">';
-                    echo '<p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
-                </div>';
-                echo '</a>';
+                    echo '<br>
+                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">
+                        <p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>
+                </a>';
                 }
 
             ?>
@@ -135,7 +136,7 @@
         </section>
     </div>
 
-    <script src="../JS/editarStatusOrcamento.js"></script>
+    <script src="../JS/scriptsParaPagEditarStatusOrcamento/editarStatusOrcamento.js"></script>
 </body>
 
 </html>
