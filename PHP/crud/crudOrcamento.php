@@ -8,38 +8,55 @@
         }
 
 
-        public function cadastrarOrcamento($orcamento) {
-
-            // Separando por virgulas os campos da tabela que receberão os valores da inserção.
-            $camposTabela = $this->organizarCamposDaTabela($orcamento);
-
-            // Separando os valores que serão inseridos na tabela.
-            $valores = $this->organizarValoresParaTabela($orcamento);
+        public function cadastrarOrcamento($orcamento, $itens) {
 
             try {
 
-                $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+                // Iniciar uma transação
+                $this->conexaoBD->beginTransaction();
+    
+                // Inserir o orçamento na tabela Orcamentos.
+                $camposTabela = $this->organizarCamposDaTabela($orcamento);
+                $valores = $this->organizarValoresParaTabela($orcamento);
+                $sqlOrcamento = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+                $resultadoCadastroOrcamento = $this->conexaoBD->queryBanco($sqlOrcamento, $orcamento);
+    
+                if ($resultadoCadastroOrcamento > 0) {
 
-                $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $orcamento);
+                    // Obter o ID do orçamento inserido.
+                    $numeroOrcamento = $this->conexaoBD->lastInsertId();
+    
+                    // Inserir os itens do orçamento na tabela itens_orcamento.
+                    foreach ($itens as $item) {
 
-                if ($resultadoCadastro > 0) {
+                        $item['numeroOrcamento'] = $numeroOrcamento;
+                        $camposItens = $this->organizarCamposDaTabela($item);
+                        $valoresItens = $this->organizarValoresParaTabela($item);
+                        $sqlItens = "INSERT INTO itens_orcamento ($camposItens) VALUES ($valoresItens)";
+                        $this->conexaoBD->queryBanco($sqlItens, $item);
 
+                    }
+    
+                    // Confirmar a transação
+                    $this->conexaoBD->commit();
                     return true;
 
                 } else {
 
+                    // Reverter a transação em caso de erro.
+                    $this->conexaoBD->rollBack();
                     return false;
 
                 }
-
             } catch (PDOException $excecao) {
 
+                // Reverter a transação em caso de exceção
+                $this->conexaoBD->rollBack();
                 echo "<br>Erro no cadastro do orçamento: " . $excecao->getMessage();
-
                 return false;
 
             }
-
+            
         }
 
         public function buscarInfoOrcamento($idOrcamento) {

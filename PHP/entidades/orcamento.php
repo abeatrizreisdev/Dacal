@@ -18,6 +18,8 @@
         private $cliente;
         private $produtos;
         private $valor;
+        private $data;
+        private $status;
         private $quantidadeProdutos;
 
         public function __construct($id = null, $cliente = null, $produtos = [], $valor = 0.0, $quantidadeProdutos = []) {
@@ -105,6 +107,30 @@
 
         }
 
+        public function setData($data) {
+
+            if (!is_string($data)) {
+
+                throw new Exception("Erro. Data de criação do orçamento inválida.");
+
+            }
+
+            $this->data = $data;
+
+        }
+
+        public function setStatus($status) {
+
+            if (!is_string($status)) {
+
+                throw new Exception("Erro. Status do orçamento inválido.");
+
+            }
+
+            $this->status = $status;
+
+        }
+
         public function getId() {
             return $this->id;
         }
@@ -123,6 +149,14 @@
 
         public function getQuantidadeProdutos() {
             return $this->quantidadeProdutos;
+        }
+
+        public function getData() {
+            return $this->data;
+        }
+
+        public function getStatus() {
+            return $this->status;
         }
 
         // Método para adicionar um produto com quantidade
