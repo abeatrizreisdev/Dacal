@@ -152,6 +152,8 @@
                                                 <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
                                                 <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
                                                 <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
+                                                <input type='hidden' name='produtoIds[]' value='" . htmlspecialchars($produto->getId()) . "'> 
+
                                             </div>";
                                     }
                                     

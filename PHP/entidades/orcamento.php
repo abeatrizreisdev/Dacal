@@ -34,21 +34,13 @@
 
         public function setId($id) {
 
-             // Se for um valor númerico (int, por exemplo) e maior que 0.
-             if (is_numeric($id) && $id <= 0) {
-
+            if (!is_numeric($id) || $id <= 0) {
                 throw new Exception("Erro. O id deve ser um número maior que 0.");
-
-            } else if(is_null($id)) {
-
-                throw new Exception("Erro. O id não pode ser nulo.");
-
             }
-
             $this->id = $id;
 
-            
         }
+        
     
         public function setCliente($cliente) {
 
@@ -76,60 +68,43 @@
     
         public function setValor($valorOrcamento) {
 
-            if (is_numeric($valorOrcamento) && $valorOrcamento -= 0) {
+            if (!is_numeric($valorOrcamento) || $valorOrcamento <= 0) {
 
                 throw new Exception("Erro. O valor do orçamento não pode ser igual ou inferior a 0.");
-
-            } elseif(!is_numeric($valorOrcamento)) {
-
-                throw new Exception("Erro. Valor do orçamento inválido.");
-
             }
 
             $this->valor = $valorOrcamento;
 
         }
+        
 
         public function setQuantidadeProdutos($quantidadeProdutos) {
 
-            if (is_numeric($quantidadeProdutos) && $quantidadeProdutos -= 0) {
+            if (!is_numeric($quantidadeProdutos) || $quantidadeProdutos <= 0) {
 
                 throw new Exception("Erro. A quantidade de produtos do orçamento não pode ser igual ou inferior a 0.");
 
-            } elseif(!is_numeric($quantidadeProdutos)) {
-
-                throw new Exception("Erro. Quantidade de produtos inválida.");
-
             }
-
 
             $this->quantidadeProdutos = $quantidadeProdutos;
 
         }
 
+
         public function setData($data) {
-
-            if (!is_string($data)) {
-
+            if (!is_string($data) || empty($data)) {
                 throw new Exception("Erro. Data de criação do orçamento inválida.");
-
             }
-
             $this->data = $data;
-
         }
 
         public function setStatus($status) {
-
-            if (!is_string($status)) {
-
+            if (!is_string($status) || empty($status)) {
                 throw new Exception("Erro. Status do orçamento inválido.");
-
             }
-
             $this->status = $status;
-
         }
+
 
         public function getId() {
             return $this->id;

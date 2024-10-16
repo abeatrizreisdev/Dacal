@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Criar o objeto Orcamento.
         $orcamentoRealizado = new Orcamento();
 
-        $orcamentoRealizado->setCliente($idCliente);
+        $orcamentoRealizado->setCliente($sessao->getValorSessao('idCliente'));
         $orcamentoRealizado->setValor($valorTotal);
         $orcamentoRealizado->setData( date('Y-m-d')); // Passando a data atual do momento do cadastro do orcamento.
         $orcamentoRealizado->setStatus('pendente');
@@ -53,13 +53,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Cadastrar o orçamento e os itens no banco de dados
-        if ($crudOrcamento->cadastrarOrcamento($orcamento, $itens)) {
+        if ($crudOrcamento->cadastrarOrcamento($orcamentoRealizado, $itens)) {
 
 
             $cliente = new Cliente();
         
             // Setando os valores do objeto Cliente que está autenticado e fez o orçamento.
-            $cliente->setNome($sessao->getValorSessao('nomeEmpresa'));
+            $cliente->setNome($sessao->getValorSessao('nome'));
             $cliente->setIdCliente($idCliente = $sessao->getValorSessao('idCliente')); 
             $cliente->setRazaoSocial($razaoSocial = $sessao->getValorSessao('razaoSocial')); 
             $cliente->setCnpj($cnpj = $sessao->getValorSessao('cnpj')); 
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mensagem .= "Produtos Solicitados:\n";
 
             foreach ($produtos as $key => $produto) {
-                $mensagem .= "- Código do Produto: {$produtoIds[$key]}- $produto: *Quantidade: {$quantidades[$key]} Valor unitário: R$ {$valores[$key]}\n";
+                $mensagem .= "- Código do Produto: {$produtoIds[$key]} - Nome do produto: $produto: *Quantidade: {$quantidades[$key]} Valor unitário: R$ {$valores[$key]}\n";
             }
 
             $mensagem .= "\nValor Total do Orçamento: R$ $valorTotal\n";

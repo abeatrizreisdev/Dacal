@@ -8,25 +8,33 @@
         }
 
 
-        public function cadastrarOrcamento($orcamento, $itens) {
-
+        public function cadastrarOrcamento(Orcamento $orcamento, $itens) {
+            
             try {
 
                 // Iniciar uma transação
                 $this->conexaoBD->beginTransaction();
     
-                // Inserir o orçamento na tabela Orcamentos.
-                $camposTabela = $this->organizarCamposDaTabela($orcamento);
-                $valores = $this->organizarValoresParaTabela($orcamento);
-                $sqlOrcamento = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-                $resultadoCadastroOrcamento = $this->conexaoBD->queryBanco($sqlOrcamento, $orcamento);
+                // Extrair os dados do objeto Orcamento para um array
+                $dadosOrcamento = [
+                    'idCliente' => $orcamento->getCliente(),
+                    'valorOrcamento' => $orcamento->getValor(),
+                    'dataCriacao' => $orcamento->getData(),
+                    'status' => $orcamento->getStatus()
+                ];
     
-                if ($resultadoCadastroOrcamento > 0) {
+                // Inserir o orçamento na tabela Orcamentos
+                $camposTabela = $this->organizarCamposDaTabela($dadosOrcamento);
+                $valores = $this->organizarValoresParaTabela($dadosOrcamento);
+                $sqlOrcamento = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+                $resultadoCadastro = $this->conexaoBD->queryBanco($sqlOrcamento, $dadosOrcamento);
+    
+                if ($resultadoCadastro > 0) {
 
-                    // Obter o ID do orçamento inserido.
+                    // Obter o ID do orçamento inserido
                     $numeroOrcamento = $this->conexaoBD->lastInsertId();
     
-                    // Inserir os itens do orçamento na tabela itens_orcamento.
+                    // Inserir os itens do orçamento na tabela itens_orcamento
                     foreach ($itens as $item) {
 
                         $item['numeroOrcamento'] = $numeroOrcamento;
@@ -43,11 +51,12 @@
 
                 } else {
 
-                    // Reverter a transação em caso de erro.
+                    // Reverter a transação em caso de erro
                     $this->conexaoBD->rollBack();
                     return false;
 
                 }
+
             } catch (PDOException $excecao) {
 
                 // Reverter a transação em caso de exceção
@@ -56,8 +65,9 @@
                 return false;
 
             }
-            
+
         }
+    
 
         public function buscarInfoOrcamento($idOrcamento) {
 
