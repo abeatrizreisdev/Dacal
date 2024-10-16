@@ -148,7 +148,8 @@ function exibirOrcamento() {
                     <div id="passo1" class="conteudoPassoAPasso">
 
                         <div class="containerPesquisar">
-                            <p>teste</p>
+                            <input type="text" id="buscarProdutoId" placeholder="Digite o ID do produto">
+                            <button onclick="buscarProdutoPorId()">Buscar</button>
                         </div>
                         <nav>
                             <ul class="containerCategorias">
@@ -170,6 +171,10 @@ function exibirOrcamento() {
                         <h2>Passo 2: Revisão dos Produtos Selecionados</h2>
                         <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
                         <?php exibirOrcamento(); ?>
+
+                        <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
+                        <button type="button" onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
+                        <button type="button" onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
                    
                     </div>
                 
@@ -210,10 +215,12 @@ function exibirOrcamento() {
 
                             ?>
                             
-                            <button type="submit">Enviar Orçamento</button>
+                            <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
+                            <button type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar Página</button>
+                            <button type="submit">Finalizar Orçamento</button>
+
                         </form>
-                        <button onclick="cancelarOrcamento()">Cancelar</button>
-                        <button type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar</button>
+                        
 
                     </div>
 
@@ -225,7 +232,7 @@ function exibirOrcamento() {
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="../JS/scriptParaPasso2DeOrcamento/removerItem.js"></script>
+        <script src="../JS/scriptParaPasso2DeOrcamento/metodosUtilizadosNosPassosDeOrcamento.js"></script>
         <script src="../JS/realizarOrcamento.js"></script>
         
 

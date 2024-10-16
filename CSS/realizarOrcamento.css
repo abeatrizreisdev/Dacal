@@ -321,11 +321,17 @@ a:hover {
 }
 
 .containerPesquisar {
-    width: 85%;
+    width: 80%;
     margin-top: 3vh;
     height: 5vh;
-    border: 0.1vh solid black;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#buscarProdutoId {
+    width: 80%;
+    border: 0.1vh solid black;
 }
 
 

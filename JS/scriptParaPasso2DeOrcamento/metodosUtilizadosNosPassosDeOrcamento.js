@@ -1,40 +1,63 @@
+// Função para buscar produto pelo seu id/código do produto.
+function buscarProdutoPorId() {
 
+    const produtoId = document.getElementById('buscarProdutoId').value.trim();
 
-console.log('realizarOrcamento.js carregado');
+    if (produtoId) {
 
-// Teste do Toastr
-toastr.info('Toastr está funcionando!');
+        fetch(`../PHP/buscarProdutos/buscarProdutoPorId.php?produto_id=${produtoId}`)
+            .then(resposta => resposta.text())
+            .then(dados => {
 
-// Função para recalcular e atualizar dinamicamente o valor total e a quantidade total
+                document.getElementById('containerProdutos').innerHTML = dados;
+
+            })
+            .catch(erro => {
+
+                console.error('Erro ao buscar produto:', erro);
+                toastr.error('Erro ao buscar produto.');
+
+            });
+    } else {
+
+        toastr.warning('Por favor, insira um ID de produto válido.');
+
+    }
+
+};
+
 // Função para recalcular e atualizar dinamicamente o valor total e a quantidade total
 function atualizarTotais() {
-    console.log('Chamando atualizarTotais'); // Log de depuração
+
     const totalElemento = document.getElementById('total');
     const quantidadeTotalElemento = document.getElementById('quantidadeTotal');
-    console.log('totalElemento:', totalElemento); // Log de depuração
-    console.log('quantidadeTotalElemento:', quantidadeTotalElemento); // Log de depuração
+    
     let total = 0;
     let quantidadeTotal = 0;
 
     document.querySelectorAll('.produto').forEach(produto => {
+
         const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+
         if (produtoQuantidadeInput) {
+
             const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
             const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
             total += produtoQuantidade * produtoValor;
             quantidadeTotal += produtoQuantidade;
-        }
-    });
 
-    console.log('Total:', total); // Log de depuração
-    console.log('Quantidade Total:', quantidadeTotal); // Log de depuração
+        };
+
+    });
 
     totalElemento.textContent = total.toFixed(2);
     quantidadeTotalElemento.textContent = quantidadeTotal;
-}
+
+};
 
 
 function removerProduto(produtoId) {
+
     fetch(`../PHP/arquivosParaRealizarOrcamento/removerProdutoOrcamento.php`, {
         method: 'POST',
         headers: {
@@ -53,20 +76,28 @@ function removerProduto(produtoId) {
             let total = 0;
             
             document.querySelectorAll('.produto').forEach(produto => {
+
                 const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+
                 if (produtoQuantidadeInput) {
+
                     const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
                     const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
                     total += produtoQuantidade * produtoValor;
+               
                 }
             });
 
             totalElemento.textContent = total.toFixed(2);
         } else {
+
             toastr.error('Erro ao remover produto: ' + dados.message);
+
         }
+
     })
-    .catch(error => console.error('Erro ao remover produto:', error));
+    .catch(erro => console.error('Erro ao remover produto:', erro));
+
 }
 
 
@@ -89,12 +120,13 @@ function alterarQuantidade(produtoId, delta) {
         },
         body: JSON.stringify({ produtoId: produtoId, quantidade: quantidadeAtual })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    .then(resposta => resposta.json())
+    .then(dados => {
+        if (dados.success) {
 
-            atualizarTotais(); // Atualiza os totais após alterar a quantidade
-            // Atualiza o valor total dinamicamente
+            atualizarTotais(); // Atualiza os totais após alterar a quantidade.
+            // Atualiza o valor total dinamicamente, conforme for alterando a quantidade do produto.
+
             const valorProduto = parseFloat(document.querySelector(`#produto-${produtoId} .valor`).textContent.trim());
             const totalElemento = document.getElementById('total');
             let total = 0;
@@ -112,15 +144,19 @@ function alterarQuantidade(produtoId, delta) {
             });
 
             totalElemento.textContent = total.toFixed(2);
+
         } else {
-            alert('Erro ao atualizar a quantidade: ' + data.message);
+
+            toastr.error('Erro ao atualizar a quantidade: ' + data.message);
+
         }
     })
     .catch(error => console.error('Erro ao atualizar a quantidade:', error));
 }
 
-// Função para abrir o passo correspondente
+// Função para abrir o passo correspondente.
 function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
+
     var indice, conteudoTabela, linksTabela;
 
     // Pegando todos os elementos que possuem esssa classe.
@@ -145,29 +181,55 @@ function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
 
 // Função para cancelar o orçamento e redirecionar para a página inicial
 function cancelarOrcamento() {
+
     fetch('../PHP/excluirOrcamento/excluirOrcamento.php', {
         method: 'POST'
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    .then(resposta => resposta.json())
+    .then(dados => {
+
+        if (dados.success) {
+
             toastr.success('Orçamento cancelado com sucesso!');
+
             setTimeout(() => {
                 window.location.href = 'homeEmpresa.php';
             }, 1500);
+
         } else {
+
             toastr.error('Erro ao cancelar o orçamento.');
+
         }
     })
     .catch(error => {
+
         console.error('Erro ao cancelar o orçamento:', error);
         toastr.error('Erro ao cancelar o orçamento.');
+
     });
+
+}
+
+function avancarParaPasso3() {
+
+    // Redirecionar para o passo 3 sem excluir o orçamento.
+    window.location.href = 'realizarOrcamento.php#passo3';
+    
 }
 
 function voltarParaPasso2() {
-    // Redirecionar para o passo 2 sem excluir o orçamento
+
+    // Redirecionar para o passo 2 sem excluir o orçamento.
     window.location.href = 'realizarOrcamento.php#passo2';
+
+}
+
+function voltarParaPasso1() {
+
+    // Redirecionar para o passo 1 sem excluir o orçamento.
+    window.location.href = 'realizarOrcamento.php#passo1';
+    
 }
 
 function visualizarProduto(produtoId) {
