@@ -180,7 +180,7 @@
 
                 }
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na busca por orçamentos cadastrados: " . $excecao->getMessage();
 
@@ -190,6 +190,44 @@
 
 
         }
+
+        // Método novo para adcionar no diagrama de classes.
+        public function buscarOrcamentosPorCliente($idCliente) {
+
+            try {
+
+                $sql = "SELECT 
+                            {$this->tabela}.numeroOrcamento, 
+                            {$this->tabela}.valorOrcamento, 
+                            {$this->tabela}.dataCriacao, 
+                            {$this->tabela}.status, 
+                            cliente.nomeEmpresa AS nomeCliente, 
+                            (SELECT SUM(itens_orcamento.quantidade) 
+                             FROM itens_orcamento 
+                             WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
+                        FROM orcamentos, cliente 
+                        WHERE {$this->tabela}.idCliente = cliente.idCliente 
+                          AND cliente.idCliente = $idCliente";
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+            } catch (Exception $excecao) {
+
+                echo "<br>Erro na busca por orçamentos do cliente: " . $excecao->getMessage();
+                return null;
+
+            }
+
+        }
+        
 
 
         public function editarOrcamento($idOrcamento, $orcamento) {

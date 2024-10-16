@@ -88,11 +88,16 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
         </div>
-        <div class="quadrado">
-            <div class="geral">
-            </div>
-        </div>
+        <section class="quadrado">  
+
+            <div id="orcamentos"></div>
+            <input type="hidden" id="clienteId" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
+            <a href="realizarOrcamento.php"><button>Realizar Orcamento</button></a>
+
+        </section>
     </div>
+
+    <script src="../JS/scriptsParaPaginaDeOrcamentosEmpresa/buscarTodosOrcamentosEmpresa.js"></script>
 </body>
 
 </html>

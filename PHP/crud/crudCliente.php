@@ -48,23 +48,21 @@
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj, 'senha' => $senha]);
                 
                 if ($resultadoConsulta->rowCount() > 0) {
-                    
-                    echo "<br>Cliente encontrado com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
-
-                    echo "<br>Nenhum cliente encontrado com esse cnpj e senha informada.";
 
                     return null;
 
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
-                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+                echo "<br>Erro na busca de informações do cliente para autenticação: " . $excecao->getMessage();
+
+                return null;
 
             }
 

@@ -1,8 +1,10 @@
-<?php 
+<?php
 
     require "./sessao/sessao.php";
 
-    $sessaoCliente = new Sessao();
+    $sessaoEmpresa = new Sessao();
+
+    $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
 
 ?>
 
@@ -16,8 +18,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeEmpresa.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -35,8 +36,8 @@
         <ul class="icons">
             <a href="./autenticacao/logout.php">
                 <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
             </a>
         </ul>
     </nav>
@@ -47,11 +48,11 @@
         <div class="menu">
             <br>
             <br>
-            <a class="abas" href="./homeEmpresa.php">
+            <a class="abas">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
-                    <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
+                    <p>Bem-vindo(a),</p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoEmpresa->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -87,40 +88,18 @@
                     <p class="descricaoAbas">Clique aqui..</p>
                 </div>
             </a>
-        </div>
-        <div class="quadrado">
-            <div id="textoPrincipal">
-                <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $sessaoCliente->getValorSessao('nome'); ?></strong> </p>
-                    <br>
-                    <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
-                        sua
-                        empresa de forma automatizada, dando a liberdade que você precisa para fazer os pedidos quando
-                        quiser e da forma que desejar.
-                        <br>
-                        Não sabe ainda como usar a nossa plataforma? Temos o tutorial logo abaixo:
-                        <br>
-                        Na aba <strong>Cadastro</strong>, você terá acesso aos seus dados cadastrais como CNPJ, E-mail, Telefone,
-                        Endereço,
-                        Senha
-                        e também será possível fazer a atualização dos mesmos.<br>
-                        Na aba <strong>Orçamentos</strong>, você terá acesso a todos os orçamentos que já foram feitos pela sua empresa
-                        nesse
-                        site e será onde ira iniciar novos orçamentos.<br>
-                        Na aba <strong>Atendimento</strong>, você terá acesso a tickets que já tenha aberto na plataforma ou contato
-                        direto
-                        com
-                        algum funcionário da nossa empresa.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/scriptsParaCliente.js/verificarStatusEdicaoCliente.js"></script>
+        </div>
+        <section class="quadrado">
+            
+            <div id="detalhesOrcamento">Carregando...</div>
+            
+            <script src="../JS/scriptsParaPaginaDeOrcamentosEmpresa/verInfoDoOrcamentoEmpresa.js"></script>
+        
+        </section>
+    </div>
 
 </body>
 
 </html>
+
