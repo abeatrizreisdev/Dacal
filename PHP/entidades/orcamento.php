@@ -136,26 +136,30 @@
 
         // Método para adicionar um produto com quantidade
         public function adicionarProduto($produto, $quantidade) {
-
             // Usar o ID do produto como chave no array associativo
             $produtoId = $produto->getId();
-            
+        
             if (isset($this->quantidadeProdutos[$produtoId])) {
-                
                 // Incrementar a quantidade do produto existente
                 $this->quantidadeProdutos[$produtoId] += $quantidade;
-
             } else {
-
                 // Adicionar o produto com a quantidade inicial
                 $this->quantidadeProdutos[$produtoId] = $quantidade;
-                $this->produtos[] = $produto;
-
+                // Verifica se o produto já está no array de produtos, caso não esteja, adiciona-o
+                $produtoJaAdicionado = false;
+                foreach ($this->produtos as $p) {
+                    if ($p->getId() == $produtoId) {
+                        $produtoJaAdicionado = true;
+                        break;
+                    }
+                }
+                if (!$produtoJaAdicionado) {
+                    $this->produtos[] = $produto;
+                }
             }
-
             $this->calcularValorOrcamento();
-
         }
+        
         
 
         // Método para remover um produto

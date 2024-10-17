@@ -116,7 +116,6 @@
                 }
             
             ?>
-
             
         </div>
         <section class="quadrado">
