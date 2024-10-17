@@ -167,8 +167,8 @@
 
                             ?>
                             
-                            <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
-                            <button type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar Página</button>
+                            <a onclick="cancelarOrcamento()">Cancelar Orçamento</a>
+                            <a type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar Página</a>
                             <button type="submit">Finalizar Orçamento</button>
 
                         </form>
