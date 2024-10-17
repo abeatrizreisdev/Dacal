@@ -73,7 +73,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
         <br>
         <hr id="linhaMenu">
         <br>
-        <a class="abas" href="./perfilFuncionario.php">
+        <a class="abas" href="<?php echo $verificarUsuarioAutenticado == 'admin' ? '../perfilADM.php' : ($verificarUsuarioAutenticado == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
             <img src="../../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
             <div id="info">
                 <p class="tituloAbas">Meu Perfil</p>
@@ -81,6 +81,23 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                 <p class="descricaoAbas">dados.</p>
             </div>
         </a>
+
+        <?php 
+
+            // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+            if ($verificarUsuarioAutenticado == "admin") {
+                echo '<br>
+                <a class="abas" href="../visualizarContasCadastradas.php">
+                <img src="../../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                <div id="info">
+                    <p class="tituloAbas"> Gerenciar Contas</p>
+                    <p class="descricaoAbas">Gerenciar funcionários</p>
+                    <p class="descricaoAbas">e empresas</p>
+                </div>
+            </a>';
+            }
+
+        ?>
 
         <?php 
 
@@ -126,15 +143,15 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
             if ($resultadoBuscaDoProduto) {
 
                 echo "<div class='containerDetalhesProduto'>";
-    echo "<div class='containerImagemProduto'>";
-    echo "<img src='data:image/png;base64," . base64_encode($resultadoBuscaDoProduto['imagemProduto']) . "' alt='Produto' class='imagemProduto'>";
-    echo "</div>";
-    echo "<div class='containerInfoProduto'>";
-    echo "<h2 class='tituloProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['nomeProduto']) . "</h2>";
-    echo "<div class='containerDescricaoValor'>";
-    echo "<p class='valorProduto'>R$ " . htmlspecialchars($resultadoBuscaDoProduto['valorProduto']) . "</p>";
-    echo "<p class='descricaoProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['descricaoProduto']) . "</p>";
-    echo "</div>";
+                echo "<div class='containerImagemProduto'>";
+                echo "<img src='data:image/png;base64," . base64_encode($resultadoBuscaDoProduto['imagemProduto']) . "' alt='Produto' class='imagemProduto'>";
+                echo "</div>";
+                echo "<div class='containerInfoProduto'>";
+                echo "<h2 class='tituloProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['nomeProduto']) . "</h2>";
+                echo "<div class='containerDescricaoValor'>";
+                echo "<p class='valorProduto'>R$ " . htmlspecialchars($resultadoBuscaDoProduto['valorProduto']) . "</p>";
+                echo "<p class='descricaoProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['descricaoProduto']) . "</p>";
+                echo "</div>";
             
 
                 switch ($verificarUsuarioAutenticado) {
@@ -164,8 +181,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                 echo "<div class='containerBotoes'>";
                 echo "<a href='../realizarOrcamento.php'><button class='botaoVoltar'>Voltar para o Catálogo</button></a>";
                 
-                // Botão "Adicionar" fora do container do produto
-
+                // Botão "Adicionar" do formulário fora do container do produto.
                 switch ($verificarUsuarioAutenticado) {
 
                     case !'admin' or !'funcionario':
@@ -175,8 +191,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                         echo "</div>";
 
                 }
-                
-                
+            
 
             } else {
 
