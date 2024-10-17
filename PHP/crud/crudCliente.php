@@ -43,9 +43,10 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj AND senha = :senha";
+                $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj";
 
-                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj, 'senha' => $senha]);
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj]);
                 
                 if ($resultadoConsulta->rowCount() > 0) {
 

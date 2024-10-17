@@ -23,9 +23,9 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
-        $cpf = $_POST['cnpj'];
+        $cnpj = $_POST['cnpj'];
         $senha = $_POST['senha'];
-        $resultadoAutenticacao = $crudCliente->autenticarCliente($cpf, $senha);
+        $resultadoAutenticacao = $crudCliente->autenticarCliente($cnpj, $senha);
     
         if ($resultadoAutenticacao === null) {
 

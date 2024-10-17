@@ -45,7 +45,7 @@
             // Instanciando o objeto que representa o cliente e passando os valores recebidos do formulário de cadastro...
             // para o objeto do tipo cliente.
             $cliente = new Cliente();
-            $cliente->setNome('teste');
+            $cliente->setNome('Atributo Nome Temporário');
             $cliente->setRazaoSocial($razaoSocial);
             $cliente->setCnpj($cnpj);
             $cliente->setInscricaoEstadual($inscricaoEstadual);
