@@ -39,6 +39,8 @@
         $municipio = $_POST['municipio'];
         $numeroEndereco = $_POST['numeroEndereco'];
 
+        $senhaHashed = password_hash($senha, PASSWORD_BCRYPT); // Usando Bcrypt para hashear a senha, para criptografar, deixando mais seguro.
+
 
         try {
 
@@ -51,7 +53,7 @@
             $cliente->setInscricaoEstadual($inscricaoEstadual);
             $cliente->setTelefone($telefone);
             $cliente->setEmail($email);
-            $cliente->setSenha($senha);
+            $cliente->setSenha($senhaHashed);
             $cliente->setTipoConta($tipoConta);
             $cliente->setLogradouro($logradouro);
             $cliente->setBairro($bairro);

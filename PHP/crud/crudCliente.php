@@ -44,20 +44,31 @@
             try {
 
                 $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj";
-
-
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj]);
                 
+                // Verificando se encontrou um cliente com o cnpj informado.
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    $cliente = $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    
+                    // Verificar a senha.
+                    if (password_verify($senha, $cliente['senha'])) {
 
+                        // Senha correta.
+                        return $cliente;
+
+                    } else {
+
+                        // Senha incorreta.
+                        return null;
+
+                    }
+                    
                 } else {
 
                     return null;
 
                 }
-
 
             } catch (Exception $excecao) {
 
@@ -68,6 +79,7 @@
             }
 
         }
+        
 
         public function buscarInfoCliente($idCliente) {
 
@@ -244,33 +256,33 @@
 
             try {
 
-                // Comando sql para editar as informações do funcionário.
-                $sql = "UPDATE {$this->tabela} SET senha = :novaSenha WHERE idCliente = :idCliente";
-        
-                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['novaSenha' => $novaSenha, 'idCliente' => $idCliente]);
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
-                if ($resultadoConsulta > 0) {
+                // Hash da nova senha.
+                $novaSenhaHashed = password_hash($novaSenha, PASSWORD_BCRYPT);
 
+                // Comando SQL para editar a senha do cliente.
+                $sql = "UPDATE {$this->tabela} SET senha = :novaSenha WHERE idCliente = :idCliente";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['novaSenha' => $novaSenhaHashed, 'idCliente' => $idCliente]);
+
+                // Verificando se a linha correspondente ao usuário foi afetada no banco
+                if ($resultadoConsulta > 0) {
 
                     return true;
 
                 } else {
 
-
                     return false;
 
                 }
-        
             } catch (Exception $excecao) {
 
-                echo "Erro na edição da senha do cliente: " . $excecao->getMessage();
-                
+                echo "Erro na edicao da senha do cliente: " . $excecao->getMessage();
                 return false;
-
+                
             }
 
         }
+
 
         public function excluirCliente($idCliente) {
 
