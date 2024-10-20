@@ -132,8 +132,20 @@
             
             <div id="containerProdutos">
                 <!-- Produtos serão carregados aqui -->
+                <?php
+                echo "<h2>$prod</h2>
+                <p class='preço'>R$ $preco</p>
+                <p class='parcelamento'>até <strong class='negrito'>6x R$ $parcela</strong> sem juros</p>
+                <p class='desconto'>ou <strong class='negrito'>R$ $pix</strong> via pix</p>
+                </br>
+                <a href='../php_extra/complementar.php?fun=add_sacola&id=$id' class='bot-comprar'>Adicionar a Sacola</a>";
+                if ($_SESSION["logado"] && $_SESSION["ADM"] == 1) {
+                    echo "<a href='../php_extra/complementar.php?fun=edit&id=$id' class='bot-comprar'>Editar Produto</a>";
+                    echo "<a href='../php_extra/complementar.php?fun=del&id=$id' class='bot-comprar'>Deletar Produto</a>";
+                }
+                ?>
             </div>
-           
+            
         </section>
     </div>
 

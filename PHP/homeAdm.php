@@ -68,7 +68,7 @@ $sessaoFuncionario = new Sessao();
                 </div>
             </a>
             <br>
-            <a class="abas" href="./visualizarContasCadastradas.php">
+            <a class="abas" href="./gerenciarContas.php">
                 <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>

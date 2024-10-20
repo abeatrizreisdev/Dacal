@@ -186,64 +186,11 @@ nav {
     font-family: "Poppins";
 }
 
-#textoPrincipal{
-    display: flex;
-    flex-direction: column;
-    align-items: justify;
-}
-#infoPrincipal{
-    display: block;
-    text-align: justify;
-    padding-right: 5vh;
-    padding-left: 5vh;
-
+.quadradoGeral{
+    background-color: #B56F2A;
 }
 
-#tituloPrincipal{
-    font-size: 4vh;
-    padding-top: 5vh;
-}
-#descricao{ 
-    font-size: 3.1vh;
-    font-weight: 120vw;
-}
-
-
-
-
-
-/* SECTION DE FUNCIONALIDADES */
-/* #tituloFuncionalidades {
-    text-align: center;
-
-    font-size: 4vh;
-} */
-
-.containerFuncionalidades {
-    border: 1vh solid black;
-    height: 20vh;
-    margin: 2vh;
-    background-color: #a6a6a6;
-    border-radius: 2vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.containerFuncionalidades h2 {
-    text-align: center;
-    font-size: 3vh;
-    padding-top: 1vh;
-    font-family: "Poppins";
-    font-size: 3.5vh;
-}
-
-.imgIcons{
-    width: 10vh;
-}
-
-.selecionado {
+#titulo{
     background-color: #ff3131;
 }
 

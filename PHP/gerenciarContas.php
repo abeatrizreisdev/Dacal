@@ -17,7 +17,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/visualizarContasCadastradas.css">
+    <link rel="stylesheet" href="../CSS/gerenciarContas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 </head>
@@ -82,20 +82,23 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             </a>
         </div>
         <section class="quadrado">
+            <div class="quadradoGeral">
+                <p id="titulo"> Tipo de Conta </p>
+                <div class="container">
+                    <a class="selecionado" id="btnContas" href="#">Empresa</a>
+                    <a id="btnContas" href="#">Funcionário</a>
+                </div>
+                <button id="empresa" class="selecionado">Empresa</button>
+                <button id="funcionario">Funcionário</button>
+                <div id="busca-container">
+                    <!-- Input de busca para empresa será inserido aqui -->
+                </div>
+                <div id="container-funcionarios"></div>
+                <p id="mensagem-erro"></p>
 
-            <h1> Tipo de Conta </h1>
-
-            <button id="empresa" class="selecionado">Empresa</button>
-            <button id="funcionario">Funcionário</button>
-            <div id="busca-container">
-                <!-- Input de busca para empresa será inserido aqui -->
+                <!-- Inserir a página de cadastro do funcionário dentro do href. -->
+                <a href=""> <button>Cadastrar Funcionário</button> </a>
             </div>
-            <div id="container-funcionarios"></div>
-            <p id="mensagem-erro"></p>
-
-            <!-- Inserir a página de cadastro do funcionário dentro do href. -->
-            <a href=""> <button>Cadastrar Funcionário</button> </a>
-
         </section>
 
     </div>
@@ -104,7 +107,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <script src="../JS/scriptsParaPagVisualizarContasCadastradas/buscarContaFuncionario.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/scriptsParaPagVisualizarContasCadastradas/scriptParaVerificarStatusDasContasCadastradas.js"></script>
+    <script
+        src="../JS/scriptsParaPagVisualizarContasCadastradas/scriptParaVerificarStatusDasContasCadastradas.js"></script>
 
 </body>
 
