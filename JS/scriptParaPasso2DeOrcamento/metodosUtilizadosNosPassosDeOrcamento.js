@@ -67,7 +67,9 @@ function removerProduto(produtoId) {
     })
     .then(respostaRequisicao => respostaRequisicao.json())
     .then(dados => {
+
         if (dados.success) {
+
             toastr.success('Produto removido com sucesso!');
             document.getElementById(`produto-${produtoId}`).remove();
             atualizarTotais(); // Atualiza os totais após remover o produto
@@ -177,6 +179,7 @@ function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
 
     document.getElementById(nomeDoPassoAPassoCorrespondente).style.display = "block";
     evento.currentTarget.className += " ativo";
+    
 }
 
 // Função para cancelar o orçamento e redirecionar para a página inicial

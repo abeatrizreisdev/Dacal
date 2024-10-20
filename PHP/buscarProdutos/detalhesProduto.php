@@ -150,7 +150,10 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                 echo "<h2 class='tituloProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['nomeProduto']) . "</h2>";
                 echo "<div class='containerDescricaoValor'>";
                 echo "<p class='valorProduto'>R$ " . htmlspecialchars($resultadoBuscaDoProduto['valorProduto']) . "</p>";
+                echo "<div class='containerDescricao'>";
+                echo "<p id='tituloDescricao'>Descrição:</p>";
                 echo "<p class='descricaoProduto'>" . htmlspecialchars($resultadoBuscaDoProduto['descricaoProduto']) . "</p>";
+                echo "</div>";
                 echo "</div>";
             
 

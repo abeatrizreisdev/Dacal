@@ -162,7 +162,9 @@
                                     echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
 
                                 } else {
+
                                     echo '<p>Nenhum produto no orçamento.</p>';
+                                    
                                 }   
 
                             ?>
