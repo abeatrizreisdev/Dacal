@@ -75,7 +75,7 @@
                 if ($tipoContaAutenticada == "admin") {
                    echo '<br>';
                    echo '<a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <img src="../IMAGENS/homeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">';
                     echo '<p class="tituloAbas"> Gerenciar Contas</p>
                     <p class="descricaoAbas">Gerenciar contas</p>

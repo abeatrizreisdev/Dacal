@@ -252,13 +252,13 @@ a:hover {
 
 .containerDescricaoValor {
 
-    width: 100%;
     display: flex;
-    align-items: center;
-    margin-bottom: 4vh;
-    margin-top: 6vh;
-    gap: 30vh;
-    
+    justify-content: space-between; /* Espaço entre os itens */
+    align-items: flex-start; /* Alinha itens ao início do container */
+    margin-top: 3vh;
+    width: 90%; 
+    max-height: 40vh; /* Define a altura máxima */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical se o conteúdo exceder a altura máxima */
 }
 
 .valorProduto {
@@ -272,6 +272,8 @@ a:hover {
     color: #666;
     text-align: justify;
     width: 40vw;
+    margin-bottom: 2vh; /* Adiciona espaço abaixo da descrição para separar do botão */
+
 }
 
 .labelQuantidade {
@@ -311,6 +313,7 @@ a:hover {
     display: flex;
     justify-content: space-evenly;
     margin-top: 4vh;
+    margin-bottom: 3vh;
 }
 
 .botaoVoltar, .botaoAdicionar {
@@ -349,7 +352,14 @@ a:hover {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    max-width: 100%; /* Garante que o container não ultrapasse seu espaço */
     
+}
+
+.descricaoProduto {
+    white-space: pre-wrap;
+    word-wrap: break-word; /* Garante que palavras longas quebrem para a linha seguinte */
+
 }
 
 #tituloDescricao {

@@ -18,7 +18,7 @@ $conexao->getConexao();
 
 $sessaoFuncionario = new Sessao();
 
-$verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
+$contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 
 ?>
@@ -73,7 +73,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
         <br>
         <hr id="linhaMenu">
         <br>
-        <a class="abas" href="<?php echo $verificarUsuarioAutenticado == 'admin' ? '../perfilADM.php' : ($verificarUsuarioAutenticado == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
+        <a class="abas" href="<?php echo $contaAutenticada == 'admin' ? '../perfilADM.php' : ($contaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
             <img src="../../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
             <div id="info">
                 <p class="tituloAbas">Meu Perfil</p>
@@ -85,7 +85,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
         <?php 
 
             // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
-            if ($verificarUsuarioAutenticado == "admin") {
+            if ($contaAutenticada == "admin") {
                 echo '<br>
                 <a class="abas" href="../visualizarContasCadastradas.php">
                 <img src="../../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
@@ -102,7 +102,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
         <?php 
 
             // Se a conta autenticada for um cliente, então vai renderizar as opções de "Orcamento" "Atendimento" na esquerda da tela.
-            if (!$verificarUsuarioAutenticado == "admin" or !$verificarUsuarioAutenticado == "funcionario") {
+            if (!$contaAutenticada  == "admin" or !$contaAutenticada  == "funcionario") {
 
 
                 echo '<br> 
@@ -157,7 +157,7 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                 echo "</div>";
             
 
-                switch ($verificarUsuarioAutenticado) {
+                switch ($contaAutenticada ) {
 
                     case !'admin' or !'funcionario':
 
@@ -182,10 +182,16 @@ $verificarUsuarioAutenticado = $sessaoFuncionario->getValorSessao('tipoConta');
                 echo "</div>";
                 
                 echo "<div class='containerBotoes'>";
-                echo "<a href='../realizarOrcamento.php'><button class='botaoVoltar'>Voltar para o Catálogo</button></a>";
+
+                $voltarCatalogoURL = ($contaAutenticada != 'admin' && $contaAutenticada != 'funcionario') 
+                ? '../../realizarOrcamento.php' 
+                : '../catalogoProdutos.php';
+
+                echo "<a href='" . $voltarCatalogoURL . "'><button class='botaoVoltar'>Voltar para o Catálogo</button></a>";
+
                 
                 // Botão "Adicionar" do formulário fora do container do produto.
-                switch ($verificarUsuarioAutenticado) {
+                switch ($contaAutenticada ) {
 
                     case !'admin' or !'funcionario':
 

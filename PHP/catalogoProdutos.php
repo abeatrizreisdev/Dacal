@@ -73,7 +73,7 @@
 
             <?php 
 
-                if ($tipoContaAutenticada != 'admin' or $tipoContaAutenticada != 'funcionario') {
+                if ($tipoContaAutenticada != 'admin' && $tipoContaAutenticada != 'funcionario') {
 
                     echo '<br>';
                     echo '<a class="abas" href="./orcamentosEmpresa.php">';
