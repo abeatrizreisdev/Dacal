@@ -94,7 +94,9 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 <p id="mensagem-erro"></p>
                 <div class="cadastro">
                     <!-- Inserir a página de cadastro do funcionário dentro do href. -->
-                    <a href=""> <button class="btnCadastro">Cadastrar Funcionário</button> </a>
+                    <a href="javascript:void(0);" onclick="abrirPopup()">
+                        <button class="btnCadastro">Cadastrar Funcionário</button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -107,6 +109,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script
         src="../JS/scriptsParaPagVisualizarContasCadastradas/scriptParaVerificarStatusDasContasCadastradas.js"></script>
+    <script src="../JS/cadastrarFuncionario/cadastrarFuncionario.js"></script>
 
 </body>
 
