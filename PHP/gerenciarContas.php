@@ -72,22 +72,19 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 </div>
             </a>
             <br>
-            <a class="abas" href="gerenciarContas.php">
+            <a class="abas" href="./visualizarContasCadastradas.php">
                 <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
+                    <p class="descricaoAbas">Gerenciar funcionários</p>
+                    <p class="descricaoAbas">e empresas</p>
                 </div>
             </a>
         </div>
         <section class="quadrado">
             <div class="quadradoGeral">
-                <p id="titulo"> Tipo de Conta </p>
-                <div class="container">
-                    <a class="selecionado" id="btnContas" href="#">Empresa</a>
-                    <a id="btnContas" href="#">Funcionário</a>
-                </div>
+                <br>
+                <h1 id="titulo"> Tipo de Conta </h1>
                 <button id="empresa" class="selecionado">Empresa</button>
                 <button id="funcionario">Funcionário</button>
                 <div id="busca-container">
@@ -95,9 +92,10 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 </div>
                 <div id="container-funcionarios"></div>
                 <p id="mensagem-erro"></p>
-
-                <!-- Inserir a página de cadastro do funcionário dentro do href. -->
-                <a href=""> <button>Cadastrar Funcionário</button> </a>
+                <div class="cadastro">
+                    <!-- Inserir a página de cadastro do funcionário dentro do href. -->
+                    <a href=""> <button class="btnCadastro">Cadastrar Funcionário</button> </a>
+                </div>
             </div>
         </section>
 

@@ -95,9 +95,16 @@
 
         div.classList.add('empresa');
         div.innerHTML = `
-            <p>${empresa.nomeEmpresa}</p>
-            <button onclick="excluirPerfilEmpresa('${empresa.idCliente}')"> Excluir Conta </button>
-            <button onclick="editarPerfilEmpresa('${empresa.nomeEmpresa}')"> Editar Perfil </button>
+            <div class="perfil">
+            <div class="perfilAjustar">
+            <img src="../IMAGENS/HomeEmpresa/imgUser.png" id=perfilImg>
+            <div class="infoPerfil">
+            <p class="perfilEmpresa">${empresa.nomeEmpresa}</p>
+            <button class ="btnExcluir" onclick="excluirPerfilEmpresa('${empresa.idCliente}')"> Excluir Conta </button>
+            <button class ="btnEditar" onclick="editarPerfilEmpresa('${empresa.nomeEmpresa}')"> Editar Perfil </button>
+            </div>
+            </div>
+            </div>
         `;
 
         container.appendChild(div);
