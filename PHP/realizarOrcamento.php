@@ -58,7 +58,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a class="abas" href="perfilEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -67,7 +67,7 @@
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
@@ -149,7 +149,7 @@
                                                 <p class='produto-quantidade'>Quantidade: 
                                                     <input type='number' name='quantidades[]' value='" . htmlspecialchars($quantidade) . "' min='1' required readonly>
                                                 </p>
-                                                <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
+                                                <p class='produto-valor'>Valor unitário: R$ " . htmlspecialchars($produto->getValor()) . "</p>
                                                 <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
                                                 <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
                                                 <input type='hidden' name='produtoIds[]' value='" . htmlspecialchars($produto->getId()) . "'> 
@@ -164,7 +164,7 @@
                                 } else {
 
                                     echo '<p>Nenhum produto no orçamento.</p>';
-                                    
+
                                 }   
 
                             ?>
