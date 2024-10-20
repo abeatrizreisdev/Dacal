@@ -85,7 +85,6 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
         return {
 
             id: parametros.get('idEmpresa'),
-            nome: parametros.get('nomeEmpresa'),
             cnpj: parametros.get('cnpjEmpresa'),
             inscricaoEstadual: parametros.get('inscricaoEstadual'),
             razaoSocial: parametros.get('razaoSocial'),
@@ -111,7 +110,6 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
         document.getElementById('idCliente').value = dados.id;
         document.getElementById('idClienteSenha').value = dados.id;
         document.getElementById('idClienteEmail').value = dados.id;
-        document.getElementById('nome').value = dados.nome;        
         document.getElementById('razaoSocial').value = dados.razaoSocial;
         document.getElementById('inscricaoEstadual').value = formatarIE(dados.inscricaoEstadual);
         document.getElementById('cnpjEmpresa').value =  formatarCNPJ(dados.cnpj);

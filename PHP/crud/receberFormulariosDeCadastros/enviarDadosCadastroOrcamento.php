@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Cadastrar o orçamento e os itens no banco de dados
         if ($crudOrcamento->cadastrarOrcamento($orcamentoRealizado, $itens)) {
 
-
             $cliente = new Cliente();
         
             // Setando os valores do objeto Cliente que está autenticado e fez o orçamento.

@@ -41,7 +41,7 @@
                 
                 if ($tipoContaTrocarSenha == 'admin' ) {
 
-                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaFuncionario=sucesso");
+                    header("Location: ../gerenciarContas.php?statusEdicaoContaFuncionario=sucesso");
                     exit();
 
                 } elseif ($tipoContaTrocarSenha == 'funcionario') {
@@ -57,12 +57,12 @@
                 
                 if ($tipoContaTrocarSenha == 'admin' ) {
 
-                    header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaFuncionario=erro");
+                    header("Location: ../gerenciarContas.php?statusEdicaoContaFuncionario=erro");
                     exit();
 
                 } elseif ($tipoContaTrocarSenha == 'funcionario'){
 
-                    header("Location: ../HomeFuncionario.php?statusEdicaoContaFuncionario=erro");
+                    header("Location: ../homeFuncionario.php?statusEdicaoContaFuncionario=erro");
                     exit();
 
                 } 

@@ -184,7 +184,7 @@ $contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 echo "<div class='containerBotoes'>";
 
                 $voltarCatalogoURL = ($contaAutenticada != 'admin' && $contaAutenticada != 'funcionario') 
-                ? '../../realizarOrcamento.php' 
+                ? '../realizarOrcamento.php' 
                 : '../catalogoProdutos.php';
 
                 echo "<a href='" . $voltarCatalogoURL . "'><button class='botaoVoltar'>Voltar para o Catálogo</button></a>";

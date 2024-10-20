@@ -103,7 +103,7 @@
                 // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
                 if ($tipoContaAutenticada == "admin") {
                     echo '<br>
-                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <a class="abas" href="gerenciarContas.php">
                     <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                     <div id="info">
                         <p class="tituloAbas"> Gerenciar Contas</p>

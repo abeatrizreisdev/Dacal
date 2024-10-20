@@ -23,7 +23,7 @@ document.getElementById('formExcluirConta').addEventListener('submit', function(
 
             // Redireciona após 2 segundos o usuário para a página de exibição das contas cadastradas, após a exclusão com sucesso.
             setTimeout(() => {
-                window.location.href = '../PHP/visualizarContasCadastradas.php';
+                window.location.href = '../PHP/gerenciarContas.php';
             }, 2000);
 
         } else {

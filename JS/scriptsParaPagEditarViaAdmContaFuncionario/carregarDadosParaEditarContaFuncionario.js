@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (dados.status === 'success') {
                     toastr.success(dados.message);
                     setTimeout(() => {
-                        window.location.href = '../PHP/visualizarContasCadastradas.php';
+                        window.location.href = '../PHP/gerenciarContas.php';
                     }, 2000);
                 } else {
                     toastr.error(dados.message);

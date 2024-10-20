@@ -4,6 +4,8 @@ require "./sessao/sessao.php";
 
 $sessaoCliente = new Sessao();
 
+$contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
@@ -68,25 +70,50 @@ $sessaoCliente = new Sessao();
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
-            <br>
-            <a class="abas">
-                <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
-                <div id="info">
-                    <p class="tituloAbas">Orçamentos</p>
-                    <p class="descricaoAbas">Confira todos os seus</p>
-                    <p class="descricaoAbas">orçamentos.</p>
 
-                </div>
-            </a>
-            <br>
-            <a class="abas">
-                <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
+            <?php 
+
+            if ($contaAutenticada != 'admin' && $contaAutenticada != 'funcionario') {
+
+                echo '<br>';
+                echo '<a class="abas" href="./orcamentosEmpresa.php">';
+                echo '<img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">';
+                echo '<div id="info">';
+                echo '<p class="tituloAbas">Orçamentos</p>';
+                echo '<p class="descricaoAbas">Confira todos os seus</p>';
+                echo '<p class="descricaoAbas">orçamentos.</p>';
+                echo '</div>';
+                echo '</a>';
+                echo '<br>';
+                echo '<a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">';
+                echo '<img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">';
+                echo '<div id="info">';
+                echo '<p class="tituloAbas">Atendimento</p>';
+                echo '<p class="descricaoAbas">Precisando de ajuda?</p>';
+                echo '<p class="descricaoAbas">Clique aqui..</p>';
+                echo '</div>';
+                echo '</a>';
+
+            }
+
+            ?>
+
+            <?php 
+
+            // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+            if ($contaAutenticada == "admin") {
+                echo '<br>
+                <a class="abas" href="gerenciarContas.php">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
-                    <p class="tituloAbas">Atendimento</p>
-                    <p class="descricaoAbas">Precisando de ajuda?</p>
-                    <p class="descricaoAbas">Clique aqui..</p>
+                    <p class="tituloAbas"> Gerenciar Contas</p>
+                    <p class="descricaoAbas">Gerenciar funcionários</p>
+                    <p class="descricaoAbas">e empresas</p>
                 </div>
-            </a>
+            </a>';
+            }
+
+            ?>
         </div>
         <section class="quadrado">
             <div class="geral">
@@ -101,11 +128,6 @@ $sessaoCliente = new Sessao();
                             <input type="hidden" name="idCliente" id="idCliente">
 
                             <div class="infoGerais">
-
-                                <div class="parteGeral">
-                                    <p>Nome da Empresa</p>
-                                    <input type="text" id="nome" name="nome" class="input">
-                                </div>
 
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>

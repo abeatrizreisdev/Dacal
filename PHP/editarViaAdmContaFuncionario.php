@@ -70,8 +70,8 @@
                 </div>
             </a>
             <br>
-            <a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+            <a class="abas" href="gerenciarContas.php">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
                     <p class="descricaoAbas">Gerenciar contas</p>
@@ -92,8 +92,7 @@
                             <div class="infoGerais">
 
                                 <div class="parteGeral">
-                                    <p>Id</p>
-                                    <input type="number" id="inputId" name="id" class="input" required >
+                                    <input type="hidden" id="inputId" name="id" class="input" required >
                                 </div>
                                 
                                 <div class="parteGeral">

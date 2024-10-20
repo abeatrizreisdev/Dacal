@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
         <ul class="nav-list">
             <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</a></li>
-            <li><a href="">Catálogo</a></li>
+            <li><a href="catalogoProdutos.php">Catálogo</a></li>
             <li><a href="">Sobre Nós</a></li>
         </ul>
         <ul class="icons">

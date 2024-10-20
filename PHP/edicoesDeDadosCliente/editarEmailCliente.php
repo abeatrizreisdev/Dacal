@@ -35,7 +35,7 @@
     
                     if ($tipoConta == "admin") {
     
-                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=sucesso");
+                        header("Location: ../gerenciarContas.php.php?statusEdicaoContaCliente=sucesso");
                         exit();
     
                     } else {
@@ -51,7 +51,7 @@
     
                     if ($tipoConta == "admin") {
                         
-                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
+                        header("Location: ../gerenciarContas.php.php?statusEdicaoContaCliente=erro");
                         exit();
     
                     } else {
