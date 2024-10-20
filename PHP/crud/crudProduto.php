@@ -72,6 +72,35 @@
 
         }
 
+        public function buscarProdutosPorNome($nomeProduto) {
+
+            try {
+
+                // Pegando os produtos com o nome parecido ao qual o usuário digitou.
+                $sql = "SELECT * FROM {$this->tabela} WHERE nomeProduto LIKE :nomeProduto";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['nomeProduto' => $nomeProduto]);
+                
+                if ($resultadoConsulta->rowCount() > 0) {
+                    
+                    // Retornando todos os produtos com nome parecido ao que o usuário digitou.
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+
+
+            } catch (Exception $excecao) {
+
+                echo "<br>Erro na busca de informações dos produtos: " . $excecao->getMessage();
+
+            }
+
+        }
+
         public function buscarTodosProdutos() {
 
             try {

@@ -67,8 +67,65 @@
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
+<<<<<<< Updated upstream
+=======
+
+            <?php 
+
+                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+                if ($tipoContaAutenticada == "admin") {
+
+                    echo '<br>
+                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">
+                        <p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>
+                </a>';
+
+                }
+
+            ?>
+
+            <?php 
+
+                // Se a conta autenticada for um cliente, então vai renderizar as opções de "Orcamento" "Atendimento" na esquerda da tela.
+                if (!$tipoContaAutenticada == "admin" or !$tipoContaAutenticada == "funcionario") {
+
+
+                    echo '<br> 
+                        <a class="abas" href="./orcamentosEmpresa.php">
+                            <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
+                        <div id="info">
+                            <p class="tituloAbas">Orçamentos</p>
+                            <p class="descricaoAbas">Confira todos os seus</p>
+                            <p class="descricaoAbas">orçamentos.</p>
+                        </div>
+                        </a>
+                        <br>
+                        <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+                            <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
+                            <div id="info">
+                                <p class="tituloAbas">Atendimento</p>
+                                <p class="descricaoAbas">Precisando de ajuda?</p>
+                                <p class="descricaoAbas">Clique aqui..</p>
+                            </div>
+                        </a>';
+
+                }
+            
+            ?>
+            
+>>>>>>> Stashed changes
         </div>
         <section class="quadrado">
+
+            <div class="containerPesquisar">
+                    <input type="text" id="buscarProdutoNome" placeholder="Digite o nome do produto.">
+                    <button onclick="buscarProdutoPorId()">Buscar</button>
+            </div>
             
             <nav>
                 <ul class="containerCategorias">

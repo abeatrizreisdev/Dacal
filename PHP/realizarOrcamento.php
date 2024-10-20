@@ -28,7 +28,7 @@
 
         <ul class="nav-list">
             <li><a href="./homeEmpresa.php">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
