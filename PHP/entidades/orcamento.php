@@ -18,6 +18,8 @@
         private $cliente;
         private $produtos;
         private $valor;
+        private $data;
+        private $status;
         private $quantidadeProdutos;
 
         public function __construct($id = null, $cliente = null, $produtos = [], $valor = 0.0, $quantidadeProdutos = []) {
@@ -32,21 +34,13 @@
 
         public function setId($id) {
 
-             // Se for um valor númerico (int, por exemplo) e maior que 0.
-             if (is_numeric($id) && $id <= 0) {
-
+            if (!is_numeric($id) || $id <= 0) {
                 throw new Exception("Erro. O id deve ser um número maior que 0.");
-
-            } else if(is_null($id)) {
-
-                throw new Exception("Erro. O id não pode ser nulo.");
-
             }
-
             $this->id = $id;
 
-            
         }
+        
     
         public function setCliente($cliente) {
 
@@ -74,36 +68,43 @@
     
         public function setValor($valorOrcamento) {
 
-            if (is_numeric($valorOrcamento) && $valorOrcamento -= 0) {
+            if (!is_numeric($valorOrcamento) || $valorOrcamento <= 0) {
 
                 throw new Exception("Erro. O valor do orçamento não pode ser igual ou inferior a 0.");
-
-            } elseif(!is_numeric($valorOrcamento)) {
-
-                throw new Exception("Erro. Valor do orçamento inválido.");
-
             }
 
             $this->valor = $valorOrcamento;
 
         }
+        
 
         public function setQuantidadeProdutos($quantidadeProdutos) {
 
-            if (is_numeric($quantidadeProdutos) && $quantidadeProdutos -= 0) {
+            if (!is_numeric($quantidadeProdutos) || $quantidadeProdutos <= 0) {
 
                 throw new Exception("Erro. A quantidade de produtos do orçamento não pode ser igual ou inferior a 0.");
 
-            } elseif(!is_numeric($quantidadeProdutos)) {
-
-                throw new Exception("Erro. Quantidade de produtos inválida.");
-
             }
-
 
             $this->quantidadeProdutos = $quantidadeProdutos;
 
         }
+
+
+        public function setData($data) {
+            if (!is_string($data) || empty($data)) {
+                throw new Exception("Erro. Data de criação do orçamento inválida.");
+            }
+            $this->data = $data;
+        }
+
+        public function setStatus($status) {
+            if (!is_string($status) || empty($status)) {
+                throw new Exception("Erro. Status do orçamento inválido.");
+            }
+            $this->status = $status;
+        }
+
 
         public function getId() {
             return $this->id;
@@ -125,72 +126,78 @@
             return $this->quantidadeProdutos;
         }
 
-        // Método para adicionar um produto
-        public function adicionarProduto($produto) {
-
-            $this->produtos[] = $produto;
-
-            // Verificando se o produto já foi inserido no array associativo "quantidadeProdutos" do orçamento.
-            if (isset($this->quantidadeProdutos[$produto])) {
-
-                // Incrementa a quantidade desse produto em 1.
-                $this->quantidadeProdutos[$produto]++;
-
-            } else { // Se o produto não existe...
-                
-                // Adiciona o produto ao array associativo quantidadeProdutos com a quantidade inicial de 1.
-                $this->quantidadeProdutos[$produto] = 1;
-
-            }
-
-            $this->calcularValorOrcamento();
-
+        public function getData() {
+            return $this->data;
         }
 
+        public function getStatus() {
+            return $this->status;
+        }
+
+        // Método para adicionar um produto com quantidade
+        public function adicionarProduto($produto, $quantidade) {
+            // Usar o ID do produto como chave no array associativo
+            $produtoId = $produto->getId();
+        
+            if (isset($this->quantidadeProdutos[$produtoId])) {
+                // Incrementar a quantidade do produto existente
+                $this->quantidadeProdutos[$produtoId] += $quantidade;
+            } else {
+                // Adicionar o produto com a quantidade inicial
+                $this->quantidadeProdutos[$produtoId] = $quantidade;
+                // Verifica se o produto já está no array de produtos, caso não esteja, adiciona-o
+                $produtoJaAdicionado = false;
+                foreach ($this->produtos as $p) {
+                    if ($p->getId() == $produtoId) {
+                        $produtoJaAdicionado = true;
+                        break;
+                    }
+                }
+                if (!$produtoJaAdicionado) {
+                    $this->produtos[] = $produto;
+                }
+            }
+            $this->calcularValorOrcamento();
+        }
+        
+        
+
         // Método para remover um produto
-        public function removerProduto($produto) {
+        public function removerProduto($produtoId) {
 
-            // Usa "array_search" para encontrar a chave do produto no array associativo "produtos" do orçamento.
-            if (($key = array_search($produto, $this->produtos)) !== false) {
+            if (isset($this->quantidadeProdutos[$produtoId])) {
 
-                // Remove o produto do array associativo produtos usando "unset".
-                unset($this->produtos[$key]);
+                unset($this->quantidadeProdutos[$produtoId]); // Remove a quantidade do produto
+    
+                foreach ($this->produtos as $index => $produto) {
 
-                // Verifica se o produto existe no array associativo "quantidadeProdutos".
-                if (isset($this->quantidadeProdutos[$produto])) {
-
-                    // Decrementa a quantidade do produto que foi removido do orçamento em 1.
-                    $this->quantidadeProdutos[$produto]--;
-
-                    // E se a quantidade do produto for menor ou igual a 0, remove o produto do array quantidadeProdutos usando unset.
-                    if ($this->quantidadeProdutos[$produto] <= 0) {
-
-                        unset($this->quantidadeProdutos[$produto]);
-
+                    if ($produto->getId() == $produtoId) {
+                        unset($this->produtos[$index]); // Remove o produto da lista de produtos
+                        break;
                     }
 
                 }
-
-                // Chama "calcularValorOrcamento" para recalcular o valor total do orçamento depois da remoção feita.
+    
+                // Recalcular o valor total do orçamento
                 $this->calcularValorOrcamento();
-
             }
+        }
 
+        // novo método para adcionar no diagrama de classes.
+        public function atualizarQuantidadeProduto($produtoId, $novaQuantidade) {
+            if (isset($this->quantidadeProdutos[$produtoId])) {
+                $this->quantidadeProdutos[$produtoId] = $novaQuantidade;
+                $this->calcularValorOrcamento();
+            }
         }
 
         // Método para calcular o valor total do orçamento
         public function calcularValorOrcamento() {
-            
             $this->valor = 0.0;
-
-            // Itera sobre cada produto no array produtos.
             foreach ($this->produtos as $produto) {
-
-                // Para cada produto, multiplica o preço do produto ($produto->getPreco()) pela quantidade do produto ($this->quantidadeProdutos[$produto]) e adciona no atributo "valor" do orçamento.
-                $this->valor += $produto->getPreco() * $this->quantidadeProdutos[$produto];
-
+                $produtoId = $produto->getId();
+                $this->valor += $produto->getValor() * $this->quantidadeProdutos[$produtoId];
             }
-
         }
 
         /*

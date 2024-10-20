@@ -1,8 +1,10 @@
 <?php
 
-require "./sessao/sessao.php";
+    require "./sessao/sessao.php";
 
-$sessaoFuncionario = new Sessao();
+    $sessaoEmpresa = new Sessao();
+
+    $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
 
 ?>
 
@@ -27,7 +29,7 @@ $sessaoFuncionario = new Sessao();
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="homeEmpresa.php">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -50,7 +52,7 @@ $sessaoFuncionario = new Sessao();
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoFuncionario->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoEmpresa->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -59,7 +61,7 @@ $sessaoFuncionario = new Sessao();
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="./perfilEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -67,13 +69,32 @@ $sessaoFuncionario = new Sessao();
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
+            <br>
+            <a class="abas" href="./orcamentosEmpresa.php">
+                <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
+                <div id="info">
+                    <p class="tituloAbas">Orçamentos</p>
+                    <p class="descricaoAbas">Confira todos os seus</p>
+                    <p class="descricaoAbas">orçamentos.</p>
+
+                </div>
+            </a>
+            <br>
+            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+                <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
+                <div id="info">
+                    <p class="tituloAbas">Atendimento</p>
+                    <p class="descricaoAbas">Precisando de ajuda?</p>
+                    <p class="descricaoAbas">Clique aqui..</p>
+                </div>
+            </a>
+
         </div>
         <section class="quadrado">
             
-            <h2>Detalhes do Orçamento</h2>
             <div id="detalhesOrcamento">Carregando...</div>
             
-            <script src="../JS/carregarOrcamentoEspecifico.js"></script>
+            <script src="../JS/scriptsParaPaginaDeOrcamentosEmpresa/verInfoDoOrcamentoEmpresa.js"></script>
         
         </section>
     </div>

@@ -321,15 +321,79 @@ a:hover {
 }
 
 .containerPesquisar {
-    width: 85%;
+    width: 80%;
     margin-top: 3vh;
     height: 5vh;
-    border: 0.1vh solid black;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#buscarProdutoId {
+    width: 80%;
+    border: 0.1vh solid black;
 }
 
 
 
+/* Estilo do passo 2 */
+.produto {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.produto-nome, .produto-categoria, .produto-quantidade, .produto-valor {
+    font-weight: bold;
+}
+
+.produto-imagem {
+    width: 100px;
+    height: auto;
+}
+
+.btn-remover, .btn-visualizar, .btn-alterar {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-remover:hover, .btn-visualizar:hover, .btn-alterar:hover {
+    background-color: #d32f2f;
+}
+
+.total {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.btn-avancar, .btn-alterar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-avancar:hover, .btn-alterar:hover {
+    background-color: #45a049;
+}
+
+button[type="button"] {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #e0e0e0;
+}
 
 
 

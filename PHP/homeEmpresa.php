@@ -17,6 +17,7 @@
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/homeEmpresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -27,7 +28,7 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="">Homepage</li></a>
+            <li><a href="homeEmpresa.php">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -46,7 +47,7 @@
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="./homeEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
@@ -59,7 +60,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a href="perfilEmpresa.php" class="abas">
+            <a class="abas" href="./perfilEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -68,7 +69,7 @@
                 </div>
             </a>
             <br>
-            <a href="./realizarOrcamento.php" class="abas">
+            <a class="abas" href="./orcamentosEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
@@ -78,7 +79,7 @@
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -90,7 +91,7 @@
         <div class="quadrado">
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $_SESSION['nome'] ?></strong> </p>
+                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $sessaoCliente->getValorSessao('nome'); ?></strong> </p>
                     <br>
                     <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
                         sua
@@ -116,6 +117,9 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/scriptsParaCliente.js/verificarStatusEdicaoCliente.js"></script>
 
 </body>
 

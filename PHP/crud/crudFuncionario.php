@@ -21,12 +21,10 @@
 
                 if ($resultadoCadastro > 0) {
 
-                    echo "<br>Cadastro de funcionário realizado com sucesso.";
                     return true;
 
                 } else {
 
-                    echo "<br>Cadastro de funcionário não realizado.";
                     return false;
 
                 }
@@ -51,13 +49,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Funcionário encontrado com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum funcionário encontrado com esse cpf e senha informados.";
 
                     return null;
 
@@ -84,13 +80,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Busca por funcionário realizada com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum funcionário encontrado.";
 
                     return null;
 
@@ -147,13 +141,14 @@
 
                 } else {
 
-                    throw new Exception("<br>Nenhum funcionário encontrado.");
+                    return null;
 
                 }
 
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações dos funcionários: " . $excecao->getMessage();
+
                 return null;
 
             }
@@ -176,19 +171,16 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Funcionário editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Funcionário não encontrado.";
-
                     return false;
 
                 }
         
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na edição do funcionário: " . $excecao->getMessage();
                 
@@ -208,7 +200,6 @@
                 
                 if ($resultadoConsulta > 0) {
                     
-                    echo "<br>Funcionário excluido com sucesso.";
 
                     return $resultadoConsulta;
 
@@ -222,6 +213,8 @@
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na exclusão do funcionário: " . $excecao->getMessage();
+
+                return null;
 
             }
 

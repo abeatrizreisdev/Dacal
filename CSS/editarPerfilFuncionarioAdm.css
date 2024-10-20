@@ -1,0 +1,388 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/*Spiriazi roupas em cima */
+/*HEADER COMEÇA AQUI*/
+a:hover {
+    opacity: 0.7;
+}
+
+.logoDacal {
+    letter-spacing: 4px;
+    width: 10vw;
+    height: 9vh;
+}
+
+nav {
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: sans-serif;
+    background-color: transparent;
+    height: 10vh;
+    /* o position transform é responsavel por fizar a barra de pesquisa na parte superior so site */
+    position: static;
+}
+
+/* dar uma estudada em position  'absolute'/*
+  
+  /*
+  ----------------------------------------------------------
+   Parte superior do código onde informa o valor da promoção
+  ----------------------------------------------------------
+  */
+
+.nav-superior {
+    border-bottom: solid 1px black;
+    background-color: white;
+}
+
+.informativo_superior {
+    background-color: #ff3131;
+    height: 4vh;
+    width: 100vw;
+    text-align: center;
+
+}
+
+.informativo_superior p {
+    color: #000000;
+    text-align: center;
+    font-family: "Poppins";
+    font-weight: 600;
+
+}
+
+/*Icons no canto superior direito */
+
+
+.nav-list li:hover {
+    opacity: 0.7;
+}
+
+.nav-list {
+    /*  tirando o estilo da lista (as bolinhas) */
+    list-style: none;
+    display: flex;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+}
+
+.nav-list li {
+    /* é usada para controlar o espaço em branco entre as letras */
+    letter-spacing: 0.5vh;
+    /* Afastar os itens uns dos outros */
+    margin-left: 15vh;
+    color: rgb(3, 3, 3);
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 20px;
+}
+
+#liqui a {
+    color: #B56F2A;
+}
+
+.icons {
+    /*  tirando o estilo da lista (as bolinhas) */
+    list-style: none;
+    display: flex;
+}
+
+.sair {
+    width: 4vw;
+    height: 7vh;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.fundo {
+    background-color: #a6a6a6;
+}
+
+
+.homepage {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    justify-content: space-between;
+}
+
+.menu {
+    height: 80vh;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.abas {
+    background-color: #ffffff;
+    height: 20vh;
+    width: 20vw;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#nomeEmpresa {
+    font-weight: bold;
+}
+
+.tituloAbas {
+    font-weight: bold;
+}
+
+.imgPerfil {
+    height: 9vh;
+}
+
+#info {
+    font-family: "Poppins";
+}
+
+.sairInfo {
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+#imgInfo {
+    height: 4vh;
+    width: 2vw;
+}
+
+#linhaMenu {
+    height: 0.1vh;
+    width: 15vw;
+    background-color: #cfcfcf;
+}
+
+.quadrado {
+    background-color: white;
+    width: 80vw;
+    height: 80vh;
+    margin-right: 5vh;
+    margin-top: 3vh;
+    font-family: "Poppins";
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.geral {
+    align-items: center;
+}
+
+.geral h1 {
+    text-align: center;
+    font-size: 4.5vh;
+    margin-top: 3vh;
+}
+
+.infoConta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 75vw;
+    display: flex;
+    padding-top: 2vh;
+}
+
+.infoGerais {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.parteGeral p {
+    text-align: justify;
+}
+
+.dadosGerais {
+    width: 60vw;
+    height: 55vh;
+    border-radius: 3vh;
+    border-color: #000000;
+    border: 0.3vh solid;
+    text-align: center;
+    margin-top: 3vh;
+}
+
+.dadosGerais h2 {
+    font-size: 3vh;
+    margin-top: 3vh;
+    margin-bottom: 4vh;
+}
+
+.formDados {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.mensagem-feedback {
+    display: none;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+
+#btnLogin {
+    align-items: center;
+    background-color: #7ed957;
+    width: 18vw;
+    height: 6vh;
+    border-radius: 1vh;
+    font-size: 3vh;
+    font-family: "Poppins";
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 0;
+    padding-top: 15%;
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-section {
+    flex-basis: 25%;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-family: oxanium;
+    font-weight: 600;
+    text-align: center;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Oxanium';
+    font-weight: 200;
+    font: bolder;
+}
+
+.footer-section p {
+    padding: 20px;
+    padding-top: 0;
+    font-family: 'Oxanium';
+    font-style: normal;
+    font-weight: 300;
+    text-align: center;
+    align-items: center;
+}
+
+.footer-credits {
+    text-align: center;
+    margin-top: 20px;
+    font-family: oxanium;
+    font-weight: 600;
+}
+
+.linha-footer {
+    border: 1px solid #B56F2A;
+    margin: 10%;
+    width: 80%;
+}
+
+.conteiner-linha {
+    display: flex;
+    justify-content: center;
+}
+
+.linha-destaques {
+    border: 1.2px solid #B56F2A;
+    width: 90%;
+}
+
+.footer-section ul li {
+    padding-bottom: 10px;
+}

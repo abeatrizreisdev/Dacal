@@ -1,5 +1,5 @@
 // Essa é a função responsável por exibir o conteudo de um dos 3 passo a passo de realização do orçamento, dependendo do passo que o usuário clicar.
-function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
+function abrirPassoAPasso(evento, nomeDoPassoAPassoCorrespondente) {
     
     var indice, conteudoTabela, linksTabela;
     

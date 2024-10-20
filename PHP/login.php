@@ -10,7 +10,6 @@ require './sessao/sessao.php';
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,76 +18,88 @@ require './sessao/sessao.php';
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/login.css">
-</head>
-<script>
-    function metodosLogin(type) {
-
-        const actionFormulario = document.getElementById('formLogin');
-        const loginEmpresa = document.getElementById('loginEmpresa');
-        const loginFuncionario = document.getElementById('loginFuncionario');
-
-        if (type === 'empresa') {
-            loginEmpresa.style.display = 'block';
-            loginFuncionario.style.display = 'none';
-            cadastroOpcao.style.display = 'block';
-            actionFormulario.action = 'autenticacao/autenticacaoEmpresa.php';
-        } else {
-            loginEmpresa.style.display = 'none';
-            loginFuncionario.style.display = 'block';
-            cadastroOpcao.style.display = 'none';
-            actionFormulario.action = 'autenticacao/autenticacaoFuncionario.php';
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        .selecionado {
+            /* Cor de fundo do botão selecionado de login. */
+            background-color: #f44f4f; 
         }
-    }
-</script>
-<php? 
-
-function entradaBanco{ 
-    if (metodosLogin='empresa' ){ 
-
-    }else{
-
-     } 
-}
-
-?>
-    <header>
-
-    </header>
-
-    <body>
-        <div id="homeGeral">
-            <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-            <form action="" method="post" id ="formLogin" class="formularioLogin">
-                <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
-                <h1 id="titulo">Tipo de Acesso</h1>
-                <div class="container">
-                    <a class="btn" href="#" onclick="metodosLogin('empresa')">Empresa</a>
-                    <a class="btn" href="#" onclick="metodosLogin('funcionario')">Funcionário</a>
+    </style>
+</head>
+<body>
+    <div id="homeGeral">
+        <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
+        <form action="" method="post" id="formLogin" class="formularioLogin">
+            <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
+            <h1 id="titulo">Tipo de Acesso</h1>
+            <div class="container">
+                <a class="btn selecionado" href="#" onclick="metodosLogin('empresa', this)">Empresa</a>
+                <a class="btn" href="#" onclick="metodosLogin('funcionario', this)">Funcionário</a>
+            </div>
+            <p><?php echo $erro; ?></p>
+            <div class="formularioInterior">
+                <div id="loginEmpresa" style="display:block;">
+                    <p class="formularioNomes">CNPJ</p>
+                    <input type="text" id="cnpj" name="cnpj" class="input">
                 </div>
-
-                <p> <?php echo $erro; ?> </p>
-                <div class="formularioInterior">
-                    <div id="loginEmpresa" style="display:block;">
-                        <p class="formularioNomes">CNPJ</p>
-                        <input type="text" id="cnpj" name="cnpj" class="input">
-                    </div>
-                    <div id="loginFuncionario" style="display:none;">
-                        <p class="formularioNomes">CPF</p>
-                        <input type="text" id="cpf" name="cpf" class="input">
-                    </div>
-                    <p class="formularioNomes">Senha</p>
-                    <input type="password" id="senha" name="senha" class="input">
-                    <p id="cadastroOpcao" style="display:'block';">Ainda não tem conta? 
-                    <a id="cadastro"href="#">Cadastre-se Aqui.</a></p>
+                <div id="loginFuncionario" style="display:none;">
+                    <p class="formularioNomes">CPF</p>
+                    <input type="text" id="cpf" name="cpf" class="input">
                 </div>
-                <br>
-                <button type="submit" id="btnLogin">Login</button>
-            </form>
-        </div>
-    </body>
-
-
+                <p class="formularioNomes">Senha</p>
+                <input type="password" id="senha" name="senha" class="input">
+                <p id="cadastroOpcao" style="display:block;">Ainda não tem conta?
+                    <a id="cadastro" href="cadastroEmpresa.php">Cadastre-se Aqui.</a>
+                </p>
+            </div>
+            <br>
+            <button type="submit" id="btnLogin">Login</button>
+        </form>
+    </div>
     <footer id="footer">
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/verificarStatusCadastroCliente.js"></script>
+    <script>
 
+        function metodosLogin(type, element) {
+            
+            const tagFormulario = document.getElementById('formLogin');
+            const loginEmpresa = document.getElementById('loginEmpresa');
+            const loginFuncionario = document.getElementById('loginFuncionario');
+            const botoes = document.querySelectorAll('.btn');
+
+            // Iterando sobre o botão do tipo de login e removendo a classe "selecionado" dele.
+            botoes.forEach(btn => btn.classList.remove('selecionado'));
+
+            // Adcionando a classe de botão selecionado no botão clicado pelo usuário.
+            element.classList.add('selecionado');
+
+            if (type === 'empresa') {
+
+                loginEmpresa.style.display = 'block';
+                loginFuncionario.style.display = 'none';
+                cadastroOpcao.style.display = 'block';
+                tagFormulario.action = 'autenticacao/autenticacaoEmpresa.php'; // se o tipo for empresa, o arquivo php que fará a autenticação será especifico para ele.
+
+            } else {
+
+                loginEmpresa.style.display = 'none';
+                loginFuncionario.style.display = 'block';
+                cadastroOpcao.style.display = 'none';
+                tagFormulario.action = 'autenticacao/autenticacaoFuncionario.php';
+
+            }
+
+        }
+
+        // Seleciona o botão de empresa por padrão ao carregar a página.
+        document.addEventListener('DOMContentLoaded', function() {
+            const botaoSelecionadoPorPadrao = document.querySelector('.btn.selecionado');
+            metodosLogin('empresa', botaoSelecionadoPorPadrao);
+        });
+
+    </script>
+</body>
 </html>

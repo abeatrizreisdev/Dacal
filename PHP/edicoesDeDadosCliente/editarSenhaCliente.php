@@ -6,6 +6,10 @@
     require "../sessao/sessao.php";
     require "../conexaoBD/configBanco.php";
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     $conexao = new ConexaoBD();
     $conexao->setHostBD(host: BD_HOST);
     $conexao->setPortaBD(porta: BD_PORTA);
@@ -16,27 +20,64 @@
 
     $crudCliente = new CrudCliente($conexao);
 
+    $sessaoAtiva = new Sessao(); 
+        
+    $tipoConta = $sessaoAtiva->getValorSessao('tipoConta');
+
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
+        $idCliente = $_POST['idClienteSenha'];
         $novaSenha = $_POST['senha'];
 
-        $sessaoCliente = new Sessao(); 
-        
-        $resultadoEdicao = $crudCliente->editarSenhaCliente($sessaoCliente->getValorSessao('idCliente'), $novaSenha);
+        try {
 
-        switch ($resultadoEdicao) {
+            $resultadoEdicao = $crudCliente->editarSenhaCliente($idCliente, $novaSenha);
 
-            case true :
+            switch ($resultadoEdicao) {
+    
+                case true :
+    
+                    if ($tipoConta == "admin") {
+    
+                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=sucesso");
+                        exit();
+    
+                    } else {
+                        
+                        $sessaoAtiva->setChaveEValorSessao('senha', $novaSenha);
+                        header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
+                        exit();
+    
+                    }
+                    
+    
+                case false :
+    
+                    if ($tipoConta == "admin") {
+                        
+                        header("Location: ../visualizarContasCadastradas.php?statusEdicaoContaCliente=erro");
+                        exit();
+    
+                    } else {
+    
+                        header("Location: ../perfilEmpresa.php?statusEdicaoContaCliente=erro");
+                        exit();
+    
+                    }
+    
+            }
 
-                header("Location: ../homeEmpresa.php");
-                exit();
 
-            case false :
+        } catch(Exception $excecao) {
 
-                header("Location: ../perfilEmpresa.php");
-                exit();
+
+            echo "Erro ao editar o cliente: " . $excecao->getMessage();
 
         }
+
+    } else {
+
+        
 
     }
 

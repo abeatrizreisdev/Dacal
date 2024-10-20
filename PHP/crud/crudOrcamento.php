@@ -8,48 +8,88 @@
         }
 
 
-        public function cadastrarOrcamento($orcamento) {
-
-            // Separando por virgulas os campos da tabela que receberão os valores da inserção.
-            $camposTabela = $this->organizarCamposDaTabela($orcamento);
-
-            // Separando os valores que serão inseridos na tabela.
-            $valores = $this->organizarValoresParaTabela($orcamento);
-
+        public function cadastrarOrcamento(Orcamento $orcamento, $itens) {
+            
             try {
 
-                $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-
-                $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $orcamento);
-
+                // Iniciar uma transação
+                $this->conexaoBD->beginTransaction();
+    
+                // Extrair os dados do objeto Orcamento para um array
+                $dadosOrcamento = [
+                    'idCliente' => $orcamento->getCliente(),
+                    'valorOrcamento' => $orcamento->getValor(),
+                    'dataCriacao' => $orcamento->getData(),
+                    'status' => $orcamento->getStatus()
+                ];
+    
+                // Inserir o orçamento na tabela Orcamentos
+                $camposTabela = $this->organizarCamposDaTabela($dadosOrcamento);
+                $valores = $this->organizarValoresParaTabela($dadosOrcamento);
+                $sqlOrcamento = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+                $resultadoCadastro = $this->conexaoBD->queryBanco($sqlOrcamento, $dadosOrcamento);
+    
                 if ($resultadoCadastro > 0) {
 
+                    // Obter o ID do orçamento inserido
+                    $numeroOrcamento = $this->conexaoBD->lastInsertId();
+    
+                    // Inserir os itens do orçamento na tabela itens_orcamento
+                    foreach ($itens as $item) {
+
+                        $item['numeroOrcamento'] = $numeroOrcamento;
+                        $camposItens = $this->organizarCamposDaTabela($item);
+                        $valoresItens = $this->organizarValoresParaTabela($item);
+                        $sqlItens = "INSERT INTO itens_orcamento ($camposItens) VALUES ($valoresItens)";
+                        $this->conexaoBD->queryBanco($sqlItens, $item);
+
+                    }
+    
+                    // Confirmar a transação
+                    $this->conexaoBD->commit();
                     return true;
 
                 } else {
 
+                    // Reverter a transação em caso de erro
+                    $this->conexaoBD->rollBack();
                     return false;
 
                 }
 
             } catch (PDOException $excecao) {
 
+                // Reverter a transação em caso de exceção
+                $this->conexaoBD->rollBack();
                 echo "<br>Erro no cadastro do orçamento: " . $excecao->getMessage();
-
                 return false;
 
             }
 
         }
+    
 
         public function buscarInfoOrcamento($idOrcamento) {
+
             try {
+
                 $sql = "SELECT 
                             {$this->tabela}.numeroOrcamento, 
                             {$this->tabela}.valorOrcamento, 
                             {$this->tabela}.dataCriacao, 
                             {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente, 
+                            cliente.nomeEmpresa AS nomeCliente,
+                            cliente.razaoSocial AS razaoSocial,
+                            cliente.cnpj AS cnpj,
+                            cliente.inscricaoEstadual AS inscricaoEstadual,
+                            cliente.telefone AS telefone,
+                            cliente.email AS email,
+                            cliente.logradouro AS logradouro,
+                            cliente.bairro AS bairro,
+                            cliente.cep AS cep,
+                            cliente.estado AS estado,
+                            cliente.municipio AS municipio,
+                            cliente.numeroEndereco AS numeroEndereco, 
                             itens_orcamento.idProduto, 
                             itens_orcamento.quantidade, 
                             produto.nomeProduto
@@ -73,14 +113,29 @@
                         "dataCriacao" => $orcamentoDetalhes[0]['dataCriacao'],
                         "status" => $orcamentoDetalhes[0]['status'],
                         "nomeCliente" => $orcamentoDetalhes[0]['nomeCliente'],
+                        "razaoSocial" => $orcamentoDetalhes[0]['razaoSocial'],
+                        "cnpj" => $orcamentoDetalhes[0]['cnpj'],
+                        "inscricaoEstadual" => $orcamentoDetalhes[0]['inscricaoEstadual'],
+                        "telefone" => $orcamentoDetalhes[0]['telefone'],
+                        "email" => $orcamentoDetalhes[0]['email'],
+                        "logradouro" => $orcamentoDetalhes[0]['logradouro'],
+                        "bairro" => $orcamentoDetalhes[0]['bairro'],
+                        "cep" => $orcamentoDetalhes[0]['cep'],
+                        "estado" => $orcamentoDetalhes[0]['estado'],
+                        "municipio" => $orcamentoDetalhes[0]['municipio'],
+                        "numeroEndereco" => $orcamentoDetalhes[0]['numeroEndereco'],
+
                         "quantidadeTotal" => array_sum(array_column($orcamentoDetalhes, 'quantidade')),
                         "itens" => array_map(function($item) {
+
                             return [
                                 "idProduto" => $item['idProduto'],
                                 "quantidade" => $item['quantidade'],
                                 "nomeProduto" => $item['nomeProduto']
                             ];
+                            
                         }, $orcamentoDetalhes)
+
                     ];
 
                     return $orcamento;
@@ -90,6 +145,7 @@
                     return null;
 
                 }
+
             } catch (Exception $excecao) {
 
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
@@ -151,7 +207,7 @@
 
                 }
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na busca por orçamentos cadastrados: " . $excecao->getMessage();
 
@@ -161,6 +217,44 @@
 
 
         }
+
+        // Método novo para adcionar no diagrama de classes.
+        public function buscarOrcamentosPorCliente($idCliente) {
+
+            try {
+
+                $sql = "SELECT 
+                            {$this->tabela}.numeroOrcamento, 
+                            {$this->tabela}.valorOrcamento, 
+                            {$this->tabela}.dataCriacao, 
+                            {$this->tabela}.status, 
+                            cliente.nomeEmpresa AS nomeCliente, 
+                            (SELECT SUM(itens_orcamento.quantidade) 
+                             FROM itens_orcamento 
+                             WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
+                        FROM orcamentos, cliente 
+                        WHERE {$this->tabela}.idCliente = cliente.idCliente 
+                          AND cliente.idCliente = $idCliente";
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+            } catch (Exception $excecao) {
+
+                echo "<br>Erro na busca por orçamentos do cliente: " . $excecao->getMessage();
+                return null;
+
+            }
+
+        }
+        
 
 
         public function editarOrcamento($idOrcamento, $orcamento) {

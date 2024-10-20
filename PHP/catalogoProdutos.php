@@ -4,6 +4,8 @@
 
     $sessao = new Sessao();
 
+    $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +19,7 @@
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/catalogoProdutos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -27,8 +30,8 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : ($tipoContaAutenticada == 'funcionario' ? 'homeFuncionario.php' : 'homeEmpresa.php'); ?>">Homepage</li></a>
+            <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
         <ul class="icons">
@@ -59,7 +62,7 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin' ? 'perfilADM.php' : ($tipoContaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -139,12 +142,29 @@
             
             <div id="containerProdutos">
                 <!-- Produtos serão carregados aqui -->
+                <?php
+                echo "<h2>$prod</h2>
+                <p class='preço'>R$ $preco</p>
+                <p class='parcelamento'>até <strong class='negrito'>6x R$ $parcela</strong> sem juros</p>
+                <p class='desconto'>ou <strong class='negrito'>R$ $pix</strong> via pix</p>
+                </br>
+                <a href='../php_extra/complementar.php?fun=add_sacola&id=$id' class='bot-comprar'>Adicionar a Sacola</a>";
+                if ($_SESSION["logado"] && $_SESSION["ADM"] == 1) {
+                    echo "<a href='../php_extra/complementar.php?fun=edit&id=$id' class='bot-comprar'>Editar Produto</a>";
+                    echo "<a href='../php_extra/complementar.php?fun=del&id=$id' class='bot-comprar'>Deletar Produto</a>";
+                }
+                ?>
             </div>
-           
+            
         </section>
     </div>
 
-    <script src="../JS/carregarProdutos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/verificarStatusCadastroProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/verificarStatusEdicaoProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/excluirProduto.js"></script>
+    <script src="../JS/scriptsParaPagCatalogoProdutos/carregarProdutos.js"></script>
 
 </body>
 

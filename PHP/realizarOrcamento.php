@@ -1,8 +1,6 @@
 <?php 
 
-    require "./sessao/sessao.php";
-
-    $sessaoCliente = new Sessao();
+    require "./exibirOrcamento/exibirOrcamento.php"
 
 ?>
 
@@ -17,6 +15,7 @@
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/realizarOrcamento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -50,7 +49,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeEmpresa'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -87,7 +86,7 @@
                 </div>
             </a>
         </div>
-        <section class="quadrado">
+        <section class="quadrado"> 
             
                 <div class="container">
                     <div class="tabelas"> 
@@ -99,7 +98,8 @@
                     <div id="passo1" class="conteudoPassoAPasso">
 
                         <div class="containerPesquisar">
-                            <p>teste</p>
+                            <input type="text" id="buscarProdutoId" placeholder="Digite o código do produto">
+                            <button onclick="buscarProdutoPorId()">Buscar</button>
                         </div>
                         <nav>
                             <ul class="containerCategorias">
@@ -120,17 +120,73 @@
                     <div id="passo2" class="conteudoPassoAPasso">
                         <h2>Passo 2: Revisão dos Produtos Selecionados</h2>
                         <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
+                        <?php exibirOrcamento(); ?>
+
+                        <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
+                        <button type="button" onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
+                        <button type="button" onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
+                   
                     </div>
                 
                     <div id="passo3" class="conteudoPassoAPasso">
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
                         <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
+                        <form id="formOrcamento" action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroOrcamento.php" method="post">
+                            <?php
+                                // Recuperar o orçamento da sessão e gerar inputs ocultos
+                                $orcamento_serializado = $sessaoCliente->getValorSessao('orcamento');
+                                if ($orcamento_serializado && is_string($orcamento_serializado)) {
+                                    $orcamento = unserialize($orcamento_serializado);
+                                    $quantidadeTotal = 0; // Definir a variável $quantidadeTotal
+
+                                    foreach ($orcamento->getProdutos() as $produto) {
+                                        $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
+                                        $quantidadeTotal += $quantidade; // Calcular a quantidade total
+                                        echo "<div class='produto'>
+                                                <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
+                                                <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
+                                                <img class='produto-imagem' src='data:image/jpeg;base64," . base64_encode($produto->getImagem()) . "' alt='Produto'>
+                                                <p class='produto-quantidade'>Quantidade: 
+                                                    <input type='number' name='quantidades[]' value='" . htmlspecialchars($quantidade) . "' min='1' required readonly>
+                                                </p>
+                                                <p class='produto-valor'>Valor: R$ " . htmlspecialchars($produto->getValor()) . "</p>
+                                                <input type='hidden' name='produtos[]' value='" . htmlspecialchars($produto->getNome()) . "'>
+                                                <input type='hidden' name='valores[]' value='" . htmlspecialchars($produto->getValor()) . "'>
+                                                <input type='hidden' name='produtoIds[]' value='" . htmlspecialchars($produto->getId()) . "'> 
+
+                                            </div>";
+                                    }
+                                    
+                                    echo '<p class="produto-valor"> Valor Total: R$ ' . htmlspecialchars($orcamento->getValor()) . ' </p>';
+                                    echo '<h3>Quantidade Total de Itens: ' . htmlspecialchars($quantidadeTotal) . '</h3>';
+                                    echo '<input type="hidden" name="valorTotal" value="' . htmlspecialchars($orcamento->getValor()) . '">';
+
+                                } else {
+                                    echo '<p>Nenhum produto no orçamento.</p>';
+                                }   
+
+                            ?>
+                            
+                            <a onclick="cancelarOrcamento()">Cancelar Orçamento</a>
+                            <a type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar Página</a>
+                            <button type="submit">Finalizar Orçamento</button>
+
+                        </form>
+                        
+
                     </div>
+
                 </div>
 
         </section>
 
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="../JS/scriptParaPasso2DeOrcamento/metodosUtilizadosNosPassosDeOrcamento.js"></script>
         <script src="../JS/realizarOrcamento.js"></script>
+        
 
 </body>
 

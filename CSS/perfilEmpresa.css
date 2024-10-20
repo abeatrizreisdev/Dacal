@@ -363,12 +363,21 @@ nav {
     cursor: pointer;
 }
 
+#btnApagar {
+    align-items: center;
+    background-color: #a6a6a6;
+    width: 20vw;
+    height: 5vh;
+    border-radius: 1vh;
+    font-size: 3vh;
+    font-family: "Poppins";
+    font-weight: 700;
+    cursor: pointer;
+}
 
-
-
-
-
-
+#imgApagar {
+width: 2vw;
+}
 
 
 

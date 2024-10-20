@@ -51,6 +51,32 @@
             return $this->portaBD;
         }
 
+        public function beginTransaction() {
+            $this->conexao->beginTransaction();
+        }
+    
+        public function commit() {
+            $this->conexao->commit();
+        }
+    
+        public function rollBack() {
+            $this->conexao->rollBack();
+        }
+
+        public function lastInsertId(): string {
+
+            if ($this->conexao) {
+
+                return $this->conexao->lastInsertId();
+
+            } else {
+
+                throw new Exception("Conexão não estabelecida.");
+
+            }
+
+        }
+
 
         // Pegar a conexão com o banco de dados.
         public function getConexao(): PDO {

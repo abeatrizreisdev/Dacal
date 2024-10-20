@@ -70,10 +70,23 @@
                 $sessao->setChaveEValorSessao('bairro', $funcionarioAutenticado->getBairro());
                 $sessao->setChaveEValorSessao('logradouro', $funcionarioAutenticado->getLogradouro());
                 $sessao->setChaveEValorSessao('cep', $funcionarioAutenticado->getCep());
+                
+                $tipoConta = $funcionarioAutenticado->getTipoConta();
 
-                header("Location: ../homeFuncionario.php");
+                if ($tipoConta == "funcionario") {
 
-                exit();
+                    header("Location: ../homeFuncionario.php");
+
+                    exit();
+
+                } else if($tipoConta == "admin") {
+
+                    header("Location: ../homeAdm.php");
+
+                    exit();
+
+                }
+                
 
             }
 

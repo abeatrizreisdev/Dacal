@@ -4,6 +4,8 @@
 
     $sessaoFuncionario = new Sessao();
 
+    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
             <li><a href="">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -67,6 +69,23 @@
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
+
+            <?php 
+
+                if ($tipoContaAutenticada == "admin") {
+                   echo '<br>';
+                   echo '<a class="abas" href="./visualizarContasCadastradas.php">
+                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+                <div id="info">';
+                    echo '<p class="tituloAbas"> Gerenciar Contas</p>
+                    <p class="descricaoAbas">Gerenciar contas</p>
+                    <p class="descricaoAbas">funcionários e empresas</p>
+                </div>';
+                    echo '</a>';
+                }
+
+            ?>
+
         </div>
         <section class="quadrado">
         
@@ -84,7 +103,17 @@
 
                                 <label for="valorProduto">Valor:</label>
                                 <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required min="1">
+
+                                <label for="categoriaProduto"> Categoria: </label>
+                                <select name="categoriaProduto" id="CategoriaProduto">
+                                    <option value="1">Móveis</option>
+                                    <option value="2">Cadeiras</option>
+                                    <option value="3">Cozinha</option>
+                                    <option value="4">Utensilios</option>
+                                    <option value="5">Aparelhos</option>
+                                </select>
                             </div>
+                            
                     </div>
 
                     <div class="descricao-field">

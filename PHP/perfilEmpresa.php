@@ -4,6 +4,7 @@ require "./sessao/sessao.php";
 
 $sessaoCliente = new Sessao();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,7 @@ $sessaoCliente = new Sessao();
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -47,7 +49,7 @@ $sessaoCliente = new Sessao();
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="./homeEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
@@ -60,16 +62,16 @@ $sessaoCliente = new Sessao();
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a class="abas" href="./perfilEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
-                    <p class="tituloAbas">Meu Perfil</p>
+                    <p class="tituloAbas"> Meu Perfil</p>
                     <p class="descricaoAbas">Visualize e altere seus</p>
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas" href="./orcamentosEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
@@ -79,7 +81,8 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
             <br>
-            <a class="abas">
+            <a class="abas"
+                href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -94,7 +97,9 @@ $sessaoCliente = new Sessao();
                 <div class="infoConta">
                     <div class="dadosGerais">
                         <p id="titulo">Dados da Conta</p>
-                        <form action="#" method="" class="formDados">
+                        <form action="./edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="POST" class="formDados">
+
+                            <input type="hidden" name="idCliente" id="idCliente" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
@@ -122,8 +127,8 @@ $sessaoCliente = new Sessao();
                             <br>
                             <div class="endereço">
                                 <p id="">Endereço</p>
-                                <input type="text" id="estado" name="estado" class="inputAPI">
-                                <input type="text" id="municipio" name="municipio" class="inputAPI">
+                                <input type="text" id="estado" name="estado" class="inputAPI" value="<?php echo $sessaoCliente->getValorSessao('estado'); ?>">
+                                <input type="text" id="municipio" name="municipio" class="inputAPI" value="<?php echo $sessaoCliente->getValorSessao('municipio'); ?>">
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
@@ -159,6 +164,7 @@ $sessaoCliente = new Sessao();
                         <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST"
                             class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
+                            <input type="hidden" name="idClienteEmail" id="idClienteEmail" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
                             <input type="email" id="trocarEmail" name="email" class="input"
                                 value="<?php echo $sessaoCliente->getValorSessao('email'); ?> ">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
@@ -166,15 +172,23 @@ $sessaoCliente = new Sessao();
                         <form action="./edicoesDeDadosCliente/editarSenhaCliente.php" method="POST"
                             class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
+                            <input type="hidden" name="idClienteSenha" id="idClienteSenha" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
                             <input type="password" id="trocarSenha" name="senha" class="input"
                                 value="<?php echo $sessaoCliente->getValorSessao('senha'); ?>">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
                         </form>
+                        <div class="btnApagarConta">
+                            <button type="submit" id="btnApagar">
+                                <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" id="imgApagar">
+                                <p id=""> </p>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 </body>
 

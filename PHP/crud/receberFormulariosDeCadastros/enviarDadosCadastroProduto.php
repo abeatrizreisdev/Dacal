@@ -4,7 +4,7 @@
     require "../crudProduto.php";
     require "../../sessao/sessao.php";
     require "../../entidades/produto.php";
-    require "../conexaoBD/configBanco.php";
+    require "../../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
     $conexao->setHostBD(host: BD_HOST);
@@ -35,6 +35,7 @@
                 $nomeProduto = $_POST['nome'];
                 $valorProduto = floatval(str_replace(',', '.', $_POST['valor']));
                 $descricaoProduto = $_POST['descricao'];
+                $categoriaProduto = $_POST['categoriaProduto'];
 
                 try {
 
@@ -47,7 +48,7 @@
                     $produto->setValor($valorProduto);
                     $produto->setDescricao($descricaoProduto);
                     // está caracterizado como a categoria 5, pois estava testando o banco como deve ser, se o catalogo de produtos forem separados por categorias.
-                    $produto->setCategoria(5);
+                    $produto->setCategoria($categoriaProduto);
 
                     // Chamando o método de cadastro do produto
                     $crudProduto->cadastrarProduto([
@@ -57,13 +58,16 @@
                         'descricaoProduto' => $produto->getDescricao(),
                         'categoria' => $produto->getCategoria()
                     ]);
+                    
+                    $sessao = new Sessao();
 
-                    header("Location: .../homeFuncionario.php");
+                    header("Location: ../../catalogoProdutos.php?statusCadastroProduto=sucesso");
                     exit();
-
+                    
                 } catch (Exception $excecao) {
 
                     echo "Erro ao cadastrar o produto: " . $excecao->getMessage();
+                    header("Location: ../../catalogoProdutos.php?statusCadastroProduto=erro");
                     exit();
 
                 }
@@ -73,11 +77,13 @@
                 echo 'O caminho do arquivo está vazio.';
 
             }
+
         } else {
 
             echo 'O campo imagem não foi enviado ou ocorreu um erro no upload.';
 
         }
+
     } else {
 
         echo 'Requisição inválida.';

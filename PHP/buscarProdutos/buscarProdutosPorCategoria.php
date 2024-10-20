@@ -5,8 +5,6 @@
     require "../conexaoBD/configBanco.php";
     require "../sessao/sessao.php";
 
-    
-
     $conexao = new ConexaoBD();
     $conexao->setHostBD(BD_HOST);
     $conexao->setPortaBD(BD_PORTA);
@@ -44,8 +42,8 @@
 
                     echo "<div class='botoesProduto'>";
                     echo "<a class='botao' id='botaoVisualizar' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar" . "</button>" . "</a>";
-                    echo "<a class='botao' id='botaoRemover' href='./buscarProdutos/excluirProduto.php?id=$idProduto'>" . "<button>Remover" . "</button></a>";
-                    echo "<a class='botao' id='botaoEditar' href='./editarProduto/editarProduto.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
+                    echo "<a class='botao' id='botaoRemover'>" . "<button onclick='excluirProduto($idProduto)'>Remover" . "</button></a>";
+                    echo "<a class='botao' id='botaoEditar' href='./editarProduto2.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
                     echo "</div>";
                     echo "</div>"; // Fechamento da div 'produtoEspecifico'
 

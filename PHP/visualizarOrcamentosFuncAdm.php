@@ -4,6 +4,8 @@ require "./sessao/sessao.php";
 
 $sessaoFuncionario = new Sessao();
 
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ $sessaoFuncionario = new Sessao();
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -67,6 +69,24 @@ $sessaoFuncionario = new Sessao();
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
+
+            <?php 
+
+                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+                if ($tipoContaAutenticada == "admin") {
+                    echo '<br>
+                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">
+                        <p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>
+                </a>';
+                }
+
+            ?>
+
         </div>
         <section class="quadrado">
             
@@ -75,7 +95,7 @@ $sessaoFuncionario = new Sessao();
         </section>
     </div>
 
-    <script src="../JS/carregarOrcamentos.js"></script>
+    <script src="../JS/scriptsParaPagVisualizarOrcamentoFuncAdm/carregarOrcamentos.js"></script>
 </body>
 
 </html>

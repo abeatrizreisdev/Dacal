@@ -37,6 +37,7 @@
 
            
             echo json_encode(['erro' => 'Número do orçamento não fornecido.']);
+            
         }
 
     } catch (Exception $excecao) {

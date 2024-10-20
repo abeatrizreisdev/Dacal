@@ -1,6 +1,6 @@
 <?php 
 
-    require "../crud/crud.php";
+    require "crud.php";
 
     class CrudCliente extends Crud {
 
@@ -21,19 +21,15 @@
 
                 if ($resultadoCadastro > 0) {
 
-                    echo "<br>Cadastro de cliente realizado com sucesso.";
-
                     return true;
 
                 } else {
-
-                    echo "<br>Cadastro de cliente não realizado.";
 
                     return false;
 
                 }
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro no cadastro do cliente: " . $excecao->getMessage();
 
@@ -47,28 +43,27 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj AND senha = :senha";
+                $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj";
 
-                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj, 'senha' => $senha]);
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj]);
                 
                 if ($resultadoConsulta->rowCount() > 0) {
-                    
-                    echo "<br>Cliente encontrado com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
-
-                    echo "<br>Nenhum cliente encontrado com esse cnpj e senha informada.";
 
                     return null;
 
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
-                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+                echo "<br>Erro na busca de informações do cliente para autenticação: " . $excecao->getMessage();
+
+                return null;
 
             }
 
@@ -84,13 +79,11 @@
                 
                 if ($resultadoConsulta->rowCount() > 0) {
                     
-                    echo "<br>Busca por cliente realizada com sucesso.";
 
                     return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum cliente encontrado.";
 
                     return null;
 
@@ -100,6 +93,8 @@
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações do cliente: " . $excecao->getMessage();
+
+                return null;
 
             }
 
@@ -146,19 +141,20 @@
 
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    echo "<br>A busca pelos clientes cadastrados foi realizado com sucesso.";
 
                     return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
 
-                    echo "<br>Nenhum cliente encontrado.";
+                    return null;
 
                 }
 
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações dos clientes: " . $excecao->getMessage();
+
+                return null;
 
             }
 
@@ -174,19 +170,28 @@
 
                 // Comando sql para editar as informações do funcionário.
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE idCliente = :id";
+
+                // Debug: Print SQL and parameters
+                echo "SQL: $sql<br>";
+                print_r(array_merge($dados, ['id' => $idCliente]));
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idCliente]));
+
+                // Check the result of the query
+                if ($resultadoConsulta === false) {
+                    echo "<br>Erro na execução da consulta.";
+                } else {
+                    echo "<br>Número de linhas afetadas: $resultadoConsulta";
+                }
                 
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Cliente editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
@@ -214,13 +219,11 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Email do cliente editado com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
@@ -249,21 +252,19 @@
                 // Verificando se a linha correspondente ao usuário foi afetada no banco.
                 if ($resultadoConsulta > 0) {
 
-                    echo "<br>Senha do cliente editada com sucesso.";
 
                     return true;
 
                 } else {
 
-                    echo "<br>Cliente não encontrado.";
 
                     return false;
 
                 }
         
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
-                echo "<br>Erro na edição da senha do cliente: " . $excecao->getMessage();
+                echo "Erro na edição da senha do cliente: " . $excecao->getMessage();
                 
                 return false;
 
@@ -281,7 +282,6 @@
                 
                 if ($resultadoConsulta > 0) {
                     
-                    echo "<br>Cliente excluido com sucesso.";
 
                     return $resultadoConsulta;
 
@@ -292,7 +292,7 @@
                 }
 
 
-            } catch (PDOException $excecao) {
+            } catch (Exception $excecao) {
 
                 echo "<br>Erro na exclusão do cliente: " . $excecao->getMessage();
 
