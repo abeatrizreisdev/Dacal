@@ -76,6 +76,9 @@
 
             try {
 
+                // Adicionando os caracteres coringa '%' para buscar nomes que contenham a string fornecida.
+                $nomeProduto = "%" . $nomeProduto . "%"; 
+                
                 // Pegando os produtos com o nome parecido ao qual o usuário digitou.
                 $sql = "SELECT * FROM {$this->tabela} WHERE nomeProduto LIKE :nomeProduto";
 

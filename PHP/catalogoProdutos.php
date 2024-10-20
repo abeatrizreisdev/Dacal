@@ -119,7 +119,7 @@
 
             <div class="containerPesquisar">
                     <input type="text" id="buscarProdutoNome" placeholder="Digite o nome do produto.">
-                    <button onclick="buscarProdutoPorId()">Buscar</button>
+                    <button onclick="buscarProdutoPorNome()">Buscar</button>
             </div>
             
             <nav>
@@ -146,6 +146,7 @@
     <script src="../JS/scriptsParaPagCatalogoProdutos/verificarStatusEdicaoProduto.js"></script>
     <script src="../JS/scriptsParaPagCatalogoProdutos/excluirProduto.js"></script>
     <script src="../JS/scriptsParaPagCatalogoProdutos/carregarProdutos.js"></script>
+    <script src="../JS/buscarProdutoPorNome.js"></script>
 
 </body>
 

@@ -98,8 +98,8 @@
                     <div id="passo1" class="conteudoPassoAPasso">
 
                         <div class="containerPesquisar">
-                            <input type="text" id="buscarProdutoId" placeholder="Digite o código do produto">
-                            <button onclick="buscarProdutoPorId()">Buscar</button>
+                            <input type="text" id="buscarProdutoNome" placeholder="Digite o nome do produto">
+                            <button onclick="buscarProdutoPorNome()">Buscar</button>
                         </div>
                         <nav>
                             <ul class="containerCategorias">
@@ -140,8 +140,10 @@
                                     $quantidadeTotal = 0; // Definir a variável $quantidadeTotal
 
                                     foreach ($orcamento->getProdutos() as $produto) {
+
                                         $quantidade = $orcamento->getQuantidadeProdutos()[$produto->getId()];
                                         $quantidadeTotal += $quantidade; // Calcular a quantidade total
+                                        
                                         echo "<div class='produto'>
                                                 <p class='produto-nome'>Produto: " . htmlspecialchars($produto->getNome()) . "</p>
                                                 <p class='produto-categoria'>Categoria: " . htmlspecialchars($produto->getCategoria()) . "</p>
