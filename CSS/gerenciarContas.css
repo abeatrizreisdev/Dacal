@@ -344,8 +344,8 @@ copiar e colar a partir daqui no csss de la
     /* Ajusta a posição centralizada */
     background-color: #a6a6a6;
     /* Cor de fundo do pop-up */
-    height: 50vh;
-    width: 50vw;
+    height: 85vh;
+    width: 60vw;
     /* Espaçamento interno */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     /* Sombra para o pop-up */
@@ -396,6 +396,7 @@ copiar e colar a partir daqui no csss de la
     justify-content: space-evenly;
 }
 
+
 .labelOne{
     display: flex;
     flex-direction: column;
@@ -417,11 +418,38 @@ copiar e colar a partir daqui no csss de la
 
 .input{
     height: 4vh;
-    width: 15vw;
+    width: 17vw;
 }
-.Endereco{
+.inputE{
     height: 4vh;
-    width: 48vw;
+    width: 42vw;
+}
+.inputsAPI{
+    height: 4vh;
+    width: 10vw;
+    border: 0.5vh solid;
+}
+
+.classeEndereco{
+}
+.logradouro {
+    width: 30vw;
+    height: 4vh;
+}
+
+.numeroEndereco {
+    width: 4vw;
+    height: 4vh;
+}
+
+.bairro {
+    width: 22vw;
+    height: 4vh;
+}
+
+.cep {
+    width: 12vw;
+    height: 4vh;
 }
 
 .fecharBtn {
@@ -441,9 +469,6 @@ copiar e colar a partir daqui no csss de la
     background-color: #d32f2f;  /* Cor de fundo ao passar o mouse por cima */
     cursor: pointer;
   }
-
-
-
 
 
 
