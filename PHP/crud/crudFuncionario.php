@@ -31,7 +31,7 @@
 
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro no cadastro do funcionário: " . $excecao->getMessage();
+                echo "Erro no cadastro do funcionário: " . $excecao->getMessage();
 
                 return false;
 
@@ -120,7 +120,7 @@
 
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
+                echo "Erro na busca de informações do funcionário: " . $excecao->getMessage();
                 return null;
                 
             }
@@ -147,7 +147,7 @@
 
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro na busca de informações dos funcionários: " . $excecao->getMessage();
+                echo "Erro na busca de informações dos funcionários: " . $excecao->getMessage();
 
                 return null;
 

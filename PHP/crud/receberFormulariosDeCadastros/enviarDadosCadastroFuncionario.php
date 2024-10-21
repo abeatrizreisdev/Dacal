@@ -1,24 +1,28 @@
-<?php 
-
+<?php
     require "../../conexaoBD/conexaoBD.php";
     require "../crudFuncionario.php";
     require "../../sessao/sessao.php";
     require "../../entidades/funcionario.php";
-    require "../conexaoBD/configBanco.php";
+    require "../../conexaoBD/configBanco.php";
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
     $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: BD_HOST);
-    $conexao->setPortaBD(porta: BD_PORTA);
-    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
-    $conexao->setSenhaBD(senha: BD_PASSWORD);
-    $conexao->setUsuarioBD(user: BD_USERNAME);
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
-
     $crudFuncionario = new CrudFuncionario($conexao);
 
+    header('Content-Type: application/json'); // Define o cabeçalho JSON
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os as suas variáveis.
+
+        // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os às suas variáveis.
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
         $email = $_POST['email'];
@@ -29,7 +33,7 @@
         $bairro = $_POST['bairro'];
         $cep = $_POST['cep'];
         $estado = $_POST['estado'];
-        $cidade = $_POST['cidade'];
+        $cidade = $_POST['municipio'];
         $numeroEndereco = $_POST['numeroEndereco'];
 
         try {
@@ -51,27 +55,39 @@
             $funcionario->setNumeroEndereco($numeroEndereco);
 
             // Enviando os dados do funcionário que serão cadastrados na tabela Pessoa no banco de dados.
-            $cadastroRealizado = $crudFuncionario->cadastrarFuncionario(['nome' => $funcionario->getNome(), 'email' => $funcionario->getEmail(), 'senha' => $funcionario->getSenha(), 'telefone' => $funcionario->getTelefone(), 'tipoConta' => $funcionario->getTipoConta(), 'cpf' => $funcionario->getCpf(), 'estado' => $funcionario->getEstado(), 'cidade' => $funcionario->getCidade(), 'bairro' => $funcionario->getBairro(), 'logradouro' => $funcionario->getLogradouro(), 'cep' => $funcionario->getCep()]);
+            $cadastroRealizado = $crudFuncionario->cadastrarFuncionario([
+                'nome' => $funcionario->getNome(),
+                'email' => $funcionario->getEmail(),
+                'senha' => $funcionario->getSenha(),
+                'telefone' => $funcionario->getTelefone(),
+                'tipoConta' => $funcionario->getTipoConta(),
+                'cpf' => $funcionario->getCpf(),
+                'estado' => $funcionario->getEstado(),
+                'cidade' => $funcionario->getCidade(),
+                'bairro' => $funcionario->getBairro(),
+                'logradouro' => $funcionario->getLogradouro(),
+                'cep' => $funcionario->getCep()
+            ]);
 
             // Se o cadastro foi efetuado com sucesso, então entrará nessa condicional pois será retornado true.
             if ($cadastroRealizado) {
 
-                // Vai direcionar o usuário para a página de login.
-                header("Location: .../homeFuncionario.php");
-                exit();
+                echo json_encode(['sucesso' => true, 'mensagem' => 'Funcionário cadastrado com sucesso.']);
 
-            } 
+            } else {
 
-        } catch(Exception $excecao) {
+                echo json_encode(['erro' => true, 'mensagem' => 'Erro ao cadastrar o funcionário.']);
 
-            echo "Erro ao cadastrar o funcionário: " . $excecao->getMessage();
+            }
+
+        } catch (Exception $excecao) {
+
+            echo json_encode(['erro' => true, 'mensagem' => 'Erro ao cadastrar o funcionário: ' . $excecao->getMessage()]);
 
         }
 
     } else {
 
-        echo 'Requisição inválida.';
+        echo json_encode(['erro' => true, 'mensagem' => 'Requisicao inválida.']);
 
     }
-
-?>

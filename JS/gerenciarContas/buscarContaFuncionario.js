@@ -22,20 +22,22 @@ function buscarFuncionarioPorCpf() {
     fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
         .then(resposta => resposta.json())
         .then(dados => {
+
             if (dados && dados.nome) {
                 exibirFuncionario(dados, container);
             } else {
                 mensagemErro.textContent = 'Funcionário(a) não encontrado(a).';
             }
+
         })
         .catch(erro => {
+
             mensagemErro.textContent = 'Erro ao buscar os dados do funcionário.';
             console.error('Erro ao buscar os dados do funcionário:', erro);
+
         });
 }
 
-
-// Função para buscar todos os funcionários cadastrados.
 function buscarTodosFuncionarios() {
 
     const container = document.getElementById('container-funcionarios');
@@ -45,10 +47,11 @@ function buscarTodosFuncionarios() {
 
     fetch(`../PHP/crud/retornarDados/retornarTodosFuncionarios.php`)
         .then(resposta => {
+
+           // console.log('Resposta bruta:', resposta); // log de depuração de erro.
+
             if (!resposta.ok) {
-
                 throw new Error('Erro na resposta do servidor');
-
             }
 
             return resposta.json();
@@ -73,39 +76,55 @@ function buscarTodosFuncionarios() {
             mensagemErro.textContent = 'Nenhum funcionário cadastrado no sistema.';
 
         });
-
 }
 
-// Função para exibir informações de um funcionário.
 function exibirFuncionario(funcionario, container) {
 
     const div = document.createElement('div');
+
     div.classList.add('funcionario');
+
     div.innerHTML = `
-            <div class="perfil">
+        <div class="perfil">
             <div class="perfilAjustar">
-            <img src="../IMAGENS/HomeEmpresa/imgUser.png" id=perfilImg>
-            <div class="infoPerfil">
-            <p class="perfilFuncionario">${funcionario.nome}</p>
-            <button class ="btnExcluir" onclick="excluirPerfil(${funcionario.id})">Excluir Conta</button>
-            <button class ="btnEditar" onclick="editarPerfil(${funcionario.cpf})">Editar Perfil</button>
+                <img src="../IMAGENS/HomeEmpresa/imgUser.png" id="perfilImg">
+                <div class="infoPerfil">
+                    <p class="perfilFuncionario">${funcionario.nome}</p>
+                    <button class="btnExcluir" onclick="excluirPerfil(${funcionario.id})">Excluir Conta</button>
+                    <button class="btnEditar" onclick="editarPerfil('${funcionario.cpf}')">Editar Perfil</button>
+                </div>
             </div>
-            </div>
-            </div>
-        `;
+        </div>
+    `;
+
     container.appendChild(div);
 
-};
+}
+
 
 // Função para navegar até a página de edição do funcionário.
 function editarPerfil(cpf) {
 
+    if (!cpf || cpf.length === 0) {
+        console.error('CPF inválido:', cpf);
+        return;
+    }
+
     fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
-        .then(resposta => resposta.json())
+        .then(resposta => {
+            if (!resposta.ok) {
+                throw new Error('Erro na resposta do servidor');
+            }
+            return resposta.json(); 
+        })
         .then(dados => {
-
+            
+            if (dados.error) {
+                console.error('Erro:', dados.error);
+                return;
+            }
+           // console.log('Dados do funcionário:', dados); // Dados convertidos de JSON
             const url = new URL('../Dacal/PHP/editarFuncionario.php', window.location.origin);
-
             url.searchParams.set('idFuncionario', dados.id);
             url.searchParams.set('nomeFuncionario', dados.nome);
             url.searchParams.set('cpfFuncionario', dados.cpf);
@@ -117,18 +136,15 @@ function editarPerfil(cpf) {
             url.searchParams.set('bairroFuncionario', dados.bairro);
             url.searchParams.set('logradouroFuncionario', dados.logradouro);
             url.searchParams.set('cepFuncionario', dados.cep);
-
-
+           // console.log('URL de redirecionamento:', url.toString());
             window.location.href = url.toString();
-
         })
         .catch(erro => {
-
-            console.error('Erro ao buscar os dados do funcionário:', erro); // Log para depuração.
-
+            console.error('Erro ao buscar os dados do funcionário:', erro);
         });
+}
 
-};
+
 
 function excluirPerfil(id) {
 

@@ -27,8 +27,8 @@
             if ($funcionarioEncontrado != null) {
 
                 // Retorna os dados em formato JSON para o front.
-                header('Content-Type: application/json');
-                echo json_encode($funcionarioEncontrado);
+               header('Content-Type: application/json');
+               echo json_encode($funcionarioEncontrado);
 
             } else {
 

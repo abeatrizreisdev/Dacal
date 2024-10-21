@@ -30,8 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function obterParametrosDaUrl() {
+
         const parametros = new URLSearchParams(window.location.search);
-        return {
+        
+        const dados = {
             id: parametros.get('idFuncionario'),
             nome: parametros.get('nomeFuncionario'),
             cpf: parametros.get('cpfFuncionario'),
@@ -44,10 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
             logradouro: parametros.get('logradouroFuncionario'),
             cep: parametros.get('cepFuncionario')
         };
+
+        return dados;
+
     }
 
     function preencherCamposDeEdicao() {
+
         const dados = obterParametrosDaUrl();
+        
         document.getElementById('inputId').value = dados.id;
         document.getElementById('inputNome').value = dados.nome;
         document.getElementById('inputCpf').value = formatarCPF(dados.cpf);
@@ -60,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('inputLogradouro').value = dados.logradouro;
         document.getElementById('inputCep').value = formatarCEP(dados.cep);
         document.getElementById('idOcultoFunc').value = dados.id;
+
     }
 
     // Função para excluir perfil
@@ -72,38 +80,56 @@ document.addEventListener('DOMContentLoaded', function() {
             body: formData
         })
         .then(resposta => {
+
             if (!resposta.ok) {
                 throw new Error('Erro na requisição');
             }
+
             return resposta.text(); // Obter texto para depuração
+
         })
         .then(texto => {
+
             console.log('Resposta do servidor:', texto); // Exibir resposta no console
             try {
+
                 const dados = JSON.parse(texto); // Tentar converter para JSON
+
                 if (dados.status === 'success') {
+
                     toastr.success(dados.message);
                     setTimeout(() => {
                         window.location.href = '../PHP/gerenciarContas.php';
                     }, 2000);
                 } else {
+
                     toastr.error(dados.message);
+
                 }
+
             } catch (erro) {
+
                 console.error('Erro ao analisar JSON:', erro);
                 toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
+
             }
+
         })
         .catch(error => {
+
             toastr.error('Ocorreu um erro ao excluir a conta');
             console.error('Erro:', error);
+
         });
     }
 
     document.getElementById('botaoExcluirConta').addEventListener('click', function() {
+
         const idFuncionario = document.getElementById('inputId').value;
         excluirPerfil(idFuncionario);
+
     });
 
     preencherCamposDeEdicao();
+
 });
