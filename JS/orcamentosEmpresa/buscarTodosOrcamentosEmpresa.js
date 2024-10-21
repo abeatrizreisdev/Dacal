@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         Status: ${orcamento.status}, 
                         Quantidade total de itens: ${orcamento.quantidadeTotal}
                         </li>
-                        <a href='../PHP/verMaisInfoDoOrcamentoEmpresa.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>`;
+                        <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>`;
 
                 });
 

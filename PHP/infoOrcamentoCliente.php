@@ -94,7 +94,7 @@
             
             <div id="detalhesOrcamento">Carregando...</div>
             
-            <script src="../JS/scriptsParaPaginaDeOrcamentosEmpresa/verInfoDoOrcamentoEmpresa.js"></script>
+            <script src="../JS/orcamentosEmpresa/verInfoDoOrcamentoEmpresa.js"></script>
         
         </section>
     </div>

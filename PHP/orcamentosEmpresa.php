@@ -97,7 +97,7 @@ $sessaoCliente = new Sessao();
         </section>
     </div>
 
-    <script src="../JS/scriptsParaPaginaDeOrcamentosEmpresa/buscarTodosOrcamentosEmpresa.js"></script>
+    <script src="../JS/orcamentosEmpresa/buscarTodosOrcamentosEmpresa.js"></script>
 </body>
 
 </html>
