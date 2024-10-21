@@ -111,11 +111,9 @@
         }
 
         document.getElementById('formEditarStatus').addEventListener('submit', function(event) {
-
             event.preventDefault(); // Impede o envio padrão do formulário.
-
             const formData = new FormData(this);
-
+        
             fetch('../PHP/editarOrcamento/editarStatusOrcamento.php', {
                 method: 'POST',
                 body: formData
@@ -125,20 +123,23 @@
 
                 if (dados.sucesso) {
 
-                    document.getElementById('mensagemSucesso').textContent = 'Status do orçamento atualizado com sucesso.';
+                    toastr.success(dados.mensagem || 'Status do orçamento atualizado com sucesso.');
+                    
+                    setTimeout(() => {
+                        window.location.href = "gerenciarOrcamentos.php";
+                    }, 2000);
 
                 } else {
 
-                    document.getElementById('mensagemErro').textContent = dados.mensagem || 'Erro ao atualizar status do orçamento.';
+                    toastr.error(dados.mensagem || 'Erro. O status do orçamento não foi modificado.');
 
                 }
-
             })
             .catch(erro => {
 
                 console.error('Erro:', erro);
-                document.getElementById('mensagemErro').textContent = 'Erro ao atualizar status do orçamento. Por favor, tente novamente mais tarde.';
-                
+                toastr.error('Erro ao atualizar status do orçamento. Por favor, tente novamente mais tarde.');
+
             });
 
         });
