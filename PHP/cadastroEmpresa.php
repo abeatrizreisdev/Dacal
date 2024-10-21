@@ -53,7 +53,6 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                             <input type="text" id="telefone" name="telefone" class="input" required>
                         </div>
                     </div>
-                    <br>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Email</p>
