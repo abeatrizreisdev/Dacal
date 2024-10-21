@@ -104,7 +104,7 @@ function editarPerfil(cpf) {
         .then(resposta => resposta.json())
         .then(dados => {
 
-            const url = new URL('../Dacal/PHP/editarViaAdmContaFuncionario.php', window.location.origin);
+            const url = new URL('../Dacal/PHP/editarFuncionario.php', window.location.origin);
 
             url.searchParams.set('idFuncionario', dados.id);
             url.searchParams.set('nomeFuncionario', dados.nome);
@@ -151,7 +151,7 @@ function excluirPerfil(id) {
                 if (dados.status === 'success') {
                     toastr.success(dados.message);
                     setTimeout(() => {
-                        window.location.href = '../PHP/visualizarContasCadastradas.php';
+                        window.location.href = '../PHP/gerenciarContas.php';
                     }, 2000);
                 } else {
                     toastr.error(dados.message);
