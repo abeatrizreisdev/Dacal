@@ -201,7 +201,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
     </div>
 
 
-    <script src="../JS/scriptsParaPagEditarViaAdmContaCliente/carregarDadosParaEditarContaCliente.js"></script>
+    <script src="../JS/editarCliente_adm/carregarDadosCliente.js"></script>
     
 </body>
 

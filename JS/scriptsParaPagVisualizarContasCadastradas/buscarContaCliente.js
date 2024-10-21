@@ -118,7 +118,7 @@
             .then(resposta => resposta.json())
             .then(dados => {
 
-                const url = new URL('../Dacal/PHP/editarViaAdmContaCliente.php', window.location.origin);
+                const url = new URL('../Dacal/PHP/editarContaEmpresa.php', window.location.origin);
 
                 url.searchParams.set('idEmpresa', dados.idCliente);
                 url.searchParams.set('nomeEmpresa', dados.nomeEmpresa);
@@ -155,32 +155,50 @@
             body: formData
         })
         .then(resposta => {
+
             if (!resposta.ok) {
+
                 throw new Error('Erro na requisição');
+
             }
+
             return resposta.text(); // Obter texto para depuração
+
         })
         .then(texto => {
-            console.log('Resposta do servidor:', texto); // Exibir resposta no console
+
+
             try {
+
                 const dados = JSON.parse(texto); // Tentar converter para JSON
                 if (dados.status === 'success') {
+
                     toastr.success(dados.message);
                     setTimeout(() => {
                         window.location.href = '../PHP/visualizarContasCadastradas.php';
                     }, 2000);
+
                 } else {
+
                     toastr.error(dados.message);
+
                 }
+
             } catch (erro) {
-                console.error('Erro ao analisar JSON:', erro);
+
+                //console.error('Erro ao analisar JSON:', erro);
                 toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
+
             }
+
         })
         .catch(error => {
-            toastr.error('Ocorreu um erro ao excluir a conta');
-            console.error('Erro:', error);
+
+            toastr.error('Ocorreu um erro ao excluir a conta.');
+            //console.error('Erro:', error);
+
         });
+
     }    
 
     
