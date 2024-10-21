@@ -159,7 +159,7 @@ $contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
                 switch ($contaAutenticada ) {
 
-                    case !'admin' or !'funcionario':
+                    case !'admin' && !'funcionario':
 
                         echo "<form method='post' class='formOrcamento' id='formOrcamento'>";
                         echo "<div class='inputQuantidadeContainer'>";

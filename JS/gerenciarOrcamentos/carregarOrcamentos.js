@@ -35,7 +35,7 @@
                             Data: ${formatarData(orcamento.dataCriacao)}, 
                             Status: ${orcamento.status}, 
                             Quantidade total de itens: ${orcamento.quantidadeTotal}</li>
-                            <a href='../PHP/verInformacoesOrcamentoFuncAdm.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
+                            <a href='../PHP/detalhesOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
                             `;
 
 

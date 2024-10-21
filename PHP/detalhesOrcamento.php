@@ -93,7 +93,7 @@
             <h2>Detalhes do Orçamento</h2>
             <div id="detalhesOrcamento">Carregando...</div>
             
-            <script src="../JS/scriptsParaPagVerInformacoesOrcamentoFuncAdm/carregarOrcamentoEspecifico.js"></script>
+            <script src="../JS/detalhesOrcamento/carregarOrcamentoEspecifico.js"></script>
         
         </section>
     </div>
