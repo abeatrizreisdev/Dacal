@@ -134,7 +134,7 @@
             
             <div id="containerProdutos">
                 <!-- Produtos serão carregados aqui -->
-                
+                 
             </div>
             
         </section>

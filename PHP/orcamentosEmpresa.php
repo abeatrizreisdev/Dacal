@@ -16,7 +16,7 @@ $sessaoCliente = new Sessao();
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
+    <link rel="stylesheet" href="../CSS/orcamentosEmpresa.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -79,7 +79,8 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
             <br>
-            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+            <a class="abas"
+                href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -88,12 +89,14 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
         </div>
-        <section class="quadrado">  
+        <section class="quadrado">
 
-            <div id="orcamentos"></div>
-            <input type="hidden" id="clienteId" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
-            <a href="realizarOrcamento.php"><button>Realizar Orcamento</button></a>
-
+            <div id="orcamentos">
+                <input type="hidden" id="clienteId" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
+                <div id="btn">
+                    <a href="realizarOrcamento.php"><button id="btnOrcamento">Realizar Orcamento</button></a>
+                </div>
+            </div>
         </section>
     </div>
 

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoCliente = new Sessao();
+$sessaoCliente = new Sessao();
 
 ?>
 
@@ -35,8 +35,8 @@
         <ul class="icons">
             <a href="./autenticacao/logout.php">
                 <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
             </a>
         </ul>
     </nav>
@@ -79,7 +79,8 @@
                 </div>
             </a>
             <br>
-            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+            <a class="abas"
+                href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -91,26 +92,29 @@
         <div class="quadrado">
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
-                    <p id="tituloPrincipal">Seja Bem Vinda, <strong><?php echo $sessaoCliente->getValorSessao('nome'); ?></strong> </p>
+                    <p id="tituloPrincipal">Seja Bem Vinda,
+                        <strong><?php echo $sessaoCliente->getValorSessao('nome'); ?></strong>
+                    </p>
                     <br>
-                    <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece os produtos para a
+                    <p id="descricao">É um prazer ter você aqui, somos a <strong>DACAL</strong>, a empresa que fornece
+                        os produtos para a
                         sua
                         empresa de forma automatizada, dando a liberdade que você precisa para fazer os pedidos quando
                         quiser e da forma que desejar.
                         <br>
                         Não sabe ainda como usar a nossa plataforma? Temos o tutorial logo abaixo:
                         <br>
-                        Na aba <strong>Cadastro</strong>, você terá acesso aos seus dados cadastrais como CNPJ, E-mail, Telefone,
+                        Na aba <strong>Meu perfil</strong>, você terá acesso aos seus dados cadastrais como CNPJ,
+                        E-mail, Telefone,
                         Endereço,
                         Senha
                         e também será possível fazer a atualização dos mesmos.<br>
-                        Na aba <strong>Orçamentos</strong>, você terá acesso a todos os orçamentos que já foram feitos pela sua empresa
+                        Na aba <strong>Orçamentos</strong>, você terá acesso a todos os orçamentos que já foram feitos
+                        pela sua empresa
                         nesse
                         site e será onde ira iniciar novos orçamentos.<br>
-                        Na aba <strong>Atendimento</strong>, você terá acesso a tickets que já tenha aberto na plataforma ou contato
-                        direto
-                        com
-                        algum funcionário da nossa empresa.
+                        Na aba <strong>Atendimento</strong>, você terá acesso a contatodireto com algum funcionário da
+                        nossa empresa.
                     </p>
                 </div>
             </div>
