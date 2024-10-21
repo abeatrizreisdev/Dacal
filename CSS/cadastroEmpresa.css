@@ -87,7 +87,7 @@ body {
 
 .inputAPI {
     height: 4vh;
-    width: 12vw;
+    width: 13vw;
     border: 0.5vh solid;
 }
 
@@ -114,6 +114,17 @@ body {
 
 #telefone {
     width: 15vw;
+}
+
+
+#email{
+    width: 20vw;
+
+}
+
+#senha{
+    width: 16vw;
+
 }
 
 #logradouro {

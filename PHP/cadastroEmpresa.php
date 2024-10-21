@@ -26,7 +26,8 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
 <body>
     <div id="homeGeral">
         <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
-        <form action="crud/receberFormulariosDeCadastros/enviarDadosCadastroCliente.php" method="post" id="formLogin" class="formularioLogin">
+        <form action="crud/receberFormulariosDeCadastros/enviarDadosCadastroCliente.php" method="post" id="formLogin"
+            class="formularioLogin">
             <div class="infoConta">
                 <div class="dadosGerais">
                     <br>
@@ -53,16 +54,17 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                         </div>
                     </div>
                     <br>
-                    <div class="parteGeral">
+                    <div class="infoGerais">
+                        <div class="parteGeral">
                             <p>Email</p>
                             <input type="text" id="email" name="email" class="input" required>
-                    </div>
-                    <div class="parteGeral">
+                        </div>
+                        <div class="parteGeral">
                             <p>Senha</p>
                             <input type="text" id="senha" name="senha" class="input" required>
+                        </div>
                     </div>
-
-                    <br>    
+                    <br>
                     <div class="endereço">
                         <p id="">Endereço</p>
                         <input type="text" id="estado" name="estado" class="inputAPI" required>
