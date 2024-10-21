@@ -148,11 +148,15 @@
 
 
     function excluirPerfilEmpresa(id) {
+
         const formData = new FormData();
         formData.append('idCliente', id);
+
         fetch('../PHP/excluirCliente/excluirCliente.php', {
+
             method: 'POST',
             body: formData
+
         })
         .then(resposta => {
 
@@ -171,11 +175,12 @@
             try {
 
                 const dados = JSON.parse(texto); // Tentar converter para JSON
+                
                 if (dados.status === 'success') {
 
                     toastr.success(dados.message);
                     setTimeout(() => {
-                        window.location.href = '../PHP/visualizarContasCadastradas.php';
+                        window.location.href = '../PHP/gerenciarContas.php';
                     }, 2000);
 
                 } else {
