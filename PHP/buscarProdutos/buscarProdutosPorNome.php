@@ -37,7 +37,7 @@ if (isset($_GET['produtoNome'])) {
                 echo "<div class='botoesProduto'>";
                 echo "<a class='botao' id='botaoVisualizar' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar" . "</button>" . "</a>";
                 echo "<a class='botao' id='botaoRemover'>" . "<button onclick='excluirProduto($idProduto)'>Remover" . "</button></a>";
-                echo "<a class='botao' id='botaoEditar' href='./editarProduto2.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
+                echo "<a class='botao' id='botaoEditar' href='./editarProduto.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
                 echo "</div>";
                 echo "</div>"; // Fechamento da div 'produtoEspecifico'
 

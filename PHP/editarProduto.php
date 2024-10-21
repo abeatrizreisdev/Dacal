@@ -76,8 +76,8 @@ if (isset($_GET['id'])) {
             </a>
             <?php if ($tipoContaAutenticada == "admin") { ?>
             <br>
-            <a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
+            <a class="abas" href="./gerenciarCOntas">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
                     <p class="descricaoAbas">Gerenciar contas</p>
