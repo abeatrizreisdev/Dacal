@@ -131,7 +131,7 @@
         </section>
     </div>
 
-    <script src="../JS/scriptCadastroDeProduto.js"></script>
+    <script src="../JS/cadastrarProduto/cadastroProduto.js"></script>
 
 </body>
 
