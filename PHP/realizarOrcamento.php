@@ -67,7 +67,7 @@
                 </div>
             </a>
             <br>
-            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+            <a class="abas" href="orcamentosEmpresa.php">
                 <img src="../IMAGENS/HomeEmpresa/imgOrcamento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Orçamentos</p>
@@ -188,8 +188,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="../JS/scriptParaPasso2DeOrcamento/metodosUtilizadosNosPassosDeOrcamento.js"></script>
-        <script src="../JS/realizarOrcamento.js"></script>
+        <script src="../JS/realizarOrcamento/metodosDosPassos.js"></script>
         
 
 </body>
