@@ -1,5 +1,5 @@
-// Função para verificar o status de edição
-function verificarStatusCadastroProduto() {
+// Função para verificar o status de cadastro de cliente.
+function verificarStatusCadastroCliente() {
 
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('statusCadastroCliente');
@@ -24,5 +24,5 @@ function verificarStatusCadastroProduto() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    verificarStatusCadastroProduto()
+    verificarStatusCadastroCliente()
 });
