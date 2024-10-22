@@ -1,46 +1,42 @@
 <?php
-require '../conexaoBD/conexaoBD.php'; 
-require "../crud/crudProduto.php";
-require "../conexaoBD/configBanco.php";
-require "../sessao/sessao.php";
+    require '../conexaoBD/conexaoBD.php';
+    require "../crud/crudProduto.php";
+    require "../conexaoBD/configBanco.php";
+    require "../sessao/sessao.php";
 
-$conexao = new ConexaoBD();
-$conexao->setHostBD(BD_HOST);
-$conexao->setPortaBD(BD_PORTA);
-$conexao->setEschemaBD(BD_ESCHEMA);
-$conexao->setSenhaBD(BD_PASSWORD);
-$conexao->setUsuarioBD( BD_USERNAME);
-$conexao->getConexao(); // Iniciando a conexão com o banco.
-$sessao = new Sessao();
-$crudProduto = new CrudProduto($conexao);
+    $conexao = new ConexaoBD();
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
+    $conexao->getConexao();
 
-// Habilitar exibição de erros na página
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    $sessao = new Sessao();
+    $crudProduto = new CrudProduto($conexao);
 
-//echo "DEBUG: Entrou no script PHP<br>";
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-if (isset($_GET['categoria_id'])) {
-    $categoria_id = $_GET['categoria_id'];
-   // echo "DEBUG: Categoria ID recebida: " . $categoria_id . "<br>";
-    $produtos = $crudProduto->buscarProdutosPorCategoria($categoria_id);
-    header('Content-Type: application/json');
-    
-    if (is_array($produtos) && count($produtos) > 0) {
-        //echo "DEBUG: Produtos encontrados: " . count($produtos) . "<br>";
-        // Codificar imagem em base64
-        foreach ($produtos as &$produto) {
-            $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
+    if (isset($_GET['categoria_id'])) {
+        $categoria_id = $_GET['categoria_id'];
+        $produtos = $crudProduto->buscarProdutosPorCategoria($categoria_id);
+        header('Content-Type: application/json');
+        
+        $contaAutenticada = $sessao->getValorSessao('tipoConta');
+
+        if (is_array($produtos) && count($produtos) > 0) {
+            foreach ($produtos as &$produto) {
+                $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
+            }
+            // Adicionar o tipo de conta ao JSON retornado
+            $response = ['produtos' => $produtos, 'tipoConta' => $contaAutenticada];
+            echo json_encode($response);
+        } else {
+            echo json_encode([]);
         }
-        // Remova mensagens de depuração da resposta JSON
-        echo json_encode($produtos);
     } else {
-        //echo "DEBUG: Nenhum produto encontrado<br>";
         echo json_encode([]);
     }
-} else {
-   // echo "DEBUG: Nenhum ID de categoria fornecido<br>";
-    echo json_encode([]);
-}
 ?>
