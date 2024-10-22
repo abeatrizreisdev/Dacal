@@ -92,9 +92,10 @@
         </div>
         <section class="quadrado">
             
+            <!-- Div responsável por exibir dentro dela as informações de um orçamento especifico que o arquivo "detalhesOrcamento.js irá renderizar.  -->
             <div id="detalhesOrcamento">Carregando...</div>
             
-            <script src="../JS/orcamentosEmpresa/verInfoDoOrcamentoEmpresa.js"></script>
+            <script src="../JS/orcamentosEmpresa/detalhesOrcamento.js"></script>
         
         </section>
     </div>

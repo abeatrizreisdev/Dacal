@@ -22,10 +22,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (Array.isArray(dadosOrcamento)) { // Verifica se a resposta é um array com os orçamentos.
 
+                // Titulo da página, mas pode ser retirado se não tiver necessidade.
+                // Mas a tag "ul" precisa continuar.
                 let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
                 // Itera sobre cada orçamento no array.
                 dadosOrcamento.forEach(orcamento => {
 
+                    // Exibindo os elementos html com os dados dos orçamentos.
+                    // Para cada orçamento encontrado será criado esses elementos.
                     saida += `<li>
                         Orçamento ${orcamento.numeroOrcamento}: 
                         Cliente: ${orcamento.nomeCliente}, 
@@ -39,16 +43,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 saida += "</ul>";
-                // Insere a lista de orçamentos no elemento HTML com id 'orcamentos'.
+
+                // Insere a lista de orçamentos no elemento HTML da página "orcamentosEmpresa.php" com id 'orcamentos'.
                 document.getElementById('orcamentos').innerHTML = saida;
 
             } else {
 
-                // Se a resposta não for um array, mostra uma mensagem de erro.
+                // Se a resposta não for um array com orçamentos, mostra uma mensagem de erro.
                 document.getElementById('orcamentos').innerHTML = `<p>${dadosOrcamento.mensagem || 'Erro ao carregar orçamentos.'}</p>`;
 
             }
 
         })
-        .catch(erro => console.error('Erro:', erro)); // Lida com erros na solicitação.
+        .catch(erro => 
+            console.error('Erro:', erro)
+        ); // Lida com erros na solicitação, para encontrar possíveis problemas no console do navegador.
+        
 });

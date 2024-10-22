@@ -90,17 +90,20 @@ $sessaoCliente = new Sessao();
             </a>
         </div>
         <section class="quadrado">
-
+            
+            <!-- Este é o container, a div que será responsável por exibir dentro dela todos os orçamentos da empresa. Sendo que o html dos orçamentos serão gerados pelo js. -->
             <div id="orcamentos">
                 <input type="hidden" id="clienteId" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
-                <div id="btn">
+                
+            </div>
+
+            <div id="btn">
                     <a href="realizarOrcamento.php"><button id="btnOrcamento">Realizar Orcamento</button></a>
-                </div>
             </div>
         </section>
     </div>
 
-    <script src="../JS/orcamentosEmpresa/buscarTodosOrcamentosEmpresa.js"></script>
+    <script src="../JS/orcamentosEmpresa/carregarOrcamentos.js"></script>
 </body>
 
 </html>

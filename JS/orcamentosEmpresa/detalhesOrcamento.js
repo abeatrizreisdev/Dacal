@@ -65,6 +65,8 @@
             .then(resposta => resposta.json())
             .then(dadosOrcamento => {
 
+                // Elementos de html que irá exibir todos os dados de um orçamento especifico.
+                // Para estilizar é só inserir class ou id, normalmente.
                 let detalhes = `
                     <p>Número do Orçamento: ${dadosOrcamento.numeroOrcamento}</p>
                     <p>Cliente: ${dadosOrcamento.nomeCliente}</p>
@@ -95,6 +97,7 @@
 
                 detalhes += `</ul>`;
 
+                // Botão para retornar para a página de orçamentos.
                 detalhes += `<a href='../PHP/orcamentosEmpresa.php'> Voltar </>`
 
                 document.getElementById('detalhesOrcamento').innerHTML = detalhes;
