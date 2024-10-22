@@ -1,320 +1,380 @@
-// Função para buscar produto pelo seu id/código do produto.
-function buscarProdutoPorId() {
-
-    const produtoId = document.getElementById('buscarProdutoId').value.trim();
-
-    if (produtoId) {
-
-        fetch(`../PHP/buscarProdutos/buscarProdutoPorId.php?produto_id=${produtoId}`)
-            .then(resposta => resposta.text())
-            .then(dados => {
-
-                document.getElementById('containerProdutos').innerHTML = dados;
-
-            })
-            .catch(erro => {
-
-                console.error('Erro ao buscar produto:', erro);
-                toastr.error('Erro ao buscar produto.');
-
-            });
-    } else {
-
-        toastr.warning('Por favor, insira um ID de produto válido.');
-
-    }
-
-};
-
-// Função para buscar produto pelo nome do produto.
-function buscarProdutoPorNome() {
-
-    const produtoNome = document.getElementById('buscarProdutoNome').value.trim();
-
-    if (produtoNome) {
-
-        fetch(`../PHP/buscarProdutos/buscarProdutosPorNome.php?produtoNome=${produtoNome}`)
-            .then(resposta => resposta.text())
-            .then(dados => {
-
-                document.getElementById('containerProdutos').innerHTML = dados;
-
-            })
-            .catch(erro => {
-
-                console.error('Erro ao buscar produto:', erro);
-                toastr.error('Erro ao buscar produto.');
-
-            });
-    } else {
-
-        toastr.warning('Por favor, insira um nome de produto válido.');
-
-    }
-
-};
-
-// Função para recalcular e atualizar dinamicamente o valor total e a quantidade total
-function atualizarTotais() {
-
-    const totalElemento = document.getElementById('total');
-    const quantidadeTotalElemento = document.getElementById('quantidadeTotal');
     
-    let total = 0;
-    let quantidadeTotal = 0;
+     // Função para cancelar o orçamento e redirecionar para a página inicial
+    function cancelarOrcamento() {
 
-    document.querySelectorAll('.produto').forEach(produto => {
+        fetch('../PHP/excluirOrcamento/excluirOrcamento.php', {
+            method: 'POST'
+        })
+        .then(resposta => resposta.json())
+        .then(dados => {
 
-        const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+            if (dados.success) {
 
-        if (produtoQuantidadeInput) {
+                toastr.success('Orçamento cancelado com sucesso!');
 
-            const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
-            const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
-            total += produtoQuantidade * produtoValor;
-            quantidadeTotal += produtoQuantidade;
+                setTimeout(() => {
+                    window.location.href = 'homeEmpresa.php';
+                }, 1500);
+
+            } else {
+
+                toastr.error('Erro ao cancelar o orçamento.');
+
+            }
+        })
+        .catch(error => {
+
+            console.error('Erro ao cancelar o orçamento:', error);
+            toastr.error('Erro ao cancelar o orçamento.');
+
+        });
+
+    };
+
+    // Função que exibe os dados do orçamento no passo 2 para o usuário.
+    function criarProdutoHTMLPasso2(produto) {
+
+        return `
+                <div class='produto' id='produto-${produto.id}'>
+                    <p class='produto-nome'>Produto: ${produto.nome}</p>
+                    <p class='produto-categoria'>Categoria: ${produto.categoria}</p>
+                    <img class='produto-imagem' src='data:image/jpeg;base64,${produto.imagem}' alt='Produto'>
+                    <p class='produto-quantidade'>
+                        Quantidade:
+                        <button type='button' onclick='alterarQuantidade(${produto.id}, -1)'>-</button>
+                        <input type='number' name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}' min='1'>
+                        <button type='button' onclick='alterarQuantidade(${produto.id}, 1)'>+</button>
+                    </p>
+                    <p class='produto-valor'>Valor unitário: R$ <span class='valor'>${produto.valor}</span></p>
+                    <button class='btn-remover' onclick="removerProduto('${produto.id}')">Remover Produto</button>
+                    <button class='btn-visualizar' onclick="visualizarProduto('${produto.id}')">Visualizar Produto</button>
+                </div>`;
+
+    };
+     
+    // Função que exibe os dados do orçamento para o usuário e também contém os inputs com os dados do orçamento para enviar para o back-end processar o orçamento realizado.
+    function criarFormProdutoHTMLPasso3(produto) {
+
+        return `
+            <div class='produto'>
+                <p class='produto-nome'>Produto: ${produto.nome}</p>
+                <p class='produto-categoria'>Categoria: ${produto.categoria}</p>
+                <img class='produto-imagem' src='data:image/jpeg;base64,${produto.imagem}' alt='Produto'>
+                <p class='produto-quantidade'>
+                    Quantidade:
+                    <input type='number' name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}' min='1' required readonly>
+                </p>
+                <p class='produto-valor'>Valor unitário: R$ ${produto.valor}</p>
+                <input type='hidden' name='produtos[]' value='${produto.nome}'>
+                <input type='hidden' name='valores[]' value='${produto.valor}'>
+                <input type='hidden' name='produtoIds[]' value='${produto.id}'>
+            </div>`;
+
+    };
+    
+    
+    // Função que exibe os elementos finais do html do passo 2 e 3.
+    function exibirOrcamento() {
+
+        fetch('../PHP/exibirOrcamento/exibirOrcamento.php')
+            .then(response => response.json())
+            .then(data => {
+
+                const container = document.getElementById('orcamentoContainer');
+                const formContainer = document.getElementById('formOrcamentoContainer');
+    
+                if (data.message) {
+
+                    container.innerHTML = `<p>${data.message}</p>`;
+                    formContainer.innerHTML = `<p>${data.message}</p>`;
+
+                } else if (data.produtos && Array.isArray(data.produtos)) {
+
+                    let htmlPasso2 = '';
+                    let formHtmlPasso3 = '';
+    
+                    data.produtos.forEach(produto => {
+
+                        htmlPasso2 += criarProdutoHTMLPasso2(produto);
+                        formHtmlPasso3 += criarFormProdutoHTMLPasso3(produto);
+
+                    });
+    
+                    htmlPasso2 += `
+                        <h3>Total: R$ <span id='total'>${data.total}</span></h3>
+                        <h3>Quantidade Total de Itens: <span id='quantidadeTotal'>${data.quantidadeTotal}</span></h3>`;
+    
+                    formHtmlPasso3 += `
+                        <p class="produto-valor"> Valor Total: <span id="valorTotalSpan">R$ ${data.total}</span> </p>
+                        <h3>Quantidade Total de Itens: <span id="quantidadeTotalSpan">${data.quantidadeTotal}</span></h3>
+                        <input type="hidden" name="valorTotal" value="${data.total}">
+                        <input type="hidden" name="quantidadeTotal" value="${data.quantidadeTotal}">`;
+    
+                    container.innerHTML = htmlPasso2;
+                    formContainer.innerHTML = formHtmlPasso3;
+    
+                    // Adicionar evento de input aos inputs de quantidade no passo 2.
+                    document.querySelectorAll('.produto input[type="number"]').forEach(input => {
+
+                        input.addEventListener('input', (event) => {
+
+                            const produtoId = event.target.getAttribute('data-produto-id');
+                            alterarQuantidadeManual(produtoId);
+
+                        });
+                        
+                    });
+
+                } else {
+
+                    container.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
+                    formContainer.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
+
+                };
+
+            })
+            .catch(erro => {
+
+                console.error('Erro ao exibir o orçamento:', erro);
+                const container = document.getElementById('orcamentoContainer');
+                const formContainer = document.getElementById('formOrcamentoContainer');
+                container.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
+                formContainer.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
+
+            });
+
+    };
+    
+    // Função que atualiza dinamicamente a quantidade total de itens e o valor total do orçamento.
+    function atualizarTotais() {
+
+        let total = 0;
+        let quantidadeTotal = 0;
+    
+        document.querySelectorAll('.produto').forEach(produto => {
+
+            const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+
+            if (produtoQuantidadeInput) {
+
+                const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
+                const valorElemento = produto.querySelector('.valor');
+
+                if (valorElemento) {
+
+                    const produtoValor = parseFloat(valorElemento.textContent.trim());
+                    total += produtoQuantidade * produtoValor;
+                    quantidadeTotal += produtoQuantidade;
+    
+                    // Atualiza os inputs no passo 3
+                    const hiddenInputQuantidade = document.querySelector(`input[data-produto-id='${produtoQuantidadeInput.dataset.produtoId}'][name='quantidades[]']`);
+
+                    if (hiddenInputQuantidade) {
+
+                        hiddenInputQuantidade.value = produtoQuantidade;
+
+                    }
+                    
+                }
+
+            }
+
+        });
+    
+        const totalElemento = document.getElementById('total');
+        const quantidadeTotalElemento = document.getElementById('quantidadeTotal');
+    
+        if (totalElemento) {
+
+            totalElemento.textContent = total;
 
         };
 
-    });
+        if (quantidadeTotalElemento) {
 
-    totalElemento.textContent = total.toFixed(2);
-    quantidadeTotalElemento.textContent = quantidadeTotal;
+            quantidadeTotalElemento.textContent = quantidadeTotal;
 
-};
+        };
+    
+        atualizarTotaisPasso3(total, quantidadeTotal);
 
+    };
+    
+    
+    // Função que atualiza os valores do valor total do orçamento e a quantidade total de itens no passo 3.
+    function atualizarTotaisPasso3(total, quantidadeTotal) {
 
-function removerProduto(produtoId) {
+        // Atualiza os elementos de valor total e quantidade total no passo 3
+        const valorTotalSpan = document.getElementById('valorTotalSpan');
+        const quantidadeTotalSpan = document.getElementById('quantidadeTotalSpan');
+    
+        if (valorTotalSpan) {
 
-    fetch(`../PHP/arquivosParaRealizarOrcamento/removerProdutoOrcamento.php`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ produtoId: produtoId })
-    })
-    .then(respostaRequisicao => respostaRequisicao.json())
-    .then(dados => {
-
-        if (dados.success) {
-
-            toastr.success('Produto removido com sucesso!');
-            document.getElementById(`produto-${produtoId}`).remove();
-            atualizarTotais(); // Atualiza os totais após remover o produto
-
-            const totalElemento = document.getElementById('total');
-            let total = 0;
+            valorTotalSpan.textContent = total;
             
-            document.querySelectorAll('.produto').forEach(produto => {
+        };
 
-                const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
+        if (quantidadeTotalSpan) {
 
-                if (produtoQuantidadeInput) {
+            quantidadeTotalSpan.textContent = quantidadeTotal;
 
-                    const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
-                    const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
-                    total += produtoQuantidade * produtoValor;
-               
-                }
-            });
-
-            totalElemento.textContent = total.toFixed(2);
-        } else {
-
-            toastr.error('Erro ao remover produto: ' + dados.message);
-
-        }
-
-    })
-    .catch(erro => console.error('Erro ao remover produto:', erro));
-
-}
-
-
-
-function alterarQuantidade(produtoId, delta) {
-
-    const inputQuantidade = document.querySelector(`input[data-produto-id="${produtoId}"]`);
-    let quantidadeAtual = parseInt(inputQuantidade.value);
-    quantidadeAtual += delta;
-
-    if (quantidadeAtual < 1) quantidadeAtual = 1; // Garantir que a quantidade não seja menor que 1
-
-    inputQuantidade.value = quantidadeAtual;
-
-    // Atualiza a quantidade no backend
-    fetch('../PHP/arquivosParaRealizarOrcamento/editarQuantidadeProduto.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ produtoId: produtoId, quantidade: quantidadeAtual })
-    })
-    .then(resposta => resposta.json())
-    .then(dados => {
-        if (dados.success) {
-
-            atualizarTotais(); // Atualiza os totais após alterar a quantidade.
-            // Atualiza o valor total dinamicamente, conforme for alterando a quantidade do produto.
-
-            const valorProduto = parseFloat(document.querySelector(`#produto-${produtoId} .valor`).textContent.trim());
-            const totalElemento = document.getElementById('total');
-            let total = 0;
-            
-            document.querySelectorAll('.produto').forEach(produto => {
-
-                const produtoQuantidadeInput = produto.querySelector('input[data-produto-id]');
-
-                if (produtoQuantidadeInput) {
-                    const produtoQuantidade = parseInt(produtoQuantidadeInput.value);
-                    const produtoValor = parseFloat(produto.querySelector('.valor').textContent.trim());
-                    total += produtoQuantidade * produtoValor;
-                }
-
-            });
-
-            totalElemento.textContent = total.toFixed(2);
-
-        } else {
-
-            toastr.error('Erro ao atualizar a quantidade: ' + data.message);
-
-        }
-    })
-    .catch(error => console.error('Erro ao atualizar a quantidade:', error));
-}
-
-// Função para abrir o passo correspondente.
-function abrirPassoAPassoOrcamento(evento, nomeDoPassoAPassoCorrespondente) {
-
-    var indice, conteudoTabela, linksTabela;
-
-    // Pegando todos os elementos que possuem esssa classe.
-    conteudoTabela = document.getElementsByClassName("conteudoPassoAPasso");
-    // Iterando sobre cada um dos elementos que tem a classe "conteudoTabela".
-    for (indice = 0; indice < conteudoTabela.length; indice++) {
-        // E ocultando da tela o seu conteudo.
-        conteudoTabela[indice].style.display = "none";
-    }
-
-    // Pegando todos os elementos que tem essa classe.
-    linksTabela = document.getElementsByClassName("linksTabela");
-    // Iterando sobre todos os elementos que foram pegos com a classe "linksTabela".
-    for (indice = 0; indice < linksTabela.length; indice++) {
-        // E adcionando uma nova classe com o nome "ativo", para poder exibir o conteudo dela, o que significa que o cliente clicou naquele passo em especifico.
-        linksTabela[indice].className = linksTabela[indice].className.replace(" ativo", "");
-    }
-
-    document.getElementById(nomeDoPassoAPassoCorrespondente).style.display = "block";
-    evento.currentTarget.className += " ativo";
+        };
     
-}
+        // Atualiza os inputs de valor total e quantidade total no passo 3
+        const totalHiddenInput = document.querySelector(`input[name='valorTotal']`);
 
-// Função para cancelar o orçamento e redirecionar para a página inicial
-function cancelarOrcamento() {
+        if (totalHiddenInput && !isNaN(total)) {
 
-    fetch('../PHP/excluirOrcamento/excluirOrcamento.php', {
-        method: 'POST'
-    })
-    .then(resposta => resposta.json())
-    .then(dados => {
+            totalHiddenInput.value = total; // Assegurar que é um valor numérico
 
-        if (dados.success) {
-
-            toastr.success('Orçamento cancelado com sucesso!');
-
-            setTimeout(() => {
-                window.location.href = 'homeEmpresa.php';
-            }, 1500);
-
-        } else {
-
-            toastr.error('Erro ao cancelar o orçamento.');
-
-        }
-    })
-    .catch(error => {
-
-        console.error('Erro ao cancelar o orçamento:', error);
-        toastr.error('Erro ao cancelar o orçamento.');
-
-    });
-
-}
-
-function avancarParaPasso3() {
-
-    // Redirecionar para o passo 3 sem excluir o orçamento.
-    window.location.href = 'realizarOrcamento.php#passo3';
+        };
     
-}
+        const quantidadeTotalHiddenInput = document.querySelector(`input[name='quantidadeTotal']`);
 
-function voltarParaPasso2() {
+        if (quantidadeTotalHiddenInput && !isNaN(quantidadeTotal)) {
 
-    // Redirecionar para o passo 2 sem excluir o orçamento.
-    window.location.href = 'realizarOrcamento.php#passo2';
+            quantidadeTotalHiddenInput.value = quantidadeTotal; // Assegurar que é um valor numérico
 
-}
+        };
 
-function voltarParaPasso1() {
-
-    // Redirecionar para o passo 1 sem excluir o orçamento.
-    window.location.href = 'realizarOrcamento.php#passo1';
+    };
     
-}
-
-function visualizarProduto(produtoId) {
-    window.location.href = '../PHP/buscarProdutos/detalhesProduto.php?id=' + produtoId;
-}
-
-// Essa é a função responsável por exibir o conteudo de um dos 3 passo a passo de realização do orçamento, dependendo do passo que o usuário clicar.
-function abrirPassoAPasso(evento, nomeDoPassoAPassoCorrespondente) {
     
-    var indice, conteudoTabela, linksTabela;
+    // Função que atualiza dinamicamente os valores totais, caso o usuário digite manualmente a quantidade no input do passo 2 em vez de usar os botões.
+    function alterarQuantidadeManual(produtoId) {
+
+        const inputQuantidade = document.querySelector(`input[data-produto-id="${produtoId}"]`);
+        let novaQuantidade = parseInt(inputQuantidade.value);
+
+        if (novaQuantidade < 1) novaQuantidade = 1; // Garantir que a quantidade não seja menor que 1
+
+        inputQuantidade.value = novaQuantidade;
     
-    // Pegando todos os elementos que possuem esssa classe.
-    conteudoTabela = document.getElementsByClassName("conteudoPassoAPasso");
-
-    // Iterando sobre cada um dos elementos que tem a classe "conteudoTabela".
-    for (indice = 0; indice < conteudoTabela.length; indice++) {
-
-      // E ocultando da tela o seu conteudo.
-      conteudoTabela[indice].style.display = "none";
-
-    }
+        atualizarTotais(); // Atualiza os totais após alterar a quantidade
     
-    // Pegando todos os elementos que tem essa classe.
-    linksTabela = document.getElementsByClassName("linksTabela");
-
-    // Iterando sobre todos os elementos que foram pegos com a classe "linksTabela".
-    for (indice = 0; indice < linksTabela.length; indice++) {
-
-      // E adcionando uma nova classe com o nome "ativo", para poder exibir o conteudo dela, o que significa que o cliente clicou naquele passo em especifico.
-      linksTabela[indice].className = linksTabela[indice].className.replace(" ativo", "");
-
-    }
-    
-    document.getElementById(nomeDoPassoAPassoCorrespondente).style.display = "block";
-
-    evento.currentTarget.className += " ativo";
-
-  }
-  
-  document.getElementById("passoPadrao").click(); // Abre o primeiro passo por padrão.
-  
-
-
-// Essa função é muito util, porque é através dela que se o usuário clicar em alguma categoria do catalogo de produtos, não abrirá uma nova guia no navegador nem irá recarregar a página, pois por meio da api "fetch" do javascript, é chamado o arquivo php responsável por buscar os produtos da categoria que o usuário selecionar.
-function carregarProdutos(categoria_id) {
-
-    // URL para a qual a requisição é enviada. O parâmetro categoria_id é anexado à URL para especificar a categoria dos produtos que queremos buscar.
-    fetch('../PHP/buscarProdutos/buscarProdutosPorCategoria.php?categoria_id=' + categoria_id)
-        .then(resposta => resposta.text()) // Este método é chamado quando a requisição é completada com sucesso, convertendo a resposta em texto. Como estamos esperando um HTML como resposta, usamos text().
-        .then(dados => { // "dados" é o texto (HTML) retornado pela requisição.
-            document.getElementById('containerProdutos').innerHTML = dados; // Atualiza o conteúdo do elemento com o ID produtos com o HTML retornado. Isso exibe os produtos na página sem precisar recarregar.
+        // Atualiza a quantidade no backend sem recarregar toda a página
+        fetch('../PHP/arquivosParaRealizarOrcamento/editarQuantidadeProduto.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ produtoId: produtoId, quantidade: novaQuantidade })
         })
-        .catch(erro => {
-            console.error('Erro:', erro);
+        .then(resposta => resposta.json())
+        .then(dados => {
+
+            if (dados.success) {
+
+                // Atualiza os inputs ocultos no passo 3
+                document.querySelectorAll(`input[data-produto-id="${produtoId}"][name='quantidades[]']`).forEach(input => {
+                    input.value = novaQuantidade;
+                });
+    
+                // Pega os valores atualizados de total e quantidade total
+                const total = parseFloat(document.getElementById('total').textContent.replace(/[^\d,.-]/g, '').replace(',', '.'));
+                const quantidadeTotal = parseInt(document.getElementById('quantidadeTotal').textContent);
+    
+                atualizarTotaisPasso3(total, quantidadeTotal); // Atualiza os totais no passo 3
+            
+            } else {
+
+                toastr.error('Erro ao atualizar a quantidade: ' + dados.message);
+
+            };
+
+        })
+        .catch(error => console.error('Erro ao atualizar a quantidade:', error));
+
+    }
+    
+    
+    // Função que calcula a quantidade dinamicamente se o usuário optar por usar os botões em vez de digitar no input do passo 2.
+    function alterarQuantidade(produtoId, delta) {
+
+        const inputQuantidade = document.querySelector(`input[data-produto-id="${produtoId}"]`);
+
+        let quantidadeAtual = parseInt(inputQuantidade.value);
+        quantidadeAtual += delta;
+
+        if (quantidadeAtual < 1) quantidadeAtual = 1; // Garantir que a quantidade não seja menor que 1
+
+        inputQuantidade.value = quantidadeAtual;
+    
+        atualizarTotais(); // Atualiza os totais após alterar a quantidade
+    
+        // Atualiza a quantidade no backend sem recarregar toda a página
+        fetch('../PHP/arquivosParaRealizarOrcamento/editarQuantidadeProduto.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ produtoId: produtoId, quantidade: quantidadeAtual })
+        })
+        .then(resposta => resposta.json())
+        .then(dados => {
+
+            if (dados.success) {
+
+                // Atualiza os inputs ocultos no passo 3
+                document.querySelectorAll(`input[data-produto-id="${produtoId}"][name='quantidades[]']`).forEach(input => {
+
+                    input.value = quantidadeAtual;
+
+                });
+    
+                // Atualizar a exibição do total e da quantidade total
+                const total = parseFloat(document.getElementById('total').textContent.replace(/[^\d,.-]/g, '').replace(',', '.'));
+
+                const quantidadeTotal = parseInt(document.getElementById('quantidadeTotal').textContent);
+    
+                atualizarTotaisPasso3(total, quantidadeTotal); // Atualiza os totais no passo 3
+            
+            } else {
+
+                toastr.error('Erro ao atualizar a quantidade: ' + dados.message);
+
+            };
+
+        })
+        .catch(error => console.error('Erro ao atualizar a quantidade:', error));
+
+    };
+    
+    // Função que remove o produto do orçamento.
+    function removerProduto(produtoId) {
+
+        fetch('../PHP/arquivosParaRealizarOrcamento/removerProdutoOrcamento.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ produtoId: produtoId })
+        })
+        .then(respostaRequisicao => respostaRequisicao.json())
+        .then(dados => {
+
+            if (dados.success) {
+
+                toastr.success('Produto removido com sucesso!');
+                document.getElementById(`produto-${produtoId}`).remove();
+                atualizarTotais(); // Atualiza os totais após remover o produto
+                exibirOrcamento(); // Chame exibirOrcamento para refletir as mudanças nos passos 2 e 3
+            } else {
+
+                toastr.error('Erro ao remover produto: ' + dados.message);
+                
+            };
+
+        }).catch(erro => console.error('Erro ao remover produto:', erro));
+        
+    };
+        
+    // Chamando a função exibirOrcamento para renderizar os produtos assim que a página carregar.
+    document.addEventListener('DOMContentLoaded', () => {
+
+        exibirOrcamento();
+    
+        document.querySelectorAll('.produto input[type="number"]').forEach(input => {
+            input.addEventListener('input', (event) => {
+                const produtoId = event.target.getAttribute('data-produto-id');
+                alterarQuantidadeManual(produtoId);
+            });
+
         });
 
-}
+    });
+    

@@ -413,6 +413,14 @@ button[type="button"]:hover {
     background-color: #e0e0e0;
 }
 
+.conteudoPassoAPasso {
+    display: none;
+}
+.ativo {
+    display: block;
+}
+
+
 
 
 
