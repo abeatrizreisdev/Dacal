@@ -134,6 +134,7 @@
                     toastr.error(dados.mensagem || 'Erro. O status do orçamento não foi modificado.');
 
                 }
+                
             })
             .catch(erro => {
 

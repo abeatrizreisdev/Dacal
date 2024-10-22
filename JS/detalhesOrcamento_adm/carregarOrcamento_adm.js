@@ -65,6 +65,7 @@
             .then(resposta => resposta.json())
             .then(dadosOrcamento => {
 
+                // Elementos html que irá exibir os dados de um orçamento especifico.
                 let detalhes = `
                     <p>Número do Orçamento: ${dadosOrcamento.numeroOrcamento}</p>
                     <p>Cliente: ${dadosOrcamento.nomeCliente}</p>
@@ -95,6 +96,7 @@
 
                 detalhes += `</ul>`;
 
+                // Botão que irá direcionar o adm para a página de editar o status do orçamento.
                 detalhes += `<a href='../PHP/editarStatusOrcamento.php?numeroOrcamento=${numeroOrcamento}'> <button id="editarStatus"> Editar status do orçamento </button> </a>`
 
 

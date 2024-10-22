@@ -95,7 +95,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         </section>
     </div>
 
-    <script src="../JS/gerenciarOrcamentos/carregarOrcamentos.js"></script>
+    <script src="../JS/gerenciarOrcamentos/carregarOrcamentos_adm.js"></script>
+    
 </body>
 
 </html>

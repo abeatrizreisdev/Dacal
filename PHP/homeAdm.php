@@ -81,19 +81,19 @@ $sessaoFuncionario = new Sessao();
             <div id="textoPrincipal">
                 <div id="infoPrincipal">
                     <br>
-                    <a href="./catalogoProdutos.php">
+                    <a href="catalogoProdutos.php">
                         <div class="containerFuncionalidades">
                             <h2> Gerenciar catálogo </h2>
                             <img src="../IMAGENS/homeFuncionario/gerenciarCatalogo.png" class="imgIcons">
                         </div>
                     </a>
-                    <a href="./cadastrarProduto.php">
+                    <a href="cadastrarProduto.php">
                         <div class="containerFuncionalidades">
                             <h2> Cadastrar produtos </h2>
                             <img src="../IMAGENS/homeFuncionario/cadastrarProduto.png" class="imgIcons">
                         </div>
                     </a>
-                    <a href="visualizarOrcamentosFuncAdm.php">
+                    <a href="gerenciarOrcamentos.php">
                         <div class="containerFuncionalidades">
                             <h2> Visualizar orçamentos </h2>
                             <img src="../IMAGENS/homeFuncionario/visualizarOrcamentos.png" class="imgIcons">

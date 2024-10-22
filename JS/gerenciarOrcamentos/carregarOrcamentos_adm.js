@@ -28,6 +28,7 @@
                     // Itera sobre cada orçamento no array.
                     dadosOrcamento.forEach(orcamento => {
 
+                        // Elementos html que irá exibir todos os orçamentos cadastrados no sistema.
                         saida += `<li>
                             Orçamento ${orcamento.numeroOrcamento}: 
                             Cliente: ${orcamento.nomeCliente}, 
