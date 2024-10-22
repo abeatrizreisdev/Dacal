@@ -1,72 +1,46 @@
 <?php
+require '../conexaoBD/conexaoBD.php'; 
+require "../crud/crudProduto.php";
+require "../conexaoBD/configBanco.php";
+require "../sessao/sessao.php";
 
-    require '../conexaoBD/conexaoBD.php'; 
-    require "../crud/crudProduto.php";
-    require "../conexaoBD/configBanco.php";
-    require "../sessao/sessao.php";
+$conexao = new ConexaoBD();
+$conexao->setHostBD(BD_HOST);
+$conexao->setPortaBD(BD_PORTA);
+$conexao->setEschemaBD(BD_ESCHEMA);
+$conexao->setSenhaBD(BD_PASSWORD);
+$conexao->setUsuarioBD( BD_USERNAME);
+$conexao->getConexao(); // Iniciando a conexão com o banco.
+$sessao = new Sessao();
+$crudProduto = new CrudProduto($conexao);
 
-    $conexao = new ConexaoBD();
-    $conexao->setHostBD(BD_HOST);
-    $conexao->setPortaBD(BD_PORTA);
-    $conexao->setEschemaBD(BD_ESCHEMA);
-    $conexao->setSenhaBD(BD_PASSWORD);
-    $conexao->setUsuarioBD( BD_USERNAME);
-    $conexao->getConexao(); // Iniciando a conexão com o banco.
+// Habilitar exibição de erros na página
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-    $sessao = new Sessao();
+//echo "DEBUG: Entrou no script PHP<br>";
 
-    $crudProduto = new CrudProduto($conexao);
-
-    if (isset($_GET['categoria_id'])) {
-
-        $categoria_id = $_GET['categoria_id'];
-
-        $produtos = $crudProduto->buscarProdutosPorCategoria($categoria_id);
-
-        if ($produtos) {
-
-            foreach ($produtos as $produto) {
-
-
-                $idProduto = $produto['codigoProduto'];
-
-                $imagem_base64 = base64_encode($produto['imagemProduto']); // Converte a imagem do produto que está salva no banco de dados no formato BLOB para base64.
-
-                $tipoConta = $sessao->getValorSessao('tipoConta');
-
-                // Verifica se o usuário é funcionário ou admin
-                if ($tipoConta == "funcionario" || $tipoConta == "admin") {
-
-                    echo "<div class='produtoEspecifico'>";
-                    echo "<a class='linkDoProduto' href='./buscarProdutos/detalhesProduto.php?id=$idProduto'>" . "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'> </a>";
-
-                    echo "<div class='botoesProduto'>";
-                    echo "<a class='botao' id='botaoVisualizar' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar" . "</button>" . "</a>";
-                    echo "<a class='botao' id='botaoRemover'>" . "<button onclick='excluirProduto($idProduto)'>Remover" . "</button></a>";
-                    echo "<a class='botao' id='botaoEditar' href='./editarProduto.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
-                    echo "</div>";
-                    echo "</div>"; // Fechamento da div 'produtoEspecifico'
-
-                } else {
-
-                    echo "<div class='produtoEspecifico'>";
-                    echo "<a class='linkDoProduto' href='./buscarProdutos/detalhesProduto.php?id=$idProduto'>" . "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'> </a>";
-                    echo "<a class='visualizarDetalhes' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar Detalhes" . "</button>"  . "</a>";
-                    echo "</div>"; // Fechamento da div 'produtoEspecifico'
-
-
-                }
-
-                
-
-            }
-
-        } else {
-
-            echo "<div>Nenhum produto encontrado para esta categoria.</div>";
-
+if (isset($_GET['categoria_id'])) {
+    $categoria_id = $_GET['categoria_id'];
+   // echo "DEBUG: Categoria ID recebida: " . $categoria_id . "<br>";
+    $produtos = $crudProduto->buscarProdutosPorCategoria($categoria_id);
+    header('Content-Type: application/json');
+    
+    if (is_array($produtos) && count($produtos) > 0) {
+        //echo "DEBUG: Produtos encontrados: " . count($produtos) . "<br>";
+        // Codificar imagem em base64
+        foreach ($produtos as &$produto) {
+            $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
         }
-        
+        // Remova mensagens de depuração da resposta JSON
+        echo json_encode($produtos);
+    } else {
+        //echo "DEBUG: Nenhum produto encontrado<br>";
+        echo json_encode([]);
     }
-
+} else {
+   // echo "DEBUG: Nenhum ID de categoria fornecido<br>";
+    echo json_encode([]);
+}
 ?>

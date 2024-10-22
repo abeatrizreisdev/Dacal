@@ -18,6 +18,7 @@ function buscarProdutoPorNome() {
                 toastr.error('Erro ao buscar produto.');
 
             });
+            
     } else {
 
         toastr.warning('Por favor, insira um nome de produto válido.');
