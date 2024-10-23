@@ -90,7 +90,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 <div id="busca-container">
                     <!-- Input de busca para empresa será inserido aqui -->
                 </div>
-                <div id="container-funcionarios"></div>
+                <div id="container-funcionarios">
+                </div>
                 <p id="mensagem-erro"></p>
                 <div class="cadastro">
                     <!-- Inserir a página de cadastro do funcionário dentro do href. -->

@@ -252,9 +252,11 @@ copiar e colar a partir daqui no csss de la
 }
 
 #container-funcionarios {
+    height: 50vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    overflow: scroll;
 }
 
 .perfilAjustar {
@@ -269,7 +271,7 @@ copiar e colar a partir daqui no csss de la
     background-color: #cfcfcf;
     border-radius: 2vh;
     border: #a6a6a6 solid 0.4vh;
-
+    margin: 1vh;
 }
 
 #perfilImg {
@@ -313,9 +315,6 @@ copiar e colar a partir daqui no csss de la
     width: 8vw;
 }
 
-.cadastro {
-    padding-top: 10vh;
-}
 
 .btnCadastro {
     background-color: #7ed957;
@@ -397,12 +396,13 @@ copiar e colar a partir daqui no csss de la
 }
 
 
-.labelOne{
+.labelOne {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
-.Cadastrar{
+
+.Cadastrar {
     background-color: #7ed957;
     color: black;
     border-radius: 4vh;
@@ -416,22 +416,24 @@ copiar e colar a partir daqui no csss de la
     width: 20vw;
 }
 
-.input{
+.input {
     height: 4vh;
     width: 17vw;
 }
-.inputE{
+
+.inputE {
     height: 4vh;
     width: 42vw;
 }
-.inputsAPI{
+
+.inputsAPI {
     height: 4vh;
     width: 10vw;
     border: 0.5vh solid;
 }
 
-.classeEndereco{
-}
+.classeEndereco {}
+
 .logradouro {
     width: 30vw;
     height: 4vh;
@@ -453,22 +455,26 @@ copiar e colar a partir daqui no csss de la
 }
 
 .fecharBtn {
-    background-color: #f44336;  /* Cor de fundo vermelha */
-    color: black;            
+    background-color: #f44336;
+    /* Cor de fundo vermelha */
+    color: black;
     font-family: 'Poppins';
     font-weight: 700;
     width: 10vw;
     height: 5vh;
     border: black solid 0.4vh;
-    border-radius: 1vh;         /* Bordas arredondadas */
-    cursor: pointer;            /* Muda o cursor para pointer */
-    margin-left: 3vh;
-  }
-
-  .fecharBtn:hover {
-    background-color: #d32f2f;  /* Cor de fundo ao passar o mouse por cima */
+    border-radius: 1vh;
+    /* Bordas arredondadas */
     cursor: pointer;
-  }
+    /* Muda o cursor para pointer */
+    margin-left: 3vh;
+}
+
+.fecharBtn:hover {
+    background-color: #d32f2f;
+    /* Cor de fundo ao passar o mouse por cima */
+    cursor: pointer;
+}
 
 
 
