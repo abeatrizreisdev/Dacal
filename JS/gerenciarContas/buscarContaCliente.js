@@ -14,46 +14,64 @@
 
     // Função para buscar uma empresa pelo nome.
     function buscarEmpresaPorNome() {
-
         const nome = document.getElementById('inputNome').value;
         const container = document.getElementById('container-funcionarios');
-        const mensagemErro = document.getElementById('mensagem-erro');
-
         container.innerHTML = '';
-        mensagemErro.textContent = '';
-
+    
         fetch(`../PHP/buscarCliente/buscarClientePeloNome.php?nome=${nome}`)
-            .then(resposta => resposta.text())
-            .then(dados => {
-                
-                // Verificando se o cliente pesquisado pelo nome foi encontrado.
-                if (dados && dados.nome) {
-
-                    exibirEmpresa(dados, container);
-
-                } else {
-
-                    mensagemErro.textContent = 'Cliente não encontrado.';
-
+            .then(resposta => {
+                if (!resposta.ok) {
+                    throw new Error('Erro na resposta do servidor');
                 }
-
+                return resposta.json();
+            })
+            .then(dados => {
+                if (dados && Array.isArray(dados) && dados.length > 0) {
+                    dados.forEach(empresa => exibirEmpresa(empresa, container));
+                    let mensagemErro = document.getElementById('mensagem-erro');
+                    if (mensagemErro) mensagemErro.style.display = 'none'; // Ocultando a mensagem de erro
+                } else {
+                    exibirMensagemErro(container, dados.error || 'Cliente não encontrado.');
+                }
             })
             .catch(erro => {
-
-                mensagemErro.textContent = 'Ocorreu um erro ao buscar a empresa. Por favor, tente novamente mais tarde.';
-
+                console.error('Erro ao buscar os dados da empresa:', erro);
+                exibirMensagemErro(container, 'Ocorreu um erro ao buscar a empresa. Por favor, tente novamente mais tarde.');
             });
+    }
+    
+    
 
-    };
+    function exibirMensagemErro(container, mensagem) {
+
+       // console.log('Exibindo mensagem de erro:', mensagem); // Log de depuração.
+        let mensagemErro = document.getElementById('mensagem-erro');
+
+        if (!mensagemErro) {
+
+            // tipo do elemento que será criado para exibir a mensagem de erro.
+            mensagemErro = document.createElement('p');
+            mensagemErro.id = 'mensagem-erro'; // id do elemento para estilizar no css.
+
+            // Criando o elemento da mensagem de erro dentro da div.
+            container.appendChild(mensagemErro);
+            console.log('Elemento de mensagem de erro criado:', mensagemErro); // Log de depuração
+        }
+
+        mensagemErro.textContent = mensagem;
+        mensagemErro.style.display = 'block';
+
+        //console.log('Mensagem de erro exibida:', mensagemErro); // Log de depuração
+
+    }
+    
 
     // Função para buscar todas as empresas cadastradas.
     function buscarTodasEmpresas() {
 
         const container = document.getElementById('container-funcionarios');
-        container.innerHTML = ''; // Limpa o container aqui.
-        const mensagemErro = document.getElementById('mensagem-erro');
-        mensagemErro.textContent = '';
-        
+        container.innerHTML = '';
+    
         fetch(`../PHP/buscarCliente/buscarTodosClientes.php`)
             .then(resposta => {
 
@@ -62,7 +80,7 @@
                     throw new Error('Erro na resposta do servidor');
 
                 }
-                
+
                 return resposta.json();
 
             })
@@ -72,21 +90,25 @@
 
                     dados.forEach(empresa => exibirEmpresa(empresa, container));
 
+                    let mensagemErro = document.getElementById('mensagem-erro');
+                    if (mensagemErro) mensagemErro.style.display = 'none'; // Ocultando a mensagem de erro.
+
                 } else {
 
-                    container.innerHTML = '<p>Nenhuma empresa cadastrada.</p>';
+                   // console.log('Dados recebidos:', dados); // Log de depuração
+                    exibirMensagemErro(container, 'Nenhuma empresa cadastrada.');
 
                 }
-
             })
             .catch(erro => {
 
-                console.error('Erro ao buscar as empresas:', erro); // Log para depuração.
-                mensagemErro.textContent = 'Nenhum cliente cadastrado no sistema.';
+                console.error('Erro ao buscar as empresas:', erro);
+                exibirMensagemErro(container, 'Nenhum cliente cadastrado no sistema.');
 
             });
 
-    };
+    }
+    
 
     // Função para exibir informações de uma empresa.
     function exibirEmpresa(empresa, container) {
@@ -148,9 +170,10 @@
 
 
     function excluirPerfilEmpresa(id) {
-
+   
         const formData = new FormData();
         formData.append('idCliente', id);
+
 
         fetch('../PHP/excluirCliente/excluirCliente.php', {
 
@@ -160,21 +183,24 @@
         })
         .then(resposta => {
 
+            //console.log('Status da resposta:', resposta.status); // log para status da resposta.
+
             if (!resposta.ok) {
 
                 throw new Error('Erro na requisição');
 
             }
 
-            return resposta.text(); // Obter texto para depuração
+            return resposta.text(); // Obter texto para depuração.
 
         })
         .then(texto => {
 
+            // console.log('Resposta do servidor:', texto); // Exibir resposta no console para depurar.
 
             try {
 
-                const dados = JSON.parse(texto); // Tentar converter para JSON
+                const dados = JSON.parse(texto); // Convertendo o texto para JSON.
                 
                 if (dados.status === 'success') {
 
@@ -191,7 +217,7 @@
 
             } catch (erro) {
 
-                //console.error('Erro ao analisar JSON:', erro);
+                console.error('Erro ao analisar JSON:', erro);
                 toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
 
             }

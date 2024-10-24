@@ -16,22 +16,31 @@
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $idCliente = $_POST['idCliente'];
-        $resultadoExclusao = $crudCliente->excluirCliente($idCliente);
+        if (isset($_POST['idCliente'])) {
 
-        if ($resultadoExclusao > 0) {
-
-            echo json_encode(['status' => 'success', 'message' => 'Conta excluída com sucesso.']);
+            $idCliente = $_POST['idCliente'];
+            $resultadoExclusao = $crudCliente->excluirCliente($idCliente);
+    
+            if ($resultadoExclusao > 0) {
+    
+                echo json_encode(['status' => 'success', 'message' => 'Conta excluída com sucesso.']);
+    
+            } else {
+    
+                echo json_encode(['status' => 'error', 'message' => 'Erro ao excluir a conta.']);
+                
+            };
 
         } else {
 
-            echo json_encode(['status' => 'error', 'message' => 'Erro ao excluir a conta.']);
-            
-        }
+            echo json_encode(['status' => 'error', 'message' => 'ID do cliente não fornecido.']);
+
+        };
+
+       
     } else {
 
         echo json_encode(['status' => 'error', 'message' => 'Método de requisição inválido.']);
 
-    }
+    };
 
-?>

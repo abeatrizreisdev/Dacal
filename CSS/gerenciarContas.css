@@ -259,6 +259,10 @@ copiar e colar a partir daqui no csss de la
     overflow: scroll;
 }
 
+#mensagem-erro {
+    color: red;
+}
+
 .perfilAjustar {
     display: flex;
     justify-content: center;

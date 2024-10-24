@@ -91,8 +91,11 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                     <!-- Input de busca para empresa será inserido aqui -->
                 </div>
                 <div id="container-funcionarios">
+
+                    <!-- O elemento "p" com id "mensagem-erro" será criado dinamicamente pelo js aqui, para evitar erros. -->
+                     
                 </div>
-                <p id="mensagem-erro"></p>
+                
                 <div class="cadastro">
                     <!-- Inserir a página de cadastro do funcionário dentro do href. -->
                     <a href="javascript:void(0);" onclick="abrirPopup()">

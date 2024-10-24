@@ -10,48 +10,41 @@ function configurarBuscaFuncionario() {
 
 }
 
-// Função para buscar um funcionário pelo CPF.
-function buscarFuncionarioPorCpf() {
 
-    const cpf = document.getElementById('inputCpf').value;
-    const container = document.getElementById('container-funcionarios');
-    const mensagemErro = document.getElementById('mensagem-erro');
-    container.innerHTML = '';
-    mensagemErro.textContent = '';
+function exibirMensagemErro(container, mensagem) {
 
-    fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
-        .then(resposta => resposta.json())
-        .then(dados => {
+   // console.log('Exibindo mensagem de erro:', mensagem); // Log de depuração
 
-            if (dados && dados.nome) {
-                exibirFuncionario(dados, container);
-            } else {
-                mensagemErro.textContent = 'Funcionário(a) não encontrado(a).';
-            }
+    let mensagemErro = document.getElementById('mensagem-erro');
 
-        })
-        .catch(erro => {
+    if (!mensagemErro) {
 
-            mensagemErro.textContent = 'Erro ao buscar os dados do funcionário.';
-            console.error('Erro ao buscar os dados do funcionário:', erro);
+        mensagemErro = document.createElement('p');
+        mensagemErro.id = 'mensagem-erro'; // Basta só utilizar esse id no css para estilizar a mensagem de erro.
+        container.appendChild(mensagemErro);
+        //console.log('Elemento de mensagem de erro criado:', mensagemErro); // Log de depuração
 
-        });
+    }
+
+    mensagemErro.textContent = mensagem;
+    mensagemErro.style.display = 'block';
+    //console.log('Mensagem de erro exibida:', mensagemErro); // Log de depuração
+
 }
 
-function buscarTodosFuncionarios() {
 
+function buscarFuncionarioPorCpf() {
+    const cpf = document.getElementById('inputCpf').value;
     const container = document.getElementById('container-funcionarios');
-    container.innerHTML = ''; // Limpa o container aqui.
-    const mensagemErro = document.getElementById('mensagem-erro');
-    mensagemErro.textContent = '';
+    container.innerHTML = '';
 
-    fetch(`../PHP/crud/retornarDados/retornarTodosFuncionarios.php`)
+    fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
         .then(resposta => {
 
-           // console.log('Resposta bruta:', resposta); // log de depuração de erro.
-
             if (!resposta.ok) {
+
                 throw new Error('Erro na resposta do servidor');
+
             }
 
             return resposta.json();
@@ -59,24 +52,70 @@ function buscarTodosFuncionarios() {
         })
         .then(dados => {
 
-            if (dados.length) {
+            if (dados && dados.nome) {
 
-                dados.forEach(funcionario => exibirFuncionario(funcionario, container));
+                exibirFuncionario(dados, container);
+                let mensagemErro = document.getElementById('mensagem-erro');
+                if (mensagemErro) mensagemErro.style.display = 'none'; // Ocultando a mensagem de erro.
 
             } else {
 
-                container.innerHTML = '<p>Nenhum funcionário cadastrado.</p>';
+                //console.log('Dados recebidos:', dados); // Log de depuração
+                exibirMensagemErro(container, dados.error || 'Funcionário(a) não encontrado(a).');
+
+            };
+
+        })
+        .catch(erro => {
+            console.error('Erro ao buscar os dados do funcionário:', erro);
+            exibirMensagemErro(container, 'Erro ao buscar os dados do funcionário.');
+        });
+}
+
+
+function buscarTodosFuncionarios() {
+
+    const container = document.getElementById('container-funcionarios');
+    container.innerHTML = '';
+
+    // Fazendo a requisição para o back-end retornar os funcionários cadastrados.
+    fetch(`../PHP/crud/retornarDados/retornarTodosFuncionarios.php`)
+        .then(resposta => {
+
+            if (!resposta.ok) {
+
+                throw new Error('Erro na resposta do servidor');
 
             }
+
+            return resposta.json();
+
+        })
+        .then(dados => {
+
+            if (dados && Array.isArray(dados) && dados.length > 0) {
+
+                dados.forEach(funcionario => exibirFuncionario(funcionario, container));
+                let mensagemErro = document.getElementById('mensagem-erro');
+                if (mensagemErro) mensagemErro.style.display = 'none'; // Ocultando a mensagem de erro
+
+            } else {
+
+                exibirMensagemErro(container, 'Nenhum funcionário cadastrado.');
+
+            };
 
         })
         .catch(erro => {
 
-            console.error('Erro ao buscar os funcionários:', erro); // Log para depuração.
-            mensagemErro.textContent = 'Nenhum funcionário cadastrado no sistema.';
-
+            exibirMensagemErro(container, 'Erro ao buscar os funcionários.');
+            console.error('Erro ao buscar os funcionários:', erro);
+            
         });
 }
+
+
+
 
 function exibirFuncionario(funcionario, container) {
 
@@ -106,8 +145,10 @@ function exibirFuncionario(funcionario, container) {
 function editarPerfil(cpf) {
 
     if (!cpf || cpf.length === 0) {
+
         console.error('CPF inválido:', cpf);
         return;
+
     }
 
     fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
@@ -155,32 +196,49 @@ function excluirPerfil(id) {
         body: formData
     })
         .then(resposta => {
+
             if (!resposta.ok) {
                 throw new Error('Erro na requisição');
             }
+
             return resposta.text(); // Obter texto para depuração
+
         })
         .then(texto => {
-            console.log('Resposta do servidor:', texto); // Exibir resposta no console
+
+            //console.log('Resposta do servidor:', texto); // Exibir resposta do servidor no console.
+
             try {
-                const dados = JSON.parse(texto); // Tentar converter para JSON
+
+                const dados = JSON.parse(texto); // Convertendo a resposta do servidor para JSON.
+
                 if (dados.status === 'success') {
+
                     toastr.success(dados.message);
                     setTimeout(() => {
                         window.location.href = '../PHP/gerenciarContas.php';
                     }, 2000);
+
                 } else {
+
                     toastr.error(dados.message);
+
                 }
+                
             } catch (erro) {
+
                 console.error('Erro ao analisar JSON:', erro);
                 toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
+
             }
         })
         .catch(error => {
+
             toastr.error('Ocorreu um erro ao excluir a conta');
             console.error('Erro:', error);
+
         });
+
 }
 
 

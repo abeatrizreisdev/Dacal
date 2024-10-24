@@ -104,7 +104,7 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE nomeEmpresa = :nome";
+                $sql = "SELECT * FROM {$this->tabela} WHERE nomeEmpresa LIKE :nome";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['nome' => $nomeCliente]);
                 
