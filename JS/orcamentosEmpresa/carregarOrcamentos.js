@@ -24,21 +24,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Titulo da página, mas pode ser retirado se não tiver necessidade.
                 // Mas a tag "ul" precisa continuar.
-                let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
+                let saida = "<h2></h2>";
                 // Itera sobre cada orçamento no array.
                 dadosOrcamento.forEach(orcamento => {
 
                     // Exibindo os elementos html com os dados dos orçamentos.
                     // Para cada orçamento encontrado será criado esses elementos.
-                    saida += `<li>
-                        Orçamento ${orcamento.numeroOrcamento}: 
-                        Cliente: ${orcamento.nomeCliente}, 
-                        Valor: ${formatarValor(orcamento.valorOrcamento)}, 
-                        Data: ${formatarData(orcamento.dataCriacao)}, 
-                        Status: ${orcamento.status}, 
-                        Quantidade total de itens: ${orcamento.quantidadeTotal}
-                        </li>
-                        <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>`;
+                    saida += `
+                    <div class="orcamentosGeral">
+                        <p>Orçamento ${orcamento.numeroOrcamento}:</p> 
+                        <p>Cliente: ${orcamento.nomeCliente}</p>
+                        <p>Valor: ${formatarValor(orcamento.valorOrcamento)}</p> 
+                        <p>Data: ${formatarData(orcamento.dataCriacao)}</p> 
+                        <p>Status: ${orcamento.status}</p>
+                        <p>Quantidade total de itens: ${orcamento.quantidadeTotal}</p>
+                        <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+                        </div>`
+                        ;
+                      
 
                 });
 

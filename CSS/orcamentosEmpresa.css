@@ -188,15 +188,32 @@ nav {
     margin-top: 3vh;
     font-family: "Poppins";
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-#btn{
+#tituloPag {
+    font-size: 4vh;
+    font-family: "Poppins";
+    text-align: center;
+    font-weight: 600;
+    margin-top: 3vh;
+}
+
+#orcamentos{
+    width: 60vw;
+    height: 60vh;
+    overflow: scroll;
+}
+
+.orcamentosGeral{
+    background-color: #B56F2A;
+}
+
+#btn {
     display: flex;
     justify-content: right;
-    width: 75vw;
-    margin-top: 5vh;
 }
 
 #btnOrcamento {

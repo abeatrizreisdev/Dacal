@@ -90,7 +90,7 @@ $sessaoCliente = new Sessao();
             </a>
         </div>
         <section class="quadrado">
-            
+            <p id="tituloPag">Orçamentos Cadastrados</p>
             <!-- Este é o container, a div que será responsável por exibir dentro dela todos os orçamentos da empresa. Sendo que o html dos orçamentos serão gerados pelo js. -->
             <div id="orcamentos">
                 <input type="hidden" id="clienteId" value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
