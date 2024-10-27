@@ -373,6 +373,7 @@ nav {
     font-family: "Poppins";
     font-weight: 700;
     cursor: pointer;
+    display: flex;
 }
 
 #imgApagar {

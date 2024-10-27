@@ -204,13 +204,37 @@ nav {
 #orcamentos{
     width: 60vw;
     height: 60vh;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .orcamentosGeral{
-    background-color: #b02ab5;
-    margin: 1vh;
+    background-color: #a6a6a6;
+    border-radius: 3vh;
+    margin: 2vh;
+    text-align: center;
+    font-family: 'Poppins';
+    height: 8.5vw;
 }
+
+.tituloOrcamento{
+    font-size: 3vh;
+}
+
+.labelInfo{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3vh;
+    margin-right: 3vh;
+}
+
+.linkVerMaisInfo{
+    text-decoration: underline;
+}
+
+
+
+
+
 
 #btn {
     display: flex;
@@ -228,6 +252,7 @@ nav {
     font-family: "Poppins";
     font-weight: 700;
     cursor: pointer;
+    margin-top: 1.5vh;
 }
 
 

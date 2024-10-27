@@ -32,20 +32,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Para cada orçamento encontrado será criado esses elementos.
                     saida += `
                     <div class="orcamentosGeral">
-                        <p>Orçamento ${orcamento.numeroOrcamento}:</p> 
-                        <p>Cliente: ${orcamento.nomeCliente}</p>
-                        <p>Valor: ${formatarValor(orcamento.valorOrcamento)}</p> 
-                        <p>Data: ${formatarData(orcamento.dataCriacao)}</p> 
-                        <p>Status: ${orcamento.status}</p>
-                        <p>Quantidade total de itens: ${orcamento.quantidadeTotal}</p>
-                        <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
-                        </div>`
+                        <p class="tituloOrcamento"><strong>Orçamento nº</strong> ${orcamento.numeroOrcamento}</p> 
+                        <div class="infoOrcamento">
+                            <div class="labelInfo">
+                                <p><strong>Data:</strong> ${formatarData(orcamento.dataCriacao)}</p> 
+                                <p><strong>Status:</strong> ${orcamento.status}</p>
+                            </div>
+                            <div class="labelInfo">
+                                <p><strong>Valor:</strong> ${formatarValor(orcamento.valorOrcamento)}</p> 
+                            </div>
+                            <div class="labelInfo">
+                                <p><strong>Quantidade total de itens:</strong>${orcamento.quantidadeTotal}</p>
+                            <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+                            </div>
+                        </div>
+                    </div>`
                         ;
                       
 
                 });
 
-                saida += "</ul>";
+                saida += "";
 
                 // Insere a lista de orçamentos no elemento HTML da página "orcamentosEmpresa.php" com id 'orcamentos'.
                 document.getElementById('orcamentos').innerHTML = saida;
