@@ -130,10 +130,11 @@ $sessaoCliente = new Sessao();
                     <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
                     <div id="orcamentoContainer"></div>
 
-                    <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
-                    <button type="button" onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
-                    <button type="button" onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
-
+                    <div class="btnCentrais">
+                        <button class="btn" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar Orçamento</button>
+                        <button class="btn" id="btnVoltar" type="button" onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
+                        <button class="btn" id="btnFinalizar" type="button" onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
+                    </div>
                 </div>
 
                 <div id="passo3" class="conteudoPassoAPasso">

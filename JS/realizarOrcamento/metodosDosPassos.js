@@ -44,13 +44,13 @@ function criarProdutoHTMLPasso2(produto) {
                     <div class='produto-quantidade'>
                         Quantidade:
                         <button type='button' onclick='alterarQuantidade(${produto.id}, -1)'>-</button>
-                        <input type='number' name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}' min='1'>
+                        <input type='number' class="inputQuantidade" name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}' min='1'>
                         <button type='button' onclick='alterarQuantidade(${produto.id}, 1)'>+</button>
                     </div>
                     <p class='produto-valor'>Valor unitário: R$ <span class='valor'>${produto.valor}</span></p>
                     <div class="botoes">
-                        <button class='btn-remover' onclick="removerProduto('${produto.id}')">Remover Produto</button>
-                        <button class='btn-visualizar' onclick="visualizarProduto('${produto.id}')">Visualizar Produto</button>
+                        <button class='btn-remover' onclick="removerProduto('${produto.id}')">REMOVER PRODUTO</button>
+                        <button class='btn-visualizar' onclick="visualizarProduto('${produto.id}')">VIZUALIZAR PRODUTO</button>
                     </div>
                     </div>
                 </div>`;
@@ -106,8 +106,10 @@ function exibirOrcamento() {
                 });
 
                 htmlPasso2 += `
+                    <div class="infoGeral">
                         <h3>Total: R$ <span id='total'>${data.total}</span></h3>
-                        <h3>Quantidade Total de Itens: <span id='quantidadeTotal'>${data.quantidadeTotal}</span></h3>`;
+                        <h3>Quantidade Total de Itens: <span id='quantidadeTotal'>${data.quantidadeTotal}</span></h3>
+                    </div>`;
 
                 formHtmlPasso3 += `
                         <p class="produto-valor"> Valor Total: <span id="valorTotalSpan">R$ ${data.total}</span> </p>

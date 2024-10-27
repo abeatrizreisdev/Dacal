@@ -392,17 +392,22 @@ a:hover {
     margin: 2vh;
     border-radius: 1vh;
 }
-.produtoInfo{
+
+.produtoInfo {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 39vw;
 }
-.containerQuantidade{
+
+.containerQuantidade {
     display: flex;
 }
-.inputQuantidade{
+
+.inputQuantidade {
+    text-align: center;
     width: 3vw;
+    height: 4vh;
 }
 
 .produto-nome,
@@ -422,24 +427,101 @@ a:hover {
 
 .produtoImagem {
     align-items: center;
+    width: 11vw;
+    height: 22vh;
 }
 
-.btn-remover,
-.btn-visualizar,
-.btn-alterar {
+.btn-remover {
     background-color: #f44336;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
+    color: black;
+    border: 0.3 solid black;
+    height: 4vh;
+    width: 12vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
     cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-visualizar {
+    background-color: #7ed957;
+    color: black;
+    border: 0.3 solid black;
+    height: 4vh;
+    width: 12vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
 }
 
 .btn-remover:hover,
-.btn-visualizar:hover,
-.btn-alterar:hover {
-    background-color: #d32f2f;
+.btn-visualizar:hover {
+    opacity: 0.8
 }
+
+.infoGeral{
+    width: 60vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.btnCentrais{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+#btnCancelar{
+    background-color: #f44336;
+    margin: 2vw;
+    color: black;
+    border: 0.4 solid black;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#btnVoltar{
+    background-color: #a6a6a6;
+    margin: 2vw;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
+
+#btnFinalizar{
+    background-color: #7ed957;
+    margin: 2vw;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
+
+
 
 .total {
     font-size: 1.5em;
