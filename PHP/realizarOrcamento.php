@@ -91,15 +91,6 @@ $sessaoCliente = new Sessao();
                 </div>
             </a>
         </div>
-        <div class="container">
-            <div class="tabelas">
-                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo1')" id="passoPadrao">1 -
-                    Catálogo de itens</button>
-                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo2')"> 2 - Revisar
-                    orçamento</button>
-                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo3')"> 3 - Confirmar
-                    orçamento</button>
-            </div>
             <section class="quadrado">
 
                 <div class="container">
