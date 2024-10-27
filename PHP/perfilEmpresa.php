@@ -179,8 +179,8 @@ $sessaoCliente = new Sessao();
                         </form>
                         <div class="btnApagarConta">
                             <button type="submit" id="btnApagar">
-                                <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" id="imgApagar">
-                                <p id="">Apagar Conta</p>
+                                <img src="../IMAGENS/HomeEmpresa/imgLixeira.png" id="imgApagar">
+                                <p id="infoBtn">Apagar Conta</p>
                             </button>
                         </div>
                     </div>

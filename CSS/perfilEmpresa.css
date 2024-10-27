@@ -265,9 +265,8 @@ nav {
 .alterarDados {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 22vw;
-    height: 60vh;
     align-items: center;
     text-align: center;
 
@@ -296,6 +295,7 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    margin-top: 3vh;
 }
 
 .tituloAlterar {
@@ -371,13 +371,19 @@ nav {
     border-radius: 1vh;
     font-size: 3vh;
     font-family: "Poppins";
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+
 }
 
 #imgApagar {
 width: 2vw;
+}
+#infoBtn{
+    margin-left: 1vw;
 }
 
 
