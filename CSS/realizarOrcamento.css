@@ -60,7 +60,7 @@ a:hover {
     height: 4vh;
     width: 100vw;
     text-align: center;
-    
+
 }
 
 .informativo_superior p {
@@ -137,7 +137,7 @@ a:hover {
     align-items: center;
 }
 
-.abas{
+.abas {
     background-color: #ffffff;
     height: 20vh;
     width: 20vw;
@@ -147,12 +147,15 @@ a:hover {
     align-items: center;
     justify-content: space-evenly;
 }
-#nomeEmpresa{
+
+#nomeEmpresa {
     font-weight: bold;
 }
-.tituloAbas{
+
+.tituloAbas {
     font-weight: bold;
 }
+
 .imgPerfil {
     height: 9vh;
 }
@@ -188,12 +191,13 @@ a:hover {
     overflow-x: hidden;
 }
 
-#textoPrincipal{
+#textoPrincipal {
     display: flex;
     flex-direction: column;
     align-items: justify;
 }
-#infoPrincipal{
+
+#infoPrincipal {
     display: block;
     text-align: justify;
     padding-right: 5vh;
@@ -201,31 +205,32 @@ a:hover {
 
 }
 
-#tituloPrincipal{
+#tituloPrincipal {
     font-size: 4vh;
     padding-top: 5vh;
 }
-#descricao{ 
+
+#descricao {
     font-size: 3.1vh;
     font-weight: 120vw;
 }
 
 
 /* Estilos do passo 1 */
-  
+
 .container {
     max-width: 80vw;
     margin: 0 auto;
     padding: 2vh;
 }
-  
+
 .tabelas {
     display: flex;
     justify-content: flex-start;
     margin-left: 8vw;
     margin-bottom: 2vh;
 }
-  
+
 .linksTabela {
     background-color: green;
     color: black;
@@ -238,16 +243,17 @@ a:hover {
     border-top-right-radius: 4vh;
     width: 25vw;
 }
-  
-.linksTabela:hover, .linksTabela.ativo {
+
+.linksTabela:hover,
+.linksTabela.ativo {
     background-color: #ffffff;
 }
-  
+
 .tabcontent {
     display: none;
     width: 100%;
 }
-  
+
 .tabcontent.ativo {
     display: flex;
     width: 100%;
@@ -264,23 +270,28 @@ a:hover {
 .containerCategorias li {
 
     font-size: 3vh;
-    
+
 }
 
 #containerProdutos {
 
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Cria 4 colunas de largura igual */
-    gap: 3vw; /* Espaço entre os produtos */
-    padding: 0 5vw; /* Espaçamento nas laterais */
+    grid-template-columns: repeat(4, 1fr);
+    /* Cria 4 colunas de largura igual */
+    gap: 3vw;
+    /* Espaço entre os produtos */
+    padding: 0 5vw;
+    /* Espaçamento nas laterais */
     margin-bottom: 5vh;
 
 }
 
-#containerProdutos > div {
+#containerProdutos>div {
 
-    flex: 1 1 calc(25% - 2vw); /* Ajuste para garantir 4 por linha */
-    box-sizing: border-box; /* Inclui padding e border no tamanho total do elemento */
+    flex: 1 1 calc(25% - 2vw);
+    /* Ajuste para garantir 4 por linha */
+    box-sizing: border-box;
+    /* Inclui padding e border no tamanho total do elemento */
     display: flex;
     flex-direction: column;
     height: 40vh;
@@ -293,7 +304,8 @@ a:hover {
 
 #containerProdutos .linkDoProduto img {
     width: 100%;
-    object-fit: cover; /* Faz a imagem preencher o contêiner sem distorcer */
+    object-fit: cover;
+    /* Faz a imagem preencher o contêiner sem distorcer */
     border: 0.3vh solid black;
 }
 
@@ -355,23 +367,66 @@ a:hover {
 
 
 /* Estilo do passo 2 */
-.produto {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+
+.titulo {
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 4vh;
+    font-weight: 700;
 }
 
-.produto-nome, .produto-categoria, .produto-quantidade, .produto-valor {
+#orcamentoContainer {
+    height: 56vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.produto {
+    border: 0.4vh solid #ddd;
+    display: flex;
+    width: 50vw;
+    height: 22vh;
+    margin: 2vh;
+    border-radius: 1vh;
+}
+.produtoInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 39vw;
+}
+.containerQuantidade{
+    display: flex;
+}
+.inputQuantidade{
+    width: 3vw;
+}
+
+.produto-nome,
+.produto-categoria,
+.produto-quantidade,
+.produto-valor {
     font-weight: bold;
 }
 
 .produto-imagem {
-    width: 100px;
-    height: auto;
+    margin: 1vh;
+    height: 20vh;
+    width: 10vw;
+    object-fit: cover;
+    /* Faz a imagem preencher o contêiner sem distorcer */
 }
 
-.btn-remover, .btn-visualizar, .btn-alterar {
+.produtoImagem {
+    align-items: center;
+}
+
+.btn-remover,
+.btn-visualizar,
+.btn-alterar {
     background-color: #f44336;
     color: white;
     padding: 5px 10px;
@@ -380,7 +435,9 @@ a:hover {
     cursor: pointer;
 }
 
-.btn-remover:hover, .btn-visualizar:hover, .btn-alterar:hover {
+.btn-remover:hover,
+.btn-visualizar:hover,
+.btn-alterar:hover {
     background-color: #d32f2f;
 }
 
@@ -389,7 +446,8 @@ a:hover {
     margin-top: 20px;
 }
 
-.btn-avancar, .btn-alterar {
+.btn-avancar,
+.btn-alterar {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -398,7 +456,8 @@ a:hover {
     cursor: pointer;
 }
 
-.btn-avancar:hover, .btn-alterar:hover {
+.btn-avancar:hover,
+.btn-alterar:hover {
     background-color: #45a049;
 }
 
@@ -416,6 +475,7 @@ button[type="button"]:hover {
 .conteudoPassoAPasso {
     display: none;
 }
+
 .ativo {
     display: block;
 }
