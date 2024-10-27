@@ -24,7 +24,8 @@ function renderizarProdutos(produtos, tipoConta) {
             let produtoHTML = `
                 <div class='produtoEspecifico'>
                     <a class='linkDoProduto' href='../PHP/detalhesProduto.php?id=${produto.codigoProduto}'>
-                        <img src='data:image/png;base64,${produto.imagemProduto}' alt='${produto.nomeProduto}'>
+                        <img src='data:image/png;base64,${produto.imagemProduto}' alt='${produto.nomeProduto}' class='imagemProduto'>
+                        <div class="nomeProduto">${produto.nomeProduto}</div>
                     </a>
                     <div class='botoesProduto'>`;
             

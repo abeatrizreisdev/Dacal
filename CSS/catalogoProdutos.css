@@ -217,8 +217,8 @@ a:hover {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    margin-top: 5vh;
-    margin-bottom: 10vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 .containerCategorias li {
@@ -234,8 +234,17 @@ a:hover {
     gap: 3vw; /* Espaço entre os produtos */
     padding: 0 5vw; /* Espaçamento nas laterais */
     margin-bottom: 5vh;
+    font-family: 'Poppins';
 
+}
 
+#containerProdutos{
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.nomeProduto{
+    text-align: center;
 }
 
 #containerProdutos > div {
@@ -244,8 +253,6 @@ a:hover {
     box-sizing: border-box; /* Inclui padding e border no tamanho total do elemento */
     display: flex;
     flex-direction: column;
-    height: 40vh;
-
 }
 
 .linkDoProduto {
@@ -256,6 +263,10 @@ a:hover {
     width: 100%;
     object-fit: cover; /* Faz a imagem preencher o contêiner sem distorcer */
     border: 0.3vh solid black;
+}
+
+.imagemProduto{
+    height: 30vh;
 }
 
 .produtoEspecifico {
