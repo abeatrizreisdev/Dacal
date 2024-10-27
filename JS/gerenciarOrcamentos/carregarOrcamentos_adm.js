@@ -23,26 +23,37 @@
 
                 if (Array.isArray(dadosOrcamento)) { // Verifica se a resposta é um array com os orçamentos.
 
-                    let saida = "<h2>Orçamentos Cadastrados</h2><ul>";
+                    let saida = "";
 
                     // Itera sobre cada orçamento no array.
                     dadosOrcamento.forEach(orcamento => {
 
                         // Elementos html que irá exibir todos os orçamentos cadastrados no sistema.
-                        saida += `<li>
-                            Orçamento ${orcamento.numeroOrcamento}: 
-                            Cliente: ${orcamento.nomeCliente}, 
-                            Valor: ${formatarValor(orcamento.valorOrcamento)}, 
-                            Data: ${formatarData(orcamento.dataCriacao)}, 
-                            Status: ${orcamento.status}, 
-                            Quantidade total de itens: ${orcamento.quantidadeTotal}</li>
-                            <a href='../PHP/detalhesOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações </a>
-                            `;
+                        saida += `
+                        <div class="orcamentosGeral">
+                        <p class="tituloOrcamento"><strong>Orçamento nº</strong> ${orcamento.numeroOrcamento}</p> 
+                            <div class="infoOrcamento">
+                            <div class="labelInfo">
+                            <p><strong>Cliente:</strong> ${orcamento.nomeCliente} </p>
+                            </div>
+                            <div class="labelInfo">
+                                <p><strong>Data:</strong> ${formatarData(orcamento.dataCriacao)}</p> 
+                                <p><strong>Status:</strong> ${orcamento.status}</p>
+                            </div>
+                            <div class="labelInfo">
+                                <p><strong>Valor:</strong> ${formatarValor(orcamento.valorOrcamento)}</p> 
+                            </div>
+                            <div class="labelInfo">
+                                <p><strong>Quantidade total de itens:</strong>${orcamento.quantidadeTotal}</p>
+                            <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+                            </div>
+                            </div>
+                        </div>`;
 
 
                     });
 
-                    saida += "</ul>";
+                    saida += "";
 
                     // Insere a lista de orçamentos no elemento HTML com id 'orcamentos'.
                     document.getElementById('orcamentos').innerHTML = saida;

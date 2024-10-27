@@ -18,7 +18,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
+    <link rel="stylesheet" href="../CSS/gerenciarOrcamentos.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -29,7 +29,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage
+            </li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -70,11 +71,11 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 </div>
             </a>
 
-            <?php 
+            <?php
 
-                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
-                if ($tipoContaAutenticada == "admin") {
-                    echo '<br>
+            // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+            if ($tipoContaAutenticada == "admin") {
+                echo '<br>
                     <a class="abas" href="./visualizarContasCadastradas.php">
                     <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                     <div id="info">
@@ -83,20 +84,27 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                         <p class="descricaoAbas">e empresas</p>
                     </div>
                 </a>';
-                }
+            }
 
             ?>
 
         </div>
         <section class="quadrado">
-            
-            <div id="orcamentos"></div>
-        
+            <p id="titulo">Orçamentos</p>
+            <div class="buscar">
+                <button id="buscarNumero" class="selecionado">Número do orçamento</button>
+                <button id="buscarEmpresa">Nome da Empresa</button>
+            </div>
+            <div class="busca-conteiner"></div>
+            <div class="quadradoGeral">
+                <div id="orcamentos"></div>
+            </div>
         </section>
     </div>
 
     <script src="../JS/gerenciarOrcamentos/carregarOrcamentos_adm.js"></script>
-    
+    <script src="../JS/gerenciarOrcamentos/buscarOrcamentos.js"></script>
+
 </body>
 
 </html>
