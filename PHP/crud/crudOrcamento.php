@@ -254,7 +254,124 @@
             }
 
         }
-        
+
+        // Método para buscar orçamento pelo numeroOrcamento.
+        public function buscarOrcamentoPorNumero($numeroOrcamento) {
+
+            try {
+
+                $sql = "SELECT 
+                            {$this->tabela}.numeroOrcamento, 
+                            {$this->tabela}.valorOrcamento, 
+                            {$this->tabela}.dataCriacao, 
+                            {$this->tabela}.status, 
+                            cliente.nomeEmpresa AS nomeCliente,
+                            (SELECT SUM(itens_orcamento.quantidade) 
+                            FROM itens_orcamento 
+                            WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
+                        FROM orcamentos, cliente 
+                        WHERE {$this->tabela}.idCliente = cliente.idCliente 
+                        AND {$this->tabela}.numeroOrcamento = $numeroOrcamento";
+                
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+
+            } catch (Exception $excecao) {
+
+                echo "<br>Erro na busca pelo número do orçamento: " . $excecao->getMessage();
+                return null;
+
+            }
+            
+        }
+
+        // Método para buscar orçamento pelo nome da empresa (informações básicas)
+        public function buscarOrcamentoPorRazaoSocial($razaoSocial) {
+
+            try {
+
+                $sql = "SELECT 
+                            orcamentos.numeroOrcamento, 
+                            orcamentos.valorOrcamento, 
+                            orcamentos.dataCriacao, 
+                            orcamentos.status, 
+                            cliente.razaoSocial AS nomeCliente
+                        FROM orcamentos 
+                        JOIN cliente ON orcamentos.idCliente = cliente.idCliente
+                        WHERE cliente.razaoSocial LIKE '%$razaoSocial%'";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+
+            } catch (Exception $excecao) {
+
+                echo "Erro na busca por orçamentos pelo nome do cliente: " . $excecao->getMessage();
+                return null;
+
+            }
+
+        }
+
+
+
+        // Método para buscar orçamento pelo nome da empresa (todas as informações)
+        public function buscarInfoOrcamentoPorNomeCliente($nomeCliente) {
+
+            try {
+
+                $sql = "SELECT 
+                            orcamentos.numeroOrcamento, 
+                            orcamentos.valorOrcamento, 
+                            orcamentos.dataCriacao, 
+                            orcamentos.status, 
+                            cliente.nomeEmpresa AS nomeCliente,
+                            itens_orcamento.idProduto,
+                            itens_orcamento.quantidade
+                        FROM orcamentos 
+                        JOIN cliente ON orcamentos.idCliente = cliente.idCliente
+                        JOIN itens_orcamento ON orcamentos.numeroOrcamento = itens_orcamento.numeroOrcamento
+                        WHERE cliente.nomeEmpresa LIKE '%$nomeCliente%'";
+
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
+
+                if ($resultadoConsulta->rowCount() > 0) {
+
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
+
+                } else {
+
+                    return null;
+
+                }
+
+            } catch (Exception $excecao) {
+
+                echo "Erro na busca por orçamentos pelo nome do cliente: " . $excecao->getMessage();
+
+                return null;
+
+            }
+
+        }
+
 
 
         public function editarOrcamento($idOrcamento, $orcamento) {

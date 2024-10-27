@@ -45,7 +45,7 @@
                             </div>
                             <div class="labelInfo">
                                 <p><strong>Quantidade total de itens:</strong>${orcamento.quantidadeTotal}</p>
-                            <a href='../PHP/infoOrcamentoCliente.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+                            <a href='../PHP/editarStatusOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
                             </div>
                             </div>
                         </div>`;
