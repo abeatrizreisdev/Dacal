@@ -1,10 +1,10 @@
-<?php 
+<?php
 
-    //require "./exibirOrcamento/exibirOrcamento.php"
+//require "./exibirOrcamento/exibirOrcamento.php"
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoCliente = new Sessao();
+$sessaoCliente = new Sessao();
 
 ?>
 
@@ -38,8 +38,8 @@
         <ul class="icons">
             <a href="./autenticacao/logout.php">
                 <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
+                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
+                </button>
             </a>
         </ul>
     </nav>
@@ -91,15 +91,27 @@
                 </div>
             </a>
         </div>
-        <section class="quadrado"> 
-            
+        <div class="container">
+            <div class="tabelas">
+                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo1')" id="passoPadrao">1 -
+                    Catálogo de itens</button>
+                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo2')"> 2 - Revisar
+                    orçamento</button>
+                <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo3')"> 3 - Confirmar
+                    orçamento</button>
+            </div>
+            <section class="quadrado">
+
                 <div class="container">
-                    <div class="tabelas"> 
-                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo1')" id="passoPadrao">1 - Catálogo de itens</button> 
-                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo2')"> 2 - Revisar orçamento</button>
-                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo3')"> 3 - Confirmar orçamento</button>
+                    <div class="tabelas">
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo1')"
+                            id="passoPadrao">1 - Catálogo de itens</button>
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo2')"> 2 - Revisar
+                            orçamento</button>
+                        <button class="linksTabela" onclick="abrirPassoAPassoOrcamento(event, 'passo3')"> 3 - Confirmar
+                            orçamento</button>
                     </div>
-                
+
                     <div id="passo1" class="conteudoPassoAPasso">
 
                         <div class="containerPesquisar">
@@ -115,13 +127,13 @@
                                 <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
                             </ul>
                         </nav>
-            
+
                         <div id="containerProdutos">
                             <!-- Os produtos cadastrados, dependendo da sua categoria, serão exibidos aqui, por meio do arquivo "realizarOrcamento.js" e "buscarProdutosPorCategoria" na pasta "buscarProdutos". -->
                         </div>
-                        
+
                     </div>
-                
+
                     <div id="passo2" class="conteudoPassoAPasso">
                         <h2>Passo 2: Revisão dos Produtos Selecionados</h2>
                         <!-- Produtos selecionados para revisão, terão que aparecer aqui. -->
@@ -130,37 +142,39 @@
                         <button onclick="cancelarOrcamento()">Cancelar Orçamento</button>
                         <button type="button" onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
                         <button type="button" onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
-                   
+
                     </div>
-                
+
                     <div id="passo3" class="conteudoPassoAPasso">
                         <h2>Passo 3: Encaminhamento do Orçamento</h2>
                         <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
-                        <form id="formOrcamento" action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroOrcamento.php" method="post">
-                            
+                        <form id="formOrcamento"
+                            action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroOrcamento.php"
+                            method="post">
+
                             <div id="formOrcamentoContainer"></div>
                             <a onclick="cancelarOrcamento()">Cancelar Orçamento</a>
                             <a type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar Página</a>
                             <button type="submit">Finalizar Orçamento</button>
 
                         </form>
-                        
+
 
                     </div>
 
                 </div>
 
-        </section>
+            </section>
 
-        
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="../JS/realizarOrcamento/metodosDosPassos.js"></script>
-        <script src="../JS/realizarOrcamento/definirLogicaDosPassos.js"></script>
-        <script src="../JS/realizarOrcamento/metodosBuscarProduto.js"></script>
-        <script src="../JS/realizarOrcamento/carregarProdutos.js"></script>
-        
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script src="../JS/realizarOrcamento/metodosDosPassos.js"></script>
+            <script src="../JS/realizarOrcamento/definirLogicaDosPassos.js"></script>
+            <script src="../JS/realizarOrcamento/metodosBuscarProduto.js"></script>
+            <script src="../JS/realizarOrcamento/carregarProdutos.js"></script>
+
 
 </body>
 

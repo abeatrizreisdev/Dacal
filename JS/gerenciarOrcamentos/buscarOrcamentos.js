@@ -7,9 +7,9 @@ function criarCampoBusca(placeholder, idInput, buttonId) {
   
     // Adiciona a classe "selecionado" ao botão clicado e remove dos outros
     const buttons = document.querySelectorAll('.buscar button');
-    buttons.forEach(button => button.classList.remove('selecionado'));
-    document.getElementById(buttonId).classList.add('selecionado');
-  }
+    buttons.forEach(button => button.classList.remove('btnSelecionado'));
+    document.getElementById(buttonId).classList.add('btnSelecionado');
+}
   
   // Exibir o campo "Número do orçamento" por padrão
   criarCampoBusca('Insira o número do orçamento', 'inputNumero', 'buscarNumero');

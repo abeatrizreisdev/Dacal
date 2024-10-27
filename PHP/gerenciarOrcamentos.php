@@ -92,7 +92,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         <section class="quadrado">
             <p id="titulo">Orçamentos</p>
             <div class="buscar">
-                <button id="buscarNumero" class="selecionado">Número do orçamento</button>
+                <button id="buscarNumero" class="btnSelecionado">Número do orçamento</button>
                 <button id="buscarEmpresa">Nome da Empresa</button>
             </div>
             <div class="busca-conteiner"></div>
