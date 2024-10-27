@@ -1,78 +1,90 @@
 function criarCampoBusca(placeholder, idInput, buttonId) {
 
-    const buscaContainer = document.querySelector('.busca-conteiner');
-    buscaContainer.innerHTML = `
+  const buscaContainer = document.querySelector('.busca-conteiner');
+  buscaContainer.innerHTML = `
       <input type="text" id="${idInput}" placeholder="${placeholder}">
       <button class="btnBuscar">Buscar</button>
     `;
-  
-    // Adiciona a classe "selecionado" ao botão clicado e remove dos outros
-    const buttons = document.querySelectorAll('.buscar button');
-    buttons.forEach(button => button.classList.remove('btnSelecionado'));
-    document.getElementById(buttonId).classList.add('btnSelecionado');
+
+  // Adiciona a classe "selecionado" ao botão clicado e remove dos outros
+  const buttons = document.querySelectorAll('.buscar button');
+  buttons.forEach(button => button.classList.remove('btnSelecionado'));
+  document.getElementById(buttonId).classList.add('btnSelecionado');
 
 }
-  
-  // Exibir o campo "Número do orçamento" por padrão
+
+// Exibir o campo "Número do orçamento" por padrão
+criarCampoBusca('Insira o número do orçamento', 'inputNumero', 'buscarNumero');
+
+// Event listeners para os botões
+document.getElementById('buscarNumero').addEventListener('click', () => {
   criarCampoBusca('Insira o número do orçamento', 'inputNumero', 'buscarNumero');
-  
-  // Event listeners para os botões
-  document.getElementById('buscarNumero').addEventListener('click', () => {
-    criarCampoBusca('Insira o número do orçamento', 'inputNumero', 'buscarNumero');
-  });
-  
-  document.getElementById('buscarEmpresa').addEventListener('click', () => {
-    criarCampoBusca('Insira o nome da empresa', 'inputEmpresa', 'buscarEmpresa');
-  });
-  
+});
+
+document.getElementById('buscarEmpresa').addEventListener('click', () => {
+  criarCampoBusca('Insira o nome da empresa', 'inputEmpresa', 'buscarEmpresa');
+});
+
 
 
 // Função para buscar orçamentos e atualizar o conteúdo da página com as informações do(s)orçamento(s) pesquisados.
 function buscarOrcamentos(url) {
 
   fetch(url)
-  .then(resposta => resposta.json())
-  .then(dados => {
+    .then(resposta => resposta.json())
+    .then(dados => {
 
       const orcamentosDiv = document.getElementById('orcamentos');
       orcamentosDiv.innerHTML = '';
 
       if (Array.isArray(dados)) {
 
-          // Criando os elementos HTML com as informações dos orçamentos encontrados
-          dados.forEach(orcamento => {
+        // Criando os elementos HTML com as informações dos orçamentos encontrados
+        dados.forEach(orcamento => {
 
-              const orcamentoElement = document.createElement('div');
-              orcamentoElement.classList.add('orcamento');
-              orcamentoElement.innerHTML = `
-                  <p>Número do Orçamento: ${orcamento.numeroOrcamento}</p>
-                  <p>Valor: ${formatarValor(orcamento.valorOrcamento)}</p>
-                  <p>Data de Criação: ${formatarData(orcamento.dataCriacao)}</p>
-                  <p>Status: ${orcamento.status}</p>
-                  <p>Nome da Empresa: ${orcamento.nomeCliente}</p>
-                  <p>Quantidade total de itens: ${orcamento.quantidadeTotal}</p>
-                  <a href='../PHP/editarStatusOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+          const orcamentoElement = document.createElement('div');
+          orcamentoElement.classList.add('orcamento');
+          orcamentoElement.innerHTML = `
+                 <div class="orcamentosGeral">
+                    <p class="tituloOrcamento"><strong>Orçamento nº</strong> ${orcamento.numeroOrcamento}</p> 
+                    <div class="infoOrcamento">
+                     <div class="labelInfo">
+                      <p><strong>Cliente:</strong> ${orcamento.nomeCliente} </p>
+                     </div>
+                     <div class="labelInfo">
+                      <p><strong>Data:</strong> ${formatarData(orcamento.dataCriacao)}</p> 
+                      <p><strong>Status:</strong> ${orcamento.status}</p>
+                     </div>
+                     <div class="labelInfo">
+                       <p><strong>Valor:</strong> ${formatarValor(orcamento.valorOrcamento)}</p> 
+                      </div>
+                      <div class="labelInfo">
+                        <p><strong>Quantidade total de itens:</strong>${orcamento.quantidadeTotal}</p>
+                        <a href='../PHP/editarStatusOrcamento.php?numeroOrcamento=${orcamento.numeroOrcamento}' class='linkVerMaisInfo'>Ver mais informações</a>
+                      </div>
+                      </div>
+                  </div>
               `;
 
-              orcamentosDiv.appendChild(orcamentoElement);
+          orcamentosDiv.appendChild(orcamentoElement);
 
-          });
+        });
 
       } else if (dados.mensagem) {
 
-          // Renderizar mensagem de erro se nenhum orçamento for encontrado.
-          orcamentosDiv.innerHTML = `<p>${dados.mensagem}</p>`;
+        // Renderizar mensagem de erro se nenhum orçamento for encontrado.
+        orcamentosDiv.innerHTML = `<p>${dados.mensagem}</p>`;
 
       } else {
 
-          // Renderizar erro genérico se a resposta não for uma array nem contiver uma mensagem
-          orcamentosDiv.innerHTML = '<p>Ocorreu um erro na busca por orçamentos.</p>';
+        // Renderizar erro genérico se a resposta não for uma array nem contiver uma mensagem
+        orcamentosDiv.innerHTML = '<p>Ocorreu um erro na busca por orçamentos.</p>';
 
       }
 
-  })
-  .catch(error => console.error('Erro:', error));
-  
+    })
+    .catch(error => console.error('Erro:', error));
+
 }
 
 
@@ -83,9 +95,9 @@ document.getElementById('buscarNumero').addEventListener('click', () => {
 
   document.querySelector('.btnBuscar').addEventListener('click', () => {
 
-      // Passando o número digitado no input de busca para a função que busca o orçamento pelo número.
-      const numeroOrcamento = document.getElementById('inputNumero').value;
-      buscarOrcamentos(`../PHP/buscarOrcamentos/buscarOrcamentoPorNumero.php?numeroOrcamento=${numeroOrcamento}`);
+    // Passando o número digitado no input de busca para a função que busca o orçamento pelo número.
+    const numeroOrcamento = document.getElementById('inputNumero').value;
+    buscarOrcamentos(`../PHP/buscarOrcamentos/buscarOrcamentoPorNumero.php?numeroOrcamento=${numeroOrcamento}`);
 
   });
 
@@ -97,26 +109,26 @@ document.getElementById('buscarEmpresa').addEventListener('click', () => {
 
   document.querySelector('.btnBuscar').addEventListener('click', () => {
 
-      // Passando o número digitado no input de busca para a função que busca o orçamento pelo nome da empresa/razão social.
-      const nomeEmpresa = document.getElementById('inputEmpresa').value;
-      buscarOrcamentos(`../PHP/buscarOrcamentos/buscarOrcamentoPorRazaoSocial.php?nomeEmpresa=${nomeEmpresa}`);
+    // Passando o número digitado no input de busca para a função que busca o orçamento pelo nome da empresa/razão social.
+    const nomeEmpresa = document.getElementById('inputEmpresa').value;
+    buscarOrcamentos(`../PHP/buscarOrcamentos/buscarOrcamentoPorRazaoSocial.php?nomeEmpresa=${nomeEmpresa}`);
 
   });
 
 });
 
 
-  // Função para formatar a data no formato brasileiro
-  function formatarData(data) {
+// Função para formatar a data no formato brasileiro
+function formatarData(data) {
 
-    const dataObj = new Date(data);
-    return dataObj.toLocaleDateString('pt-BR');
+  const dataObj = new Date(data);
+  return dataObj.toLocaleDateString('pt-BR');
 
 };
 
 // Função para formatar o valor em formato brasileiro
 function formatarValor(valor) {
 
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 };
