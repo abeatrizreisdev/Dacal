@@ -53,7 +53,7 @@
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
-                    <p id="nomeEmpresa"> <?php echo $sessao->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessao->getValorSessao('razaoSocial'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
