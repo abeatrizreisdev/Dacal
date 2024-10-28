@@ -1,7 +1,9 @@
- document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function() {
+
     var urlParams = new URLSearchParams(window.location.search);
-    var produtoId = urlParams.get('id'); // Obtém o ID do produto da URL
+    var produtoId = urlParams.get('id');
+    var fromPage = urlParams.get('from') || 'catalogo'; // Padrão para 'catalogo' se não especificado.
+
     if (!produtoId) {
         document.querySelector('.quadrado').innerHTML = "ID do produto não especificado.";
         return;
@@ -14,8 +16,6 @@
                 document.querySelector('.quadrado').innerHTML = data.error;
                 return;
             }
-            
-            //console.log(data);
 
             var html = "<div class='containerDetalhesProduto'>";
             html += "<div class='containerImagemProduto'>";
@@ -30,7 +30,6 @@
             html += "<p class='descricaoProduto'>" + data.descricaoProduto + "</p>";
             html += "</div>";
             html += "</div>";
-
             if (data.contaAutenticada !== 'admin' && data.contaAutenticada !== 'funcionario') {
                 html += "<form class='formOrcamento' id='formOrcamento'>";
                 html += "<div class='inputQuantidadeContainer'>";
@@ -45,20 +44,20 @@
                 html += "<input type='hidden' name='valorProduto' value='" + data.valorProduto + "'>";
                 html += "<input type='hidden' name='imagemProduto' value='" + data.imagemProduto + "'>";
                 html += "<input type='hidden' name='categoriaProduto' value='" + data.categoria + "'>";
-                html += "<input type='hidden' name='adicionar' value='true'>"; // Adiciona a chave 'adicionar';
+                html += "<input type='hidden' name='adicionar' value='true'>"; 
                 html += "<button type='submit' name='adicionar' class='botaoAdicionar'>Adicionar</button>";
                 html += "</form>";
             }
-            
+
             html += "</div>";
             html += "</div>";
 
-            var voltarCatalogoURL = (data.contaAutenticada !== 'admin' && data.contaAutenticada !== 'funcionario') ? '../realizarOrcamento.php' : '../catalogoProdutos.php';
+            var voltarCatalogoURL = fromPage === 'orcamento' ? '../PHP/realizarOrcamento.php' : '../PHP/catalogoProdutos.php';
             html += "<div class='containerBotoes'>";
             html += "<a href='" + voltarCatalogoURL + "'><button class='botaoVoltar'>Voltar para o Catálogo</button></a>";
-            
+            html += "</div>";
             document.querySelector('.quadrado').innerHTML = html;
-            
+
             // Adiciona os listeners para os botões de quantidade
             document.getElementById('quantidadeMenos').addEventListener('click', function() {
                 var quantidade = document.getElementById('quantidade');
@@ -67,7 +66,7 @@
                     document.getElementById('quantidadeFinal').value = quantidade.value;
                 }
             });
-            
+
             document.getElementById('quantidadeMais').addEventListener('click', function() {
                 var quantidade = document.getElementById('quantidade');
                 quantidade.value++;
@@ -76,52 +75,40 @@
 
             // Adiciona o listener para o envio do formulário.
             document.getElementById('formOrcamento').addEventListener('submit', function(event) {
-                
-                event.preventDefault(); // Previne o envio padrão do formulário.
+                event.preventDefault(); 
                 var formData = new FormData(this);
-                
-                //console.log(Array.from(formData.entries()));
-                
-                fetch('./buscarProdutos/addNoOrcamento.php', { 
+                var botaoAdicionar = document.querySelector('.botaoAdicionar');
+                botaoAdicionar.disabled = true;
+
+                fetch('./buscarProdutos/addNoOrcamento.php', {
                     method: 'POST',
                     body: formData,
                     headers: {
                         'Accept': 'application/json'
                     }
                 })
-                .then(response => response.text()) 
+                .then(response => response.text())
                 .then(data => {
-
                     try {
-                        data = JSON.parse(data); // Converte para JSON se possível
-
+                        data = JSON.parse(data);
                         if (data.success) {
-
                             toastr.success(data.message);
                             setTimeout(function() {
                                 window.location.href = './realizarOrcamento.php';
                             }, 1500);
-
                         } else {
-
                             toastr.error('Erro inesperado. Por favor, tente novamente.');
-
                         }
-
                     } catch (erro) {
-
                         console.error('Erro ao processar JSON:', erro);
                         toastr.error('Erro inesperado. Por favor, tente novamente.');
-
-
                     }
-
                 })
-                .catch(error => console.log('Erro:', error));
-
+                .catch(error => console.log('Erro:', error))
+                .finally(() => {
+                    botaoAdicionar.disabled = false;
+                });
             });
-            
         })
         .catch(error => console.log('Erro:', error));
-
 });
