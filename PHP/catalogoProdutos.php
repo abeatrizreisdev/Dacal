@@ -124,6 +124,7 @@
             
             <nav>
                 <ul class="containerCategorias">
+                    <li><a href="#" onclick="carregarProdutos(0)">Geral</a></li>
                     <li><a href="#" onclick="carregarProdutos(1)">Móveis</a></li>
                     <li><a href="#" onclick="carregarProdutos(2)">Cadeiras</a></li>
                     <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>

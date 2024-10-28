@@ -1,9 +1,9 @@
-function carregarProdutos(categoria_id) {
 
-    fetch('../PHP/buscarProdutos/buscarProdutosPorCategoria.php?categoria_id=' + categoria_id)
+function carregarTodosProdutos() {
+
+    fetch('../PHP/buscarProdutos/buscarTodosProdutos.php')
         .then(resposta => resposta.json())
         .then(data => {
-           // console.log('Resposta do servidor:', data);
             renderizarProdutos(data.produtos, data.tipoConta);
         })
         .catch(erro => {
@@ -11,6 +11,24 @@ function carregarProdutos(categoria_id) {
         });
 
 }
+
+function carregarProdutos(categoria_id) {
+
+    let url = categoria_id === 0 
+        ? '../PHP/buscarProdutos/buscarTodosProdutos.php' 
+        : '../PHP/buscarProdutos/buscarProdutosPorCategoria.php?categoria_id=' + categoria_id;
+
+    fetch(url)
+        .then(resposta => resposta.json())
+        .then(data => {
+            renderizarProdutos(data.produtos, data.tipoConta);
+        })
+        .catch(erro => {
+            console.error('Erro:', erro);
+        });
+
+};
+
 
 function renderizarProdutos(produtos, tipoConta) {
 
@@ -58,3 +76,8 @@ function renderizarProdutos(produtos, tipoConta) {
     }
 
 }
+
+// Carrega a categoria "Geral" por padrão, exibindo todos os produtos cadastrados.
+document.addEventListener("DOMContentLoaded", function() {
+    carregarTodosProdutos();
+});
