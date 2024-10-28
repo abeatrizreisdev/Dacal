@@ -62,17 +62,18 @@ function criarFormProdutoHTMLPasso3(produto) {
 
     return `
             <div class='produto'>
-                <p class='produto-nome'>Produto: ${produto.nome}</p>
-                <p class='produto-categoria'>Categoria: ${produto.categoria}</p>
-                <img class='produto-imagem' src='data:image/jpeg;base64,${produto.imagem}' alt='Produto'>
-                <div class='containerQuantidade'>
-                    <p class='produto-quantidade>Quantidade:</p>
-                    <input type='number' class="inputQuantidade" name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}' min='1' required readonly>
+                <div class="produtoImagem">
+                    <img class='produto-imagem' src='data:image/jpeg;base64,${produto.imagem}' alt='Produto'>
                 </div>
-                <p class='produto-valor'>Valor unitário: R$ ${produto.valor}</p>
-                <input type='hidden' name='produtos[]' value='${produto.nome}'>
-                <input type='hidden' name='valores[]' value='${produto.valor}'>
-                <input type='hidden' name='produtoIds[]' value='${produto.id}'>
+                <div class="produtoInfo">
+                    <p class='produto-nome'>Produto: ${produto.nome}</p>
+                    <p class='produto-categoria'>Categoria: ${produto.categoria}</p>
+                    <p class='produto-quantidade'>Quantidade: ${produto.quantidade}</p>
+                    <p class='produto-valor'>Valor unitário: R$ ${produto.valor}</p>                      
+                    <input type='hidden' name='produtos[]' value='${produto.nome}'>
+                    <input type='hidden' name='valores[]' value='${produto.valor}'>
+                    <input type='hidden' name='produtoIds[]' value='${produto.id}'>
+                </div>
             </div>`;
 
 };
@@ -112,10 +113,12 @@ function exibirOrcamento() {
                     </div>`;
 
                 formHtmlPasso3 += `
+                    <div class="infoGeral">
                         <p class="produto-valor"> Valor Total: <span id="valorTotalSpan">R$ ${data.total}</span> </p>
-                        <h3>Quantidade Total de Itens: <span id="quantidadeTotalSpan">${data.quantidadeTotal}</span></h3>
+                        <p><strong>Quantidade Total de Itens: <span id="quantidadeTotalSpan">${data.quantidadeTotal}</span></strong></p>
                         <input type="hidden" name="valorTotal" value="${data.total}">
-                        <input type="hidden" name="quantidadeTotal" value="${data.quantidadeTotal}">`;
+                        <input type="hidden" name="quantidadeTotal" value="${data.quantidadeTotal}">
+                    </div>`;
 
                 container.innerHTML = htmlPasso2;
                 formContainer.innerHTML = formHtmlPasso3;

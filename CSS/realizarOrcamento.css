@@ -181,13 +181,15 @@ a:hover {
     background-color: #cfcfcf;
 }
 
-.quadrado {
+.quadradoAjustar{
+    display: flex;
+    flex-direction: column;
+}
+.quadradoOrca {
     background-color: white;
-    width: 80vw;
+    width: 75vw;
     margin-right: 5vh;
-    margin-top: 3vh;
     font-family: "Poppins";
-    margin-bottom: 3vh;
     overflow-x: hidden;
 }
 
@@ -221,26 +223,24 @@ a:hover {
 .container {
     max-width: 80vw;
     margin: 0 auto;
-    padding: 2vh;
+    margin-top: 2vh;
 }
 
 .tabelas {
     display: flex;
     justify-content: flex-start;
-    margin-left: 8vw;
-    margin-bottom: 2vh;
 }
 
 .linksTabela {
-    background-color: green;
+    background-color: #d9d9d9;
     color: black;
     font-size: 2.8vh;
     font-weight: bold;
-    padding: 1vh 2vw;
     cursor: pointer;
     border: 0.1vh solid #f4f1f1fd;
     border-top-left-radius: 4vh;
     border-top-right-radius: 4vh;
+    height: 5vh;
     width: 25vw;
 }
 
@@ -373,10 +373,11 @@ a:hover {
     font-family: 'Poppins';
     font-size: 4vh;
     font-weight: 700;
+    margin-top: 2vh;
 }
 
 #orcamentoContainer {
-    height: 56vh;
+    height: 54vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -471,7 +472,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+    height: 12.5vh;
 }
 
 #btnCancelar{
@@ -521,11 +522,20 @@ a:hover {
     white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
 }
 
-
+/* PASSO 3 */
 
 .total {
     font-size: 1.5em;
     margin-top: 20px;
+}
+
+#formOrcamentoContainer{
+    height: 54vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-avancar,
@@ -537,6 +547,60 @@ a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.btnCentrais{
+    display: flex;
+    justify-content: center;
+    height: 12.5vh;
+}
+
+#btnCancelarr{
+    text-align: center;
+    background-color: #f44336;
+    margin: 2vw;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 16vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#btnVoltarr{
+    text-align: center;
+    background-color: #a6a6a6;
+    margin: 2vw;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+}
+
+#btnFinalizarr{
+    background-color: #7ed957;
+    margin: 2vw;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 6vh;
+    width: 16vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 2.5vh;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
+
+
 
 .btn-avancar:hover,
 .btn-alterar:hover {
