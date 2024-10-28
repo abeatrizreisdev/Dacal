@@ -10,6 +10,27 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Configurações de sessão com maior segurança, salvando os dados da sessão do usuário pelo menos por um dia, caso ele não deslogue do sistema.
+    // Configurações de sessão com persistência.
+    session_set_cookie_params([
+        'lifetime' => 86400, // Sessão ativa por 1 dia (em segundos)
+        'path' => '/',
+        'domain' => $_SERVER['HTTP_HOST'],
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+    
+    $sessao = new Sessao();
+    
+    // Verifica se o cookie de sessão existe e restaura a sessão
+    if (isset($_COOKIE['usuario_sessao'])) {
+
+        session_id($_COOKIE['usuario_sessao']);
+        $sessao = new Sessao();
+
+    };
+
     $conexao = new ConexaoBD();
     $conexao->setHostBD(host: BD_HOST);
     $conexao->setPortaBD(porta: BD_PORTA);
@@ -19,7 +40,7 @@
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudCliente = new CrudCliente($conexao);
-    $sessao = new Sessao();
+    
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
