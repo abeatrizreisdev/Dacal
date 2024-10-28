@@ -1,4 +1,4 @@
-function abrirPopup() {
+function popUpCadastrarFuncionario() {
 
     // Cria uma sobreposição
     var overlay = document.createElement('div');

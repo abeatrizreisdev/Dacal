@@ -98,7 +98,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 
                 <div class="cadastro">
                     <!-- Inserir a página de cadastro do funcionário dentro do href. -->
-                    <a href="javascript:void(0);" onclick="abrirPopup()">
+                    <a href="javascript:void(0);" onclick="popUpCadastrarFuncionario()">
                         <button class="btnCadastro">Cadastrar Funcionário</button>
                     </a>
                 </div>
