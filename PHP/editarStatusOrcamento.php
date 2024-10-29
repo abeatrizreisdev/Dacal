@@ -18,7 +18,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
+    <link rel="stylesheet" href="../CSS/editarStatusOrcamento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
@@ -91,29 +91,38 @@
         </div>
         <section class="quadrado">
             
-            <h2>Editar Status do Orçamento</h2>
+            <p class="titulo">Editar Status do Orçamento</p>
 
             <form id="formEditarStatus">
 
                 <input type="hidden" id="numeroOrcamento" name="numeroOrcamento">
-
-                <p>Cliente: <span id="nomeCliente"></span></p>
-                <p>Razão Social: <span id="razaoSocial"></span></p>
-                <p>CNPJ: <span id="cnpj"></span></p>
-                <p>Inscricao Estadual: <span id="inscricaoEstadual"></span></p>
-                <p>Telefone: <span id="telefone"></span></p>
-                <p>Email: <span id="email"></span></p>
-                <p>Municipio: <span id="municipio"></span></p>
-                <p>Estado: <span id="estado"></span></p>
-                <p>Bairro: <span id="bairro"></span></p>
-                <p>Logradouro: <span id="logradouro"></span></p>
-                <p>Número do Endereço: <span id="numeroEndereco"></span></p>
-                <p>Cep: <span id="cep"></span></p>
-                <p>Data do Orçamento: <span id="dataCriacao"></span></p>
-                <p>Valor Total: <span id="valorOrcamento"></span></p>
+                <div class="labelForm">
+                <p class="infoForm">Empresa: <span id="nomeCliente"></span></p>
+                <p class="infoForm">Razão Social: <span id="razaoSocial"></span></p>
+                <p class="infoForm">CNPJ: <span id="cnpj"></span></p>
+                </div>
+                <div class="labelForm">
+                <p class="infoForm">Inscricao Estadual: <span id="inscricaoEstadual"></span></p>
+                <p class="infoForm">Telefone: <span id="telefone"></span></p>
+                <p class="infoForm">Email: <span id="email"></span></p>
+                </div>
+                <div class="labelForm">
+                <p class="infoForm">Municipio: <span id="municipio"></span></p>
+                <p class="infoForm">Estado: <span id="estado"></span></p>
+                <p class="infoForm">Bairro: <span id="bairro"></span></p>
+                </div>
+                <div class="labelForm">
+                <p class="infoForm">Logradouro: <span id="logradouro"></span></p>
+                <p class="infoForm">Número do Endereço: <span id="numeroEndereco"></span></p>
+                <p class="infoForm">Cep: <span id="cep"></span></p>
+                </div>
+                <div class="labelForm">
+                <p class="infoForm">Data do Orçamento: <span id="dataCriacao"></span></p>
+                <p class="infoForm">Valor Total: <span id="valorOrcamento"></span></p>
+                <p class="infoForm">Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
+                </div>
                 <p>Status Atual: <span id="statusAtual"></span></p>
 
-                <p>Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
 
                 <h3>Itens do Orçamento:</h3>
 
