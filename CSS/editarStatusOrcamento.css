@@ -183,8 +183,7 @@ nav {
     height: 80vh;
     margin-right: 5vh;
     margin-top: 3vh;
-    font-family: "Poppins";
-}
+    font-family: "Poppins";}
 
 .labelForm{
     display: flex;
@@ -195,4 +194,17 @@ nav {
 .infoForm{
     display: block;
     width: 23vw;
+}
+
+
+.titulo{
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 700;
+    margin: 1vh;
+}
+
+#formEditarStatus{
+    overflow-y: scroll;
+
 }
