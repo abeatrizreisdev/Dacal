@@ -18,8 +18,11 @@
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $cpf = $_POST['cpf'];
+        // Remover formatação do CPF.
+        $cpf = preg_replace('/[^0-9]/', '', $_POST['cpf']);
         $senha = $_POST['senha'];
+
+        
 
         $crudFuncionario = new CrudFuncionario($conexao);
 

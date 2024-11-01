@@ -59,6 +59,7 @@
         }
     
         return true;
+        
     }
     
     
@@ -92,7 +93,9 @@
             $funcionario->setNome($nome);
             $funcionario->setTelefone($telefone);
             $funcionario->setEmail($email);
-            $funcionario->setSenha($senha);
+            // Hash da senha.
+            $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
+            $funcionario->setSenha($hashedSenha);
             $funcionario->setCpf($cpf);
             $funcionario->setTipoConta($tipoConta);
             $funcionario->setLogradouro($logradouro);
