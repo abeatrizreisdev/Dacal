@@ -97,12 +97,17 @@
 
                 <input type="hidden" id="numeroOrcamento" name="numeroOrcamento">
                 <div class="labelForm">
-                <p class="infoForm">Empresa: <span id="nomeCliente"></span></p>
-                <p class="infoForm">Razão Social: <span id="razaoSocial"></span></p>
-                <p class="infoForm">CNPJ: <span id="cnpj"></span></p>
+                <p class="infoForm">Data do Orçamento: <span id="dataCriacao"></span></p>
                 </div>
                 <div class="labelForm">
+                <p class="infoForm">Empresa: <span id="nomeCliente"></span></p>
+                <p class="infoForm">CNPJ: <span id="cnpj"></span></p>
                 <p class="infoForm">Inscricao Estadual: <span id="inscricaoEstadual"></span></p>
+                </div>
+                <div class="labelForm">
+                <p class="infoForm">Razão Social: <span id="razaoSocial"></span></p>
+                </div>
+                <div class="labelForm">
                 <p class="infoForm">Telefone: <span id="telefone"></span></p>
                 <p class="infoForm">Email: <span id="email"></span></p>
                 </div>
@@ -117,14 +122,13 @@
                 <p class="infoForm">Cep: <span id="cep"></span></p>
                 </div>
                 <div class="labelForm">
-                <p class="infoForm">Data do Orçamento: <span id="dataCriacao"></span></p>
                 <p class="infoForm">Valor Total: <span id="valorOrcamento"></span></p>
                 <p class="infoForm">Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
                 </div>
                 <p>Status Atual: <span id="statusAtual"></span></p>
 
 
-                <h3>Itens do Orçamento:</h3>
+                <p class="titulo">Itens do Orçamento</p>
 
                 <ul id="itens"></ul>
 
