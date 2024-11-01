@@ -67,6 +67,7 @@ function criarProdutoHTMLPasso2(produto) {
 
 // Função que exibe os dados do orçamento para o usuário e também contém os inputs com os dados do orçamento para enviar para o back-end processar o orçamento realizado.
 function criarFormProdutoHTMLPasso3(produto) {
+
     const valorUnitario = parseFloat(produto.valor).toFixed(2);
     const valorUnitarioFormatado = parseFloat(valorUnitario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'});
     const quantidadeFormatada = Number.isInteger(produto.quantidade) 
@@ -86,8 +87,11 @@ function criarFormProdutoHTMLPasso3(produto) {
                 <input type='hidden' name='produtos[]' value='${produto.nome}'>
                 <input type='hidden' name='valores[]' value='${produto.valor}'>
                 <input type='hidden' name='produtoIds[]' value='${produto.id}'>
+                <input type='hidden' name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}'>
+
             </div>
         </div>`;
+
 }
 
 
@@ -296,6 +300,8 @@ function atualizarTotaisPasso3(total, quantidadeTotal) {
         if (quantidadeInputPasso2) {
 
             input.value = quantidadeInputPasso2.value;
+
+
 
         }
 

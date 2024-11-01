@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $produtoIds = $_POST['produtoIds'] ?? [];
         $valorTotal = $_POST['valorTotal'] ?? 0;
 
-        
         // Calcula a quantidade total de produtos.
         $quantidadeTotal = array_sum($quantidades);
 
@@ -54,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Cadastrar o orçamento e os itens no banco de dados
         if ($crudOrcamento->cadastrarOrcamento($orcamentoRealizado, $itens)) {
+
+            $sessao->excluirChaveSessao('orcamento');
 
             $cliente = new Cliente();
         
