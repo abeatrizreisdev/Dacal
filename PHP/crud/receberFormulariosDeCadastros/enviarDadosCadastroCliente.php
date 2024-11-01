@@ -103,7 +103,11 @@
             $cliente->setInscricaoEstadual($inscricaoEstadual);
             $cliente->setTelefone($telefone);
             $cliente->setEmail($email);
-            $cliente->setSenha($senha);
+
+            // Hash/criptografia da senha.
+            $hashedSenha = password_hash($senha, PASSWORD_DEFAULT);
+            $cliente->setSenha($hashedSenha);
+
             $cliente->setTipoConta($tipoConta);
             $cliente->setLogradouro($logradouro);
             $cliente->setBairro($bairro);

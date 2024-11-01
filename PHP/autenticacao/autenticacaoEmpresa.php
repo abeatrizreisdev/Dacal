@@ -44,7 +44,8 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
 
-        $cnpj = $_POST['cnpj'];
+        // Tirando qualquer formatação do cnpj que venha do front.
+        $cnpj = preg_replace('/[^0-9]/', '', $_POST['cnpj']);
         $senha = $_POST['senha'];
         $resultadoAutenticacao = $crudCliente->autenticarCliente($cnpj, $senha);
     
