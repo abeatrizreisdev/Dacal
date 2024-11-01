@@ -21,12 +21,60 @@
 
     $crudCliente = new CrudCliente($conexao);
 
+
+    function validarCNPJ($cnpj) {
+        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
+    
+        if (strlen($cnpj) != 14) {
+            return false;
+        }
+    
+        // Verifica se todos os dígitos são iguais
+        if (preg_match('/(\d)\1{13}/', $cnpj)) {
+            return false;
+        }
+    
+        $tamanho = strlen($cnpj) - 2;
+        $numeros = substr($cnpj, 0, $tamanho);
+        $digitos = substr($cnpj, $tamanho);
+        
+        $soma = 0;
+        $pos = $tamanho - 7;
+        for ($i = $tamanho; $i >= 1; $i--) {
+            $soma += $numeros[$tamanho - $i] * $pos--;
+            if ($pos < 2) {
+                $pos = 9;
+            }
+        }
+        $resultado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
+        if ($resultado != $digitos[0]) {
+            return false;
+        }
+        
+        $tamanho++;
+        $numeros = substr($cnpj, 0, $tamanho);
+        $soma = 0;
+        $pos = $tamanho - 7;
+        for ($i = $tamanho; $i >= 1; $i--) {
+            $soma += $numeros[$tamanho - $i] * $pos--;
+            if ($pos < 2) {
+                $pos = 9;
+            }
+        }
+        $resultado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
+        if ($resultado != $digitos[1]) {
+            return false;
+        }
+        return true;
+    }
+       
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os as suas variáveis.
         //$nome = $_POST['nome'];
         $razaoSocial = $_POST['razaoSocial'];
-        $cnpj = $_POST['cnpjEmpresa'];
+        $cnpj = preg_replace('/[^0-9]/', '', $_POST['cnpjEmpresa']);
         $inscricaoEstadual = $_POST['inscricaoEstadual'];
         $telefone = $_POST['telefone'];
         $email = $_POST['email'];
@@ -38,7 +86,11 @@
         $estado = $_POST['estado'];
         $municipio = $_POST['municipio'];
         $numeroEndereco = $_POST['numeroEndereco'];
-
+        
+        if (!validarCNPJ($cnpj)) {
+            header("Location: ../../login.php?statusCadastroCliente=erro");
+            exit();
+        }
 
         try {
 
@@ -83,8 +135,8 @@
         } catch(Exception $excecao) {
 
             echo "Erro ao cadastrar o cliente: " . $excecao->getMessage();
-            // header("Location: ../../login.php?statusCadastroCliente=erro");
-            // exit();
+            header("Location: ../../login.php?statusCadastroCliente=erro");
+            exit();
 
         }
 

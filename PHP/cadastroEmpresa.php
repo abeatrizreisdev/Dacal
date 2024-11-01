@@ -56,7 +56,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Email</p>
-                            <input type="text" id="email" name="email" class="input" required>
+                            <input type="email" id="email" name="email" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>Senha</p>
@@ -95,6 +95,8 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
             </div>
         </form>
     </div>
+
+    <script src="../JS/cadastrarCliente/validacoesCadastro.js"></script>
 </body>
 
 

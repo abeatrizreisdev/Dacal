@@ -5,11 +5,11 @@ function popUpCadastrarFuncionario() {
     overlay.classList.add('overlay'); // Adiciona a classe de sobreposição
     document.body.appendChild(overlay); // Adiciona a sobreposição ao corpo
     
-    // Crie um elemento div para o pop-up
+    // elemento div para o pop-up
     var popup = document.createElement('div');
-    popup.classList.add('popup'); // Adicione uma classe para estilizar
+    popup.classList.add('popup'); // classe para estilizar
     
-    // Defina o conteúdo do pop-up
+    // conteúdo do pop-up
     popup.innerHTML = `
         <div class="geralCadastro">
             <h1 class="cadastroTitulo">Formulário de Cadastro de Funcionário</h1>
@@ -72,10 +72,10 @@ function popUpCadastrarFuncionario() {
         </div>
     `;
     
-    // Adicione o pop-up ao corpo da página
+    // Adiciona o pop-up ao corpo da página
     document.body.appendChild(popup);
     
-    // Adicione um botão para fechar o pop-up
+    // Adiciona um botão para fechar o pop-up
     var fecharBtn = document.createElement('button');
     fecharBtn.textContent = 'Fechar Página';
     fecharBtn.classList.add('fecharBtn');
@@ -85,7 +85,7 @@ function popUpCadastrarFuncionario() {
     };
     popup.appendChild(fecharBtn);
     
-    // Adicione o event listener ao formulário
+    // Adiciona o event listener ao formulário
     document.getElementById('formCadastroFuncionario').addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário.
         const formData = new FormData(this);
@@ -105,7 +105,12 @@ function popUpCadastrarFuncionario() {
                     window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de gerencia de contas.
                 }, 2000); // Espera de 2 segundos antes de redirecionar.
 
-            } else {
+            } else if(dados.cpfInvalido) {
+
+                toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
+            
+
+            } else if (dados.erro) {
 
                 toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
                 setTimeout(() => {
@@ -114,6 +119,7 @@ function popUpCadastrarFuncionario() {
                 }, 2000); // Espera de 2 segundos antes de redirecionar
 
             }
+
         })
         .catch(erro => {
 
