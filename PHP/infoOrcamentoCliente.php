@@ -1,10 +1,10 @@
 <?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoEmpresa = new Sessao();
+$sessaoEmpresa = new Sessao();
 
-    $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
+$tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
 
 ?>
 
@@ -18,7 +18,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/homeFuncionario.css">
+    <link rel="stylesheet" href="../CSS/infoOrcamentoCliente.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -80,7 +80,8 @@
                 </div>
             </a>
             <br>
-            <a class="abas" href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
+            <a class="abas"
+                href="https://whatsa.me/5571996472678/?t=Vim%20pelo%20site%20DACAL.%20Preciso%20de%20ajuda!">
                 <img src="../IMAGENS/HomeEmpresa/imgAtendimento.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Atendimento</p>
@@ -91,16 +92,17 @@
 
         </div>
         <section class="quadrado">
-            
+            <p class="tituloSuperior">Informações do Orçamento</p>
             <!-- Div responsável por exibir dentro dela as informações de um orçamento especifico que o arquivo "detalhesOrcamento.js irá renderizar.  -->
             <div id="detalhesOrcamento">Carregando...</div>
-            
+            <button class="btnVoltar">
+                <a href='../PHP/orcamentosEmpresa.php'> Voltar </d>
+            </button>
             <script src="../JS/orcamentosEmpresa/detalhesOrcamento.js"></script>
-        
+
         </section>
     </div>
 
 </body>
 
 </html>
-
