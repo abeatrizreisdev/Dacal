@@ -72,7 +72,7 @@
         public function buscarInfoOrcamento($idOrcamento) {
 
             try {
-
+        
                 $sql = "SELECT 
                             {$this->tabela}.numeroOrcamento, 
                             {$this->tabela}.valorOrcamento, 
@@ -92,7 +92,8 @@
                             cliente.numeroEndereco AS numeroEndereco, 
                             itens_orcamento.idProduto, 
                             itens_orcamento.quantidade, 
-                            produto.nomeProduto
+                            produto.nomeProduto,
+                            produto.imagemProduto
                         FROM 
                             {$this->tabela}, itens_orcamento, cliente, produto
                         WHERE 
@@ -100,13 +101,13 @@
                             AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
                             AND {$this->tabela}.idCliente = cliente.idCliente
                             AND itens_orcamento.idProduto = produto.codigoProduto";
-        
+            
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
-        
+            
                 $orcamentoDetalhes = $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
                 
                 if ($orcamentoDetalhes) {
-
+        
                     $orcamento = [
                         "numeroOrcamento" => $orcamentoDetalhes[0]['numeroOrcamento'],
                         "valorOrcamento" => $orcamentoDetalhes[0]['valorOrcamento'],
@@ -124,36 +125,34 @@
                         "estado" => $orcamentoDetalhes[0]['estado'],
                         "municipio" => $orcamentoDetalhes[0]['municipio'],
                         "numeroEndereco" => $orcamentoDetalhes[0]['numeroEndereco'],
-
                         "quantidadeTotal" => array_sum(array_column($orcamentoDetalhes, 'quantidade')),
                         "itens" => array_map(function($item) {
-
                             return [
                                 "idProduto" => $item['idProduto'],
                                 "quantidade" => $item['quantidade'],
-                                "nomeProduto" => $item['nomeProduto']
+                                "nomeProduto" => $item['nomeProduto'],
+                                "imagemProduto" => base64_encode($item['imagemProduto']) // codificando a imagem em base64
                             ];
-                            
                         }, $orcamentoDetalhes)
-
                     ];
-
+        
                     return $orcamento;
-
+        
                 } else {
-
+        
                     return null;
-
+        
                 }
-
+        
             } catch (Exception $excecao) {
-
+        
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
                 return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
-
+        
             }
-
+        
         }
+        
         
         public function atualizarStatusOrcamento($numeroOrcamento, $status) {
 

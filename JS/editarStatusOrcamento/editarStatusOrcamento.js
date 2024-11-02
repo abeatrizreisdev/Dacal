@@ -60,15 +60,15 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const numeroOrcamento = urlParams.get('numeroOrcamento');
-
+    
         if (numeroOrcamento) {
-
+    
             fetch(`../PHP/buscarOrcamentos/buscarInfoOrcamento.php?numeroOrcamento=${numeroOrcamento}`)
                 .then(resposta => resposta.json())
                 .then(dadosOrcamento => {
-
+    
                     if (dadosOrcamento) {
-
+    
                         document.getElementById('numeroOrcamento').value = dadosOrcamento.numeroOrcamento;
                         document.getElementById('nomeCliente').textContent = dadosOrcamento.nomeCliente;
                         document.getElementById('razaoSocial').textContent = dadosOrcamento.razaoSocial;
@@ -85,31 +85,37 @@
                         document.getElementById('valorOrcamento').textContent = formatarValor(dadosOrcamento.valorOrcamento);
                         document.getElementById('dataCriacao').textContent = formatarData(dadosOrcamento.dataCriacao);
                         document.getElementById('statusAtual').textContent = dadosOrcamento.status;
-
+    
                         document.getElementById('status').value = dadosOrcamento.status;
                         document.getElementById('quantidadeTotal').textContent = dadosOrcamento.quantidadeTotal;
-                        document.getElementById('itens').innerHTML = dadosOrcamento.itens.map(item => `<li>${item.nomeProduto}: ${item.quantidade}</li>`).join('');
-
+                        document.getElementById('itens').innerHTML = dadosOrcamento.itens.map(item => `
+                            <li>
+                                <strong>${item.nomeProduto}:</strong> ${item.quantidade}
+                                <br>
+                                <img src="data:image/jpeg;base64,${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;">
+                            </li>`).join('');
+    
                     } else {
-
+    
                         document.getElementById('mensagemErro').textContent = 'Detalhes do orçamento não encontrados.';
-
+    
                     }
+                    
                 })
                 .catch(erro => {
-
+    
                     console.error('Erro:', erro);
-
+    
                     document.getElementById('mensagemErro').textContent = 'Erro ao carregar detalhes do orçamento. Por favor, tente novamente mais tarde.';
-
+    
                 });
-
+    
         } else {
-
+    
             document.getElementById('mensagemErro').textContent = 'Número do orçamento não fornecido.';
-
+    
         }
-
+    
         document.getElementById('formEditarStatus').addEventListener('submit', function(event) {
             event.preventDefault(); // Impede o envio padrão do formulário.
             const formData = new FormData(this);
@@ -120,29 +126,30 @@
             })
             .then(resposta => resposta.json())
             .then(dados => {
-
+    
                 if (dados.sucesso) {
-
+    
                     toastr.success(dados.mensagem || 'Status do orçamento atualizado com sucesso.');
                     
                     setTimeout(() => {
                         window.location.href = "gerenciarOrcamentos.php";
                     }, 2000);
-
+    
                 } else {
-
+    
                     toastr.error(dados.mensagem || 'Erro. O status do orçamento não foi modificado.');
-
+    
                 }
                 
             })
             .catch(erro => {
-
+    
                 console.error('Erro:', erro);
                 toastr.error('Erro ao atualizar status do orçamento. Por favor, tente novamente mais tarde.');
-
+    
             });
-
+    
         });
         
     });
+    
