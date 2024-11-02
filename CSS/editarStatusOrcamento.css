@@ -60,7 +60,7 @@ nav {
     height: 4vh;
     width: 100vw;
     text-align: center;
-    
+
 }
 
 .informativo_superior p {
@@ -136,7 +136,7 @@ nav {
     align-items: center;
 }
 
-.abas{
+.abas {
     background-color: #ffffff;
     height: 20vh;
     width: 20vw;
@@ -146,12 +146,15 @@ nav {
     align-items: center;
     justify-content: space-evenly;
 }
-#nomeEmpresa{
+
+#nomeEmpresa {
     font-weight: bold;
 }
-.tituloAbas{
+
+.tituloAbas {
     font-weight: bold;
 }
+
 .imgPerfil {
     height: 9vh;
 }
@@ -183,28 +186,134 @@ nav {
     height: 80vh;
     margin-right: 5vh;
     margin-top: 3vh;
-    font-family: "Poppins";}
-
-.labelForm{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    font-family: "Poppins";
 }
 
-.infoForm{
+.labelOrca {
+    display: block;
+    width: 65vw;
+    font-family: 'Poppins';
+    font-size: 3vh;
+}
+
+.labelInfo {
+    display: block;
+    width: 39vw;
+    font-family: 'Poppins';
+    font-size: 3vh;
+}
+
+.labelForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly
+}
+
+.infoForm {
     display: block;
     margin-right: 2vh;
 }
 
-
-.titulo{
+.tituloSuperior {
     text-align: center;
-    font-size: 3vh;
+    font-size: 5vh;
     font-weight: 700;
     margin: 1vh;
 }
 
-#formEditarStatus{
-    overflow-y: scroll;
+.titulo {
+    text-align: center;
+    font-size: 3.5vh;
+    font-weight: 700;
+    margin: 1vh;
+}
 
+#formEditarStatus {
+    height: 65vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#itens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itensOrcamento {
+    border: 0.4vh solid #ddd;
+    display: flex;
+    width: 50vw;
+    height: 22vh;
+    margin: 2vh;
+    border-radius: 1vh;
+}
+
+.itensInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 39vw;
+}
+
+.produto-imagem {
+    margin: 1vh;
+    height: 20vh;
+    width: 10vw;
+    object-fit: cover;
+    /* Faz a imagem preencher o contêiner sem distorcer */
+}
+
+.imagemProduto {
+    align-items: center;
+    width: 11vw;
+    height: 22vh;
+}
+
+.btnStatus {
+    width: 65vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#status {
+    font-family: 'Poppins';
+}
+
+.estadoStatus {
+    font-size: 3vh;
+}
+
+.btnAtualizar {
+    background-color: #7ed957;
+    width: 12vw;
+    height: 4vh;
+    border-radius: 3vh;
+    border: #000000 solid 0.4vh;
+    font-family: 'Poppins';
+    font-weight: 600;
+
+}
+
+.btnAtualizar:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.btnVoltar {
+    background-color: #a6a6a6;
+    width: 12vw;
+    height: 4vh;
+    border-radius: 3vh;
+    border: #000000 solid 0.4vh;
+    font-family: 'Poppins';
+    margin-left: 2vw;
+    font-weight: 600;
+}
+
+#btnVoltar:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }

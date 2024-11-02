@@ -122,6 +122,12 @@ $sessaoCliente = new Sessao();
                         <div id="containerProdutos">
                             <!-- Os produtos cadastrados, dependendo da sua categoria, serão exibidos aqui, por meio do arquivo "realizarOrcamento.js" e "buscarProdutosPorCategoria" na pasta "buscarProdutos". -->
                         </div>
+                        <div class="btnCentrais">
+                            <button class="btn" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar
+                                Orçamento</button>
+                            <button class="btn" id="btnFinalizar" type="button"
+                                onclick="abrirPassoAPasso(event, 'passo2')">Proxima Passo</button>
+                        </div>
 
                     </div>
 

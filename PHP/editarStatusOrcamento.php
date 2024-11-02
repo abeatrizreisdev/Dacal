@@ -1,10 +1,10 @@
 <?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+$sessaoFuncionario = new Sessao();
 
-    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -71,11 +71,11 @@
                 </div>
             </a>
 
-            <?php 
+            <?php
 
-                // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
-                if ($tipoContaAutenticada == "admin") {
-                    echo '<br>
+            // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
+            if ($tipoContaAutenticada == "admin") {
+                echo '<br>
                     <a class="abas" href="./visualizarContasCadastradas.php">
                     <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                     <div id="info">
@@ -84,68 +84,63 @@
                         <p class="descricaoAbas">e empresas</p>
                     </div>
                 </a>';
-                }
+            }
 
             ?>
 
         </div>
         <section class="quadrado">
-            
-            <p class="titulo">Editar Status do Orçamento</p>
+
+            <p class="tituloSuperior">Editar Status do Orçamento</p>
 
             <form id="formEditarStatus">
 
                 <input type="hidden" id="numeroOrcamento" name="numeroOrcamento">
-                <div class="labelForm">
-                <p class="infoForm">Data do Orçamento: <span id="dataCriacao"></span></p>
+                <div class="labelOrca">
+                    <p class="infoForm"><strong>Data do Orçamento:</strong> <span id="dataCriacao"></span></p>
+                    <p class="infoForm"><strong>Empresa:</strong> <span id="nomeCliente"></span></p>
+                    <p class="infoForm"><strong>CNPJ: </strong><span id="cnpj"></span></p>
+                    <p class="infoForm"><strong>Inscricao Estadual:</strong> <span id="inscricaoEstadual"></span></p>
+                    <p class="infoForm"><strong>Razão Social:</strong> <span id="razaoSocial"></span></p>
+                    <p class="infoForm"><strong>Telefone:</strong> <span id="telefone"></span></p>
+                    <p class="infoForm"><strong>Email: </strong><span id="email"></span></p>
+                    <p class="infoForm"><strong>Municipio:</strong> <span id="municipio"></span></p>
+                    <p class="infoForm"><strong>Estado:</strong> <span id="estado"></span></p>
+                    <p class="infoForm"><strong>Bairro: </strong><span id="bairro"></span></p>
+                    <p class="infoForm"><strong>Logradouro:</strong> <span id="logradouro"></span></p>
+                    <p class="infoForm"><strong>Número do Endereço: </strong><span id="numeroEndereco"></span></p>
+                    <p class="infoForm"><strong>Cep: </strong><span id="cep"></span></p>
+                    <div class="labelForm">
+                        <p class="infoForm"><strong>Valor Total: </strong><span id="valorOrcamento"></span></p>
+                        <p class="infoForm"><strong>Quantidade Total de Itens: </strong><span id="quantidadeTotal"></span></p>
+                    </div>
                 </div>
-                <div class="labelForm">
-                <p class="infoForm">Empresa: <span id="nomeCliente"></span></p>
-                <p class="infoForm">CNPJ: <span id="cnpj"></span></p>
-                <p class="infoForm">Inscricao Estadual: <span id="inscricaoEstadual"></span></p>
-                </div>
-                <div class="labelForm">
-                <p class="infoForm">Razão Social: <span id="razaoSocial"></span></p>
-                </div>
-                <div class="labelForm">
-                <p class="infoForm">Telefone: <span id="telefone"></span></p>
-                <p class="infoForm">Email: <span id="email"></span></p>
-                </div>
-                <div class="labelForm">
-                <p class="infoForm">Municipio: <span id="municipio"></span></p>
-                <p class="infoForm">Estado: <span id="estado"></span></p>
-                <p class="infoForm">Bairro: <span id="bairro"></span></p>
-                </div>
-                <div class="labelForm">
-                <p class="infoForm">Logradouro: <span id="logradouro"></span></p>
-                <p class="infoForm">Número do Endereço: <span id="numeroEndereco"></span></p>
-                <p class="infoForm">Cep: <span id="cep"></span></p>
-                </div>
-                <div class="labelForm">
-                <p class="infoForm">Valor Total: <span id="valorOrcamento"></span></p>
-                <p class="infoForm">Quantidade Total de Itens: <span id="quantidadeTotal"></span></p>
-                </div>
-                <p>Status Atual: <span id="statusAtual"></span></p>
 
 
                 <p class="titulo">Itens do Orçamento</p>
 
-                <ul id="itens"></ul>
+                <div id="itens"></div>
+                <p class="titulo">Status do Orçamento</p>
+                <div class="btnStatus">
+                    <p class="estadoStatus"><strong>Atual:</strong> <span id="statusAtual"></span></p>
+                    <div class="labelStatus">
+                        <label for="status" class="estadoStatus"><strong>Novo Status:</strong></label>
+                        <select id="status" name="status">
+                            <option value="pendente">Pendente</option>
+                            <option value="finalizado">Finalizado</option>
+                            <option value="negado">Negado</option>
+                        </select>
 
-                <label for="status">Novo Status:</label>
-                <select id="status" name="status">
-                    <option value="pendente">Pendente</option>
-                    <option value="finalizado">Finalizado</option>
-                    <option value="negado">Negado</option>
-                </select>
-
-                <button type="submit">Atualizar Status</button>
-
+                        <button type="submit" class="btnAtualizar">Atualizar Status</button>
+                    </div>
+                </div>
             </form>
-
-            <p id="mensagemSucesso" ></p>
+            <button class="btnVoltar">
+                <a href="../PHP/gerenciarOrcamentos.php">Voltar</a>
+            </button>
+            <p id="mensagemSucesso"></p>
             <p id="mensagemErro"></p>
-            
+
 
         </section>
     </div>

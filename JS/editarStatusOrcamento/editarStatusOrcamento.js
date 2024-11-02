@@ -89,11 +89,17 @@
                         document.getElementById('status').value = dadosOrcamento.status;
                         document.getElementById('quantidadeTotal').textContent = dadosOrcamento.quantidadeTotal;
                         document.getElementById('itens').innerHTML = dadosOrcamento.itens.map(item => `
-                            <li>
-                                <strong>${item.nomeProduto}:</strong> ${item.quantidade}
-                                <br>
-                                <img src="data:image/jpeg;base64,${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;">
-                            </li>`).join('');
+                            <div class="itensOrcamento">
+                                <div class="imagemProduto">
+                                <img class="produto-imagem" src="data:image/jpeg;base64,${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;">
+                                </div>
+                                <div class="itensInfo">
+                                <p class="labelInfo"><strong>${item.nomeProduto}</strong></p>
+                                <p class="labelInfo"><strong>Código:</strong> ${item.idProduto}</p>
+                                <p class="labelInfo"><strong>Quantidade:</strong> ${item.quantidade}</p>
+                                </div>
+                            </div>
+                            `).join('');
     
                     } else {
     
