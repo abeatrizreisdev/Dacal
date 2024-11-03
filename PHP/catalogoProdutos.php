@@ -156,7 +156,14 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
                 <!-- Produtos serão carregados aqui -->
 
             </div>
+            
 
+            <?php
+            if ($tipoContaAutenticada == "admin"| $tipoContaAutenticada == "funcionario") {
+                echo '<a class="btn-ca" href="./cadastrarProduto.php">
+                <button class="btnCadastro">Cadastrar Novo Produto</button>
+            </a>';}
+            ?>
         </section>
     </div>
 

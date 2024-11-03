@@ -49,7 +49,7 @@
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="./homeFuncionario.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
