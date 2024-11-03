@@ -4,11 +4,11 @@ function popUpCadastrarFuncionario() {
     var overlay = document.createElement('div');
     overlay.classList.add('overlay'); // Adiciona a classe de sobreposição
     document.body.appendChild(overlay); // Adiciona a sobreposição ao corpo
-    
+
     // elemento div para o pop-up
     var popup = document.createElement('div');
     popup.classList.add('popup'); // classe para estilizar
-    
+
     // conteúdo do pop-up
     popup.innerHTML = `
         <div class="geralCadastro">
@@ -44,8 +44,12 @@ function popUpCadastrarFuncionario() {
                 <br>
                 <div class="labelCadastro">
                     <p class="tituloEndereco">Endereço</p>
-                    <input type="text" name="estado" class="inputsAPI" required>
-                    <input type="text" name="municipio" class="inputsAPI" required>
+                        <select id="estado" name="estado" class="inputAPI" required>
+                            <option value="">Selecione um estado</option>
+                        </select>
+                        <select id="municipio" name="municipio" class="inputAPI" required>
+                            <option value="">Selecione um município</option>
+                        </select>
                 </div>
                 <div class="labelCadastro">
                     <div class="labelOne">
@@ -70,11 +74,12 @@ function popUpCadastrarFuncionario() {
                 <button type="submit" class="Cadastrar">Cadastrar Funcionario</button>
             </form>
         </div>
+    <script src="../JS/scriptsApi/ibge.js"></script>
     `;
-    
+
     // Adiciona o pop-up ao corpo da página
     document.body.appendChild(popup);
-    
+
     // Adiciona um botão para fechar o pop-up
     var fecharBtn = document.createElement('button');
     fecharBtn.textContent = 'Fechar Página';
@@ -84,52 +89,52 @@ function popUpCadastrarFuncionario() {
         overlay.remove(); // Remove a sobreposição
     };
     popup.appendChild(fecharBtn);
-    
+
     // Adiciona o event listener ao formulário
-    document.getElementById('formCadastroFuncionario').addEventListener('submit', function(event) {
+    document.getElementById('formCadastroFuncionario').addEventListener('submit', function (event) {
         event.preventDefault(); // Impede o envio padrão do formulário.
         const formData = new FormData(this);
-        
+
         fetch('../PHP/crud/receberFormulariosDeCadastros/enviarDadosCadastroFuncionario.php', {
             method: 'POST',
             body: formData
         })
-        .then(resposta => resposta.json())
-        .then(dados => {
+            .then(resposta => resposta.json())
+            .then(dados => {
 
-            if (dados.sucesso) {
+                if (dados.sucesso) {
 
-                toastr.success(dados.mensagem || 'Funcionário cadastrado com sucesso.');
+                    toastr.success(dados.mensagem || 'Funcionário cadastrado com sucesso.');
 
-                setTimeout(() => {
-                    window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de gerencia de contas.
-                }, 2000); // Espera de 2 segundos antes de redirecionar.
+                    setTimeout(() => {
+                        window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de gerencia de contas.
+                    }, 2000); // Espera de 2 segundos antes de redirecionar.
 
-            } else if(dados.cpfInvalido) {
+                } else if (dados.cpfInvalido) {
 
-                toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
-            
+                    toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
 
-            } else if (dados.erro) {
 
-                toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
-                setTimeout(() => {
+                } else if (dados.erro) {
 
-                    window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de erro
-                }, 2000); // Espera de 2 segundos antes de redirecionar
+                    toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
+                    setTimeout(() => {
 
-            }
+                        window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de erro
+                    }, 2000); // Espera de 2 segundos antes de redirecionar
 
-        })
-        .catch(erro => {
+                }
 
-            console.error('Erro:', erro);
-            toastr.error('Erro ao cadastrar o funcionário. Por favor, tente novamente mais tarde.');
-           // setTimeout(() => {
-             //   window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a gerencia de contas
-           // }, 7000); // Espera de 2 segundos antes de redirecionar
+            })
+            .catch(erro => {
 
-        });
+                console.error('Erro:', erro);
+                toastr.error('Erro ao cadastrar o funcionário. Por favor, tente novamente mais tarde.');
+                // setTimeout(() => {
+                //   window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a gerencia de contas
+                // }, 7000); // Espera de 2 segundos antes de redirecionar
+
+            });
 
     });
 }

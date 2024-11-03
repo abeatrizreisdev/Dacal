@@ -66,8 +66,12 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     <br>
                     <div class="endereço">
                         <p id="">Endereço</p>
-                        <input type="text" id="estado" name="estado" class="inputAPI" required>
-                        <input type="text" id="municipio" name="municipio" class="inputAPI" required>
+                        <select id="estado" name="estado" class="inputAPI" required>
+                            <option value="">Selecione um estado</option>
+                        </select>
+                        <select id="municipio" name="municipio" class="inputAPI" required>
+                            <option value="">Selecione um município</option>
+                        </select>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
@@ -101,6 +105,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
     </div>
 
     <script src="../JS/cadastrarCliente/validacoesCadastro.js"></script>
+    <script src="../JS/scriptsApi/ibge.js"></script>
 </body>
 
 
