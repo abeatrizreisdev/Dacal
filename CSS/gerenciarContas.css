@@ -280,13 +280,14 @@ copiar e colar a partir daqui no csss de la
 
 #perfilImg {
     height: 10vh;
-    padding-top: 1vh;
+    margin: 1vh;
 }
 
 .infoPerfil,
 .perfilFuncionario {
     padding-top: 1vh;
-    width: 18vw;
+    width: 25vw;
+    text-align: justify;
 }
 
 .perfilEmpresa {

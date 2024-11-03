@@ -239,6 +239,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    margin-top: 1vh;
 }
 
 .endereço {
@@ -247,6 +248,7 @@ nav {
     justify-content: space-evenly;
     font-family: "Poppins";
     font-size: 3vh;
+    margin-top: 1vh;
 }
 
 .inputAPI {
@@ -259,7 +261,6 @@ nav {
     font-family: "Poppins";
     font-size: 1.7vw;
     font-weight: 700;
-
 }
 
 .alterarDados {
@@ -309,8 +310,12 @@ nav {
     border: 0.5vh solid;
 }
 
+#razaoSocial{
+    width: 39vw;
+}
+
 #cnpjEmpresa,
-#razaoSocial {
+#nomeFantasia {
     width: 18vw;
 }
 
@@ -361,6 +366,7 @@ nav {
     font-family: "Poppins";
     font-weight: 700;
     cursor: pointer;
+    margin-top: 1vh;
 }
 
 #btnApagar {
