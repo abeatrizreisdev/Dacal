@@ -96,7 +96,7 @@ $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
             <!-- Div responsável por exibir dentro dela as informações de um orçamento especifico que o arquivo "detalhesOrcamento.js irá renderizar.  -->
             <div id="detalhesOrcamento">Carregando...</div>
             <button class="btnVoltar">
-                <a href='../PHP/orcamentosEmpresa.php'> Voltar </d>
+                <a href='../PHP/orcamentosEmpresa.php'>Voltar a página</d>
             </button>
             <script src="../JS/orcamentosEmpresa/detalhesOrcamento.js"></script>
 
