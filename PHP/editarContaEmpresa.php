@@ -18,7 +18,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/editarPerfilClienteViaAdm.css">
+    <link rel="stylesheet" href="../CSS/editarContaEmpresa.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -71,7 +71,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                 </div>
             </a>
 
-            <?php 
+            <?php
 
             if ($contaAutenticada != 'admin' && $contaAutenticada != 'funcionario') {
 
@@ -98,7 +98,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
 
             ?>
 
-            <?php 
+            <?php
 
             // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
             if ($contaAutenticada == "admin") {
@@ -123,8 +123,9 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
 
                         <p id="titulo">Dados da Conta</p>
 
-                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados" id="formEditarConta">
-                            
+                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados"
+                            id="formEditarConta">
+
                             <input type="hidden" name="idCliente" id="idCliente">
 
                             <div class="infoGerais">
@@ -151,8 +152,12 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                             <br>
                             <div class="endereço">
                                 <p id="">Endereço</p>
-                                <input type="text" id="estado" name="estado" class="inputAPI">
-                                <input type="text" id="municipio" name="municipio" class="inputAPI">
+                                <select id="estado" name="estado" class="inputAPI" required>
+                                    <option value="">Selecione um estado</option>
+                                </select>
+                                <select id="municipio" name="municipio" class="inputAPI" required>
+                                    <option value="">Selecione um município</option>
+                                </select>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
@@ -181,7 +186,8 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                         </form>
                     </div>
                     <div class="alterarDados">
-                        <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST" class="alterarEmail">
+                        <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST"
+                            class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
                             <input type="hidden" name="idClienteEmail" id="idClienteEmail">
                             <input type="email" id="trocarEmail" name="email" class="input">
@@ -194,6 +200,9 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                             <input type="password" id="trocarSenha" name="senha" class="input">
                             <button type="submit" class="btnAlterarSenha">Alterar Senha</button>
                         </form>
+                        <a href="./gerenciarContas.php">
+                            <button type="submit" class="btnVoltar">Voltar a página</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -202,7 +211,8 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
 
 
     <script src="../JS/editarCliente_adm/carregarDadosCliente.js"></script>
-    
+    <script src="../JS/scriptsApi/ibge.js"></script>
+
 </body>
 
 </html>
