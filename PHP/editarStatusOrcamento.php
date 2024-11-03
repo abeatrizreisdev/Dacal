@@ -30,7 +30,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
+            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? './homeAdm.php' : ($tipoContaAutenticada == 'funcionario' ? './homeFuncionario.php' : './homeEmpresa.php'); ?>">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -62,7 +62,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="<?php echo $tipoContaAutenticada == 'admin' ? './perfilADM.php' : ($tipoContaAutenticada == 'funcionario' ? './perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Meu Perfil</p>
@@ -76,7 +76,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             // Já se a conta que está logada for adm, então aparecerá a opção de gerencia de contas que é a funcionalidade que só esse tipo de conta tem.
             if ($tipoContaAutenticada == "admin") {
                 echo '<br>
-                    <a class="abas" href="./visualizarContasCadastradas.php">
+                    <a class="abas" href="./gerenciarContas.php">
                     <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                     <div id="info">
                         <p class="tituloAbas"> Gerenciar Contas</p>

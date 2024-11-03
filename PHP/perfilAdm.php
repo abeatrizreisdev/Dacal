@@ -29,8 +29,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="./homeFuncionario.php">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="./homeAdm.php">Homepage</li></a>
+            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
 
@@ -71,7 +71,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 </div>
             </a>
             <br>
-            <a class="abas" href="./visualizarContasCadastradas.php">
+            <a class="abas" href="./gerenciarContas.php">
                 <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>

@@ -113,7 +113,6 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/gerenciarContas/statusAlteracaoDeContas.js"></script>
     <script src="../JS/cadastrarFuncionario/cadastrarFuncionario.js"></script>
-    <script src="../JS/scriptsApi/ibge.js"></script>
 
 </body>
 
