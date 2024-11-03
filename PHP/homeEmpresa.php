@@ -113,7 +113,7 @@ $sessaoCliente = new Sessao();
                         pela sua empresa
                         nesse
                         site e será onde ira iniciar novos orçamentos.<br>
-                        Na aba <strong>Atendimento</strong>, você terá acesso a contatodireto com algum funcionário da
+                        Na aba <strong>Atendimento</strong>, você terá acesso a contato direto com algum funcionário da
                         nossa empresa.
                     </p>
                 </div>

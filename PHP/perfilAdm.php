@@ -115,13 +115,41 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                                 </div>
 
                             </div>
-                            <div class="endereco">
-                                <p>Endereço</p>
-                                <input type="text" id="endereco" name="endereco" class="inputEndereco"
-                                    value="<?php echo $sessaoFuncionario->getValorSessao('logradouro') . ", " . $sessaoFuncionario->getValorSessao('bairro') . ", " . $sessaoFuncionario->getValorSessao('cidade') . "/" . $sessaoFuncionario->getValorSessao("estado") . ", " . $sessaoFuncionario->getValorSessao('cep'); ?>">
+                            <div class="endereço">
+                                <p id="">Endereço</p>
+                                <input type="text" id="estado" name="estado" class="inputAPI"
+                                    value="<?php echo $sessaoFuncionario->getValorSessao('estado'); ?>">
+                                <input type="text" id="municipio" name="municipio" class="inputAPI"
+                                    value="<?php echo $sessaoFuncionario->getValorSessao('municipio'); ?>">
                             </div>
-
-
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Logradouro</p>
+                                    <input type="text" id="logradouro" name="logradouro" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('logradouro'); ?>">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>Nº</p>
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('numeroEndereco'); ?>">
+                                </div>
+                            </div>
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Bairro</p>
+                                    <input type="text" id="bairro" name="bairro" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('bairro'); ?>">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>CEP</p>
+                                    <input type="text" id="cep" name="cep" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('cep'); ?>">
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <br>
+                                <button type="submit" id="btnSalvar">Salvar Alterações</button>
+                            </div>
                         </div>
                     </div>
                 </div>

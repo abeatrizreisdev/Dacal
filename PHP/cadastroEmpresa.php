@@ -36,31 +36,31 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>CNPJ da Empresa</p>
-                            <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" required>
+                            <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" placeholder="Digite o CNPJ da Empresa" required>
                         </div>
                         <div class="parteGeral">
                             <p>Razão Social</p>
-                            <input type="text" id="razaoSocial" name="razaoSocial" class="input" required>
+                            <input type="text" id="razaoSocial" name="razaoSocial" class="input" placeholder="Digite a Razão Social" required>
                         </div>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Inscrição Estadual</p>
-                            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" class="input" required>
+                            <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" placeholder="Digite a inscricao Estadual" class="input" required>
                         </div>
                         <div class="parteGeral">
                             <p>Telefone</p>
-                            <input type="text" id="telefone" name="telefone" class="input" required>
+                            <input type="text" id="telefone" name="telefone" class="input" placeholder="Digite o número de Telefone" required>
                         </div>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Email</p>
-                            <input type="email" id="email" name="email" class="input" required>
+                            <input type="email" id="email" name="email" class="input" placeholder="Digite o endereço E-mail" required>
                         </div>
                         <div class="parteGeral">
                             <p>Senha</p>
-                            <input type="text" id="senha" name="senha" class="input" required>
+                            <input type="text" id="senha" name="senha" class="input" placeholder="Digite a senha" required>
                         </div>
                     </div>
                     <br>
@@ -76,21 +76,21 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Logradouro</p>
-                            <input type="text" id="logradouro" name="logradouro" class="input" required>
+                            <input type="text" id="logradouro" name="logradouro" class="input" placeholder="Digite a Rua/Avenida" required>
                         </div>
                         <div class="parteGeral">
                             <p>Nº</p>
-                            <input type="text" id="numeroEndereco" name="numeroEndereco" class="input" required>
+                            <input type="text" id="numeroEndereco" name="numeroEndereco" class="input" placeholder="Número" required>
                         </div>
                     </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>Bairro</p>
-                            <input type="text" id="bairro" name="bairro" class="input" required>
+                            <input type="text" id="bairro" name="bairro" class="input" placeholder="Digite o Bairro" required>
                         </div>
                         <div class="parteGeral">
                             <p>CEP</p>
-                            <input type="text" id="cep" name="cep" class="input" required>
+                            <input type="text" id="cep" name="cep" class="input" placeholder="Digite o CEP da cidade" required>
                         </div>
                     </div>
                     <label>
