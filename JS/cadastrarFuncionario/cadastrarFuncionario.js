@@ -74,7 +74,8 @@ function popUpCadastrarFuncionario() {
                 <button type="submit" class="Cadastrar">Cadastrar Funcionario</button>
             </form>
         </div>
-    <script src="../JS/scriptsApi/ibge.js"></script>
+        <script src="../JS/scriptsApi/ibge.js"></script>
+
     `;
 
     // Adiciona o pop-up ao corpo da página
