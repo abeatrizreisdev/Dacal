@@ -1,64 +1,79 @@
 <?php
-require '../conexaoBD/conexaoBD.php';
-require "../crud/crudProduto.php";
-require "../conexaoBD/configBanco.php";
-require "../sessao/sessao.php";
+    require '../conexaoBD/conexaoBD.php';
+    require "../crud/crudProduto.php";
+    require "../conexaoBD/configBanco.php";
+    require "../sessao/sessao.php";
 
-$conexao = new ConexaoBD();
-$conexao->setHostBD(BD_HOST);
-$conexao->setPortaBD(BD_PORTA);
-$conexao->setEschemaBD(BD_ESCHEMA);
-$conexao->setSenhaBD(BD_PASSWORD);
-$conexao->setUsuarioBD(BD_USERNAME);
-$conexao->getConexao(); // Iniciando a conexão com o banco.
+    $conexao = new ConexaoBD();
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
+    $conexao->getConexao(); // Iniciando a conexão com o banco.
 
-$sessao = new Sessao();
-$crudProduto = new CrudProduto($conexao);
+    if ($conexao->getConexao() === null) {
 
-if (isset($_GET['produtoNome'])) {
+        echo json_encode(['error' => 'Erro na conexão com o banco de dados']);
+        exit();
 
-    $nomeProduto = $_GET['produtoNome'];
+    }
 
-    $produtos = $crudProduto->buscarProdutosPorNome($nomeProduto); 
+    $sessao = new Sessao();
+    $crudProduto = new CrudProduto($conexao);
 
-    if ($produtos) {
-        
-        foreach ($produtos as $produto) {
+    $resposta = array();
 
-            $idProduto = $produto['codigoProduto'];
-            $imagem_base64 = base64_encode($produto['imagemProduto']); // Converte a imagem do produto que está salva no banco de dados no formato BLOB para base64
-            $tipoConta = $sessao->getValorSessao('tipoConta');
+    if (isset($_GET['produtoNome'])) {
 
-            // Verifica se o usuário é funcionário ou admin
-            if ($tipoConta == "funcionario" || $tipoConta == "admin") {
+        $nomeProduto = $_GET['produtoNome'];
 
-                echo "<div class='produtoEspecifico'>";
-                echo "<a class='linkDoProduto' href='./buscarProdutos/detalhesProduto.php?id=$idProduto'>" . "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'> </a>";
-                echo "<div class='botoesProduto'>";
-                echo "<a class='botao' id='botaoVisualizar' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar" . "</button>" . "</a>";
-                echo "<a class='botao' id='botaoRemover'>" . "<button onclick='excluirProduto($idProduto)'>Remover" . "</button></a>";
-                echo "<a class='botao' id='botaoEditar' href='./editarProduto.php?id=$idProduto'>" . "<button>Editar" . "</button></a>";
-                echo "</div>";
-                echo "</div>"; // Fechamento da div 'produtoEspecifico'
+        $produtos = $crudProduto->buscarProdutosPorNome($nomeProduto);
 
-            } else {
+        if ($produtos) {
 
-                echo "<div class='produtoEspecifico'>";
-                echo "<a class='linkDoProduto' href='./buscarProdutos/detalhesProduto.php?id=$idProduto'>" . "<img src='data:image/png;base64," . $imagem_base64 . "' alt='" . "'> </a>";
-                echo "<a class='visualizarDetalhes' href='./buscarProdutos/detalhesProduto.php?id=$idProduto''>" . "<button>Visualizar Detalhes" . "</button>" . "</a>";
-                echo "</div>"; // Fechamento da div 'produtoEspecifico'
+            foreach ($produtos as &$produto) {
+
+                // Converte a imagem do produto que está salva no banco de dados no formato BLOB para base64.
+                $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
+
+                // Sanitiza dados para garantir que sejam codificados em UTF-8.
+                $produto = array_map('utf8_encode', $produto);
 
             }
+
+            $resposta['produtos'] = $produtos;
+            $resposta['tipoConta'] = $sessao->getValorSessao('tipoConta');
+
+        } else {
+
+            $resposta['erro'] = "Nenhum produto encontrado com este nome.";
+
         }
 
     } else {
 
-        echo "<div>Nenhum produto encontrado com este nome. </div>";
+        $resposta['erro'] = "Valor do nome do produto inválido.";
 
     }
-} else {
 
-    echo "<div>Valor do nome do produto inválido. </div>";
+    // Limpa o buffer de saída para evitar conteúdo inesperado
+    if (ob_get_length()) ob_clean();
+
+    header('Content-Type: application/json');
+
+    $jsonResposta = json_encode($resposta);
+
+    // Verifica se o JSON está sendo gerado corretamente
+    if ($jsonResposta === false) {
+
+        $jsonErro = json_last_error_msg();
+        echo json_encode(['error' => 'Erro ao gerar JSON: ' . $jsonErro]);
+
+        exit();
+
+    }
+
+    echo $jsonResposta;
     
-}
 ?>
