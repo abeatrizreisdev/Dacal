@@ -53,7 +53,7 @@ $sessaoCliente = new Sessao();
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem vinda,</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nomeFantasia'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -102,6 +102,13 @@ $sessaoCliente = new Sessao();
 
                             <input type="hidden" name="idCliente" id="idCliente"
                                 value="<?php echo $sessaoCliente->getValorSessao('idCliente'); ?>">
+                                <div class="infoGerais">
+                                    <div class="parteGeral">
+                                        <p>Razão Social</p>
+                                        <input type="text" id="razaoSocial" name="razaoSocial" class="input"
+                                            value="<?php echo $sessaoCliente->getValorSessao('razaoSocial'); ?>">
+                                    </div>
+                                </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
@@ -109,9 +116,9 @@ $sessaoCliente = new Sessao();
                                         value="<?php echo $sessaoCliente->getValorSessao('cnpj') ?>">
                                 </div>
                                 <div class="parteGeral">
-                                    <p>Razão Social</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input"
-                                        value="<?php echo $sessaoCliente->getValorSessao('razaoSocial'); ?>">
+                                    <p>Nome Fantasia</p>
+                                    <input type="text" id="nomeFantasia" name="nomeFantasia" class="input"
+                                        value="<?php echo $sessaoCliente->getValorSessao('nomeFantasia'); ?>">
                                 </div>
                             </div>
                             <div class="infoGerais">
@@ -126,7 +133,6 @@ $sessaoCliente = new Sessao();
                                         value="<?php echo $sessaoCliente->getValorSessao('telefone'); ?>">
                                 </div>
                             </div>
-                            <br>
                             <div class="endereço">
                                 <p id="">Endereço</p>
                                 <select id="estado" name="estado" class="inputAPI" required>
@@ -163,7 +169,6 @@ $sessaoCliente = new Sessao();
                                 </div>
                             </div>
                             <div class="btn">
-                                <br>
                                 <button type="submit" id="btnSalvar">Salvar Alterações</button>
                             </div>
                         </form>

@@ -31,12 +31,12 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
 
         <ul class="nav-list">
             <li><a href="<?php
-            if ($sessao->getValorSessao('tipo_usuario') === 'Empresa') {
-                echo './homeEmpresa.php';
-            } elseif ($sessao->getValorSessao('tipoConta') === 'admin') {
+            if ($sessao->getValorSessao('tipoConta') === 'admin') {
                 echo './homeAdm.php';
             } elseif ($sessao->getValorSessao('tipoConta') === 'funcionario') {
                 echo './homeFuncionario.php';
+            } else {
+                echo './homeEmpresa.php';
             }
             ?>">Homepage
             </li></a>
@@ -59,19 +59,29 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
             <br>
             <br>
             <a class="abas" href="<?php
-            if ($sessao->getValorSessao('tipo_usuario') === 'Empresa') {
-                echo './homeEmpresa.php';
-            } elseif ($sessao->getValorSessao('tipoConta') === 'admin') {
+            if ($sessao->getValorSessao('tipoConta') === 'admin') {
                 echo './homeAdm.php';
             } elseif ($sessao->getValorSessao('tipoConta') === 'funcionario') {
                 echo './homeFuncionario.php';
+            } else {
+                echo './homeEmpresa.php';
             }
             ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
-                    <p id="nomeEmpresa"> <?php echo $sessao->getValorSessao('razaoSocial'); ?> </p>
-                    <p id="nomeEmpresa"> <?php echo $sessao->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php
+                    if ($sessao->getValorSessao('tipoConta') === 'admin' || $sessao->getValorSessao('tipoConta') === 'funcionario') {
+                        ?>
+                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('nome'); ?></p>
+                        <?php
+                    } else {
+                        ?>
+                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('razaoSocial'); ?></p>
+                        <?php
+                    }
+                    ?>
+                    </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>
@@ -156,13 +166,14 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
                 <!-- Produtos serão carregados aqui -->
 
             </div>
-            
+
 
             <?php
-            if ($tipoContaAutenticada == "admin"| $tipoContaAutenticada == "funcionario") {
+            if ($tipoContaAutenticada == "admin" | $tipoContaAutenticada == "funcionario") {
                 echo '<a class="btn-ca" href="./cadastrarProduto.php">
                 <button class="btnCadastro">Cadastrar Novo Produto</button>
-            </a>';}
+            </a>';
+            }
             ?>
         </section>
     </div>

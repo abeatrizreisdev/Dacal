@@ -30,17 +30,22 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
             class="formularioLogin">
             <div class="infoConta">
                 <div class="dadosGerais">
-                    <br>
                     <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
                     <p id="titulo">CADASTRO</p>
+                    <div class="infoGerais">
+                        <div class="parteGeral">
+                            <p>Razão Social</p>
+                            <input type="text" id="razaoSocial" name="razaoSocial" class="input" placeholder="Digite a Razão Social" required>
+                        </div>
+                    </div>
                     <div class="infoGerais">
                         <div class="parteGeral">
                             <p>CNPJ da Empresa</p>
                             <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input" placeholder="Digite o CNPJ da Empresa" required>
                         </div>
                         <div class="parteGeral">
-                            <p>Razão Social</p>
-                            <input type="text" id="razaoSocial" name="razaoSocial" class="input" placeholder="Digite a Razão Social" required>
+                            <p>Nome Fantasia</p>
+                            <input type="text" id="nomeFantasia" name="nomeFantasia" class="input" placeholder="Máximo de 21 caracteres" required>
                         </div>
                     </div>
                     <div class="infoGerais">
@@ -63,7 +68,6 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                             <input type="text" id="senha" name="senha" class="input" placeholder="Digite a senha" required>
                         </div>
                     </div>
-                    <br>
                     <div class="endereço">
                         <p id="">Endereço</p>
                         <select id="estado" name="estado" class="inputAPI" required>
@@ -97,8 +101,11 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                         <input type="checkbox" id="checkbox" required>
                         Declaro que as informações acima são verdadeiras
                     </label>
-                    <br>
                     <button type="submit" id="btnCadastro">Cadastrar</button>
+                    <div>
+                    <a href="./login.php" id="btnCancelar">Cancelar</a>
+
+                    </div>
                 </div>
             </div>
         </form>

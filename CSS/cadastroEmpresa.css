@@ -67,7 +67,7 @@ body {
 #tituloInfo {
     text-align: center;
     font-family: 'Poppins';
-    padding-top: 0.5vw;
+
     font-size: 2vw;
     font-weight: 700;
 }
@@ -84,6 +84,7 @@ body {
     justify-content: space-evenly;
     font-family: "Poppins";
     font-size: 3vh;
+    margin-top: 1vh;
 }
 
 .inputAPI {
@@ -106,8 +107,14 @@ body {
 }
 
 #cnpjEmpresa,
-#razaoSocial {
+#nomeFantasia {
     width: 18vw;
+}
+
+#razaoSocial{
+    width: 39vw;
+
+
 }
 
 #inscricaoEstadual {
@@ -143,4 +150,22 @@ body {
 
 #cep {
     width: 12vw;
+}
+
+#btnCancelar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: black;
+    border: black solid 0.4vh;
+    height: 3vh;
+    border-radius: 4vh;
+    font-size: 2vh;
+    font-family: "Poppins";
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    width: 6vw;
+    text-align: center;
 }
