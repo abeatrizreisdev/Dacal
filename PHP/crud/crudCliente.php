@@ -104,7 +104,9 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE nomeEmpresa LIKE :nome";
+                $nomeCliente = "%" . $nomeCliente . "%"; 
+
+                $sql = "SELECT * FROM {$this->tabela} WHERE nomeFantasia LIKE :nome";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['nome' => $nomeCliente]);
                 

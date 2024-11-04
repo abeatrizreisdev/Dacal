@@ -14,30 +14,43 @@
 
     // Função para buscar uma empresa pelo nome.
     function buscarEmpresaPorNome() {
+
         const nome = document.getElementById('inputNome').value;
         const container = document.getElementById('container-funcionarios');
         container.innerHTML = '';
     
         fetch(`../PHP/buscarCliente/buscarClientePeloNome.php?nome=${nome}`)
             .then(resposta => {
+
                 if (!resposta.ok) {
                     throw new Error('Erro na resposta do servidor');
                 }
+
                 return resposta.json();
             })
             .then(dados => {
+
                 if (dados && Array.isArray(dados) && dados.length > 0) {
+
                     dados.forEach(empresa => exibirEmpresa(empresa, container));
+
                     let mensagemErro = document.getElementById('mensagem-erro');
                     if (mensagemErro) mensagemErro.style.display = 'none'; // Ocultando a mensagem de erro
+
                 } else {
+
                     exibirMensagemErro(container, dados.error || 'Cliente não encontrado.');
+
                 }
+
             })
             .catch(erro => {
+
                 console.error('Erro ao buscar os dados da empresa:', erro);
                 exibirMensagemErro(container, 'Ocorreu um erro ao buscar a empresa. Por favor, tente novamente mais tarde.');
+
             });
+
     }
     
     
@@ -115,15 +128,18 @@
 
         const div = document.createElement('div');
 
+        console.log(empresa.idCliente)
+        console.log(empresa.nomeFantasia)
+
         div.classList.add('empresa');
         div.innerHTML = `
             <div class="perfil">
             <div class="perfilAjustar">
             <img src="../IMAGENS/HomeEmpresa/imgUser.png" id=perfilImg>
             <div class="infoPerfil">
-            <p class="perfilEmpresa">${empresa.nomeEmpresa}</p>
+            <p class="perfilEmpresa">${empresa.nomeFantasia}</p>
             <button class ="btnExcluir" onclick="excluirPerfilEmpresa('${empresa.idCliente}')"> Excluir Conta </button>
-            <button class ="btnEditar" onclick="editarPerfilEmpresa('${empresa.nomeEmpresa}')"> Editar Perfil </button>
+            <button class ="btnEditar" onclick="editarPerfilEmpresa('${empresa.nomeFantasia}')"> Editar Perfil </button>
             </div>
             </div>
             </div>
@@ -143,7 +159,7 @@
                 const url = new URL('../Dacal/PHP/editarContaEmpresa.php', window.location.origin);
 
                 url.searchParams.set('idEmpresa', dados.idCliente);
-                url.searchParams.set('nomeEmpresa', dados.nomeEmpresa);
+                url.searchParams.set('nomeFantasia', dados.nomeEmpresa);
                 url.searchParams.set('inscricaoEstadual', dados.inscricaoEstadual);
                 url.searchParams.set('razaoSocial', dados.razaoSocial);
                 url.searchParams.set('cnpjEmpresa', dados.cnpj);

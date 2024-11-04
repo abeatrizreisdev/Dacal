@@ -1,6 +1,7 @@
 <?php
 
 require "./sessao/sessao.php";
+require "./carregarApiIbge/carregarApiNosPerfis.php";
 
 $sessaoCliente = new Sessao();
 
@@ -29,7 +30,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
 
         <ul class="nav-list">
-            <li><a href="homeEmpresa.php">Homepage</li></a>
+            <li><a href="homeAdm.php">Homepage</li></a>
             <li><a href="catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
@@ -154,9 +155,27 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                                 <p id="">Endereço</p>
                                 <select id="estado" name="estado" class="inputAPI" required>
                                     <option value="">Selecione um estado</option>
+                                    <?php
+                                    $estados = getEstados();
+                                    $estadoSelecionado = $sessaoCliente->getValorSessao('estado');
+                                    foreach ($estados as $estado) {
+                                        $selected = ($estado['sigla'] == $estadoSelecionado) ? 'selected' : '';
+                                        echo "<option value='{$estado['sigla']}' {$selected}>{$estado['nome']}</option>";
+                                    }
+                                    ?>
                                 </select>
                                 <select id="municipio" name="municipio" class="inputAPI" required>
                                     <option value="">Selecione um município</option>
+                                    <?php
+                                    if (!empty($estadoSelecionado)) {
+                                        $municipios = getMunicipios($estadoSelecionado);
+                                        $municipioSelecionado = $sessaoCliente->getValorSessao('municipio');
+                                        foreach ($municipios as $municipio) {
+                                            $selected = ($municipio['nome'] == $municipioSelecionado) ? 'selected' : '';
+                                            echo "<option value='{$municipio['nome']}' {$selected}>{$municipio['nome']}</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="infoGerais">

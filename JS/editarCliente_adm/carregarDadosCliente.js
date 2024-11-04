@@ -85,6 +85,7 @@ document.getElementById('formEditarConta').addEventListener('submit', function(e
         return {
 
             id: parametros.get('idEmpresa'),
+            nomeFantasia: parametros.get('nomeFantasia'),
             cnpj: parametros.get('cnpjEmpresa'),
             inscricaoEstadual: parametros.get('inscricaoEstadual'),
             razaoSocial: parametros.get('razaoSocial'),

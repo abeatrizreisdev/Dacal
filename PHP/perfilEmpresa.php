@@ -1,6 +1,7 @@
 <?php
 
 require "./sessao/sessao.php";
+include './carregarApiIbge/carregarApiNosPerfis.php';
 
 $sessaoCliente = new Sessao();
 
@@ -136,12 +137,28 @@ $sessaoCliente = new Sessao();
                             <div class="endereço">
                                 <p id="">Endereço</p>
                                 <select id="estado" name="estado" class="inputAPI" required>
-                                    <option value="<?php echo $sessaoCliente->getValorSessao('estado'); ?>">Selecione um
-                                        estado</option>
+                                    <option value="">Selecione um estado</option>
+                                    <?php
+                                    $estados = getEstados();
+                                    $estadoSelecionado = $sessaoCliente->getValorSessao('estado');
+                                    foreach ($estados as $estado) {
+                                        $selected = ($estado['sigla'] == $estadoSelecionado) ? 'selected' : '';
+                                        echo "<option value='{$estado['sigla']}' {$selected}>{$estado['nome']}</option>";
+                                    }
+                                    ?>
                                 </select>
                                 <select id="municipio" name="municipio" class="inputAPI" required>
-                                    <option value="<?php echo $sessaoCliente->getValorSessao('municipio'); ?>">Selecione
-                                        um município</option>
+                                    <option value="">Selecione um município</option>
+                                    <?php
+                                    if (!empty($estadoSelecionado)) {
+                                        $municipios = getMunicipios($estadoSelecionado);
+                                        $municipioSelecionado = $sessaoCliente->getValorSessao('municipio');
+                                        foreach ($municipios as $municipio) {
+                                            $selected = ($municipio['nome'] == $municipioSelecionado) ? 'selected' : '';
+                                            echo "<option value='{$municipio['nome']}' {$selected}>{$municipio['nome']}</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="infoGerais">

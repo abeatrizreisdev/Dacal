@@ -19,7 +19,9 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         try {
+
             $id = $_POST['idCliente'];
+            $nomeFantasia = $_POST['nomeFantasia'];
             $razaoSocial = $_POST['razaoSocial'];
             $estado = $_POST['estado'];
             $municipio = $_POST['municipio'];
@@ -35,6 +37,7 @@
             
             $cliente = new Cliente();
             $cliente->setIdCliente($id);
+            $cliente->setNome($nomeFantasia);
             $cliente->setCnpj($cnpj);
             $cliente->setRazaoSocial($razaoSocial);
             $cliente->setInscricaoEstadual($inscricaoEstadual);
@@ -48,6 +51,8 @@
             
             $resultadoEdicao = $crudCliente->editarCliente(
                 $cliente->getId(), [
+
+                    'nomeFantasia' => $cliente->getNome(),
                     'razaoSocial' => $cliente->getRazaoSocial(),
                     'cnpj' => $cliente->getCnpj(),
                     'inscricaoEstadual' => $cliente->getInscricaoEstadual(),
@@ -58,6 +63,7 @@
                     'estado' => $cliente->getEstado(),
                     'municipio' => $cliente->getMunicipio(),
                     'numeroEndereco' => $cliente->getNumeroEndereco()
+
                 ]
             );
             
@@ -72,6 +78,7 @@
 
                     // Passando os dados do funcionário autenticado para editar os dados da sua sessão no site, após a realização da edição dos dados gerais.
                     $sessaoAtiva->setChaveEValorSessao('idCliente', $cliente->getId());
+                    $sessaoAtiva->setChaveEValorSessao('nomeFantasia', $cliente->getNome());
                     $sessaoAtiva->setChaveEValorSessao('razaoSocial', $cliente->getRazaoSocial());
                     $sessaoAtiva->setChaveEValorSessao('cnpj', $cliente->getCnpj());
                     $sessaoAtiva->setChaveEValorSessao('inscricaoEstadual', $cliente->getInscricaoEstadual());
@@ -108,6 +115,7 @@
         } catch (Exception $excecao) {
 
             echo "<br>Erro ao processar a edição do cliente: " . $excecao->getMessage();
+            
             if ($tipoConta == 'admin') {
 
                 header("Location: ../gerenciarContas.php?statusEdicaoContaCliente=erro");
