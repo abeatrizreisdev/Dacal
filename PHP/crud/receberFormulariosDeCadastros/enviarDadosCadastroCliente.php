@@ -72,7 +72,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os as suas variáveis.
-        //$nome = $_POST['nome'];
+        $nomeFantasia = $_POST['nomeFantasia'];
         $razaoSocial = $_POST['razaoSocial'];
         $cnpj = preg_replace('/[^0-9]/', '', $_POST['cnpjEmpresa']);
         $inscricaoEstadual = $_POST['inscricaoEstadual'];
@@ -97,7 +97,7 @@
             // Instanciando o objeto que representa o cliente e passando os valores recebidos do formulário de cadastro...
             // para o objeto do tipo cliente.
             $cliente = new Cliente();
-            $cliente->setNome('Atributo Nome Temporário');
+            $cliente->setNome($nomeFantasia);
             $cliente->setRazaoSocial($razaoSocial);
             $cliente->setCnpj($cnpj);
             $cliente->setInscricaoEstadual($inscricaoEstadual);

@@ -126,7 +126,7 @@ $sessaoCliente = new Sessao();
                             <button class="btn" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar
                                 Orçamento</button>
                             <button class="btn" id="btnFinalizar" type="button"
-                                onclick="abrirPassoAPasso(event, 'passo2')">Proxima Passo</button>
+                                onclick="avancarParaPasso('passo2')">Proximo Passo</button>
                         </div>
 
                     </div>
@@ -140,9 +140,9 @@ $sessaoCliente = new Sessao();
                             <button class="btn" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar
                                 Orçamento</button>
                             <button class="btn" id="btnVoltar" type="button"
-                                onclick="abrirPassoAPasso(event, 'passo1')">Voltar Página</button>
+                                onclick="voltarParaPasso('passo1')">Voltar Página</button>
                             <button class="btn" id="btnFinalizar" type="button"
-                                onclick="abrirPassoAPasso(event, 'passo3')">Finalizar Orçamento</button>
+                                onclick="avancarParaPasso('passo3')">Finalizar Orçamento</button>
                         </div>
                     </div>
 
@@ -155,7 +155,7 @@ $sessaoCliente = new Sessao();
                             <div id="formOrcamentoContainer"></div>
                             <div class="btnCentrais">
                                 <a id="btnCancelarr" onclick="cancelarOrcamento()">Cancelar Orçamento</a>
-                                <a id="btnVoltarr" type="button" onclick="abrirPassoAPasso(event, 'passo2')">Voltar
+                                <a id="btnVoltarr" type="button" onclick="voltarParaPasso('passo2')">Voltar
                                     Página</a>
                                 <button id="btnFinalizarr" type="submit">Finalizar Orçamento</button>
                             </div>
