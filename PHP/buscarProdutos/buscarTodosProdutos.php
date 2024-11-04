@@ -1,4 +1,5 @@
 <?php
+
     require '../conexaoBD/conexaoBD.php';
     require "../crud/crudProduto.php";
     require "../conexaoBD/configBanco.php";
@@ -29,12 +30,13 @@
 
         foreach ($produtos as &$produto) {
 
-            $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
+            $produto['imagemProduto'] = $produto['imagemProduto']; 
 
         }
 
-        $response = ['produtos' => $produtos, 'tipoConta' => $contaAutenticada];
-        echo json_encode($response);
+        $resposta = ['produtos' => $produtos, 'tipoConta' => $contaAutenticada];
+        
+        echo json_encode($resposta);
 
     } else {
 

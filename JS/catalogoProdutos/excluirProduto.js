@@ -1,53 +1,52 @@
-function excluirProduto(idProduto) {
-    const formData = new FormData();
-    formData.append('idProduto', idProduto);
+    function excluirProduto(idProduto) {
+        const formData = new FormData();
+        formData.append('idProduto', idProduto);
 
-    fetch('../PHP/excluirProduto/excluirProduto.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(resposta => {
-        if (!resposta.ok) {
-            throw new Error('Erro na requisição');
-        }
-        return resposta.text();
-    })
-    .then(texto => {
-        console.log('Resposta do servidor:', texto);
+        fetch('../PHP/excluirProduto/excluirProduto.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(resposta => {
+            if (!resposta.ok) {
+                throw new Error('Erro na requisição');
+            }
+            return resposta.text();
+        })
+        .then(texto => {
 
-        try {
+            try {
 
-            const dados = JSON.parse(texto);
+                const dados = JSON.parse(texto);
 
-            if (dados.status === 'success') {
+                if (dados.status === 'success') {
 
-                toastr.success(dados.message);
+                    toastr.success(dados.message);
 
-                setTimeout(() => {
+                    setTimeout(() => {
 
-                    window.location.reload(); // Recarrega a página após a exclusão do produto.
+                        window.location.reload(); // Recarrega a página após a exclusão do produto.
 
-                }, 2000);
+                    }, 2000);
 
-            } else {
+                } else {
 
-                toastr.error(dados.message);
+                    toastr.error(dados.message);
+
+                }
+
+            } catch (erro) {
+
+                console.error('Erro ao analisar JSON:', erro);
+                toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
 
             }
 
-        } catch (erro) {
+        })
+        .catch(error => {
 
-            console.error('Erro ao analisar JSON:', erro);
-            toastr.error('Ocorreu um erro inesperado. Por favor, tente novamente.');
+            toastr.error('Ocorreu um erro ao excluir o produto');
+            console.error('Erro:', error);
 
-        }
-
-    })
-    .catch(error => {
-
-        toastr.error('Ocorreu um erro ao excluir o produto');
-        console.error('Erro:', error);
-
-    });
-    
-}
+        });
+        
+    }

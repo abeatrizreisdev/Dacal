@@ -1,35 +1,37 @@
 <?php 
 
-    require "../../conexaoBD/conexaoBD.php";
-    require "../crudProduto.php";
-    require "../../sessao/sessao.php";
-    require "../../entidades/produto.php";
-    require "../../conexaoBD/configBanco.php";
+require "../../conexaoBD/conexaoBD.php";
+require "../crudProduto.php";
+require "../../sessao/sessao.php";
+require "../../entidades/produto.php";
+require "../../conexaoBD/configBanco.php";
 
-    $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: BD_HOST);
-    $conexao->setPortaBD(porta: BD_PORTA);
-    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
-    $conexao->setSenhaBD(senha: BD_PASSWORD);
-    $conexao->setUsuarioBD(user: BD_USERNAME);
-    $conexao->getConexao(); // Iniciando a conexão com o banco.
-    
-    $crudProduto = new CrudProduto($conexao);
+$conexao = new ConexaoBD();
+$conexao->setHostBD(BD_HOST);
+$conexao->setPortaBD(BD_PORTA);
+$conexao->setEschemaBD(BD_ESCHEMA);
+$conexao->setSenhaBD(BD_PASSWORD);
+$conexao->setUsuarioBD(BD_USERNAME);
+$conexao->getConexao(); // Iniciando a conexão com o banco.
 
-    // Verifica se o método de requisição é POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$crudProduto = new CrudProduto($conexao);
 
-        // Verifica se o arquivo de imagem foi enviado
-        if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-            
-            echo 'Erro no upload: ' . $_FILES['imagem']['error'];
-            $imagemProduto = $_FILES['imagem'];
+// Verifica se o método de requisição é POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            // Verifica se o caminho temporário do arquivo não está vazio
-            if (!empty($imagemProduto['tmp_name'])) {
+    // Verifica se o arquivo de imagem foi enviado
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+        
+        $imagemProduto = $_FILES['imagem'];
+        $nomeArquivo = basename($imagemProduto['name']);
+        $caminhoRelativo = 'IMAGENS/Produtos/' . $nomeArquivo;
+        $caminhoDestino = '../../../' . $caminhoRelativo;
 
-                // Lê o conteúdo do arquivo
-                $conteudoImagem = file_get_contents($imagemProduto['tmp_name']);
+        // Verifica se o caminho temporário do arquivo não está vazio
+        if (!empty($imagemProduto['tmp_name'])) {
+
+            // Move o arquivo para o diretório de destino
+            if (move_uploaded_file($imagemProduto['tmp_name'], $caminhoDestino)) {
                 
                 // Processa os outros campos do formulário
                 $nomeProduto = $_POST['nome'];
@@ -43,11 +45,10 @@
                     $produto = new Produto();
                     
                     // Define os atributos do produto
-                    $produto->setImagem($conteudoImagem); // Armazena a imagem como BLOB
+                    $produto->setImagem($caminhoRelativo); // Armazena o caminho relativo da imagem
                     $produto->setNome($nomeProduto);
                     $produto->setValor($valorProduto);
                     $produto->setDescricao($descricaoProduto);
-                    // está caracterizado como a categoria 5, pois estava testando o banco como deve ser, se o catalogo de produtos forem separados por categorias.
                     $produto->setCategoria($categoriaProduto);
 
                     // Chamando o método de cadastro do produto
@@ -74,22 +75,26 @@
 
             } else {
 
-                echo 'O caminho do arquivo está vazio.';
+                echo 'Falha ao mover o arquivo para o destino final.';
 
             }
 
         } else {
 
-            echo 'O campo imagem não foi enviado ou ocorreu um erro no upload.';
+            echo 'O caminho do arquivo está vazio.';
 
         }
 
     } else {
 
-        echo 'Requisição inválida.';
+        echo 'O campo imagem não foi enviado ou ocorreu um erro no upload.';
 
     }
 
-    
+} else {
+
+    echo 'Requisição inválida.';
+
+}
 
 ?>

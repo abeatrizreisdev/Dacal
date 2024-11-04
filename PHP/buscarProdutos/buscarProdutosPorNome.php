@@ -1,4 +1,5 @@
 <?php
+
     require '../conexaoBD/conexaoBD.php';
     require "../crud/crudProduto.php";
     require "../conexaoBD/configBanco.php";
@@ -13,10 +14,8 @@
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     if ($conexao->getConexao() === null) {
-
         echo json_encode(['error' => 'Erro na conexão com o banco de dados']);
         exit();
-
     }
 
     $sessao = new Sessao();
@@ -25,7 +24,6 @@
     $resposta = array();
 
     if (isset($_GET['produtoNome'])) {
-
         $nomeProduto = $_GET['produtoNome'];
 
         $produtos = $crudProduto->buscarProdutosPorNome($nomeProduto);
@@ -34,8 +32,7 @@
 
             foreach ($produtos as &$produto) {
 
-                // Converte a imagem do produto que está salva no banco de dados no formato BLOB para base64.
-                $produto['imagemProduto'] = base64_encode($produto['imagemProduto']);
+                $produto['imagemProduto'] = $produto['imagemProduto'];
 
                 // Sanitiza dados para garantir que sejam codificados em UTF-8.
                 $produto = array_map('utf8_encode', $produto);
@@ -57,7 +54,7 @@
 
     }
 
-    // Limpa o buffer de saída para evitar conteúdo inesperado
+    // Limpa o buffer de saída para evitar conteúdo inesperad.o
     if (ob_get_length()) ob_clean();
 
     header('Content-Type: application/json');
@@ -69,7 +66,6 @@
 
         $jsonErro = json_last_error_msg();
         echo json_encode(['error' => 'Erro ao gerar JSON: ' . $jsonErro]);
-
         exit();
 
     }

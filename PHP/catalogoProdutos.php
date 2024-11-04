@@ -181,7 +181,6 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/catalogoProdutos/verificarStatusCadastroProduto.js"></script>
-    <script src="../JS/catalogoProdutos/verificarStatusEdicaoProduto.js"></script>
     <script src="../JS/catalogoProdutos/excluirProduto.js"></script>
     <script src="../JS/catalogoProdutos/carregarProdutos.js"></script>
     <script src="../JS/catalogoProdutos/buscarProdutoPorNome.js"></script>

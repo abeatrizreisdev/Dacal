@@ -1,41 +1,48 @@
 <?php
-require_once '../conexaoBD/conexaoBD.php';
-require_once '../conexaoBD/configBanco.php';
-require_once '../crud/crudProduto.php';
-require_once '../sessao/sessao.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    require_once '../conexaoBD/conexaoBD.php';
+    require_once '../conexaoBD/configBanco.php';
+    require_once '../crud/crudProduto.php';
+    require_once '../sessao/sessao.php';
 
-$conexao = new ConexaoBD();
-$conexao->setHostBD(BD_HOST);
-$conexao->setPortaBD(BD_PORTA);
-$conexao->setEschemaBD(BD_ESCHEMA);
-$conexao->setSenhaBD(BD_PASSWORD);
-$conexao->setUsuarioBD(BD_USERNAME);
-$conexao->getConexao(); // Iniciando a conexão com o banco
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-$sessao = new Sessao();
-$crudProduto = new CrudProduto($conexao);
+    $conexao = new ConexaoBD();
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
+    $conexao->getConexao(); // Iniciando a conexão com o banco
 
-header('Content-Type: application/json');
+    $sessao = new Sessao();
+    $crudProduto = new CrudProduto($conexao);
 
-$contaAutenticada = $sessao->getValorSessao('tipoConta');
+    header('Content-Type: application/json');
 
-if (isset($_GET['id'])) {
-    $produto_id = $_GET['id'];
-    $resultadoBuscaDoProduto = $crudProduto->buscarInfoProduto($produto_id);
+    $contaAutenticada = $sessao->getValorSessao('tipoConta');
 
-    if ($resultadoBuscaDoProduto) {
-        // Codificando a imagem em base64
-        $resultadoBuscaDoProduto['imagemProduto'] = base64_encode($resultadoBuscaDoProduto['imagemProduto']);
-        $resultadoBuscaDoProduto['contaAutenticada'] = $contaAutenticada;
-        echo json_encode($resultadoBuscaDoProduto);
+    if (isset($_GET['id'])) {
+        $produto_id = $_GET['id'];
+        $resultadoBuscaDoProduto = $crudProduto->buscarInfoProduto($produto_id);
+
+        if ($resultadoBuscaDoProduto) {
+
+            // Adicionar o tipo de conta ao resultado
+            $resultadoBuscaDoProduto['contaAutenticada'] = $contaAutenticada;
+            echo json_encode($resultadoBuscaDoProduto);
+
+        } else {
+
+            echo json_encode(['error' => 'Produto não encontrado.']);
+
+        }
+
     } else {
-        echo json_encode(['error' => 'Produto não encontrado.']);
+
+        echo json_encode(['error' => 'ID do produto não fornecido.']);
+
     }
-} else {
-    echo json_encode(['error' => 'ID do produto não fornecido.']);
-}
 ?>

@@ -6,14 +6,16 @@ require "../../entidades/produto.php";
 require "../../conexaoBD/configBanco.php";
 
 $conexao = new ConexaoBD();
-$conexao->setHostBD(host: BD_HOST);
-$conexao->setPortaBD(porta: BD_PORTA);
-$conexao->setEschemaBD(eschema: BD_ESCHEMA);
-$conexao->setSenhaBD(senha: BD_PASSWORD);
-$conexao->setUsuarioBD(user: BD_USERNAME);
+$conexao->setHostBD(BD_HOST);
+$conexao->setPortaBD(BD_PORTA);
+$conexao->setEschemaBD(BD_ESCHEMA);
+$conexao->setSenhaBD(BD_PASSWORD);
+$conexao->setUsuarioBD(BD_USERNAME);
 $conexao->getConexao(); // Iniciando a conexão com o banco.
 
 $crudProduto = new CrudProduto($conexao);
+
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idProduto = $_POST['idProduto'];
@@ -24,10 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verifica se o arquivo de imagem foi enviado e está sem erros
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-        $imagemProduto = file_get_contents($_FILES['imagem']['tmp_name']);
+        $imagemProduto = $_FILES['imagem'];
+        $nomeArquivo = basename($imagemProduto['name']);
+        $caminhoRelativo = 'IMAGENS/Produtos/' . $nomeArquivo;
+        $caminhoDestino = '../../../' . $caminhoRelativo;
+
+        // Move o arquivo para o diretório de destino
+        if (!move_uploaded_file($imagemProduto['tmp_name'], $caminhoDestino)) {
+            echo json_encode(['error' => 'Falha ao mover o arquivo para o destino final.']);
+            exit();
+        }
     } else {
         // Se nenhuma nova imagem foi enviada, mantenha a imagem atual
-        $imagemProduto = base64_decode($_POST['imagemAtual']);
+        $caminhoRelativo = $_POST['imagemAtual'];
     }
 
     try {
@@ -35,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $produto = new Produto();
         
         // Define os atributos do produto
-        $produto->setImagem($imagemProduto); // Armazena a imagem como BLOB
+        $produto->setImagem($caminhoRelativo); // Armazena o caminho relativo da imagem
         $produto->setNome($nomeProduto);
         $produto->setValor($valorProduto);
         $produto->setDescricao($descricaoProduto);
@@ -51,17 +62,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         if ($resultadoEdicaoProduto) {
-            header("Location: ../../catalogoProdutos.php?statusEdicaoProduto=sucesso");
-           exit();
-        } else {
-            header("Location: ../../catalogoProdutos.php?statusEdicaoProduto=erro");
+
+            echo json_encode(['sucesso' => true, 'mensagem' => 'Edição do produto feita com sucesso!']);
             exit();
+
+        } else {
+
+            echo json_encode(['erro' => true, 'mensagem' => 'Erro na edição do produto.']);            
+            exit();
+
         }
+
     } catch (Exception $excecao) {
-        header("Location: ../../catalogoProdutos.php?statusEdicaoProduto=erro");
+
+        echo json_encode(['erro' => 'Erro ao atualizar o produto: ' . $excecao->getMessage()]);
         exit();
+
     }
+
 } else {
-    echo 'Requisição inválida.';
+
+    echo json_encode(['erro' => 'Requisição inválida.']);
+
 }
 ?>
