@@ -16,9 +16,9 @@ $conexao->setSenhaBD(BD_PASSWORD);
 $conexao->setUsuarioBD(BD_USERNAME);
 $conexao->getConexao();
 
-$sessaoFuncionario = new Sessao();
+$sessao = new Sessao();
 
-$contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+$contaAutenticada = $sessao->getValorSessao('tipoConta');
 
 
 ?>
@@ -65,7 +65,7 @@ $contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             <div id="info">
                 <p>Bem-vindo(a),</p>
                 <p id="nomeEmpresa"><?php
-                    if ($sessao->getValorSessao('tipoConta') === 'admin' || $sessao->getValorSessao('tipoConta') === 'funcionario') {
+                    if ($contaAutenticada === 'admin' || $contaAutenticada === 'funcionario') {
                         ?>
                         <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('nome'); ?></p>
                         <?php
