@@ -61,7 +61,7 @@
     
             // Inserindo as informações do cliente retiradas do banco de dados.
             $clienteAutenticado->setIdCliente($resultadoAutenticacao['idCliente']);
-            $clienteAutenticado->setNome($resultadoAutenticacao['nomeEmpresa']);
+            $clienteAutenticado->setNome($resultadoAutenticacao['nomeFantasia']);
             $clienteAutenticado->setEmail($resultadoAutenticacao['email']);
             $clienteAutenticado->setSenha($resultadoAutenticacao['senha']);
             $clienteAutenticado->setTelefone($resultadoAutenticacao['telefone']);
@@ -77,7 +77,7 @@
     
             // Passando os dados do cliente autenticado para criar sua sessão no site.
             $sessao->setChaveEValorSessao('idCliente', $clienteAutenticado->getId());
-            $sessao->setChaveEValorSessao('nome', $clienteAutenticado->getNome());
+            $sessao->setChaveEValorSessao('nomeFantasia', $clienteAutenticado->getNome());
             $sessao->setChaveEValorSessao('email', $clienteAutenticado->getEmail());
             $sessao->setChaveEValorSessao('senha', $clienteAutenticado->getSenha());
             $sessao->setChaveEValorSessao('razaoSocial', $clienteAutenticado->getRazaoSocial());
