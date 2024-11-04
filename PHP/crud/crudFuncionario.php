@@ -43,32 +43,39 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE cpf = :cpf AND senha = :senha";
-
-                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cpf' => $cpf, 'senha' => $senha]);
-                
+                $sql = "SELECT * FROM {$this->tabela} WHERE cpf = :cpf";
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cpf' => $cpf]);
+        
                 if ($resultadoConsulta->rowCount() > 0) {
-                    
 
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    $usuario = $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+        
+                    // Verificando se a senha fornecida é igual a senha armazenada.
+                    if ($senha === $usuario['senha']) 
+                    {
+                        return $usuario; // Autenticação bem-sucedida
+
+                    } else {
+
+                        return null; // Senha incorreta.
+
+                    }
 
                 } else {
 
-
-                    return null;
+                    return null; // CPF não encontrado.
 
                 }
-
-
+        
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na busca de informações do funcionário: " . $excecao->getMessage();
-
                 return null;
 
             }
-
+            
         }
+        
 
         public function buscarInfoFuncionario($idFuncionario) {
 

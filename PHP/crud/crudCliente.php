@@ -44,30 +44,36 @@
             try {
 
                 $sql = "SELECT * FROM {$this->tabela} WHERE cnpj = :cnpj";
-
-
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['cnpj' => $cnpj]);
                 
                 if ($resultadoConsulta->rowCount() > 0) {
 
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    $cliente = $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+
+                    // Verifique a senha fornecida com a senha armazenada.
+                    if ($senha === $cliente['senha']) {
+
+                        return $cliente; // Autenticação bem-sucedida;
+
+                    } else {
+
+                        return null; // Senha incorreta
+                    }
 
                 } else {
 
-                    return null;
+                    return null; // CNPJ não encontrado
 
-                }
-
+                };
 
             } catch (Exception $excecao) {
 
                 echo "<br>Erro na busca de informações do cliente para autenticação: " . $excecao->getMessage();
-
                 return null;
-
+                
             }
-
         }
+
 
         public function buscarInfoCliente($idCliente) {
 
