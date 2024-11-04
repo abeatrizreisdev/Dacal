@@ -467,6 +467,45 @@ a:hover {
     flex-direction: row;
     justify-content: space-evenly;
 }
+.btnPasso{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 6.5vh;
+}
+#btnCancelar1{
+    background-color: #a6a6a6;
+    margin: 1vh;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
+
+#btnProximo{
+    background-color: #7ed957;
+    margin: 1vh;
+    color: black;
+    border: #000000 solid 0.4vh;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
 
 .btnCentrais{
     display: flex;
