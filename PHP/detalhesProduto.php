@@ -64,7 +64,17 @@ $contaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
             <div id="info">
                 <p>Bem-vindo(a),</p>
-                <p id="nomeEmpresa"><?php echo $sessaoFuncionario->getValorSessao('nome'); ?></p>
+                <p id="nomeEmpresa"><?php
+                    if ($sessao->getValorSessao('tipoConta') === 'admin' || $sessao->getValorSessao('tipoConta') === 'funcionario') {
+                        ?>
+                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('nome'); ?></p>
+                        <?php
+                    } else {
+                        ?>
+                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('nomeFantasia'); ?></p>
+                        <?php
+                    }
+                    ?></p>
                 <button class="sairInfo" href="">
                     <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                 </button>

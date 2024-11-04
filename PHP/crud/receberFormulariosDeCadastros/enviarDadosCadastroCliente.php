@@ -23,50 +23,73 @@
 
 
     function validarCNPJ($cnpj) {
+
+        // Remove caracteres não numéricos do CNPJ
         $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
     
+        // Verifica se o CNPJ tem 14 dígitos
         if (strlen($cnpj) != 14) {
             return false;
         }
     
-        // Verifica se todos os dígitos são iguais
+        // Verifica se todos os dígitos são iguais.
         if (preg_match('/(\d)\1{13}/', $cnpj)) {
             return false;
         }
     
-        $tamanho = strlen($cnpj) - 2;
-        $numeros = substr($cnpj, 0, $tamanho);
-        $digitos = substr($cnpj, $tamanho);
-        
+        $tamanhoSemDigitos = strlen($cnpj) - 2;
+        $numerosBase = substr($cnpj, 0, $tamanhoSemDigitos);
+        $digitosVerificadores = substr($cnpj, $tamanhoSemDigitos);
+    
         $soma = 0;
-        $pos = $tamanho - 7;
-        for ($i = $tamanho; $i >= 1; $i--) {
-            $soma += $numeros[$tamanho - $i] * $pos--;
-            if ($pos < 2) {
-                $pos = 9;
+        $peso = $tamanhoSemDigitos - 7;
+
+        for ($indice = $tamanhoSemDigitos; $indice >= 1; $indice--) {
+
+            $soma += $numerosBase[$tamanhoSemDigitos - $indice] * $peso--;
+
+            if ($peso < 2) {
+
+                $peso = 9;
+
             }
+
         }
-        $resultado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
-        if ($resultado != $digitos[0]) {
+
+        $digitoCalculado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
+        if ($digitoCalculado != $digitosVerificadores[0]) {
+
             return false;
+
         }
-        
-        $tamanho++;
-        $numeros = substr($cnpj, 0, $tamanho);
+    
+        $tamanhoComPrimeiroDigito = $tamanhoSemDigitos + 1;
+        $numerosBase = substr($cnpj, 0, $tamanhoComPrimeiroDigito);
         $soma = 0;
-        $pos = $tamanho - 7;
-        for ($i = $tamanho; $i >= 1; $i--) {
-            $soma += $numeros[$tamanho - $i] * $pos--;
-            if ($pos < 2) {
-                $pos = 9;
+        $peso = $tamanhoComPrimeiroDigito - 7;
+        for ($indice = $tamanhoComPrimeiroDigito; $indice >= 1; $indice--) {
+
+            $soma += $numerosBase[$tamanhoComPrimeiroDigito - $indice] * $peso--;
+
+            if ($peso < 2) {
+
+                $peso = 9;
+
             }
+            
         }
-        $resultado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
-        if ($resultado != $digitos[1]) {
+
+        $digitoCalculado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
+        if ($digitoCalculado != $digitosVerificadores[1]) {
+
             return false;
+
         }
+
         return true;
+        
     }
+    
        
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -113,7 +136,7 @@
             $cliente->setNumeroEndereco($numeroEndereco);
 
             // Enviando os dados do cliente que será cadastrado para o banco de dados.
-            $cadastroRealizado = $crudCliente->cadastrarCliente(['nomeEmpresa' => $cliente->getNome(), 'razaoSocial' => $cliente->getRazaoSocial(), 'cnpj' => $cliente->getCnpj(), 'inscricaoEstadual' => $cliente->getInscricaoEstadual(), 'telefone' => $cliente->getTelefone(), 'email' => $cliente->getEmail(), 'senha' => $cliente->getSenha(), 'logradouro' => $cliente->getLogradouro(), 'bairro' => $cliente->getBairro(), 'cep' => $cliente->getCep(), 'estado' => $cliente->getEstado(), 'municipio' => $cliente->getMunicipio(), 'numeroEndereco' => $cliente->getNumeroEndereco()]);
+            $cadastroRealizado = $crudCliente->cadastrarCliente(['nomeFantasia' => $cliente->getNome(), 'razaoSocial' => $cliente->getRazaoSocial(), 'cnpj' => $cliente->getCnpj(), 'inscricaoEstadual' => $cliente->getInscricaoEstadual(), 'telefone' => $cliente->getTelefone(), 'email' => $cliente->getEmail(), 'senha' => $cliente->getSenha(), 'logradouro' => $cliente->getLogradouro(), 'bairro' => $cliente->getBairro(), 'cep' => $cliente->getCep(), 'estado' => $cliente->getEstado(), 'municipio' => $cliente->getMunicipio(), 'numeroEndereco' => $cliente->getNumeroEndereco()]);
 
             // Se o cadastro foi efetuado com sucesso, então entrará nessa condicional pois será retornado true.
             if ($cadastroRealizado) {

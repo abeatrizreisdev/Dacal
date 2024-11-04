@@ -77,7 +77,7 @@ $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
                         <?php
                     } else {
                         ?>
-                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('razaoSocial'); ?></p>
+                        <p id="nomeEmpresa"><?php echo $sessao->getValorSessao('nomeFantasia'); ?></p>
                         <?php
                     }
                     ?>
