@@ -185,7 +185,7 @@
                         {$this->tabela}.valorOrcamento, 
                         {$this->tabela}.dataCriacao, 
                         {$this->tabela}.status, 
-                        cliente.nomeEmpresa AS nomeCliente, 
+                        cliente.nomeFantasia AS nomeCliente, 
                         (SELECT SUM(itens_orcamento.quantidade) 
                         FROM itens_orcamento 
                         WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
