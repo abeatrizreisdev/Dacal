@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $orcamentoRealizado->setCliente($sessao->getValorSessao('idCliente'));
         $orcamentoRealizado->setValor($valorTotal);
-        $orcamentoRealizado->setData( date('Y-m-d')); // Passando a data atual do momento do cadastro do orcamento.
+        $orcamentoRealizado->setData( date('Y-m-d H:i:s')); // Passando a data e as horas atuais do momento do cadastro do orcamento.
         $orcamentoRealizado->setStatus('pendente');
 
 
