@@ -1,6 +1,7 @@
 <?php 
 
     require_once "crud.php";
+    
     class CrudOrcamento extends Crud {
 
         public function __construct($conexao) {
@@ -47,6 +48,7 @@
     
                     // Confirmar a transação
                     $this->conexaoBD->commit();
+
                     return true;
 
                 } else {
@@ -131,7 +133,7 @@
                                 "idProduto" => $item['idProduto'],
                                 "quantidade" => $item['quantidade'],
                                 "nomeProduto" => $item['nomeProduto'],
-                                "imagemProduto" => base64_encode($item['imagemProduto']) // codificando a imagem em base64
+                                "imagemProduto" => base64_encode($item['imagemProduto']) // codificando a imagem em base64.
                             ];
                         }, $orcamentoDetalhes)
                     ];
@@ -185,7 +187,7 @@
                         {$this->tabela}.valorOrcamento, 
                         {$this->tabela}.dataCriacao, 
                         {$this->tabela}.status, 
-                        cliente.nomeEmpresa AS nomeCliente, 
+                        cliente.nomeFantasia AS nomeCliente, 
                         (SELECT SUM(itens_orcamento.quantidade) 
                         FROM itens_orcamento 
                         WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
