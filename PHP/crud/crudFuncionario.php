@@ -1,6 +1,6 @@
 <?php 
 
-    require "crud.php";
+    require_once "crud.php";
     
     class CrudFuncionario extends Crud {
 
