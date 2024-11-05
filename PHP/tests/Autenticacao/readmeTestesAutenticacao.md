@@ -8,16 +8,16 @@
 ### Necessário ter o PHP 8.1.25 ou superior no pc; instalar no pc o Composer, para gerenciamento de dependências para o PHP; PHPUnit, frameworks para testes.
 
 
-#INSTALAR AS DEPENDÊNCIAS DO PROJETO COM O Composer:
+#INSTALAR AS DEPENDÊNCIAS DO PROJETO COM O Composer, o PHPUnit será instalado também:
 ### No diretório raiz do projeto, execute o comando no terminal (usei no vscode): composer install
-
-
-#CONFIGURAR O BANCO DE DADOS:
-### Editar o arquivo "configBanco.php" e atualizar as configurações do banco de dados.
 
 
 #VERIFICAR A INSTALAÇÃO DO PHPUnit NO PROJETO:
 ### utilize o comando no terminal: php vendor/bin/phpunit --version
+
+#CONFIGURAR O BANCO DE DADOS:
+### Editar o arquivo "configBanco.php" e atualizar as configurações do banco de dados.
+
 
 
 #ESTRUTURA DOS TESTES
