@@ -128,9 +128,6 @@
 
         const div = document.createElement('div');
 
-        console.log(empresa.idCliente)
-        console.log(empresa.nomeFantasia)
-
         div.classList.add('empresa');
         div.innerHTML = `
             <div class="perfil">
@@ -159,7 +156,7 @@
                 const url = new URL('../Dacal/PHP/editarContaEmpresa.php', window.location.origin);
 
                 url.searchParams.set('idEmpresa', dados.idCliente);
-                url.searchParams.set('nomeFantasia', dados.nomeEmpresa);
+                url.searchParams.set('nomeFantasia', dados.nomeFantasia);
                 url.searchParams.set('inscricaoEstadual', dados.inscricaoEstadual);
                 url.searchParams.set('razaoSocial', dados.razaoSocial);
                 url.searchParams.set('cnpjEmpresa', dados.cnpj);

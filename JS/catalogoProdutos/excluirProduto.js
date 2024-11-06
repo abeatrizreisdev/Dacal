@@ -1,4 +1,5 @@
     function excluirProduto(idProduto) {
+
         const formData = new FormData();
         formData.append('idProduto', idProduto);
 
@@ -7,10 +8,15 @@
             body: formData
         })
         .then(resposta => {
+
             if (!resposta.ok) {
+
                 throw new Error('Erro na requisição');
+
             }
+
             return resposta.text();
+
         })
         .then(texto => {
 
@@ -18,9 +24,9 @@
 
                 const dados = JSON.parse(texto);
 
-                if (dados.status === 'success') {
+                if (dados.status === 'sucesso') {
 
-                    toastr.success(dados.message);
+                    toastr.success(dados.mensagem);
 
                     setTimeout(() => {
 
@@ -30,7 +36,7 @@
 
                 } else {
 
-                    toastr.error(dados.message);
+                    toastr.error(dados.mensagem);
 
                 }
 
@@ -42,10 +48,10 @@
             }
 
         })
-        .catch(error => {
+        .catch(erro => {
 
             toastr.error('Ocorreu um erro ao excluir o produto');
-            console.error('Erro:', error);
+            console.error('Erro:', erro);
 
         });
         

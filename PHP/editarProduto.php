@@ -103,7 +103,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                     <textarea id="descricaoProduto" name="descricaoProduto" required></textarea>
                 </div>
                 <div class="form-buttons">
-                    <a href="./homeFuncionario.php" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
+                    <a href="./catalogoProdutos.php" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
                     <button type="submit" id="botaoCadastrarProduto">Salvar Alterações</button>
                 </div>
             </form>

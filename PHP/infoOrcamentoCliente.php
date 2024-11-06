@@ -52,7 +52,7 @@ $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
-                    <p id="nomeEmpresa"> <?php echo $sessaoEmpresa->getValorSessao('nome'); ?> </p>
+                    <p id="nomeEmpresa"> <?php echo $sessaoEmpresa->getValorSessao('nomeFantasia'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
                     </button>

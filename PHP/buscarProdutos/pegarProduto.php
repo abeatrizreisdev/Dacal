@@ -25,24 +25,25 @@
     $contaAutenticada = $sessao->getValorSessao('tipoConta');
 
     if (isset($_GET['id'])) {
+
         $produto_id = $_GET['id'];
         $resultadoBuscaDoProduto = $crudProduto->buscarInfoProduto($produto_id);
 
         if ($resultadoBuscaDoProduto) {
 
-            // Adicionar o tipo de conta ao resultado
+            // Adiciona o tipo de conta ao resultado.
             $resultadoBuscaDoProduto['contaAutenticada'] = $contaAutenticada;
             echo json_encode($resultadoBuscaDoProduto);
 
         } else {
 
-            echo json_encode(['error' => 'Produto não encontrado.']);
+            echo json_encode(['erro' => 'Produto não encontrado.']);
 
         }
 
     } else {
 
-        echo json_encode(['error' => 'ID do produto não fornecido.']);
+        echo json_encode(['erro' => 'ID do produto não fornecido.']);
 
     }
 ?>

@@ -78,9 +78,9 @@
                     <p class='produto-categoria'>Categoria: ${produto.categoria}</p>
                     <p class='produto-quantidade'>Quantidade: <span class='quantidade' data-produto-id='${produto.id}'>${quantidadeFormatada}</span></p>
                     <p class='produto-valor'>Valor unitário: ${valorUnitarioFormatado}</p>
-                    <input type='hidden' name='produtos[]' value='${produto.nome}'>
-                    <input type='hidden' name='valores[]' value='${produto.valor}'>
-                    <input type='hidden' name='produtoIds[]' value='${produto.id}'>
+                    <input type='hidden' name='produtos[]' value='${produto.nome}' required>
+                    <input type='hidden' name='valores[]' value='${produto.valor}' required>
+                    <input type='hidden' name='produtoIds[]' value='${produto.id}' required>
                     <input type='hidden' name='quantidades[]' data-produto-id='${produto.id}' value='${produto.quantidade}'>
                 </div>
             </div>`;
@@ -413,6 +413,22 @@
 
     };
 
+    // Função para evitar que o formulário do orçamento seja enviado para o servidor sem nenhum produto.
+    document.getElementById('formOrcamento').addEventListener('submit', function(event) {
+
+        const produtos = document.getElementsByName('produtos[]');
+
+        if (produtos.length === 0) {
+
+            toastr.error('Selecione pelo menos um produto antes de finalizar o orçamento.');
+            event.preventDefault();
+
+        }
+
+    });
+    
+    
+    
     // Chamando a função exibirOrcamento para renderizar os produtos assim que a página carregar.
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -427,3 +443,5 @@
         });
 
     });
+
+    

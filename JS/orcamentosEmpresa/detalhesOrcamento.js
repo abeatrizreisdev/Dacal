@@ -65,8 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(resposta => resposta.json())
         .then(dadosOrcamento => {
 
+
             // Elementos de html que irá exibir todos os dados de um orçamento especifico.
-            // Para estilizar é só inserir class ou id, normalmente.
             let detalhes = `
                 <div class="labelOrca">
                     <div class="labelStatus">
@@ -95,22 +95,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     <ul>
                 `;
 
-            dadosOrcamento.itens.forEach(item => {
+                dadosOrcamento.itens.forEach(item => { 
 
-                detalhes += `
-                <div class="itensOrcamento">
-                    <div class="imagemProduto">
-                        <img class="produto-imagem" src="data:image/jpeg;base64,${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;">
-                    </div>
-                    <div class="itensInfo">
-                        <p class="labelInfo"><strong>${item.nomeProduto}</strong></p>
-                        <p class="labelInfo"><strong>Código:</strong> ${item.idProduto}</p>
-                        <p class="labelInfo"><strong>Quantidade:</strong> ${item.quantidade}</p>
-                    </div>
-                </div>
-                `;
-
-            });
+                    detalhes += ` 
+                    <div class="itensOrcamento"> 
+                        <div class="imagemProduto"> 
+                            <img class="produto-imagem" src="../${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;"> 
+                        </div> 
+                        <div class="itensInfo"> 
+                            <p class="labelInfo"><strong>${item.nomeProduto}</strong></p> 
+                            <p class="labelInfo"><strong>Código:</strong> ${item.idProduto}</p> 
+                            <p class="labelInfo"><strong>Quantidade:</strong> ${item.quantidade}</p> 
+                        </div> 
+                    </div> 
+                    `; });
 
             detalhes += ``;
 

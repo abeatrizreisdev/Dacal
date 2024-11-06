@@ -20,6 +20,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/editarContaEmpresa.css">
+    <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -124,20 +125,24 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
 
                         <p id="titulo">Dados da Conta</p>
 
-                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados"
-                            id="formEditarConta">
+                        <form action="edicoesDeDadosCliente/editarInfoGeraisCliente.php" method="post" class="formDados" id="formEditarConta">
 
                             <input type="hidden" name="idCliente" id="idCliente">
 
                             <div class="infoGerais">
-
+                                <div class="parteGeral">
+                                    <p>Razão Social</p>
+                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                </div>
+                            </div>
+                            <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
                                     <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
                                 </div>
                                 <div class="parteGeral">
-                                    <p>Razão Social</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                    <p>Nome Fantasia</p>
+                                    <input type="text" id="nomeFantasia" name="nomeFantasia" class="input">
                                 </div>
                             </div>
                             <div class="infoGerais">
@@ -150,32 +155,13 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                                     <input type="text" id="telefone" name="telefone" class="input">
                                 </div>
                             </div>
-                            <br>
                             <div class="endereço">
-                                <p id="">Endereço</p>
+                                <p>Endereço</p>
                                 <select id="estado" name="estado" class="inputAPI" required>
                                     <option value="">Selecione um estado</option>
-                                    <?php
-                                    $estados = getEstados();
-                                    $estadoSelecionado = $sessaoCliente->getValorSessao('estado');
-                                    foreach ($estados as $estado) {
-                                        $selected = ($estado['sigla'] == $estadoSelecionado) ? 'selected' : '';
-                                        echo "<option value='{$estado['sigla']}' {$selected}>{$estado['nome']}</option>";
-                                    }
-                                    ?>
                                 </select>
                                 <select id="municipio" name="municipio" class="inputAPI" required>
                                     <option value="">Selecione um município</option>
-                                    <?php
-                                    if (!empty($estadoSelecionado)) {
-                                        $municipios = getMunicipios($estadoSelecionado);
-                                        $municipioSelecionado = $sessaoCliente->getValorSessao('municipio');
-                                        foreach ($municipios as $municipio) {
-                                            $selected = ($municipio['nome'] == $municipioSelecionado) ? 'selected' : '';
-                                            echo "<option value='{$municipio['nome']}' {$selected}>{$municipio['nome']}</option>";
-                                        }
-                                    }
-                                    ?>
                                 </select>
                             </div>
                             <div class="infoGerais">
@@ -199,7 +185,6 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                                 </div>
                             </div>
                             <div class="btn">
-                                <br>
                                 <button type="submit" id="btnSalvar">Salvar Alterações</button>
                             </div>
                         </form>

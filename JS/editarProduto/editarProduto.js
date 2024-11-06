@@ -4,15 +4,17 @@ document.addEventListener("DOMContentLoaded", function() {
     var produtoId = urlParams.get('id');
 
     if (!produtoId) {
+
         document.querySelector('.quadrado').innerHTML = "ID do produto não especificado.";
         return;
+
     }
 
     fetch('./buscarProdutos/pegarProduto.php?id=' + produtoId)
         .then(resposta => resposta.json())
         .then(produto => {
 
-            if (produto.error) {
+            if (produto.erro) {
                 document.querySelector('.quadrado').innerHTML = produto.error;
                 return;
             }
@@ -29,7 +31,21 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(erro => console.log('Erro:', erro));
 
-    // Adiciona o listener para submissão do formulário.
+    // Adiciona o evento para exibir preview da nova imagem do produto selecionada.
+    document.getElementById('imagem').addEventListener('change', function(event) {
+
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            
+            document.getElementById('imagemPreview').src = e.target.result;
+        }
+
+        reader.readAsDataURL(event.target.files[0]);
+
+    });
+
+    // Adiciona o evento para submissão do formulário de edição do produto.
     document.querySelector('form').addEventListener('submit', function(event) {
 
         event.preventDefault(); // Impedir o envio padrão do formulário.
@@ -47,7 +63,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 toastr.success(dados.mensagem);
                 setTimeout(function() { 
+
                     window.location.href = 'catalogoProdutos.php'; 
+                    
                 }, 2000); // 2 segundos de atraso.
 
             } else {
@@ -58,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         })
         .catch(erro => console.log('Erro:', erro));
+
     });
 
 });
