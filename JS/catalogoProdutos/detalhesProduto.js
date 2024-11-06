@@ -50,6 +50,7 @@ function criarImagemProduto(imagemProduto) {
 
     // Atualizado para usar o caminho relativo da imagem
     return `
+    <div class="produto">
         <div class='containerImagemProduto'>
             <img src='../${imagemProduto}' alt='Produto' class='imagemProduto'>
         </div>
@@ -64,13 +65,15 @@ function criarInfoProduto(dados) {
             <h2 class='tituloProduto'>${dados.nomeProduto}</h2>
             <div class='containerDescricaoValor'>
                 <p class='valorProduto'>R$ ${dados.valorProduto}</p>
-                <div class='containerDescricao'>
-                    <p id='tituloDescricao'>Descrição:</p>
-                    <p class='descricaoProduto'>${dados.descricaoProduto}</p>
-                </div>
             </div>
             ${dados.contaAutenticada !== 'admin' && dados.contaAutenticada !== 'funcionario' ? criarFormularioOrcamento(dados) : ''}
+         </div>
         </div>
+    </div>
+    <div class='containerDescricao'>
+        <p id='tituloDescricao'>Descrição:</p>
+        <p class='descricaoProduto'>${dados.descricaoProduto}</p>
+    </div>
     `;
 
 }
@@ -94,6 +97,8 @@ function criarFormularioOrcamento(dados) {
             <input type='hidden' name='adicionar' value='true'> 
             <button type='submit' name='adicionar' class='botaoAdicionar'>Adicionar</button>
         </form>
+    </div>
+    
     `;
 
 }
