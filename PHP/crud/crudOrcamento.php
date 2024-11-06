@@ -70,15 +70,13 @@
     
 
         public function buscarInfoOrcamento($idOrcamento) {
-
             try {
-        
                 $sql = "SELECT 
                             {$this->tabela}.numeroOrcamento, 
                             {$this->tabela}.valorOrcamento, 
                             {$this->tabela}.dataCriacao, 
                             {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente,
+                            cliente.nomeFantasia AS nomeCliente,
                             cliente.razaoSocial AS razaoSocial,
                             cliente.cnpj AS cnpj,
                             cliente.inscricaoEstadual AS inscricaoEstadual,
@@ -101,7 +99,7 @@
                             AND {$this->tabela}.numeroOrcamento = itens_orcamento.numeroOrcamento 
                             AND {$this->tabela}.idCliente = cliente.idCliente
                             AND itens_orcamento.idProduto = produto.codigoProduto";
-            
+                
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, ['id' => $idOrcamento]);
             
                 $orcamentoDetalhes = $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
@@ -131,7 +129,7 @@
                                 "idProduto" => $item['idProduto'],
                                 "quantidade" => $item['quantidade'],
                                 "nomeProduto" => $item['nomeProduto'],
-                                "imagemProduto" => base64_encode($item['imagemProduto']) // codificando a imagem em base64
+                                "imagemProduto" => $item['imagemProduto'] 
                             ];
                         }, $orcamentoDetalhes)
                     ];
@@ -139,19 +137,15 @@
                     return $orcamento;
         
                 } else {
-        
                     return null;
-        
                 }
-        
             } catch (Exception $excecao) {
-        
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
                 return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
-        
             }
-        
         }
+        
+        
         
         
         public function atualizarStatusOrcamento($numeroOrcamento, $status) {
@@ -227,7 +221,7 @@
                             {$this->tabela}.valorOrcamento, 
                             {$this->tabela}.dataCriacao, 
                             {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente, 
+                            cliente.nomeFantasia AS nomeCliente, 
                             (SELECT SUM(itens_orcamento.quantidade) 
                              FROM itens_orcamento 
                              WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
@@ -264,7 +258,7 @@
                             {$this->tabela}.valorOrcamento, 
                             {$this->tabela}.dataCriacao, 
                             {$this->tabela}.status, 
-                            cliente.nomeEmpresa AS nomeCliente,
+                            cliente.nomeFantasia AS nomeCliente,
                             (SELECT SUM(itens_orcamento.quantidade) 
                             FROM itens_orcamento 
                             WHERE itens_orcamento.numeroOrcamento = {$this->tabela}.numeroOrcamento) AS quantidadeTotal 
