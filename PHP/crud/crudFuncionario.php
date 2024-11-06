@@ -10,15 +10,19 @@
 
         public function cadastrarFuncionario($dados) {
 
+            // Validação de CPF.
+            if (!$this->verificarCpf($dados['cpf'])) {
+                return false; // CPF inválido.
+            }
+        
             $camposTabela = $this->organizarCamposDaTabela($dados);
             $valores = $this->organizarValoresParaTabela($dados);
-
+        
             try {
 
                 $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-
                 $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $dados);
-
+        
                 if ($resultadoCadastro > 0) {
 
                     return true;
@@ -28,17 +32,16 @@
                     return false;
 
                 }
-
             } catch (PDOException $excecao) {
 
                 echo "Erro no cadastro do funcionário: " . $excecao->getMessage();
-
                 return false;
 
             }
 
         }
-
+        
+        
         public function autenticarUsuario($cpf, $senha) {
 
             try {
@@ -227,6 +230,39 @@
 
 
         }
+
+
+        private function verificarCpf($cpf) {
+
+            // Remove caracteres não numéricos
+            $cpf = preg_replace('/[^0-9]/', '', (string) $cpf);
+        
+            // Verifica se o CPF tem 11 dígitos
+            if (strlen($cpf) != 11) {
+                return false;
+            }
+        
+            // Verifica se todos os dígitos são iguais
+            if (preg_match('/(\d)\1{10}/', $cpf)) {
+                return false;
+            }
+        
+            // Valida os dígitos verificadores
+            for ($tamanho = 9; $tamanho < 11; $tamanho++) {
+                $soma = 0;
+                for ($posicao = 0; $posicao < $tamanho; $posicao++) {
+                    $soma += $cpf[$posicao] * (($tamanho + 1) - $posicao);
+                }
+        
+                $digitoVerificadorCalculado = ((10 * $soma) % 11) % 10;
+                if ($cpf[$posicao] != $digitoVerificadorCalculado) {
+                    return false;
+                }
+            }
+        
+            return true;
+        }
+        
 
 
     }
