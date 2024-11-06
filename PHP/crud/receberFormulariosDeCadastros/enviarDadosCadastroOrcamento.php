@@ -5,6 +5,7 @@
     require '../../crud/crudOrcamento.php';
     require "../../entidades/orcamento.php";
     require "../../entidades/cliente.php";
+    require "../../entidades/produto.php";
     require '../../conexaoBD/configBanco.php';
 
     $sessao = new Sessao();
@@ -36,20 +37,25 @@
 
             $orcamentoRealizado->setCliente($sessao->getValorSessao('idCliente'));
             $orcamentoRealizado->setValor($valorTotal);
-            $orcamentoRealizado->setData( date('Y-m-d H:i:s')); // Passando a data e as horas atuais do momento do cadastro do orcamento.
+            $orcamentoRealizado->setData(date('Y-m-d H:i:s')); // Passando a data e as horas atuais do momento do cadastro do orcamento.
             $orcamentoRealizado->setStatus('pendente');
-
 
             // Criando os itens do orçamento.
             $itens = [];
 
-            foreach ($produtos as $index => $produto) {
+            foreach ($produtos as $index => $produtoNome) {
+
+                $produto = new Produto();
+                $produto->setId($produtoIds[$index]);
+                $produto->setNome($produtoNome);
+                $produto->setValor($valores[$index]);
+                $quantidade = $quantidades[$index];
 
                 $itens[] = [
-                    'idProduto' => $produtoIds[$index],
-                    'quantidade' => $quantidades[$index]
+                    'produto' => $produto,
+                    'quantidade' => $quantidade
                 ];
-
+                
             }
 
             // Cadastrar o orçamento e os itens no banco de dados
@@ -58,26 +64,24 @@
                 $sessao->excluirChaveSessao('orcamento');
 
                 $cliente = new Cliente();
-            
+
                 // Setando os valores do objeto Cliente que está autenticado e fez o orçamento.
                 $cliente->setNome($sessao->getValorSessao('nomeFantasia'));
-                $cliente->setIdCliente($idCliente = $sessao->getValorSessao('idCliente')); 
-                $cliente->setRazaoSocial($razaoSocial = $sessao->getValorSessao('razaoSocial')); 
-                $cliente->setCnpj($cnpj = $sessao->getValorSessao('cnpj')); 
-                $cliente->setInscricaoEstadual($inscricaoEstadual = $sessao->getValorSessao('inscricaoEstadual')); 
-                $cliente->setTelefone($telefone = $sessao->getValorSessao('telefone')); 
+                $cliente->setIdCliente($idCliente = $sessao->getValorSessao('idCliente'));
+                $cliente->setRazaoSocial($razaoSocial = $sessao->getValorSessao('razaoSocial'));
+                $cliente->setCnpj($cnpj = $sessao->getValorSessao('cnpj'));
+                $cliente->setInscricaoEstadual($inscricaoEstadual = $sessao->getValorSessao('inscricaoEstadual'));
+                $cliente->setTelefone($telefone = $sessao->getValorSessao('telefone'));
                 $cliente->setEmail($email = $sessao->getValorSessao('email'));
-                $cliente->setLogradouro($logradouro = $sessao->getValorSessao('logradouro')); 
-                $cliente->setBairro($bairro = $sessao->getValorSessao('bairro')); 
-                $cliente->setCep($cep = $sessao->getValorSessao('cep')); 
-                $cliente->setEstado($estado = $sessao->getValorSessao('estado')); 
-                $cliente->setMunicipio($municipio = $sessao->getValorSessao('municipio')); 
-                $cliente->setNumeroEndereco($numeroEndereco = $sessao->getValorSessao('numeroEndereco')); 
-
+                $cliente->setLogradouro($logradouro = $sessao->getValorSessao('logradouro'));
+                $cliente->setBairro($bairro = $sessao->getValorSessao('bairro'));
+                $cliente->setCep($cep = $sessao->getValorSessao('cep'));
+                $cliente->setEstado($estado = $sessao->getValorSessao('estado'));
+                $cliente->setMunicipio($municipio = $sessao->getValorSessao('municipio'));
+                $cliente->setNumeroEndereco($numeroEndereco = $sessao->getValorSessao('numeroEndereco'));
 
                 // Retornar JSON de sucesso.
                 echo json_encode(['status' => 'sucesso']);
-
 
                 // Passando o número oficial do whatsapp da empresa a qual o cliente será direcionado com as informações do orçamento.
                 $numero = '5571996023166';
@@ -85,15 +89,15 @@
                 // Criando a mensagem que será encaminhada para o número do whatsapp, em que estará incluso todos os dados do formulário e do cliente.
                 $mensagem = "Olá, equipe da Dacal!\n\n";
                 $mensagem .= "Um novo orçamento foi solicitado pelo cliente. Seguem os detalhes:\n\n";
-                $mensagem .= "Nome do Cliente: " . $cliente->getNome() .  "\n";
+                $mensagem .= "Nome do Cliente: " . $cliente->getNome() . "\n";
                 $mensagem .= "CNPJ: " . $cliente->getCnpj() . "\n";
                 $mensagem .= "Telefone: " . $cliente->getTelefone() . "\n";
                 $mensagem .= "Email: " . $cliente->getEmail() . "\n";
-                $mensagem .= "Endereço: " . $cliente->getlogradouro() . ", " . $cliente->getNumeroEndereco() . ", " . $cliente->getBairro() . "-" . $cliente->getMunicipio() . "/" . $cliente->getEstado() . ", " . $cliente->getCep(). "\n\n";
+                $mensagem .= "Endereço: " . $cliente->getlogradouro() . ", " . $cliente->getNumeroEndereco() . ", " . $cliente->getBairro() . "-" . $cliente->getMunicipio() . "/" . $cliente->getEstado() . ", " . $cliente->getCep() . "\n\n";
                 $mensagem .= "Produtos Solicitados:\n";
 
-                foreach ($produtos as $key => $produto) {
-                    $mensagem .= "- Código do Produto: {$produtoIds[$key]} - Nome do produto: $produto: *Quantidade: {$quantidades[$key]} Valor unitário: R$ {$valores[$key]}\n";
+                foreach ($itens as $item) {
+                    $mensagem .= "- Código do Produto: " . $item['produto']->getId() . " - Nome do produto: " . $item['produto']->getNome() . ": *Quantidade: " . $item['quantidade'] . " Valor unitário: R$ " . $item['produto']->getValor() . "\n";
                 }
 
                 $mensagem .= "\nValor Total do Orçamento: R$ $valorTotal\n";
@@ -118,7 +122,6 @@
 
             };
 
-
         } catch (Exception $excecao) {
 
             echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao cadastrar o orçamento: ' . $excecao->getMessage()]);
@@ -127,11 +130,10 @@
 
         }
 
-        
     } else {
 
         echo '<p>Método de requisição inválido.</p>';
 
     }
-    
+
 ?>

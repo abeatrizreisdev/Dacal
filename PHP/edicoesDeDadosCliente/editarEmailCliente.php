@@ -35,7 +35,7 @@
     
                     if ($tipoConta == "admin") {
     
-                        header("Location: ../gerenciarContas.php.php?statusEdicaoContaCliente=sucesso");
+                        header("Location: ../gerenciarContas.php?statusEdicaoContaCliente=sucesso");
                         exit();
     
                     } else {
@@ -51,7 +51,7 @@
     
                     if ($tipoConta == "admin") {
                         
-                        header("Location: ../gerenciarContas.php.php?statusEdicaoContaCliente=erro");
+                        header("Location: ../gerenciarContas.php?statusEdicaoContaCliente=erro");
                         exit();
     
                     } else {

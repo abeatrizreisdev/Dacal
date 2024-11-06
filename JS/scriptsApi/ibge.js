@@ -13,6 +13,7 @@ fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome'
 
   // Carregar municípios com base no estado selecionado
   document.getElementById('estado').addEventListener('change', function () {
+    
     const uf = this.options[this.selectedIndex].getAttribute('data-uf');
     const municipioSelect = document.getElementById('municipio');
     municipioSelect.innerHTML = '<option value="">Selecione um município</option>';

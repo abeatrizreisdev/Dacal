@@ -62,38 +62,18 @@
             // Inserindo as informações do cliente retiradas do banco de dados.
             $clienteAutenticado->setIdCliente($resultadoAutenticacao['idCliente']);
             $clienteAutenticado->setNome($resultadoAutenticacao['nomeFantasia']);
-            $clienteAutenticado->setEmail($resultadoAutenticacao['email']);
-            $clienteAutenticado->setSenha($resultadoAutenticacao['senha']);
-            $clienteAutenticado->setTelefone($resultadoAutenticacao['telefone']);
-            $clienteAutenticado->setCnpj($resultadoAutenticacao['cnpj']);
-            $clienteAutenticado->setRazaoSocial($resultadoAutenticacao['razaoSocial']);
-            $clienteAutenticado->setInscricaoEstadual($resultadoAutenticacao['inscricaoEstadual']);
-            $clienteAutenticado->setEstado($resultadoAutenticacao['estado']);
-            $clienteAutenticado->setMunicipio($resultadoAutenticacao['municipio']);
-            $clienteAutenticado->setBairro($resultadoAutenticacao['bairro']);
-            $clienteAutenticado->setLogradouro($resultadoAutenticacao['logradouro']);
-            $clienteAutenticado->setCep($resultadoAutenticacao['cep']);
-            $clienteAutenticado->setNumeroEndereco($resultadoAutenticacao['numeroEndereco']);
+            
     
             // Passando os dados do cliente autenticado para criar sua sessão no site.
             $sessao->setChaveEValorSessao('idCliente', $clienteAutenticado->getId());
             $sessao->setChaveEValorSessao('nomeFantasia', $clienteAutenticado->getNome());
-            $sessao->setChaveEValorSessao('email', $clienteAutenticado->getEmail());
-            $sessao->setChaveEValorSessao('senha', $clienteAutenticado->getSenha());
-            $sessao->setChaveEValorSessao('razaoSocial', $clienteAutenticado->getRazaoSocial());
-            $sessao->setChaveEValorSessao('cnpj', $clienteAutenticado->getCnpj());
-            $sessao->setChaveEValorSessao('inscricaoEstadual', $clienteAutenticado->getInscricaoEstadual());
-            $sessao->setChaveEValorSessao('telefone', $clienteAutenticado->getTelefone());
-            $sessao->setChaveEValorSessao('estado', $clienteAutenticado->getEstado());
-            $sessao->setChaveEValorSessao('municipio', $clienteAutenticado->getMunicipio());
-            $sessao->setChaveEValorSessao('bairro', $clienteAutenticado->getBairro());
-            $sessao->setChaveEValorSessao('cep', $clienteAutenticado->getCep());
-            $sessao->setChaveEValorSessao('logradouro', $clienteAutenticado->getLogradouro());
-            $sessao->setChaveEValorSessao('numeroEndereco', $clienteAutenticado->getNumeroEndereco());
+            
     
             header("Location: ../homeEmpresa.php");
             exit();
+
         }
+        
     }
     
     
