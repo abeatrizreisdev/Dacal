@@ -52,6 +52,7 @@ function renderizarProdutos(produtos, tipoConta) {
                     <a class='botao' id='botaoVisualizar' href='../PHP/detalhesProduto.php?id=${produto.codigoProduto}&from=catalogo'><button>Visualizar</button></a>
                     <a class='botao' id='botaoRemover'><button onclick='excluirProduto(${produto.codigoProduto})'>Remover</button></a>
                     <a class='botao' id='botaoEditar' href='./editarProduto.php?id=${produto.codigoProduto}'><button>Editar</button></a>`;
+                    
             } else {
 
                 produtoHTML += `
