@@ -10,15 +10,23 @@
 
         public function cadastrarCliente($dados) {
 
+            // Validação de CNPJ.
+            if (!$this->verificarCnpj($dados['cnpj'])) {
+
+                echo "<br>Erro no cadastro do cliente: CNPJ inválido.";
+                
+                return false; // CNPJ inválido.
+
+            }
+        
             $camposTabela = $this->organizarCamposDaTabela($dados);
             $valores = $this->organizarValoresParaTabela($dados);
-
+        
             try {
 
                 $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-
                 $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $dados);
-
+        
                 if ($resultadoCadastro > 0) {
 
                     return true;
@@ -28,16 +36,16 @@
                     return false;
 
                 }
-
+                
             } catch (Exception $excecao) {
 
                 echo "<br>Erro no cadastro do cliente: " . $excecao->getMessage();
-
                 return false;
 
             }
 
         }
+
 
         public function autenticarCliente($cnpj, $senha) {
 
@@ -310,6 +318,41 @@
 
 
         }
+
+        private function verificarCnpj($cnpj) {
+
+            // Remove caracteres não numéricos.
+            $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+            
+            // Verifica se o CNPJ tem 14 dígitos.
+            if (strlen($cnpj) != 14) {
+                return false;
+            }
+        
+            // Verifica se todos os dígitos são iguais.
+            if (preg_match('/(\d)\1{13}/', $cnpj)) {
+                return false;
+            }
+        
+            // Valida os dígitos verificadores.
+            for ($tamanho = 12; $tamanho < 14; $tamanho++) {
+                $soma = 0;
+                $peso = 5;
+                for ($posicao = 0; $posicao < $tamanho; $posicao++) {
+                    $soma += $cnpj[$posicao] * $peso;
+                    $peso = ($peso == 2 ? 9 : $peso - 1);
+                }
+        
+                $digitoVerificadorCalculado = ((10 * $soma) % 11) % 10;
+                if ($cnpj[$posicao] != $digitoVerificadorCalculado) {
+                    return false;
+                }
+            }
+        
+            return true;
+
+        }
+
 
 
     }
