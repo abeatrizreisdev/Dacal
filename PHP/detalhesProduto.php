@@ -140,8 +140,8 @@ $contaAutenticada = $sessao->getValorSessao('tipoConta');
 
     </div>
 
-    <section class="quadrado" id="productDetails">
-
+    <section class="quadrado">
+        <div id="productDetails"></div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

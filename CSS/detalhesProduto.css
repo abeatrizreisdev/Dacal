@@ -61,7 +61,7 @@ a:hover {
     height: 4vh;
     width: 100vw;
     text-align: center;
-    
+
 }
 
 .informativo_superior p {
@@ -137,7 +137,7 @@ a:hover {
     align-items: center;
 }
 
-.abas{
+.abas {
     background-color: #ffffff;
     height: 20vh;
     width: 20vw;
@@ -147,12 +147,15 @@ a:hover {
     align-items: center;
     justify-content: space-evenly;
 }
-#nomeEmpresa{
+
+#nomeEmpresa {
     font-weight: bold;
 }
-.tituloAbas{
+
+.tituloAbas {
     font-weight: bold;
 }
+
 .imgPerfil {
     height: 9vh;
 }
@@ -190,12 +193,13 @@ a:hover {
     flex-direction: column;
 }
 
-#textoPrincipal{
+#textoPrincipal {
     display: flex;
     flex-direction: column;
     align-items: justify;
 }
-#infoPrincipal{
+
+#infoPrincipal {
     display: block;
     text-align: justify;
     padding-right: 5vh;
@@ -203,24 +207,23 @@ a:hover {
 
 }
 
-#tituloPrincipal{
+#tituloPrincipal {
     font-size: 4vh;
     padding-top: 5vh;
 }
-#descricao{ 
+
+#descricao {
     font-size: 3.1vh;
     font-weight: 120vw;
 }
 
 
 
-/* SECTION DE FUNCIONALIDADES */
-.containerDetalhesProduto {
+/* SECTION DA VISUALIZAÇÃO DO PRODUTO*/
+.produto {
     display: flex;
-    align-items: flex-start;
-    padding: 4vh;
-    width: 100vw;
-    margin-bottom: 4vh;
+    flex-direction: row;
+    width: 70vw;
 }
 
 .containerImagemProduto {
@@ -250,15 +253,27 @@ a:hover {
     margin-bottom: 2vh;
 }
 
+.containerDetalhesProduto {
+    display: flex;
+    align-items: flex-start;
+    padding: 4vh;
+    width: 100vw;
+    margin-bottom: 4vh;
+}
+
 .containerDescricaoValor {
 
     display: flex;
-    justify-content: space-between; /* Espaço entre os itens */
-    align-items: flex-start; /* Alinha itens ao início do container */
+    justify-content: space-between;
+    /* Espaço entre os itens */
+    align-items: flex-start;
+    /* Alinha itens ao início do container */
     margin-top: 3vh;
-    width: 90%; 
-    max-height: 40vh; /* Define a altura máxima */
-    overflow-y: auto; /* Adiciona uma barra de rolagem vertical se o conteúdo exceder a altura máxima */
+    width: 90%;
+    max-height: 40vh;
+    /* Define a altura máxima */
+    overflow-y: auto;
+    /* Adiciona uma barra de rolagem vertical se o conteúdo exceder a altura máxima */
 }
 
 .valorProduto {
@@ -267,17 +282,10 @@ a:hover {
     font-weight: bold;
 }
 
-.descricaoProduto {
-    font-size: 2.5vh;
-    color: #666;
-    text-align: justify;
-    width: 40vw;
-    margin-bottom: 2vh; /* Adiciona espaço abaixo da descrição para separar do botão */
 
-}
 
 .labelQuantidade {
-    font-size: 2vh;    
+    font-size: 2vh;
     display: flex;
     align-items: center;
 }
@@ -302,7 +310,7 @@ a:hover {
     cursor: pointer;
     border: none;
     background: none;
-   
+
 }
 
 .quantidadeBtn:hover {
@@ -316,7 +324,8 @@ a:hover {
     margin-bottom: 3vh;
 }
 
-.botaoVoltar, .botaoAdicionar {
+.botaoVoltar,
+.botaoAdicionar {
     width: 20vw;
     padding: 2vh;
     background-color: #d9d9d9;
@@ -328,7 +337,7 @@ a:hover {
     font-size: 2.5vh;
     margin-right: 2vh;
     cursor: pointer;
-    
+
 }
 
 .botaoAdicionar {
@@ -351,14 +360,26 @@ a:hover {
 .containerDescricao {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 100%; /* Garante que o container não ultrapasse seu espaço */
-    
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 95%;
 }
+
 
 .descricaoProduto {
     white-space: pre-wrap;
-    word-wrap: break-word; /* Garante que palavras longas quebrem para a linha seguinte */
+    word-wrap: break-word;
+    /* Garante que palavras longas quebrem para a linha seguinte */
+
+
+}
+.descricaoProduto {
+    font-size: 2.5vh;
+    color: #666;
+    text-align: justify;
+    margin-bottom: 2vh;
+    /* Adiciona espaço abaixo da descrição para separar do botão */
 
 }
 
