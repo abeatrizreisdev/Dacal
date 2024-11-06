@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(resposta => resposta.json())
         .then(dadosOrcamento => {
 
-            console.log(dadosOrcamento.cnpj);
 
             // Elementos de html que irá exibir todos os dados de um orçamento especifico.
             let detalhes = `
@@ -98,14 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 dadosOrcamento.itens.forEach(item => { 
 
-                    // Verificando o caminho da imagem no console 
-                    console.log("Caminho da imagem do produto:", item.imagemProduto); // Certifique-se de que o caminho é relativo ao documento HTML 
-                    const caminhoImagem = `${item.imagemProduto}`;
-
                     detalhes += ` 
                     <div class="itensOrcamento"> 
                         <div class="imagemProduto"> 
-                            <img class="produto-imagem" src="../${caminhoImagem}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;"> 
+                            <img class="produto-imagem" src="../${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;"> 
                         </div> 
                         <div class="itensInfo"> 
                             <p class="labelInfo"><strong>${item.nomeProduto}</strong></p> 

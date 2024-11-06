@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     var urlParams = new URLSearchParams(window.location.search);
     var produtoId = urlParams.get('id');
 
@@ -29,9 +28,17 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(erro => console.log('Erro:', erro));
 
+    // Adicionar listener para exibir preview da nova imagem selecionada
+    document.getElementById('imagem').addEventListener('change', function(event) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagemPreview').src = e.target.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    });
+
     // Adiciona o listener para submissão do formulário.
     document.querySelector('form').addEventListener('submit', function(event) {
-
         event.preventDefault(); // Impedir o envio padrão do formulário.
 
         var formData = new FormData(this);
@@ -44,20 +51,14 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(dados => {
             
             if (dados.sucesso) {
-
                 toastr.success(dados.mensagem);
                 setTimeout(function() { 
                     window.location.href = 'catalogoProdutos.php'; 
                 }, 2000); // 2 segundos de atraso.
-
             } else {
-
                 toastr.error('Erro na edição do produto.');
-
             }
-
         })
         .catch(erro => console.log('Erro:', erro));
     });
-
 });

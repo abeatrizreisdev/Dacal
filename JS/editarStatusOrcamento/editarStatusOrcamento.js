@@ -91,7 +91,7 @@
                         document.getElementById('itens').innerHTML = dadosOrcamento.itens.map(item => `
                             <div class="itensOrcamento">
                                 <div class="imagemProduto">
-                                <img class="produto-imagem" src="data:image/jpeg;base64,${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;">
+                                <img class="produto-imagem" src="../${item.imagemProduto}" alt="${item.nomeProduto}" style="max-width: 150px; max-height: 150px;"> 
                                 </div>
                                 <div class="itensInfo">
                                 <p class="labelInfo"><strong>${item.nomeProduto}</strong></p>
