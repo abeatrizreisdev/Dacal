@@ -9,57 +9,63 @@
 
 
         public function cadastrarOrcamento(Orcamento $orcamento, $itens) {
-            
+
             try {
 
-                // Iniciar uma transação
+                // Iniciar uma transação.
                 $this->conexaoBD->beginTransaction();
-    
-                // Extrair os dados do objeto Orcamento para um array
+        
+                // Extrair os dados do objeto Orcamento para um array.
                 $dadosOrcamento = [
                     'idCliente' => $orcamento->getCliente(),
                     'valorOrcamento' => $orcamento->getValor(),
                     'dataCriacao' => $orcamento->getData(),
                     'status' => $orcamento->getStatus()
                 ];
-    
-                // Inserir o orçamento na tabela Orcamentos
+        
+                // Inserir o orçamento na tabela Orcamentos.
                 $camposTabela = $this->organizarCamposDaTabela($dadosOrcamento);
                 $valores = $this->organizarValoresParaTabela($dadosOrcamento);
                 $sqlOrcamento = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
                 $resultadoCadastro = $this->conexaoBD->queryBanco($sqlOrcamento, $dadosOrcamento);
-    
+        
                 if ($resultadoCadastro > 0) {
 
-                    // Obter o ID do orçamento inserido
+                    // Obter o ID do orçamento inserido.
                     $numeroOrcamento = $this->conexaoBD->lastInsertId();
-    
-                    // Inserir os itens do orçamento na tabela itens_orcamento
+        
+                    // Inserir os itens do orçamento na tabela itens_orcamento.
                     foreach ($itens as $item) {
 
-                        $item['numeroOrcamento'] = $numeroOrcamento;
-                        $camposItens = $this->organizarCamposDaTabela($item);
-                        $valoresItens = $this->organizarValoresParaTabela($item);
+                        // Extrair dados do objeto Produto.
+                        $produto = $item['produto'];
+                        $dadosItem = [
+                            'numeroOrcamento' => $numeroOrcamento,
+                            'idProduto' => $produto->getId(),
+                            'quantidade' => $item['quantidade']
+                        ];
+
+                        $camposItens = $this->organizarCamposDaTabela($dadosItem);
+                        $valoresItens = $this->organizarValoresParaTabela($dadosItem);
                         $sqlItens = "INSERT INTO itens_orcamento ($camposItens) VALUES ($valoresItens)";
-                        $this->conexaoBD->queryBanco($sqlItens, $item);
+                        $this->conexaoBD->queryBanco($sqlItens, $dadosItem);
 
                     }
-    
-                    // Confirmar a transação
+        
+                    // Confirmar a transação.
                     $this->conexaoBD->commit();
                     return true;
 
                 } else {
 
-                    // Reverter a transação em caso de erro
+                    // Reverter a transação em caso de erro.
                     $this->conexaoBD->rollBack();
                     return false;
 
                 }
-
             } catch (PDOException $excecao) {
 
-                // Reverter a transação em caso de exceção
+                // Reverter a transação em caso de exceção.
                 $this->conexaoBD->rollBack();
                 echo "<br>Erro no cadastro do orçamento: " . $excecao->getMessage();
                 return false;
@@ -67,10 +73,11 @@
             }
 
         }
-    
-
+        
         public function buscarInfoOrcamento($idOrcamento) {
+
             try {
+
                 $sql = "SELECT 
                             {$this->tabela}.numeroOrcamento, 
                             {$this->tabela}.valorOrcamento, 
@@ -137,15 +144,19 @@
                     return $orcamento;
         
                 } else {
+
                     return null;
+
                 }
+
             } catch (Exception $excecao) {
+
                 error_log('Erro: ' . $excecao->getMessage()); // Log para depuração
                 return ["erro" => "Erro na busca de informações do orçamento: " . $excecao->getMessage()];
+
             }
+
         }
-        
-        
         
         
         public function atualizarStatusOrcamento($numeroOrcamento, $status) {

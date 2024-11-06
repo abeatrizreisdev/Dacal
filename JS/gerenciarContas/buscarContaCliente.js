@@ -128,9 +128,6 @@
 
         const div = document.createElement('div');
 
-        console.log(empresa.idCliente)
-        console.log(empresa.nomeFantasia)
-
         div.classList.add('empresa');
         div.innerHTML = `
             <div class="perfil">

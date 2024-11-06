@@ -1,10 +1,10 @@
 <?php
 
-//require "./exibirOrcamento/exibirOrcamento.php"
 
 require "./sessao/sessao.php";
 
 $sessaoCliente = new Sessao();
+
 
 ?>
 
@@ -148,7 +148,6 @@ $sessaoCliente = new Sessao();
 
                     <div id="passo3" class="conteudoPassoAPasso">
                         <p class="titulo">ORÇAMENTO</p>
-                        <!-- Precisa criar o formulário para enviar o orçamento para o whatsapp aqui. -->
                         <form id="formOrcamento"
                             action="./crud/receberFormulariosDeCadastros/enviarDadosCadastroOrcamento.php"
                             method="post">

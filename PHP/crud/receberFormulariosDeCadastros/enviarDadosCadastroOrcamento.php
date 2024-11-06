@@ -3,6 +3,7 @@
     require '../../conexaoBD/conexaoBD.php';
     require '../../sessao/sessao.php';
     require '../../crud/crudOrcamento.php';
+    require_once '../../crud/crudCliente.php';
     require "../../entidades/orcamento.php";
     require "../../entidades/cliente.php";
     require "../../entidades/produto.php";
@@ -20,6 +21,8 @@
     $crudOrcamento = new CrudOrcamento($conexao);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        
 
         try {
 
@@ -62,23 +65,25 @@
             if ($crudOrcamento->cadastrarOrcamento($orcamentoRealizado, $itens)) {
 
                 $sessao->excluirChaveSessao('orcamento');
+                $clienteCrud = new CrudCliente($conexao);
+                $dadosCliente = $clienteCrud->buscarInfoCliente($sessao->getValorSessao('idCliente'));
 
                 $cliente = new Cliente();
 
                 // Setando os valores do objeto Cliente que está autenticado e fez o orçamento.
-                $cliente->setNome($sessao->getValorSessao('nomeFantasia'));
-                $cliente->setIdCliente($idCliente = $sessao->getValorSessao('idCliente'));
-                $cliente->setRazaoSocial($razaoSocial = $sessao->getValorSessao('razaoSocial'));
-                $cliente->setCnpj($cnpj = $sessao->getValorSessao('cnpj'));
-                $cliente->setInscricaoEstadual($inscricaoEstadual = $sessao->getValorSessao('inscricaoEstadual'));
-                $cliente->setTelefone($telefone = $sessao->getValorSessao('telefone'));
-                $cliente->setEmail($email = $sessao->getValorSessao('email'));
-                $cliente->setLogradouro($logradouro = $sessao->getValorSessao('logradouro'));
-                $cliente->setBairro($bairro = $sessao->getValorSessao('bairro'));
-                $cliente->setCep($cep = $sessao->getValorSessao('cep'));
-                $cliente->setEstado($estado = $sessao->getValorSessao('estado'));
-                $cliente->setMunicipio($municipio = $sessao->getValorSessao('municipio'));
-                $cliente->setNumeroEndereco($numeroEndereco = $sessao->getValorSessao('numeroEndereco'));
+                $cliente->setNome($dadosCliente['nomeFantasia']);
+                $cliente->setIdCliente($sessao->getValorSessao('idCliente'));
+                $cliente->setRazaoSocial($dadosCliente['razaoSocial']);
+                $cliente->setCnpj($dadosCliente['cnpj']);
+                $cliente->setInscricaoEstadual($dadosCliente['inscricaoEstadual']);
+                $cliente->setTelefone($dadosCliente['telefone']);
+                $cliente->setEmail($dadosCliente['email']);
+                $cliente->setLogradouro($dadosCliente['logradouro']);
+                $cliente->setBairro($dadosCliente['bairro']);
+                $cliente->setCep($dadosCliente['cep']);
+                $cliente->setEstado($dadosCliente['estado']);
+                $cliente->setMunicipio($dadosCliente['municipio']);
+                $cliente->setNumeroEndereco($dadosCliente['numeroEndereco']);
 
                 // Retornar JSON de sucesso.
                 echo json_encode(['status' => 'sucesso']);
