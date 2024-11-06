@@ -300,6 +300,9 @@
             
         }
 
+        /*
+            RASCUNHOS DE MÉTODOS INUTILIZADOS NO SISTEMA, NÃO TESTADOS.
+
         // Método para buscar orçamento pelo nome da empresa (informações básicas)
         public function buscarOrcamentoPorRazaoSocial($razaoSocial) {
 
@@ -415,6 +418,8 @@
 
         }
 
+        
+
         public function excluirOrcamento($idOrcamento) {
 
             try {
@@ -444,6 +449,7 @@
 
 
         }
+            */
 
     }
 

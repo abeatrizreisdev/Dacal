@@ -121,11 +121,13 @@
             $declaracao->execute($parametros);
 
             foreach ($parametros as $chave => $valor) {
+
                 if (is_resource($valor)) {
                     $declaracao->bindParam($chave, $valor, PDO::PARAM_LOB);
                 } else {
                     $declaracao->bindValue($chave, $valor);
                 }
+                
             }
 
             if (strpos($sql, 'INSERT') === 0) { // Verifica se a consulta é uma inserção
