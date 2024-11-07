@@ -10,9 +10,19 @@
 
         public function cadastrarCliente($dados) {
 
+
+            // Verificação de campos obrigatórios 
+            if (!$this->verificarCamposObrigatorios($dados)) { 
+
+                fwrite(STDERR, "Erro no cadastro do cliente: Dados incompletos.\n"); 
+                return false; // Dados incompletos 
+
+            }
+
             // Validação de CNPJ.
             if (!$this->verificarCnpj($dados['cnpj'])) {
 
+                fwrite(STDERR, "Erro no cadastro do cliente: CNPJ inválido.\n"); 
                 echo "<br>Erro no cadastro do cliente: CNPJ inválido.";
                 
                 return false; // CNPJ inválido.
@@ -178,50 +188,56 @@
         }
 
         public function editarCliente($idCliente, $dados) {
-            
+
             try {
 
-                // Instanciando uma lista para armazenar os campos da tabela.
+                // Verificação de campos obrigatórios 
+                if (!$this->verificarCamposObrigatorios($dados)) { 
+
+                    fwrite(STDERR, "Erro na edição do cliente: Dados incompletos.\n"); 
+                    return false; // Dados incompletos 
+                }
+        
+                // Verificação de CNPJ válido
+                if (!$this->verificarCnpj($dados['cnpj'])) {
+                    fwrite(STDERR, "Erro na edição do cliente: CNPJ inválido.\n");
+                    return false; // CNPJ inválido
+                }
+        
+                
+                // Instanciando uma lista para armazenar os campos da tabela
                 $campos = $this->inserirCamposTabelaEmUmaLista($dados);
-
-                // Comando sql para editar as informações do funcionário.
+        
+                // Comando SQL para editar as informações do cliente
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE idCliente = :id";
-
-                // Debug: Print SQL and parameters
-                echo "SQL: $sql<br>";
-                print_r(array_merge($dados, ['id' => $idCliente]));
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idCliente]));
-
-                // Check the result of the query
-                if ($resultadoConsulta === false) {
-                    echo "<br>Erro na execução da consulta.";
-                } else {
-                    echo "<br>Número de linhas afetadas: $resultadoConsulta";
-                }
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+        
+                // Verificando se a linha correspondente ao cliente foi afetada no banco
                 if ($resultadoConsulta > 0) {
 
-
+                    fwrite(STDOUT, "Edição realizada com sucesso. Linhas afetadas: $resultadoConsulta.\n");
                     return true;
 
                 } else {
 
-
+                    fwrite(STDERR, "Erro na edição do cliente: Nenhuma linha afetada.\n");
                     return false;
 
                 }
-        
+
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro na edição do cliente: " . $excecao->getMessage();
-                
+                fwrite(STDERR, "Erro na edição do cliente: " . $excecao->getMessage() . "\n");
+                fwrite(STDERR, "Código do erro SQLSTATE: " . $excecao->getCode() . "\n");
+                fwrite(STDERR, "Arquivo onde ocorreu o erro: " . $excecao->getFile() . "\n");
+                fwrite(STDERR, "Linha onde ocorreu o erro: " . $excecao->getLine() . "\n");
                 return false;
 
             }
 
         }
+        
 
         public function editarEmailCliente($idCliente, $novoEmail) {
 
@@ -352,6 +368,24 @@
         
             return true;
 
+        }
+
+
+
+        private function verificarCamposObrigatorios($dados) { 
+            
+            $camposObrigatorios = [ 'nomeFantasia', 'razaoSocial', 'cnpj', 'inscricaoEstadual', 'telefone', 'email', 'senha', 'logradouro', 'bairro', 'cep', 'estado', 'municipio', 'numeroEndereco' ]; 
+
+            foreach ($camposObrigatorios as $campo) { 
+
+                if (empty($dados[$campo])) {
+                     return false; 
+                } 
+                
+            } 
+
+            return true; 
+        
         }
 
 

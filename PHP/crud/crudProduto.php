@@ -168,38 +168,44 @@
 
 
         public function editarProduto($idProduto, $produto) {
-            
             try {
-
-                // Instanciando uma lista para armazenar os campos da tabela.
+                // Verificação de campos obrigatórios
+                if (empty($produto['nomeProduto']) || empty($produto['descricaoProduto']) || empty($produto['valorProduto']) || empty($produto['categoria']) || empty($produto['imagemProduto'])) {
+                    fwrite(STDERR, "Erro na edição do produto: Dados incompletos.\n");
+                    return false; // Dados incompletos
+                }
+        
+                // Verificação de valor válido
+                if ($produto['valorProduto'] <= 0) {
+                    fwrite(STDERR, "Erro na edição do produto: Valor inválido.\n");
+                    return false; // Valor inválido
+                }
+        
+                // Instanciando uma lista para armazenar os campos da tabela
                 $campos = $this->inserirCamposTabelaEmUmaLista($produto);
-
-                // Comando sql para editar as informações do produto.
+        
+                // Comando SQL para editar as informações do produto
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE codigoProduto = :id";
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($produto, ['id' => $idProduto]));
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
-                if ($resultadoConsulta > 0) {
-
-
-                    return true;
-
-                } else {
-
-
-                    return false;
-
-                }
         
+                // Verificando se a linha correspondente ao produto foi afetada no banco
+                if ($resultadoConsulta > 0) {
+                    fwrite(STDOUT, "Edição realizada com sucesso. Linhas afetadas: $resultadoConsulta.\n");
+                    return true;
+                } else {
+                    fwrite(STDERR, "Erro na edição do produto: Nenhuma linha afetada.\n");
+                    return false;
+                }
             } catch (PDOException $excecao) {
-
-                echo "<br>Erro na edição do produto: " . $excecao->getMessage();
-                
+                fwrite(STDERR, "Erro na edição do produto: " . $excecao->getMessage() . "\n");
+                fwrite(STDERR, "Código do erro SQLSTATE: " . $excecao->getCode() . "\n");
+                fwrite(STDERR, "Arquivo onde ocorreu o erro: " . $excecao->getFile() . "\n");
+                fwrite(STDERR, "Linha onde ocorreu o erro: " . $excecao->getLine() . "\n");
                 return false;
             }
-
         }
+        
 
         public function excluirProduto($idProduto) {
 
@@ -225,6 +231,7 @@
             } catch (Exception $excecao) {
 
                 echo "<br>Erro na exclusão do produto: " . $excecao->getMessage();
+                return false;
 
             }
 

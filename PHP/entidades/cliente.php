@@ -131,7 +131,7 @@
 
             if (empty($telefone)) {
 
-                throw new Exception("Erro. O Telefone não não pode ser vazio.");
+                throw new Exception("Erro. O Telefone não pode ser vazio.");
 
             } elseif (!is_string($telefone)) {
 

@@ -167,38 +167,46 @@
         }
 
         public function editarFuncionario($idFuncionario, $dados) {
-            
             try {
-
-                // Instanciando uma lista para armazenar os campos da tabela.
+                // Verificação de campos obrigatórios
+                if (!$this->verificarCamposObrigatorios($dados)) {
+                    fwrite(STDERR, "Erro na edição do funcionário: Dados incompletos.\n");
+                    return false; // Dados incompletos
+                }
+        
+                // Verificação de CPF válido (exemplo de validação simples, deve ser ajustada conforme necessidade)
+                if (!$this->verificarCpf($dados['cpf'])) {
+                    fwrite(STDERR, "Erro na edição do funcionário: CPF inválido.\n");
+                    return false; // CPF inválido
+                }
+        
+                // Instanciando uma lista para armazenar os campos da tabela
                 $campos = $this->inserirCamposTabelaEmUmaLista($dados);
-
-                // Comando sql para editar as informações do funcionário.
+        
+                // Comando SQL para editar as informações do funcionário
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE id = :id";
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idFuncionario]));
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
-                if ($resultadoConsulta > 0) {
-
-
-                    return true;
-
-                } else {
-
-                    return false;
-
-                }
         
+                // Verificando se a linha correspondente ao funcionário foi afetada no banco
+                if ($resultadoConsulta > 0) {
+                    fwrite(STDOUT, "Edição realizada com sucesso. Linhas afetadas: $resultadoConsulta.\n");
+                    return true;
+                } else {
+                    fwrite(STDERR, "Erro na edição do funcionário: Nenhuma linha afetada.\n");
+                    return false;
+                }
             } catch (Exception $excecao) {
-
-                echo "<br>Erro na edição do funcionário: " . $excecao->getMessage();
-                
+                fwrite(STDERR, "Erro na edição do funcionário: " . $excecao->getMessage() . "\n");
+                fwrite(STDERR, "Código do erro SQLSTATE: " . $excecao->getCode() . "\n");
+                fwrite(STDERR, "Arquivo onde ocorreu o erro: " . $excecao->getFile() . "\n");
+                fwrite(STDERR, "Linha onde ocorreu o erro: " . $excecao->getLine() . "\n");
                 return false;
-
             }
-
         }
+        
+        
+        
 
         public function excluirFuncionario($idFuncionario) {
 
@@ -256,6 +264,21 @@
         
                 $digitoVerificadorCalculado = ((10 * $soma) % 11) % 10;
                 if ($cpf[$posicao] != $digitoVerificadorCalculado) {
+                    return false;
+                }
+            }
+        
+            return true;
+        }
+
+        private function verificarCamposObrigatorios($dados) {
+            $camposObrigatorios = [
+                'nome', 'cpf', 'email', 'senha', 'telefone', 'tipoConta', 
+                'estado', 'cidade', 'bairro', 'logradouro', 'cep', 'numeroEndereco'
+            ];
+        
+            foreach ($camposObrigatorios as $campo) {
+                if (empty($dados[$campo])) {
                     return false;
                 }
             }
