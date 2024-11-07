@@ -1,6 +1,6 @@
 <?php 
 
-    require "crud.php";
+    require_once "crud.php";
 
     class CrudProduto extends Crud {
 
@@ -12,37 +12,42 @@
         }
 
         public function cadastrarProduto($produto) {
-
-            // Separando por virgulas os campos da tabela que receberão os valores da inserção.
-            $camposTabela = $this->organizarCamposDaTabela($produto);
-
-            // Separando os valores que serão inseridos na tabela.
-            $valores = $this->organizarValoresParaTabela($produto);
-
-            try {
-
-                $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-
-                $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $produto);
-
-                if ($resultadoCadastro > 0) {
-
-                    return true;
-
-                } else {
-
-                    return false;
-
-                }
-
-            } catch (PDOException $excecao) {
-
-                echo "<br>Erro no cadastro do funcionário: " . $excecao->getMessage();
-                return false;
-
+            // Verificação de campos obrigatórios
+            if (empty($produto['nomeProduto']) || empty($produto['descricaoProduto']) || empty($produto['valorProduto']) || empty($produto['categoria']) || empty($produto['imagemProduto'])) {
+                fwrite(STDERR, "Erro no cadastro do produto: Dados incompletos.\n");
+                return false; // Dados incompletos
             }
-
+        
+            // Verificação de valor válido
+            if ($produto['valorProduto'] <= 0) {
+                fwrite(STDERR, "Erro no cadastro do produto: Valor inválido.\n");
+                return false; // Valor inválido
+            }
+        
+            $camposTabela = $this->organizarCamposDaTabela($produto);
+            $valores = $this->organizarValoresParaTabela($produto);
+        
+            try {
+                $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
+                $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $produto);
+        
+                if ($resultadoCadastro > 0) {
+                    fwrite(STDOUT, "Cadastro realizado com sucesso. Linhas afetadas: $resultadoCadastro.\n");
+                    return true;
+                } else {
+                    fwrite(STDERR, "Erro no cadastro do produto: Nenhuma linha afetada.\n");
+                    return false;
+                }
+            } catch (PDOException $excecao) {
+                fwrite(STDERR, "Erro no cadastro do produto: " . $excecao->getMessage() . "\n");
+                fwrite(STDERR, "Código do erro SQLSTATE: " . $excecao->getCode() . "\n");
+                fwrite(STDERR, "Arquivo onde ocorreu o erro: " . $excecao->getFile() . "\n");
+                fwrite(STDERR, "Linha onde ocorreu o erro: " . $excecao->getLine() . "\n");
+                return false;
+            }
         }
+        
+        
 
         public function buscarInfoProduto($idProduto) {
 
