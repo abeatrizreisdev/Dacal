@@ -10,10 +10,18 @@
 
         public function cadastrarCliente($dados) {
 
+
+            // Verificação de campos obrigatórios 
+            if (!$this->verificarCamposObrigatorios($dados)) { 
+
+                return false; // Dados incompletos 
+
+            }
+
             // Validação de CNPJ.
             if (!$this->verificarCnpj($dados['cnpj'])) {
 
-                echo "<br>Erro no cadastro do cliente: CNPJ inválido.";
+                echo "Erro no cadastro do cliente: CNPJ inválido.";
                 
                 return false; // CNPJ inválido.
 
@@ -39,13 +47,13 @@
                 
             } catch (Exception $excecao) {
 
-                echo "<br>Erro no cadastro do cliente: " . $excecao->getMessage();
+                echo "Erro no cadastro do cliente: " . $excecao->getMessage();
                 return false;
 
             }
 
         }
-
+        
 
         public function autenticarCliente($cnpj, $senha) {
 
@@ -178,51 +186,49 @@
         }
 
         public function editarCliente($idCliente, $dados) {
-            
+
             try {
 
-                // Instanciando uma lista para armazenar os campos da tabela.
+                // Verificação de campos obrigatórios 
+                if (!$this->verificarCamposObrigatorios($dados)) { 
+
+                    return false; // Dados incompletos 
+                }
+        
+                // Verificação de CNPJ válido
+                if (!$this->verificarCnpj($dados['cnpj'])) {
+                    return false; // CNPJ inválido
+                }
+        
+                // Instanciando uma lista para armazenar os campos da tabela
                 $campos = $this->inserirCamposTabelaEmUmaLista($dados);
-
-                // Comando sql para editar as informações do funcionário.
+        
+                // Comando SQL para editar as informações do cliente
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE idCliente = :id";
-
-                // Debug: Print SQL and parameters
-                echo "SQL: $sql<br>";
-                print_r(array_merge($dados, ['id' => $idCliente]));
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idCliente]));
-
-                // Check the result of the query
-                if ($resultadoConsulta === false) {
-                    echo "<br>Erro na execução da consulta.";
-                } else {
-                    echo "<br>Número de linhas afetadas: $resultadoConsulta";
-                }
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+        
+                // Verificando se a linha correspondente ao cliente foi afetada no banco
                 if ($resultadoConsulta > 0) {
-
 
                     return true;
 
                 } else {
 
-
                     return false;
 
                 }
-        
+
             } catch (PDOException $excecao) {
 
                 echo "<br>Erro na edição do cliente: " . $excecao->getMessage();
-                
+
                 return false;
 
             }
 
         }
-
+        
         public function editarEmailCliente($idCliente, $novoEmail) {
 
             try {
@@ -352,6 +358,25 @@
             return true;
 
         }
+
+        
+        private function verificarCamposObrigatorios($dados) { 
+            
+            $camposObrigatorios = [ 'nomeFantasia', 'razaoSocial', 'cnpj', 'inscricaoEstadual', 'telefone', 'email', 'senha', 'logradouro', 'bairro', 'cep', 'estado', 'municipio', 'numeroEndereco' ]; 
+
+            foreach ($camposObrigatorios as $campo) { 
+
+                if (empty($dados[$campo])) {
+                     return false; 
+                } 
+                
+            } 
+
+            return true; 
+        
+        }
+
+
 
 
 

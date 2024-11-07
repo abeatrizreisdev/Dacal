@@ -12,7 +12,9 @@
 
             // Validação de CPF.
             if (!$this->verificarCpf($dados['cpf'])) {
+
                 return false; // CPF inválido.
+
             }
         
             $camposTabela = $this->organizarCamposDaTabela($dados);
@@ -32,6 +34,7 @@
                     return false;
 
                 }
+
             } catch (PDOException $excecao) {
 
                 echo "Erro no cadastro do funcionário: " . $excecao->getMessage();
@@ -167,20 +170,33 @@
         }
 
         public function editarFuncionario($idFuncionario, $dados) {
-            
+
             try {
 
-                // Instanciando uma lista para armazenar os campos da tabela.
-                $campos = $this->inserirCamposTabelaEmUmaLista($dados);
+                // Verificação de campos obrigatórios
+                if (!$this->verificarCamposObrigatorios($dados)) {
 
-                // Comando sql para editar as informações do funcionário.
+                    return false; // Dados incompletos
+
+                }
+        
+                // Verificação de CPF válido (exemplo de validação simples, deve ser ajustada conforme necessidade)
+                if (!$this->verificarCpf($dados['cpf'])) {
+
+                    return false; // CPF inválido
+
+                }
+        
+                // Instanciando uma lista para armazenar os campos da tabela
+                $campos = $this->inserirCamposTabelaEmUmaLista($dados);
+        
+                // Comando SQL para editar as informações do funcionário
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE id = :id";
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($dados, ['id' => $idFuncionario]));
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
+        
+                // Verificando se a linha correspondente ao funcionário foi afetada no banco
                 if ($resultadoConsulta > 0) {
-
 
                     return true;
 
@@ -189,16 +205,17 @@
                     return false;
 
                 }
-        
+
             } catch (Exception $excecao) {
 
-                echo "<br>Erro na edição do funcionário: " . $excecao->getMessage();
-                
+                echo "Erro na edição do funcionário: " . $excecao->getMessage();
+
                 return false;
 
             }
-
         }
+        
+
 
         public function excluirFuncionario($idFuncionario) {
 
@@ -261,6 +278,26 @@
         
             return true;
         }
+
+        private function verificarCamposObrigatorios($dados) {
+
+            $camposObrigatorios = [
+                'nome', 'cpf', 'email', 'senha', 'telefone', 'tipoConta', 
+                'estado', 'cidade', 'bairro', 'logradouro', 'cep', 'numeroEndereco'
+            ];
+        
+            foreach ($camposObrigatorios as $campo) {
+
+                if (empty($dados[$campo])) {
+                    return false;
+                }
+                
+            }
+        
+            return true;
+
+        }
+        
 
 
     }

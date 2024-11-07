@@ -13,31 +13,31 @@
 
         public function cadastrarProduto($produto) {
 
-            // Separando por virgulas os campos da tabela que receberão os valores da inserção.
+            if (!$this->verificarCamposObrigatorios($produto)) {
+
+                return false; // Dados incompletos
+
+            }
+        
+            // Verificação de valor válido
+            if ($produto['valorProduto'] <= 0) {
+
+                return false; // Valor inválido
+
+            }
+        
             $camposTabela = $this->organizarCamposDaTabela($produto);
-
-            // Separando os valores que serão inseridos na tabela.
             $valores = $this->organizarValoresParaTabela($produto);
-
+        
             try {
 
                 $sql = "INSERT INTO {$this->tabela} ($camposTabela) VALUES ($valores)";
-
                 $resultadoCadastro = $this->conexaoBD->queryBanco($sql, $produto);
-
-                if ($resultadoCadastro > 0) {
-
-                    return true;
-
-                } else {
-
-                    return false;
-
-                }
+        
+                return $resultadoCadastro > 0;
 
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro no cadastro do funcionário: " . $excecao->getMessage();
                 return false;
 
             }
@@ -163,35 +163,33 @@
 
 
         public function editarProduto($idProduto, $produto) {
-            
+
             try {
 
-                // Instanciando uma lista para armazenar os campos da tabela.
+                if (!$this->verificarCamposObrigatorios($produto)) {
+                    return false; // Dados incompletos
+                }
+        
+                // Verificação de valor válido
+                if ($produto['valorProduto'] <= 0) {
+                    return false; // Valor inválido
+                }
+        
+                // Instanciando uma lista para armazenar os campos da tabela
                 $campos = $this->inserirCamposTabelaEmUmaLista($produto);
-
-                // Comando sql para editar as informações do produto.
+        
+                // Comando SQL para editar as informações do produto
                 $sql = "UPDATE {$this->tabela} SET " . implode(", ", $campos) . " WHERE codigoProduto = :id";
         
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql, array_merge($produto, ['id' => $idProduto]));
-                
-                // Verificando se a linha correspondente ao usuário foi afetada no banco.
-                if ($resultadoConsulta > 0) {
-
-
-                    return true;
-
-                } else {
-
-
-                    return false;
-
-                }
         
+                return $resultadoConsulta > 0;
+
             } catch (PDOException $excecao) {
 
-                echo "<br>Erro na edição do produto: " . $excecao->getMessage();
-                
+                echo "Erro na edição do produto: " . $excecao->getMessage();
                 return false;
+
             }
 
         }
@@ -226,6 +224,25 @@
 
         }
 
+
+        
+        
+        private function verificarCamposObrigatorios($produto) {
+
+            $camposObrigatorios = ['nomeProduto', 'descricaoProduto', 'valorProduto', 'categoria', 'imagemProduto'];
+        
+            foreach ($camposObrigatorios as $campo) {
+
+                if (empty($produto[$campo])) {
+                    return false;
+                }
+
+            }
+        
+            return true;
+        }
+
+        
         
     }
 
