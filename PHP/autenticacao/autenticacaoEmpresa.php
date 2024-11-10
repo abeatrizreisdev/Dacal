@@ -1,5 +1,16 @@
 <?php 
 
+     // Configurações de sessão com maior segurança, salvando os dados da sessão do usuário pelo menos por um dia, caso ele não deslogue do sistema.
+    // Configurações de sessão com persistência.
+    session_set_cookie_params([
+        'lifetime' => 86400, // Sessão ativa por 1 dia (em segundos)
+        'path' => '/',
+        'domain' => $_SERVER['HTTP_HOST'],
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
     require "../conexaoBD/conexaoBD.php";
     require "../crud/crudCliente.php";
     require "../entidades/cliente.php";
@@ -10,16 +21,6 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    // Configurações de sessão com maior segurança, salvando os dados da sessão do usuário pelo menos por um dia, caso ele não deslogue do sistema.
-    // Configurações de sessão com persistência.
-    session_set_cookie_params([
-        'lifetime' => 86400, // Sessão ativa por 1 dia (em segundos)
-        'path' => '/',
-        'domain' => $_SERVER['HTTP_HOST'],
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
     
     $sessao = new Sessao();
     
@@ -51,7 +52,7 @@
         if ($resultadoAutenticacao === null) {
 
             $sessao->setChaveEValorSessao('erro', 'Login ou senha inválida.');
-            header("Location: ../login.php");
+            header("Location: ../../login.php");
             exit();
             
         } else {

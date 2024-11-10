@@ -103,7 +103,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                     </label>
                     <button type="submit" id="btnCadastro">Cadastrar</button>
                     <div>
-                    <a href="./login.php" id="btnCancelar">Cancelar</a>
+                    <a href="../login.php" id="btnCancelar">Cancelar</a>
 
                     </div>
                 </div>

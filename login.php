@@ -1,11 +1,32 @@
 <?php
 
-require './sessao/sessao.php';
+    require 'PHP/sessao/sessao.php';
 
     $sessao = new Sessao();
     $erro = $sessao->getValorSessao('erro');
     $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
 
+    $funcionarioAutenticado = $sessao->getValorSessao('id');
+    $clienteAutenticado = $sessao->getValorSessao('idCliente');
+
+    if ($funcionarioAutenticado) {
+
+        $tipoConta = $sessao->getValorSessao('tipoConta');
+
+        if ($tipoConta == "admin") {
+
+            header("PHP/homeAdm.php");
+
+        } elseif ($tipoConta == "funcionario") {
+
+            header("PHP/homeFuncionario.php");
+
+        }
+
+    } elseif ($clienteAutenticado) {
+        header("PHP/homeEmpresa.php");
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +38,7 @@ require './sessao/sessao.php';
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="CSS/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
         .selecionado {
@@ -28,9 +49,9 @@ require './sessao/sessao.php';
 </head>
 <body>
     <div id="homeGeral">
-        <img src="../IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
+        <img src="IMAGENS/Homepage/imagemDacalF.png" id="imagemInicial">
         <form action="" method="post" id="formLogin" class="formularioLogin">
-            <img src="../IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
+            <img src="IMAGENS/Homepage/logoDacal.png" id="logoDacal" alt="logoDacal">
             <h1 id="titulo">Tipo de Acesso</h1>
             <div class="container">
                 <a class="btn selecionado" href="#" onclick="metodosLogin('empresa', this)">Empresa</a>
@@ -49,7 +70,7 @@ require './sessao/sessao.php';
                 <p class="formularioNomes">Senha</p>
                 <input type="password" id="senha" name="senha" class="input">
                 <p id="cadastroOpcao" style="display:block;">Ainda não tem conta?
-                    <a id="cadastro" href="cadastroEmpresa.php">Cadastre-se Aqui.</a>
+                    <a id="cadastro" href="PHP/cadastroEmpresa.php">Cadastre-se Aqui.</a>
                 </p>
             </div>
             <br>
@@ -60,7 +81,7 @@ require './sessao/sessao.php';
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/cadastrarCliente/statusCadastroCliente.js"></script>
-    <script src="../JS/login/selecaoDeLogin.js"></script>
+    <script src="JS/cadastrarCliente/statusCadastroCliente.js"></script>
+    <script src="JS/login/selecaoDeLogin.js"></script>
 </body>
 </html>

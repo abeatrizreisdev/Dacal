@@ -16,14 +16,14 @@ function metodosLogin(type, element) {
                 loginEmpresa.style.display = 'block';
                 loginFuncionario.style.display = 'none';
                 cadastroOpcao.style.display = 'block';
-                tagFormulario.action = 'autenticacao/autenticacaoEmpresa.php'; // se o tipo for empresa, o arquivo php que fará a autenticação será especifico para ele.
+                tagFormulario.action = 'PHP/autenticacao/autenticacaoEmpresa.php'; // se o tipo for empresa, o arquivo php que fará a autenticação será especifico para ele.
 
             } else {
 
                 loginEmpresa.style.display = 'none';
                 loginFuncionario.style.display = 'block';
                 cadastroOpcao.style.display = 'none';
-                tagFormulario.action = 'autenticacao/autenticacaoFuncionario.php';
+                tagFormulario.action = 'PHP/autenticacao/autenticacaoFuncionario.php';
 
             }
 
