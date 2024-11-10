@@ -37,6 +37,7 @@ require './sessao/sessao.php';
                 <a class="btn" href="#" onclick="metodosLogin('funcionario', this)">Funcionário</a>
             </div>
             <p><?php echo $erro; ?></p>
+            <br>
             <div class="formularioInterior">
                 <div id="loginEmpresa" style="display:block;">
                     <p class="formularioNomes">CNPJ</p>
