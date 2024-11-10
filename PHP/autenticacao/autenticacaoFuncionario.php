@@ -34,7 +34,7 @@
                 $sessao->setChaveEValorSessao( 'erro', "Login ou senha inválida.");
 
 
-                header("Location: ../login.php");
+                header("Location: ../../login.php");
 
                 exit();
 
