@@ -66,13 +66,16 @@ function criarInfoProduto(dados) {
             <div class='containerDescricaoValor'>
                 <p class='valorProduto'>R$ ${dados.valorProduto}</p>
             </div>
+                <p class='codigoProduto'>Código: ${dados.codigoProduto}</p>
             ${dados.contaAutenticada !== 'admin' && dados.contaAutenticada !== 'funcionario' ? criarFormularioOrcamento(dados) : ''}
          </div>
         </div>
     </div>
+    <p id='tituloDescricao'>Descrição:</p>
     <div class='containerDescricao'>
-        <p id='tituloDescricao'>Descrição:</p>
-        <p class='descricaoProduto'>${dados.descricaoProduto}</p>
+        <div class='alinharContainer'>
+            <p class='descricaoProduto'>${dados.descricaoProduto}</p>
+        </div>
     </div>
     `;
 

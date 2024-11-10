@@ -268,7 +268,7 @@ a:hover {
     /* Espaço entre os itens */
     align-items: flex-start;
     /* Alinha itens ao início do container */
-    margin-top: 3vh;
+    margin-top: 1vh;
     width: 90%;
     max-height: 40vh;
     /* Define a altura máxima */
@@ -278,6 +278,11 @@ a:hover {
 
 .valorProduto {
     font-size: 4vh;
+    color: black;
+    font-weight: bold;
+}
+.codigoProduto {
+    font-size: 3vh;
     color: black;
     font-weight: bold;
 }
@@ -328,7 +333,7 @@ a:hover {
 .botaoAdicionar {
     width: 20vw;
     padding: 2vh;
-    background-color: #d9d9d9;
+    background-color: #a6a6a6;
     color: black;
     border: none;
     border-radius: 5vh;
@@ -360,12 +365,16 @@ a:hover {
 .containerDescricao {
     display: flex;
     flex-direction: column;
+    width: 70vw;
+    margin-left: 2vw;
+    height: 25vh;
+    overflow-y: scroll;
+}
+.alinharContainer{
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 95%;
 }
-
 
 .descricaoProduto {
     white-space: pre-wrap;
@@ -385,6 +394,8 @@ a:hover {
 
 #tituloDescricao {
     font-weight: bold;
+    text-align: justify;
+    margin-left: 2vw;
 }
 
 
