@@ -298,7 +298,9 @@ nav {
     justify-content: space-evenly;
     margin-top: 3vh;
 }
-
+#trocarEmail, #trocarSenha{
+    width: 18vw;
+}
 .tituloAlterar {
     text-align: center;
     font-size: 1.7vw;
@@ -347,7 +349,7 @@ nav {
 #btnLogin {
     align-items: center;
     background-color: #7ed957;
-    width: 18vw;
+    width: 15vw;
     height: 6vh;
     border-radius: 1vh;
     font-size: 3vh;
@@ -359,7 +361,7 @@ nav {
 #btnSalvar {
     align-items: center;
     background-color: #7ed957;
-    width: 40vw;
+    width: 25vw;
     height: 6vh;
     border-radius: 1vh;
     font-size: 3vh;
