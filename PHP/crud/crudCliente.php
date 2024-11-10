@@ -135,7 +135,7 @@
                 if ($resultadoConsulta->rowCount() > 0) {
                     
 
-                    return $resultadoConsulta->fetch(PDO::FETCH_ASSOC);
+                    return $resultadoConsulta->fetchAll(PDO::FETCH_ASSOC);
 
                 } else {
 
