@@ -195,21 +195,24 @@ nav {
 
 .geral {
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.geral h1 {
+.tituloGeral{
     text-align: center;
-    font-size: 4.5vh;
-    margin-top: 3vh;
+    font-weight: 700;
+    font-size: 4vh;
+    margin-top: 1vh;
 }
 
 .infoConta {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 75vw;
-    display: flex;
-    padding-top: 2vh;
+    height: 70vh;
+    margin-top: 1vh;
 }
 
 .infoGerais {
@@ -219,22 +222,24 @@ nav {
 
 .parteGeral p {
     text-align: justify;
+    font-weight: 600;
 }
 
 .dadosGerais {
-    width: 60vw;
-    height: 55vh;
+    width: 45vw;
+    height: 64vh;
     border-radius: 3vh;
     border-color: #000000;
-    border: 0.3vh solid;
+    border: 0.4vh solid;
     text-align: center;
-    margin-top: 3vh;
+    margin-top: 2vh;
 }
 
-.dadosGerais h2 {
+
+#subtitulo{
     font-size: 3vh;
-    margin-top: 3vh;
-    margin-bottom: 4vh;
+    margin: 1vh;
+    font-weight: 700;
 }
 
 .formDados {
@@ -245,14 +250,14 @@ nav {
 
 .endereco {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
     font-family: "Poppins";
 }
 
 .endereco p {
     text-align: start;
     font-size: 2.7vh;
-    margin-left: 15.6vh;
 }
 
 .endereco input {
@@ -265,8 +270,8 @@ nav {
 
 .inputAPI {
     height: 4vh;
-    width: 12vw;
-    border: 0.5vh solid;
+    width: 13vw;
+    border: 0.4vh solid;
 }
 
 #titulo {
@@ -278,9 +283,9 @@ nav {
 .alterarDados {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 22vw;
-    height: 60vh;
+    height: 70vh;
     align-items: center;
     text-align: center;
 }
@@ -319,15 +324,44 @@ nav {
 .input {
     height: 4vh;
     width: 18vw;
-    border: 0.3vh solid;
-    padding: 0.5vh;
-    margin-bottom: 3vh;
+    border: 0.5vh solid;
+    margin-bottom: 2vh;
 }
 
+#nome{
+    width: 39vw;
+}
+
+#logradouro{
+    width: 28vw;
+}
+
+#numeroEndereco{
+    width: 8vw;
+}
+
+#bairro{
+    width: 24vw;
+}
+#cep{
+    width: 12vw;
+}
+#btnSalvar{
+    align-items: center;
+    background-color: #7ed957;
+    width: 25vw;
+    height: 6vh;
+    border-radius: 1vh;
+    font-size: 3vh;
+    font-family: "Poppins";
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 2vh;
+}
 #btnLogin {
     align-items: center;
     background-color: #7ed957;
-    width: 18vw;
+    width: 15vw;
     height: 6vh;
     border-radius: 1vh;
     font-size: 3vh;

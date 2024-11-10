@@ -1,10 +1,10 @@
-<?php 
+<?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+$sessaoFuncionario = new Sessao();
 
-    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -71,49 +71,89 @@
                 </div>
             </a>
             <br>
-            
+
         </div>
         <div class="quadrado">
-            
+
             <div class="geral">
-            <h1> Informações da conta </h1>
+                <p class="tituloGeral">Informações da conta</p>
                 <div class="infoConta">
                     <div class="dadosGerais">
-                        <h2 id="subtitulo"> Dados gerais </h2>
+                        <p id="subtitulo">Dados Gerais</p>
                         <div action="#" method="" class="formDados">
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Nome</p>
-                                    <input type="text" id="nome" name="nome" class="input" value="<?php echo $sessaoFuncionario->getValorSessao('nome') ?>" readonly>
-                                </div>
-                                <div class="parteGeral">
-                                    <p>CPF</p>
-                                    <input type="text" id="cpf" name="cpf" class="input" value="<?php echo $sessaoFuncionario->getValorSessao('cpf'); ?>" readonly>
+                                    <input type="text" id="nome" name="nome" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('nome') ?>" readonly>
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
-                                    <p>Email</p>
-                                    <input type="text" id="email" name="email" class="input" value="<?php echo $sessaoFuncionario->getValorSessao('email') ?>" readonly>
+                                    <p>CPF</p>
+                                    <input type="text" id="CPF" name="CPF" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('CPF') ?>" readonly>
                                 </div>
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="telefone" name="telefone" class="input" value="<?php echo $sessaoFuncionario->getValorSessao('telefone'); ?>" readonly>
+                                    <input type="text" id="telefone" name="telefone" class="input"
+                                        value="<?php echo $sessaoFuncionario->getValorSessao('telefone'); ?>" readonly>
                                 </div>
-                                
                             </div>
                             <div class="endereco">
                                 <p>Endereço</p>
-                                <input type="text" id="endereco" name="endereco" class="inputEndereco" value="<?php echo $sessaoFuncionario->getValorSessao('logradouro') . ", " . $sessaoFuncionario->getValorSessao('bairro') . ", " . $sessaoFuncionario->getValorSessao('cidade') . "/" . $sessaoFuncionario->getValorSessao("estado") . ", " . $sessaoFuncionario->getValorSessao('cep'); ?>">
+                                <select id="estado" name="estado" class="inputAPI" value="<?php echo $sessaoFuncionario->getValorSessao('estado'); ?>" required>
+                                    <option value="">Selecione um estado</option>
+                                </select>
+                                <select id="municipio" name="municipio" class="inputAPI" value="<?php echo $sessaoFuncionario->getValorSessao('municipio'); ?>" required>
+                                    <option value="">Selecione um município</option>
+                                </select>
                             </div>
-                            
-                            
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Logradouro</p>
+                                    <input type="text" id="logradouro" name="logradouro" required class="input" value="<?php echo $sessaoFuncionario->getValorSessao('logradouro'); ?>">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>Nº</p>
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" value="<?php echo $sessaoFuncionario->getValorSessao('numeroEndereco'); ?>" required class="input">
+                                </div>
+                            </div>
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Bairro</p>
+                                    <input type="text" id="bairro" name="bairro" value="<?php echo $sessaoFuncionario->getValorSessao('bairro'); ?>" required class="input">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>CEP</p>
+                                    <input type="text" id="cep" name="cep" value="<?php echo $sessaoFuncionario->getValorSessao('cep'); ?>" required class="input">
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button type="submit" id="btnSalvar">Salvar Alterações</button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="alterarDados">
+                        <form action="" method="POST" class="alterarEmail">
+                            <p class="tituloAlterar">E-mail</p>
+                            <input type="hidden" name="" id="">
+                            <input type="email" id="trocarEmail" name="email" required class="input">
+                            <button type="submit" id="btnLogin">Alterar E-mail</button>
+                        </form>
+                        <form action="" method="POST" class="alterarSenha">
+                            <p class="tituloAlterar">Senha</p>
+                            <input type="hidden" name="" id="">
+                            <input type="password" id="trocarSenha" name="senha" required class="input">
+                            <button type="submit" id="btnLogin">Alterar Senha</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="../JS/scriptsApi/ibge.js"></script>
 
 </body>
 
