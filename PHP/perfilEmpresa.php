@@ -103,27 +103,27 @@ $sessaoCliente = new Sessao();
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Razão Social</p>
-                                    <input type="text" id="razaoSocial" name="razaoSocial" class="input">
+                                    <input type="text" id="razaoSocial" name="razaoSocial" required class="input">
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CNPJ da Empresa</p>
-                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" class="input">
+                                    <input type="text" id="cnpjEmpresa" name="cnpjEmpresa" maxlength="14" required class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Nome Fantasia</p>
-                                    <input type="text" id="nomeFantasia" name="nomeFantasia" class="input">
+                                    <input type="text" id="nomeFantasia" name="nomeFantasia" required class="input">
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Inscrição Estadual</p>
-                                    <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" class="input">
+                                    <input type="text" id="inscricaoEstadual" required name="inscricaoEstadual" class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="telefone" name="telefone" class="input">
+                                    <input type="text" id="telefone" name="telefone" required class="input">
                                 </div>
                             </div>
                             <div class="endereço">
@@ -138,21 +138,21 @@ $sessaoCliente = new Sessao();
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Logradouro</p>
-                                    <input type="text" id="logradouro" name="logradouro" class="input">
+                                    <input type="text" id="logradouro" name="logradouro" required class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Nº</p>
-                                    <input type="text" id="numeroEndereco" name="numeroEndereco" class="input">
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" required class="input">
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Bairro</p>
-                                    <input type="text" id="bairro" name="bairro" class="input">
+                                    <input type="text" id="bairro" name="bairro" required class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>CEP</p>
-                                    <input type="text" id="cep" name="cep" class="input">
+                                    <input type="text" id="cep" name="cep" required class="input">
                                 </div>
                             </div>
                             <div class="btn">
@@ -164,13 +164,13 @@ $sessaoCliente = new Sessao();
                         <form action="./edicoesDeDadosCliente/editarEmailCliente.php" method="POST" class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
                             <input type="hidden" name="idClienteEmail" id="idClienteEmail">
-                            <input type="email" id="trocarEmail" name="email" class="input">
+                            <input type="email" id="trocarEmail" name="email" required class="input">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
                         </form>
                         <form action="./edicoesDeDadosCliente/editarSenhaCliente.php" method="POST" class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
                             <input type="hidden" name="idClienteSenha" id="idClienteSenha">
-                            <input type="password" id="trocarSenha" name="senha" class="input">
+                            <input type="password" id="trocarSenha" name="senha" required class="input">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
                         </form>
                         <div class="btnApagarConta">
@@ -185,6 +185,9 @@ $sessaoCliente = new Sessao();
         </section>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/editarCliente_adm/enviarFormulario.js"></script>
     <script src="../JS/scriptsApi/ibge.js"></script>
     <script src="../JS/scriptsParaCliente.js/carregarDadosCliente.js"></script>
 </body>

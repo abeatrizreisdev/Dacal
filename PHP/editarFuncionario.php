@@ -160,7 +160,7 @@
                                     
                         </div>
 
-                        <a href="visualizarContasCadastradas.php"> <button>Página Anterior</button> </a>
+                        <a href="gerenciarContas.php"> <button>Página Anterior</button> </a>
 
                         
                         <button id="botaoExcluirConta">Excluir Conta</button>
@@ -174,6 +174,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/editarFuncionario_adm/enviarFormulario.js"></script>
     <script src="../JS/editarFuncionario_adm/carregarDadosFuncionario.js"></script>
     
 </body>

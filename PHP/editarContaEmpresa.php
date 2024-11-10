@@ -21,6 +21,8 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/editarContaEmpresa.css">
     <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 <header>
     <div class="informativo_superior">
@@ -54,7 +56,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
             <a class="abas">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
-                    <p>Bem vinda,</p>
+                    <p>Bem vindo,</p>
                     <p id="nomeEmpresa"> <?php echo $sessaoCliente->getValorSessao('nome'); ?> </p>
                     <button class="sairInfo" href="">
                         <img src="../IMAGENS/HomeEmpresa/sair.png" id="imgInfo" alt="">
@@ -185,7 +187,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
                                 </div>
                             </div>
                             <div class="btn">
-                                <button type="submit" id="btnSalvar">Salvar Alterações</button>
+                                <button type="button" id="btnSalvar">Salvar Alterações</button>
                             </div>
                         </form>
                     </div>
@@ -213,8 +215,10 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
         </section>
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/editarCliente_adm/carregarDadosCliente.js"></script>
+    <script src="../JS/editarCliente_adm/enviarFormulario.js"></script>
     <script src="../JS/scriptsApi/ibge.js"></script>
 
 </body>

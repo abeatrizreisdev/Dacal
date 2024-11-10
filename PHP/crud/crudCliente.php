@@ -362,7 +362,7 @@
         
         private function verificarCamposObrigatorios($dados) { 
             
-            $camposObrigatorios = [ 'nomeFantasia', 'razaoSocial', 'cnpj', 'inscricaoEstadual', 'telefone', 'email', 'senha', 'logradouro', 'bairro', 'cep', 'estado', 'municipio', 'numeroEndereco' ]; 
+            $camposObrigatorios = [ 'nomeFantasia', 'razaoSocial', 'cnpj', 'inscricaoEstadual', 'telefone', 'logradouro', 'bairro', 'cep', 'estado', 'municipio', 'numeroEndereco' ]; 
 
             foreach ($camposObrigatorios as $campo) { 
 

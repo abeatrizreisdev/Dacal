@@ -174,9 +174,9 @@
             try {
 
                 // Verificação de campos obrigatórios
-                if (!$this->verificarCamposObrigatorios($dados)) {
+               if (!$this->verificarCamposObrigatorios($dados)) {
 
-                    return false; // Dados incompletos
+                  //  return false; // Dados incompletos
 
                 }
         
@@ -282,7 +282,7 @@
         private function verificarCamposObrigatorios($dados) {
 
             $camposObrigatorios = [
-                'nome', 'cpf', 'email', 'senha', 'telefone', 'tipoConta', 
+                'nome', 'cpf', 'email', 'telefone', 
                 'estado', 'cidade', 'bairro', 'logradouro', 'cep', 'numeroEndereco'
             ];
         

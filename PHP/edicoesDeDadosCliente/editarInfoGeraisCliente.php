@@ -79,16 +79,7 @@
                     // Passando os dados do funcionário autenticado para editar os dados da sua sessão no site, após a realização da edição dos dados gerais.
                     $sessaoAtiva->setChaveEValorSessao('idCliente', $cliente->getId());
                     $sessaoAtiva->setChaveEValorSessao('nomeFantasia', $cliente->getNome());
-                    $sessaoAtiva->setChaveEValorSessao('razaoSocial', $cliente->getRazaoSocial());
-                    $sessaoAtiva->setChaveEValorSessao('cnpj', $cliente->getCnpj());
-                    $sessaoAtiva->setChaveEValorSessao('inscricaoEstadual', $cliente->getInscricaoEstadual());
-                    $sessaoAtiva->setChaveEValorSessao('telefone', $cliente->getTelefone());
-                    $sessaoAtiva->setChaveEValorSessao('estado', $cliente->getEstado());
-                    $sessaoAtiva->setChaveEValorSessao('municipio', $cliente->getMunicipio());
-                    $sessaoAtiva->setChaveEValorSessao('bairro', $cliente->getBairro());
-                    $sessaoAtiva->setChaveEValorSessao('cep', $cliente->getCep());
-                    $sessaoAtiva->setChaveEValorSessao('logradouro', $cliente->getLogradouro());
-                    $sessaoAtiva->setChaveEValorSessao('numeroEndereco', $cliente->getNumeroEndereco());
+                    
                     
                     header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
                     exit();
@@ -129,4 +120,5 @@
             }
 
         }
+        
     }
