@@ -139,30 +139,40 @@ document.querySelector('.formDados').addEventListener('submit', function(evento)
         evento.preventDefault(); // Evita o envio padrão do formulário
 
         const dadosFormulario = new FormData(evento.target);
-        dadosFormulario.append('id', idFuncionario); // Adiciona o ID do funcionário aos dados do formulário
+        dadosFormulario.append('id', idFuncionario); // Adiciona o ID do funcionário aos dados do formulário.
 
-        fetch('../PHP/editarFuncionario/alterarEmail.php', {
-            method: 'POST', // Define o método da requisição como POST
-            body: dadosFormulario // Define o corpo da requisição com os dados do formulário
+        fetch('../PHP/editarFuncionario/editarEmailFunc.php', {
+            method: 'POST', // Define o método da requisição como POST.
+            body: dadosFormulario // Define o corpo da requisição com os dados do formulário.
         })
-        .then(resposta => resposta.text())  // Captura toda a resposta como texto
+        .then(resposta => resposta.text())  // Captura toda a resposta como texto.
         .then(texto => {
+
             try {
-                const resultado = JSON.parse(texto);  // Tenta converter o texto da resposta para JSON
+
+                const resultado = JSON.parse(texto);  // Tenta converter o texto da resposta para JSON.
 
                 if (resultado.status === 'erro') {
-                    toastr.error('Erro ao alterar email: ' + resultado.mensagem); // Mostra erro em um alerta
+
+                    toastr.error('Erro ao alterar email.'); // Mostra feedback de erro.
+                    console.error(resultado.mensagem);
+
                 } else {
-                    toastr.sucess('Email alterado com sucesso.'); // Mostra sucesso em um alerta
+
+                    toastr.success('Email alterado com sucesso.'); // Mostra o feedback de sucesso.
                     setTimeout(() => {
-                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos
+                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos.
                     }, 2000); // Timeout de 2 segundos (2000 milissegundos)
+
                 }
+
             } catch (excecao) {
-                alert('Erro ao processar resposta: ' + excecao + '\n' + texto);  // Mostra erro da resposta não processada em um alerta
+                console.error('Erro ao processar resposta: ' + excecao + '\n' + texto);  // Mostra erro da resposta não processada.
             }
+
         })
-        .catch(erro => alert('Erro ao enviar o email: ' + erro)); // Mostra erro da requisição em um alerta
+        .catch(erro => console.error('Erro ao enviar o email: ' + erro)); // Mostra erro da requisição no console.
+        
     });
 
 
