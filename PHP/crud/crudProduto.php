@@ -38,6 +38,7 @@
 
             } catch (PDOException $excecao) {
 
+                echo "Erro no cadastro do produto: " . $excecao->getMessage();
                 return false;
 
             }
@@ -245,5 +246,3 @@
         
         
     }
-
-?>
