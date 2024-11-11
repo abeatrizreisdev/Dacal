@@ -19,6 +19,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/cadastroEmpresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
 </header>
@@ -111,6 +112,8 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
         </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/cadastrarCliente/validacoesCadastro.js"></script>
     <script src="../JS/scriptsApi/ibge.js"></script>
 </body>

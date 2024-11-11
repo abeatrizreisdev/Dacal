@@ -17,51 +17,51 @@ document.getElementById('formLogin').onsubmit = function(e) {
 
     // Validações simples
     if (!cnpj || !validarCNPJ(cnpj)) {
-        alert("CNPJ inválido.");
+        toastr.error("CNPJ inválido.");
         return false;
     }
     if (!razaoSocial) {
-        alert("Razão Social é obrigatória.");
+        toastr.error("Razão Social é obrigatória.");
         return false;
     }
     if (!inscricaoEstadual) {
-        alert("Inscrição Estadual é obrigatória.");
+        toastr.error("Inscrição Estadual é obrigatória.");
         return false;
     }
     if (!telefone) {
-        alert("Telefone é obrigatório.");
+        toastr.error("Telefone é obrigatório.");
         return false;
     }
     if (!email || !validarEmail(email)) {
-        alert("Email inválido.");
+        toastr.error("Email inválido.");
         return false;
     }
     if (!senha) {
-        alert("Senha é obrigatória.");
+        toastr.error("Senha é obrigatória.");
         return false;
     }
     if (!estado) {
-        alert("Estado é obrigatório.");
+        toastr.error("Estado é obrigatório.");
         return false;
     }
     if (!municipio) {
-        alert("Município é obrigatório.");
+        toastr.error("Município é obrigatório.");
         return false;
     }
     if (!logradouro) {
-        alert("Logradouro é obrigatório.");
+        toastr.error("Logradouro é obrigatório.");
         return false;
     }
     if (!numeroEndereco) {
-        alert("Número do Endereço é obrigatório.");
+        toastr.error("Número do Endereço é obrigatório.");
         return false;
     }
     if (!bairro) {
-        alert("Bairro é obrigatório.");
+        toastr.error("Bairro é obrigatório.");
         return false;
     }
     if (!cep) {
-        alert("CEP é obrigatório.");
+        toastr.error("CEP é obrigatório.");
         return false;
     }
 
@@ -70,50 +70,61 @@ document.getElementById('formLogin').onsubmit = function(e) {
 };
 
 function validarCNPJ(cnpj) {
-    cnpj = cnpj.replace(/[^\d]+/g, '');
-
-    if (cnpj == '' || cnpj.length != 14) {
+    
+    cnpj = cnpj.replace(/[^\d]+/g,'');
+ 
+    if(cnpj == '') return false;
+     
+    if (cnpj.length != 14)
         return false;
-    }
-
-    // Elimina CNPJs inválidos conhecidos
-    if (/^(\d)\1+$/.test(cnpj)) {
+ 
+    // Elimina CNPJs invalidos conhecidos
+    if (cnpj == "00000000000000" || 
+        cnpj == "11111111111111" || 
+        cnpj == "22222222222222" || 
+        cnpj == "33333333333333" || 
+        cnpj == "44444444444444" || 
+        cnpj == "55555555555555" || 
+        cnpj == "66666666666666" || 
+        cnpj == "77777777777777" || 
+        cnpj == "88888888888888" || 
+        cnpj == "99999999999999")
         return false;
-    }
-
+         
     // Valida DVs
-    let tamanho = cnpj.length - 2;
-    let numeros = cnpj.substring(0, tamanho);
-    let digitos = cnpj.substring(tamanho);
-    let soma = 0;
-    let pos = tamanho - 7;
-    for (let i = tamanho; i >= 1; i--) {
-        soma += numeros.charAt(tamanho - i) * pos--;
-        if (pos < 2) {
-            pos = 9;
-        }
-    }
-    let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado != digitos.charAt(0)) {
-        return false;
-    }
-
-    tamanho += 1;
-    numeros = cnpj.substring(0, tamanho);
+    tamanho = cnpj.length - 2
+    numeros = cnpj.substring(0,tamanho);
+    digitos = cnpj.substring(tamanho);
     soma = 0;
     pos = tamanho - 7;
-    for (let i = tamanho; i >= 1; i--) {
-        soma += numeros.charAt(tamanho - i) * pos--;
-        if (pos < 2) {
+
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
             pos = 9;
-        }
-    }
-    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado != digitos.charAt(1)) {
-        return false;
     }
 
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0))
+        return false;
+         
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0,tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+
+    for (i = tamanho; i >= 1; i--) {
+      soma += numeros.charAt(tamanho - i) * pos--;
+      if (pos < 2)
+            pos = 9;
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1))
+          return false;
+           
     return true;
+
 }
 
 function validarEmail(email) {
