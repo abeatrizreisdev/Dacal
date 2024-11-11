@@ -21,7 +21,6 @@
             // Validação de CNPJ.
             if (!$this->verificarCnpj($dados['cnpj'])) {
 
-                echo "Erro no cadastro do cliente: CNPJ inválido.";
                 
                 return false; // CNPJ inválido.
 
