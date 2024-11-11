@@ -24,69 +24,38 @@
 
     function validarCNPJ($cnpj) {
 
-        // Remove caracteres não numéricos do CNPJ
-        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
-    
-        // Verifica se o CNPJ tem 14 dígitos
-        if (strlen($cnpj) != 14) {
-            return false;
-        }
-    
-        // Verifica se todos os dígitos são iguais.
-        if (preg_match('/(\d)\1{13}/', $cnpj)) {
-            return false;
-        }
-    
-        $tamanhoSemDigitos = strlen($cnpj) - 2;
-        $numerosBase = substr($cnpj, 0, $tamanhoSemDigitos);
-        $digitosVerificadores = substr($cnpj, $tamanhoSemDigitos);
-    
-        $soma = 0;
-        $peso = $tamanhoSemDigitos - 7;
+       // Extrai os números
+       $cnpj = preg_replace('/[^0-9]/is', '', $cnpj);
 
-        for ($indice = $tamanhoSemDigitos; $indice >= 1; $indice--) {
+       // Valida tamanho
+       if (strlen($cnpj) != 14) {
+           return false;
+       }
 
-            $soma += $numerosBase[$tamanhoSemDigitos - $indice] * $peso--;
+       // Verifica sequência de digitos repetidos. Ex: 11.111.111/111-11
+       if (preg_match('/(\d)\1{13}/', $cnpj)) {
+           return false;
+       }
 
-            if ($peso < 2) {
+       // Valida dígitos verificadores
+       for ($t = 12; $t < 14; $t++) {
 
-                $peso = 9;
+           for ($d = 0, $m = ($t - 7), $i = 0; $i < $t; $i++) {
 
-            }
+               $d += $cnpj[$i] * $m;
+               $m = ($m == 2 ? 9 : --$m);
 
-        }
+           }
 
-        $digitoCalculado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
-        if ($digitoCalculado != $digitosVerificadores[0]) {
+           $d = ((10 * $d) % 11) % 10;
 
-            return false;
+           if ($cnpj[$i] != $d) {
+               return false;
+           }
 
-        }
-    
-        $tamanhoComPrimeiroDigito = $tamanhoSemDigitos + 1;
-        $numerosBase = substr($cnpj, 0, $tamanhoComPrimeiroDigito);
-        $soma = 0;
-        $peso = $tamanhoComPrimeiroDigito - 7;
-        for ($indice = $tamanhoComPrimeiroDigito; $indice >= 1; $indice--) {
+       }
 
-            $soma += $numerosBase[$tamanhoComPrimeiroDigito - $indice] * $peso--;
-
-            if ($peso < 2) {
-
-                $peso = 9;
-
-            }
-            
-        }
-
-        $digitoCalculado = $soma % 11 < 2 ? 0 : 11 - $soma % 11;
-        if ($digitoCalculado != $digitosVerificadores[1]) {
-
-            return false;
-
-        }
-
-        return true;
+       return true;
         
     }
     

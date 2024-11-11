@@ -326,38 +326,40 @@
 
         private function verificarCnpj($cnpj) {
 
-            // Remove caracteres não numéricos.
-            $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
-            
-            // Verifica se o CNPJ tem 14 dígitos.
+            // Extrai os números
+            $cnpj = preg_replace('/[^0-9]/is', '', $cnpj);
+
+            // Valida tamanho
             if (strlen($cnpj) != 14) {
                 return false;
             }
-        
-            // Verifica se todos os dígitos são iguais.
+
+            // Verifica sequência de digitos repetidos. Ex: 11.111.111/111-11
             if (preg_match('/(\d)\1{13}/', $cnpj)) {
                 return false;
             }
-        
-            // Valida os dígitos verificadores.
-            for ($tamanho = 12; $tamanho < 14; $tamanho++) {
-                $soma = 0;
-                $peso = 5;
-                for ($posicao = 0; $posicao < $tamanho; $posicao++) {
-                    $soma += $cnpj[$posicao] * $peso;
-                    $peso = ($peso == 2 ? 9 : $peso - 1);
+
+            // Valida dígitos verificadores
+            for ($t = 12; $t < 14; $t++) {
+
+                for ($d = 0, $m = ($t - 7), $i = 0; $i < $t; $i++) {
+
+                    $d += $cnpj[$i] * $m;
+                    $m = ($m == 2 ? 9 : --$m);
+
                 }
-        
-                $digitoVerificadorCalculado = ((10 * $soma) % 11) % 10;
-                if ($cnpj[$posicao] != $digitoVerificadorCalculado) {
+
+                $d = ((10 * $d) % 11) % 10;
+
+                if ($cnpj[$i] != $d) {
                     return false;
                 }
+
             }
-        
+
             return true;
 
         }
-
         
         private function verificarCamposObrigatorios($dados) { 
             
