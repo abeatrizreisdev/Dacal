@@ -213,7 +213,85 @@
                 return false;
 
             }
+
         }
+
+
+        public function editarSenhaUsuario($idFuncionario, $novaSenha) {
+
+            try {
+
+                // Verificação da nova senha.
+                if (empty($novaSenha)) {
+                    return false; // Senha vazia
+                }
+        
+                // Comando SQL para editar a senha do funcionário
+                $sql = "UPDATE {$this->tabela} SET senha = :senha WHERE id = :id";
+                
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, [
+                    'senha' => $novaSenha,
+                    'id' => $idFuncionario
+                ]);
+        
+                // Verificando se a linha correspondente ao funcionário foi afetada no banco
+                if ($resultadoConsulta > 0) {
+
+                    return true;
+
+                } else {
+
+                    return false;
+
+                }
+        
+            } catch (Exception $excecao) {
+
+                echo "Erro na edição da senha do usuário: " . $excecao->getMessage();
+                return false;
+            }
+
+        }
+
+
+        public function editarEmailUsuario($idFuncionario, $novoEmail) {
+
+            try {
+                
+                // Verificação do novo email (apenas verificar se está vazio)
+                if (empty($novoEmail)) {
+                    return false; // Email vazio
+                }
+        
+                // Comando SQL para editar o email do funcionário
+                $sql = "UPDATE {$this->tabela} SET email = :email WHERE id = :id";
+                
+                $resultadoConsulta = $this->conexaoBD->queryBanco($sql, [
+                    'email' => $novoEmail,
+                    'id' => $idFuncionario
+                ]);
+        
+                // Verificando se a linha correspondente ao funcionário foi afetada no banco
+                if ($resultadoConsulta > 0) {
+
+                    return true;
+
+                } else {
+                    
+                    return false;
+                    
+                }
+        
+            } catch (Exception $excecao) {
+
+                echo "Erro na edição do email do usuário: " . $excecao->getMessage();
+                return false;
+
+            }
+
+        }
+        
+        
         
 
 

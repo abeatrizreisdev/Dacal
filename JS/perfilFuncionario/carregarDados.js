@@ -135,56 +135,81 @@ document.querySelector('.formDados').addEventListener('submit', function(evento)
 
 
     // Função para enviar dados do formulário de alterar email
-    document.querySelector('.alterarEmail').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        formData.append('id', idFuncionario);
+    document.querySelector('.alterarEmail').addEventListener('submit', function(evento) {
+        evento.preventDefault(); // Evita o envio padrão do formulário
+
+        const dadosFormulario = new FormData(evento.target);
+        dadosFormulario.append('id', idFuncionario); // Adiciona o ID do funcionário aos dados do formulário
 
         fetch('../PHP/editarFuncionario/alterarEmail.php', {
-            method: 'POST',
-            body: formData
+            method: 'POST', // Define o método da requisição como POST
+            body: dadosFormulario // Define o corpo da requisição com os dados do formulário
         })
-        .then(response => response.text())  // Use `.text()` para capturar toda a resposta
-        .then(text => {
+        .then(resposta => resposta.text())  // Captura toda a resposta como texto
+        .then(texto => {
             try {
-                const result = JSON.parse(text);  // Tente converter o texto para JSON
-                console.log(result); // Log da resposta JSON
-                if (result.status === 'erro') {
-                    console.error('Erro ao alterar email:', result.mensagem);
+                const resultado = JSON.parse(texto);  // Tenta converter o texto da resposta para JSON
+
+                if (resultado.status === 'erro') {
+                    toastr.error('Erro ao alterar email: ' + resultado.mensagem); // Mostra erro em um alerta
                 } else {
-                    console.log('Email alterado com sucesso');
+                    toastr.sucess('Email alterado com sucesso.'); // Mostra sucesso em um alerta
+                    setTimeout(() => {
+                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos
+                    }, 2000); // Timeout de 2 segundos (2000 milissegundos)
                 }
-            } catch (e) {
-                console.error('Erro ao processar resposta:', e, text);  // Log da resposta não processada
+            } catch (excecao) {
+                alert('Erro ao processar resposta: ' + excecao + '\n' + texto);  // Mostra erro da resposta não processada em um alerta
             }
         })
-        .catch(error => console.error('Erro ao enviar o email:', error));
+        .catch(erro => alert('Erro ao enviar o email: ' + erro)); // Mostra erro da requisição em um alerta
     });
+
 
     // Função para enviar dados do formulário de alterar senha
-    document.querySelector('.alterarSenha').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        formData.append('id', idFuncionario);
+    document.querySelector('.alterarSenha').addEventListener('submit', function(evento) {
+        evento.preventDefault(); // Evita o envio padrão do formulário
+
+        const dadosFormulario = new FormData(evento.target);
+        dadosFormulario.append('id', idFuncionario); // Adiciona o ID do funcionário aos dados do formulário.
 
         fetch('../PHP/editarFuncionario/editarSenhaFunc.php', {
-            method: 'POST',
-            body: formData
+            method: 'POST', // Define o método da requisição como POST.
+            body: dadosFormulario // Define o corpo da requisição com os dados do formulário.
         })
-        .then(response => response.text())  // Use `.text()` para capturar toda a resposta
-        .then(text => {
+        .then(resposta => resposta.text())  // Captura toda a resposta como texto.
+        .then(texto => {
+
             try {
-                const result = JSON.parse(text);  // Tente converter o texto para JSON
-                console.log(result); // Log da resposta JSON
-                if (result.status === 'erro') {
-                    console.error('Erro ao alterar senha:', result.mensagem);
+
+                const resultado = JSON.parse(texto);  // Tenta converter o texto da resposta para JSON.
+
+                if (resultado.status === 'erro') {
+
+                    toastr.error('Erro ao alterar senha.'); 
+                    console.error(resultado.mensagem);
+
                 } else {
-                    console.log('Senha alterada com sucesso');
+
+                    toastr.success('Senha alterada com sucesso'); // Mostra o feedback de sucesso.
+                    setTimeout(() => {
+
+                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos.
+
+                    }, 2000); 
+
                 }
-            } catch (e) {
-                console.error('Erro ao processar resposta:', e, text);  // Log da resposta não processada
+
+            } catch (excecao) {
+
+                console.error('Erro ao processar resposta: ' + excecao + '\n' + texto);  // Mostra erro da resposta não processada.
+
             }
+
         })
-        .catch(error => console.error('Erro ao enviar a senha:', error));
+        .catch(erro => console.error('Erro ao enviar a senha: ' + erro)); 
+
     });
+
+
 });

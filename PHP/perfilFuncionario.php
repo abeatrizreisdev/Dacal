@@ -144,13 +144,13 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                     <div class="alterarDados">
                         <form action="#" method="POST" class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
-                            <input type="hidden" name="id" id="idEmail">
+                            <input type="hidden" name="idEmail" id="idEmail">
                             <input type="email" id="trocarEmail" name="email" required class="input">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
                         </form>
                         <form method="POST" class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
-                            <input type="hidden" name="id" id="idSenha">
+                            <input type="hidden" name="idSenha" id="idSenha">
                             <input type="password" id="trocarSenha" name="senha" required class="input">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
                         </form>

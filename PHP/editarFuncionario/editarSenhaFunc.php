@@ -7,68 +7,42 @@
     require "../conexaoBD/configBanco.php";
 
     $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: BD_HOST);
-    $conexao->setPortaBD(porta: BD_PORTA);
-    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
-    $conexao->setSenhaBD(senha: BD_PASSWORD);
-    $conexao->setUsuarioBD(user: BD_USERNAME);
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudFuncionario = new CrudFuncionario($conexao);
-
     $sessao = new Sessao();
 
-    $tipoContaTrocarSenha = $sessao->getValorSessao('tipoConta');
-
-
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        
-        $id = $_POST['idOcultoFunc'];
+
+        $id = $_POST['idSenha'];
         $senha = $_POST['senha'];
-     
+
         $funcionario = new Funcionario();
-    
         $funcionario->setId($id);
-        $funcionario->setSenha($senha);        
-        
-        $resultadoEdicao = $crudFuncionario->editarFuncionario($funcionario->getId(), 
-        ['senha' => $funcionario->getSenha()]);
+        $funcionario->setSenha($senha);
 
-        switch ($resultadoEdicao) {
+        $resultadoEdicao = $crudFuncionario->editarSenhaUsuario($funcionario->getId(), $funcionario->getSenha());
 
-            case true :
-                
-                
-                if ($tipoContaTrocarSenha == 'admin' ) {
+        if ($resultadoEdicao) {
 
-                    header("Location: ../gerenciarContas.php?statusEdicaoContaFuncionario=sucesso");
-                    exit();
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'sucesso']);
 
-                } elseif ($tipoContaTrocarSenha == 'funcionario') {
+        } else {
 
-                    header("Location: ../homeFuncionario.php?statusEdicaoContaFuncionario=sucesso");
-                    exit();
-                    
-                } 
-                    
-
-            case false :
-
-                
-                if ($tipoContaTrocarSenha == 'admin' ) {
-
-                    header("Location: ../gerenciarContas.php?statusEdicaoContaFuncionario=erro");
-                    exit();
-
-                } elseif ($tipoContaTrocarSenha == 'funcionario'){
-
-                    header("Location: ../homeFuncionario.php?statusEdicaoContaFuncionario=erro");
-                    exit();
-
-                } 
+            header('Content-Type: application/json');
+            echo json_encode(['status' => 'erro', 'mensagem' => 'Ocorreu um erro ao editar a senha do funcionário. Verifique os dados fornecidos e tente novamente.']);
 
         }
 
-    } 
-  
-?>
+    } else {
+
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'erro', 'mensagem' => 'Requisição inválida.']);
+
+    }
