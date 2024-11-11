@@ -40,7 +40,6 @@
 
             default :
 
-                echo "Usuário autenticado.";
                 // Instanciando um funcionário.
                 $funcionarioAutenticado = new Funcionario();
 

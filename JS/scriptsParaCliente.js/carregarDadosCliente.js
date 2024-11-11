@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error('Erro:', dados.erro);
 
                 } else {
+                    
                     document.getElementById('idCliente').value = dados.idCliente;
                     document.getElementById('razaoSocial').value = dados.razaoSocial;
                     document.getElementById('cnpjEmpresa').value = dados.cnpj;
