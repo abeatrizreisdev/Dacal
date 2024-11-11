@@ -115,7 +115,7 @@ document.querySelector('.formDados').addEventListener('submit', function(evento)
                 setTimeout(() => {
 
                     // Adiciona um timeout de 2 segundos após o sucesso
-                    window.location.href="../PHP/homeFuncionario.php";
+                    window.location.href="../PHP/homeAdm.php";
 
                 }, 2000); 
 
@@ -161,7 +161,7 @@ document.querySelector('.formDados').addEventListener('submit', function(evento)
 
                     toastr.success('Email alterado com sucesso.'); // Mostra o feedback de sucesso.
                     setTimeout(() => {
-                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos.
+                        window.location.href = '../PHP/homeAdm.php'; // Redireciona o usuário após 2 segundos.
                     }, 2000); // Timeout de 2 segundos (2000 milissegundos)
 
                 }
@@ -204,7 +204,7 @@ document.querySelector('.formDados').addEventListener('submit', function(evento)
                     toastr.success('Senha alterada com sucesso.'); // Mostra o feedback de sucesso.
                     setTimeout(() => {
 
-                        window.location.href = '../PHP/homeFuncionario.php'; // Redireciona o usuário após 2 segundos.
+                        window.location.href = '../PHP/homeAdm.php'; // Redireciona o usuário após 2 segundos.
 
                     }, 2000); 
 

@@ -6,9 +6,6 @@ $sessaoFuncionario = new Sessao();
 
 $id = $sessaoFuncionario->getValorSessao('id');
 
-
-echo "Id: " . $id;
-
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
@@ -85,7 +82,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
             <div class="geral">
                 <p class="tituloGeral">Informações da conta</p>
                 <div class="infoConta">
-                    <div class="dadosGerais" data-id-funcionario="1">
+                    <div class="dadosGerais" data-id-funcionario="<? echo $id ?>">
                         <p id="subtitulo">Dados Gerais</p>
                         <form action="./editarFuncionario/edicoesGeraisFunc.php" method="post" class="formDados">
 

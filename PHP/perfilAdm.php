@@ -4,6 +4,8 @@ require "./sessao/sessao.php";
 
 $sessaoFuncionario = new Sessao();
 
+$id = $sessaoFuncionario->getValorSessao('id');
+
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
@@ -19,6 +21,7 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
     <link rel="stylesheet" href="../CSS/perfilFuncionario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
     <div class="informativo_superior">
@@ -87,72 +90,72 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         <div class="geral">
                 <p class="tituloGeral">Informações da conta</p>
                 <div class="infoConta">
-                    <div class="dadosGerais">
+                    <div class="dadosGerais" data-id-funcionario="<?php echo $id ?>">
                         <p id="subtitulo">Dados Gerais</p>
-                        <div action="#" method="" class="formDados">
+                        <form action="./editarFuncionario/edicoesGeraisFunc.php" method="post" class="formDados">
+
+                            <input type="hidden" name="idGeral" id="idGeral">
+
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Nome</p>
-                                    <input type="text" id="nome" name="nome" class="input"
-                                        value="<?php echo $sessaoFuncionario->getValorSessao('nome') ?>" readonly>
+                                    <input type="text" id="nome" name="nome" class="input" required>
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>CPF</p>
-                                    <input type="text" id="CPF" name="CPF" class="input"
-                                        value="<?php echo $sessaoFuncionario->getValorSessao('CPF') ?>" readonly>
+                                    <input type="text" id="CPF" name="cpf" class="input" required>
                                 </div>
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="telefone" name="telefone" class="input"
-                                        value="<?php echo $sessaoFuncionario->getValorSessao('telefone'); ?>" readonly>
+                                    <input type="text" id="telefone" name="telefone" class="input" required>
                                 </div>
                             </div>
                             <div class="endereco">
                                 <p>Endereço</p>
-                                <select id="estado" name="estado" class="inputAPI" value="<?php echo $sessaoFuncionario->getValorSessao('estado'); ?>" required>
+                                <select id="estado" name="estado" class="inputAPI" required>
                                     <option value="">Selecione um estado</option>
                                 </select>
-                                <select id="municipio" name="municipio" class="inputAPI" value="<?php echo $sessaoFuncionario->getValorSessao('municipio'); ?>" required>
+                                <select id="municipio" name="municipio" class="inputAPI" required>
                                     <option value="">Selecione um município</option>
                                 </select>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Logradouro</p>
-                                    <input type="text" id="logradouro" name="logradouro" required class="input" value="<?php echo $sessaoFuncionario->getValorSessao('logradouro'); ?>">
+                                    <input type="text" id="logradouro" name="logradouro" required class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>Nº</p>
-                                    <input type="text" id="numeroEndereco" name="numeroEndereco" value="<?php echo $sessaoFuncionario->getValorSessao('numeroEndereco'); ?>" required class="input">
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" class="input">
                                 </div>
                             </div>
                             <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Bairro</p>
-                                    <input type="text" id="bairro" name="bairro" value="<?php echo $sessaoFuncionario->getValorSessao('bairro'); ?>" required class="input">
+                                    <input type="text" id="bairro" name="bairro" required class="input">
                                 </div>
                                 <div class="parteGeral">
                                     <p>CEP</p>
-                                    <input type="text" id="cep" name="cep" value="<?php echo $sessaoFuncionario->getValorSessao('cep'); ?>" required class="input">
+                                    <input type="text" id="cep" name="cep" required class="input">
                                 </div>
                             </div>
                             <div class="btn">
                                 <button type="submit" id="btnSalvar">Salvar Alterações</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="alterarDados">
-                        <form action="" method="POST" class="alterarEmail">
+                        <form action="#" method="POST" class="alterarEmail">
                             <p class="tituloAlterar">E-mail</p>
-                            <input type="hidden" name="" id="">
+                            <input type="hidden" name="idEmail" id="idEmail">
                             <input type="email" id="trocarEmail" name="email" required class="input">
                             <button type="submit" id="btnLogin">Alterar E-mail</button>
                         </form>
-                        <form action="" method="POST" class="alterarSenha">
+                        <form method="POST" class="alterarSenha">
                             <p class="tituloAlterar">Senha</p>
-                            <input type="hidden" name="" id="">
+                            <input type="hidden" name="idSenha" id="idSenha">
                             <input type="password" id="trocarSenha" name="senha" required class="input">
                             <button type="submit" id="btnLogin">Alterar Senha</button>
                         </form>
@@ -162,6 +165,9 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
         </div>
     </div>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../JS/perfilAdm/carregarDados.js"></script>
     <script src="../JS/scriptsApi/ibge.js"></script>
 
 </body>
