@@ -15,16 +15,16 @@
 
         if ($tipoConta == "admin") {
 
-            header("PHP/homeAdm.php");
+            header("Location: PHP/homeAdm.php");
 
         } elseif ($tipoConta == "funcionario") {
 
-            header("PHP/homeFuncionario.php");
+            header("Location: PHP/homeFuncionario.php");
 
         }
 
     } elseif ($clienteAutenticado) {
-        header("PHP/homeEmpresa.php");
+        header("Location: PHP/homeEmpresa.php");
     }
     
 ?>
