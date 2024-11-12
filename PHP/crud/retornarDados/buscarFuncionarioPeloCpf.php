@@ -32,7 +32,7 @@
 
             } else {
 
-                echo json_encode(['error' => 'Funcionário com CPF ' . $cpf . ' não encontrado.']);
+                echo json_encode(['error' => 'Funcionário não encontrado.']);
 
             }
             

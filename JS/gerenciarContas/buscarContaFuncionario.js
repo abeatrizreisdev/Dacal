@@ -34,6 +34,7 @@ function exibirMensagemErro(container, mensagem) {
 
 
 function buscarFuncionarioPorCpf() {
+
     const cpf = document.getElementById('inputCpf').value;
     const container = document.getElementById('container-funcionarios');
     container.innerHTML = '';
@@ -70,6 +71,7 @@ function buscarFuncionarioPorCpf() {
             console.error('Erro ao buscar os dados do funcionário:', erro);
             exibirMensagemErro(container, 'Erro ao buscar os dados do funcionário.');
         });
+        
 }
 
 

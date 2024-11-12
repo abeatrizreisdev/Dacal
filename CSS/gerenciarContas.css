@@ -260,13 +260,12 @@ copiar e colar a partir daqui no csss de la
 }
 
 #mensagem-erro {
-    color: red;
+    color: black;
 }
 
 .perfilAjustar {
     display: flex;
     justify-content: center;
-
 }
 
 .perfil {
@@ -437,7 +436,6 @@ copiar e colar a partir daqui no csss de la
     border: 0.5vh solid;
 }
 
-.classeEndereco {}
 
 .logradouro {
     width: 30vw;
