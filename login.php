@@ -14,13 +14,9 @@
         $tipoConta = $sessao->getValorSessao('tipoConta');
 
         if ($tipoConta == "admin") {
-
             header("Location: PHP/homeAdm.php");
-
         } elseif ($tipoConta == "funcionario") {
-
             header("Location: PHP/homeFuncionario.php");
-
         }
 
     } elseif ($clienteAutenticado) {
