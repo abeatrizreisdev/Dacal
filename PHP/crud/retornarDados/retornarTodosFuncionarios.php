@@ -6,11 +6,11 @@
     require "../../entidades/funcionario.php";
 
     $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: "localhost");
-    $conexao->setPortaBD(porta: 3306);
-    $conexao->setEschemaBD(eschema: "dacal");
-    $conexao->setSenhaBD(senha: "96029958va");
-    $conexao->setUsuarioBD(user: "root");
+    $conexao->setHostBD(BD_HOST);
+    $conexao->setPortaBD(BD_PORTA);
+    $conexao->setEschemaBD(BD_ESCHEMA);
+    $conexao->setSenhaBD(BD_PASSWORD);
+    $conexao->setUsuarioBD(BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudFuncionario = new CrudFuncionario($conexao);
