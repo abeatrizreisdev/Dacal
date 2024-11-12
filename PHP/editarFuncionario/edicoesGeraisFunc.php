@@ -34,6 +34,7 @@
             $cidade = $_POST['municipio'];
             $logradouro = $_POST['logradouro'];
             $bairro = $_POST['bairro'];
+            $numeroEndereco = $_POST['numeroEndereco'];
             
             // Desformatando os valores dos atributos do formulário de edição, para cadastrar no banco de dados sem formatação.
             $telefone = preg_replace('/\D/', '', $_POST['telefone']); // Remove tudo que não for dígito
@@ -50,6 +51,7 @@
             $funcionario->setTelefone($telefone);
             $funcionario->setCep($cep);
             $funcionario->setCpf($cpf);
+            $funcionario->setNumeroEndereco($numeroEndereco);
             
             $resultadoEdicao = $crudFuncionario->editarFuncionario($funcionario->getId(), [
                 'nome' => $funcionario->getNome(),
@@ -59,7 +61,9 @@
                 'cidade' => $funcionario->getCidade(),
                 'bairro' => $funcionario->getBairro(),
                 'logradouro' => $funcionario->getLogradouro(),
-                'cep' => $funcionario->getCep()
+                'cep' => $funcionario->getCep(),
+                'numeroEndereco' => $funcionario->getNumeroEndereco()
+
             ]);
             
             if ($resultadoEdicao) {

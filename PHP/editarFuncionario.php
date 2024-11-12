@@ -1,8 +1,15 @@
-<?php 
+<?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+$sessaoFuncionario = new Sessao();
+
+// Pegando o ID do funcionário da URL 
+$idFuncionario = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+echo $idFuncionario;
+
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
 ?>
 
@@ -16,7 +23,7 @@
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
-    <link rel="stylesheet" href="../CSS/editarPerfilFuncionarioAdm.css">
+    <link rel="stylesheet" href="../CSS/perfilFuncionario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
@@ -29,7 +36,7 @@
 
         <ul class="nav-list">
             <li><a href="./homeAdm.php">Homepage</li></a>
-            <li><a href="">Catálogo</li></a>
+            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
 
@@ -48,7 +55,7 @@
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="../PHP/homeAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
@@ -61,16 +68,16 @@
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas" href="./perfilFuncionario.php">
+            <a class="abas" href="./perfilAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
-                    <p class="tituloAbas">Meu Perfil</p>
+                    <p class="tituloAbas"> Meu Perfil</p>
                     <p class="descricaoAbas">Visualize e altere seus</p>
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
             <br>
-            <a class="abas" href="gerenciarContas.php">
+            <a class="abas" href="./gerenciarContas.php">
                 <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
@@ -78,105 +85,94 @@
                     <p class="descricaoAbas">funcionários e empresas</p>
                 </div>
             </a>
-            
+            <br>
+
         </div>
-        <section class="quadrado">
-            
-            <div class="geral">
-            <h1> Informações da conta </h1>
+        <div class="quadrado">
+
+        <div class="geral">
+                <p class="tituloGeral">Informações da conta</p>
                 <div class="infoConta">
-                    <div class="dadosGerais">
-                        <h2 id="subtitulo"> Dados gerais </h2>
+                    <div class="dadosGerais" data-id-funcionario="<?php echo $idFuncionario ?>">
+                        <p id="subtitulo">Dados Gerais</p>
+                        <form action="./editarFuncionario/edicoesGeraisFunc.php" method="post" class="formDados">
 
-                        <form action="editarContaFuncionario/editarContaFuncionario.php" method="post" class="formDados">
+                            <input type="hidden" name="idGeral" id="idGeral">
+
                             <div class="infoGerais">
-
-                                <div class="parteGeral">
-                                    <input type="hidden" id="inputId" name="id" class="input" required >
-                                </div>
-                                
                                 <div class="parteGeral">
                                     <p>Nome</p>
-                                    <input type="text" id="inputNome" name="nome" class="input" required>
+                                    <input type="text" id="nome" name="nome" class="input" required>
                                 </div>
-
-                                <div class="parteGeral">
-                                    <p>CPF</p>
-                                    <input type="text" id="inputCpf" name="cpf" class="input"  required>
-                                </div>
-
                             </div>
                             <div class="infoGerais">
-
                                 <div class="parteGeral">
-                                    <p>Email</p>
-                                    <input type="text" id="inputEmail" name="email" class="input" required>
+                                    <p>CPF</p>
+                                    <input type="text" id="CPF" name="cpf" class="input" required>
                                 </div>
-
                                 <div class="parteGeral">
                                     <p>Telefone</p>
-                                    <input type="text" id="inputTelefone" name="telefone" class="input" required>
+                                    <input type="text" id="telefone" name="telefone" class="input" required>
                                 </div>
-
-                                <div class="parteGeral">
-                                    <p>Cidade</p>
-                                    <input type="text" id="inputCidade" name="cidade" class="input" required>
-                                </div>
-
-                                <div class="parteGeral">
-                                    <p>Estado</p>
-                                    <input type="text" id="inputEstado" name="estado" class="input" required>
-                                </div>
-
-                                <div class="parteGeral">
-                                    <p>Bairro</p>
-                                    <input type="text" id="inputBairro" name="bairro" class="input" required>
-                                </div>
-
+                            </div>
+                            <div class="endereco">
+                                <p>Endereço</p>
+                                <select id="estado" name="estado" class="inputAPI" required>
+                                    <option value="">Selecione um estado</option>
+                                </select>
+                                <select id="municipio" name="municipio" class="inputAPI" required>
+                                    <option value="">Selecione um município</option>
+                                </select>
+                            </div>
+                            <div class="infoGerais">
                                 <div class="parteGeral">
                                     <p>Logradouro</p>
-                                    <input type="text" id="inputLogradouro" name="logradouro" class="input" required>
+                                    <input type="text" id="logradouro" name="logradouro" required class="input">
                                 </div>
-
                                 <div class="parteGeral">
-                                    <p>Cep</p>
-                                    <input type="text" id="inputCep" name="cep" class="input" required>
+                                    <p>Nº</p>
+                                    <input type="text" id="numeroEndereco" name="numeroEndereco" class="input">
                                 </div>
-
                             </div>
-
-                            <button type="submit">Salvar Alterações</button>
-                            
+                            <div class="infoGerais">
+                                <div class="parteGeral">
+                                    <p>Bairro</p>
+                                    <input type="text" id="bairro" name="bairro" required class="input">
+                                </div>
+                                <div class="parteGeral">
+                                    <p>CEP</p>
+                                    <input type="text" id="cep" name="cep" required class="input">
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button type="submit" id="btnSalvar">Salvar Alterações</button>
+                            </div>
                         </form>
-
-                        <div class="parteGeral">
-                            
-                            <form action="editarContaFuncionario/editarSenhaFuncionario.php" method="post">
-                                <p>Senha</p>
-                                <input type="password" id="inputSenha" name="senha" class="input" required >
-                                <input type="hidden" id="idOcultoFunc" name="idOcultoFunc">
-                                <button type="submit">AlterarSenha</button>
-                            </form>
-                                    
-                        </div>
-
-                        <a href="gerenciarContas.php"> <button>Página Anterior</button> </a>
-
-                        
-                        <button id="botaoExcluirConta">Excluir Conta</button>
-                    
-
+                    </div>
+                    <div class="alterarDados">
+                        <form action="#" method="POST" class="alterarEmail">
+                            <p class="tituloAlterar">E-mail</p>
+                            <input type="hidden" name="idEmail" id="idEmail">
+                            <input type="email" id="trocarEmail" name="email" required class="input">
+                            <button type="submit" id="btnLogin">Alterar E-mail</button>
+                        </form>
+                        <form method="POST" class="alterarSenha">
+                            <p class="tituloAlterar">Senha</p>
+                            <input type="hidden" name="idSenha" id="idSenha">
+                            <input type="password" id="trocarSenha" name="senha" required class="input">
+                            <button type="submit" id="btnLogin">Alterar Senha</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="../JS/editarFuncionario_adm/enviarFormulario.js"></script>
-    <script src="../JS/editarFuncionario_adm/carregarDadosFuncionario.js"></script>
-    
+    <script src="../JS/gerenciarContas/editarFuncionario.js"></script>
+    <script src="../JS/scriptsApi/ibge.js"></script>
+
 </body>
 
 </html>

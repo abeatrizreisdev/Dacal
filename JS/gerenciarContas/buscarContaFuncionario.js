@@ -132,7 +132,7 @@ function exibirFuncionario(funcionario, container) {
                 <div class="infoPerfil">
                     <p class="perfilFuncionario">${funcionario.nome}</p>
                     <button class="btnExcluir" onclick="excluirPerfil(${funcionario.id})">Excluir Conta</button>
-                    <button class="btnEditar" onclick="editarPerfil('${funcionario.cpf}')">Editar Perfil</button>
+                    <button class="btnEditar" onclick="editarPerfil('${funcionario.id}')">Editar Perfil</button>
                 </div>
             </div>
         </div>
@@ -144,47 +144,11 @@ function exibirFuncionario(funcionario, container) {
 
 
 // Função para navegar até a página de edição do funcionário.
-function editarPerfil(cpf) {
+function editarPerfil(id) { 
 
-    if (!cpf || cpf.length === 0) {
+    // Redireciona para a página de edição passando o ID do funcionário na URL.
+    window.location.href = `../PHP/editarFuncionario.php?id=${id}`;
 
-        console.error('CPF inválido:', cpf);
-        return;
-
-    }
-
-    fetch(`../PHP/crud/retornarDados/buscarFuncionarioPeloCpf.php?cpf=${cpf}`)
-        .then(resposta => {
-            if (!resposta.ok) {
-                throw new Error('Erro na resposta do servidor');
-            }
-            return resposta.json(); 
-        })
-        .then(dados => {
-            
-            if (dados.error) {
-                console.error('Erro:', dados.error);
-                return;
-            }
-           // console.log('Dados do funcionário:', dados); // Dados convertidos de JSON
-            const url = new URL('../Dacal/PHP/editarFuncionario.php', window.location.origin);
-            url.searchParams.set('idFuncionario', dados.id);
-            url.searchParams.set('nomeFuncionario', dados.nome);
-            url.searchParams.set('cpfFuncionario', dados.cpf);
-            url.searchParams.set('emailFuncionario', dados.email);
-            url.searchParams.set('senhaFuncionario', dados.senha);
-            url.searchParams.set('telefoneFuncionario', dados.telefone);
-            url.searchParams.set('estadoFuncionario', dados.estado);
-            url.searchParams.set('cidadeFuncionario', dados.cidade);
-            url.searchParams.set('bairroFuncionario', dados.bairro);
-            url.searchParams.set('logradouroFuncionario', dados.logradouro);
-            url.searchParams.set('cepFuncionario', dados.cep);
-           // console.log('URL de redirecionamento:', url.toString());
-            window.location.href = url.toString();
-        })
-        .catch(erro => {
-            console.error('Erro ao buscar os dados do funcionário:', erro);
-        });
 }
 
 
