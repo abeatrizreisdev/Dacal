@@ -144,7 +144,7 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela}";
+                $sql = "SELECT * FROM {$this->tabela} WHERE tipoConta = 'Funcionario'";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
 
@@ -176,7 +176,7 @@
                 // Verificação de campos obrigatórios
                if (!$this->verificarCamposObrigatorios($dados)) {
 
-                  //  return false; // Dados incompletos
+                  return false; // Dados incompletos
 
                 }
         
@@ -363,7 +363,7 @@
         private function verificarCamposObrigatorios($dados) {
 
             $camposObrigatorios = [
-                'nome', 'cpf', 'email', 'telefone', 
+                'nome', 'cpf', 'telefone', 
                 'estado', 'cidade', 'bairro', 'logradouro', 'cep', 'numeroEndereco'
             ];
         

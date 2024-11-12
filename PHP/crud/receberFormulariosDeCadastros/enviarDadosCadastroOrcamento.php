@@ -65,6 +65,7 @@
             if ($crudOrcamento->cadastrarOrcamento($orcamentoRealizado, $itens)) {
 
                 $sessao->excluirChaveSessao('orcamento');
+
                 $clienteCrud = new CrudCliente($conexao);
                 $dadosCliente = $clienteCrud->buscarInfoCliente($sessao->getValorSessao('idCliente'));
 
@@ -85,8 +86,6 @@
                 $cliente->setMunicipio($dadosCliente['municipio']);
                 $cliente->setNumeroEndereco($dadosCliente['numeroEndereco']);
 
-                // Retornar JSON de sucesso.
-                echo json_encode(['status' => 'sucesso']);
 
                 // Passando o número oficial do whatsapp da empresa a qual o cliente será direcionado com as informações do orçamento.
                 $numero = '5571996023166';
@@ -141,4 +140,3 @@
 
     }
 
-?>
