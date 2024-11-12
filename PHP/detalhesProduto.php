@@ -21,6 +21,7 @@ $sessao = new Sessao();
 $contaAutenticada = $sessao->getValorSessao('tipoConta');
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ $contaAutenticada = $sessao->getValorSessao('tipoConta');
     <nav class="nav-superior">
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
         <ul class="nav-list">
-            <li><a href="<?php echo $verificarUsuarioAutenticado == 'admin' ? 'homeAdm.php' : ($verificarUsuarioAutenticado == 'funcionario' ? 'homeFuncionario.php' : 'homeEmpresa.php'); ?>">Homepage</li></a>
+            <li><a href="<?php echo $contaAutenticada == 'admin' ? 'homeAdm.php' : ($contaAutenticada == 'funcionario' ? 'homeFuncionario.php' : 'homeEmpresa.php'); ?>">Homepage</li></a>
             <li><a href="./catalogoProdutos.php">Catálogo</li></a>
             <li><a href="">Sobre Nós</li></a>
         </ul>
