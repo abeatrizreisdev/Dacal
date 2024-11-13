@@ -88,7 +88,8 @@
 
 
                 // Passando o número oficial do whatsapp da empresa a qual o cliente será direcionado com as informações do orçamento.
-                $numero = '5571996023166';
+                $numero = '5571996472678';
+                
 
                 // Criando a mensagem que será encaminhada para o número do whatsapp, em que estará incluso todos os dados do formulário e do cliente.
                 $mensagem = "Olá, equipe da Dacal!\n\n";
