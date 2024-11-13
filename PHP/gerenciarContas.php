@@ -5,6 +5,7 @@ require "./sessao/sessao.php";
 $sessaoFuncionario = new Sessao();
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
+
 ?>
 
 <!DOCTYPE html>

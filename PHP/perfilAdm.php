@@ -78,8 +78,8 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                 <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
+                    <p class="descricaoAbas">Gerenciar funcionários</p>
+                    <p class="descricaoAbas">e empresas</p>
                 </div>
             </a>
             <br>

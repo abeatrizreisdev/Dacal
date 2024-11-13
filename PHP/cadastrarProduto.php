@@ -6,6 +6,13 @@
 
     $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
+     // Definindo o link com base no tipo de conta $linkCancelar = ''; 
+    if ($tipoContaAutenticada === 'admin') { 
+        $linkCancelar = './homeAdm.php'; 
+    } elseif ($tipoContaAutenticada === 'Funcionario') {
+        $linkCancelar = './homeFuncionario.php'; 
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,12 +81,12 @@
 
                 if ($tipoContaAutenticada == "admin") {
                    echo '<br>';
-                   echo '<a class="abas" href="./visualizarContasCadastradas.php">
-                <img src="../IMAGENS/homeEmpresa/imgGerenciar.png" class="imgPerfil">
+                   echo '<a class="abas" href="./gerenciarContas.php">
+                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
                 <div id="info">';
                     echo '<p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
+                    <p class="descricaoAbas">Gerenciar funcionários</p>
+                    <p class="descricaoAbas">e empresas</p>
                 </div>';
                     echo '</a>';
                 }
@@ -120,7 +127,7 @@
                     </div>
 
                     <div class="form-buttons">
-                        <a href="./homeFuncionario.php" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
+                        <a href="<?php echo $linkCancelar; ?>" id="link-botao-cancelar"><button type="button">Cancelar</button></a>
                         <button type="submit" id="botaoCadastrarProduto">Cadastrar produto</button>
                     </div>
 

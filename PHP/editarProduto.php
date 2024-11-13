@@ -61,17 +61,21 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                     <p class="descricaoAbas">dados.</p>
                 </div>
             </a>
-            <?php if ($tipoContaAutenticada == "admin") { ?>
-            <br>
-            <a class="abas" href="./gerenciarContas.php">
-                <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
-                <div id="info">
-                    <p class="tituloAbas"> Gerenciar Contas</p>
-                    <p class="descricaoAbas">Gerenciar contas</p>
-                    <p class="descricaoAbas">funcionários e empresas</p>
-                </div>
-            </a>
-            <?php } ?>
+            <?php 
+
+                if ($tipoContaAutenticada == "admin") {
+                    echo '<br>';
+                    echo '<a class="abas" href="./gerenciarContas.php">
+                    <img src="../IMAGENS/HomeEmpresa/imgGerenciar.png" class="imgPerfil">
+                    <div id="info">';
+                        echo '<p class="tituloAbas"> Gerenciar Contas</p>
+                        <p class="descricaoAbas">Gerenciar funcionários</p>
+                        <p class="descricaoAbas">e empresas</p>
+                    </div>';
+                        echo '</a>';
+                }
+
+            ?>
         </div>
         <section class="quadrado">
             <h1>Editar Produto</h1>
