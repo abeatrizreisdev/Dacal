@@ -53,7 +53,7 @@
                 <a class="btn selecionado" href="#" onclick="metodosLogin('empresa', this)">Empresa</a>
                 <a class="btn" href="#" onclick="metodosLogin('funcionario', this)">Funcionário</a>
             </div>
-            <p><?php echo $erro; ?></p>
+            <p id="msgErroLogin"><?php echo $erro; ?></p>
             <br>
             <div class="formularioInterior">
                 <div id="loginEmpresa" style="display:block;">

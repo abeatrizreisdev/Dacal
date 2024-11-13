@@ -112,10 +112,8 @@ $sessaoCliente = new Sessao();
                             <ul class="containerCategorias">
                                 <li><a href="#" onclick="carregarProdutos(0)">Geral</a></li>
                                 <li><a href="#" onclick="carregarProdutos(1)">Móveis</a></li>
-                                <li><a href="#" onclick="carregarProdutos(2)">Cadeiras</a></li>
-                                <li><a href="#" onclick="carregarProdutos(3)">Cozinha</a></li>
-                                <li><a href="#" onclick="carregarProdutos(4)">Utensílios</a></li>
-                                <li><a href="#" onclick="carregarProdutos(5)">Aparelhos</a></li>
+                                <li><a href="#" onclick="carregarProdutos(2)">Escritório</a></li>
+                                <li><a href="#" onclick="carregarProdutos(3)">Diversos</a></li>
                             </ul>
                         </nav>
 

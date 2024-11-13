@@ -104,13 +104,11 @@
                                 <label for="valorProduto">Valor:</label>
                                 <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required min="1">
 
-                                <label for="categoriaProduto"> Categoria: </label>
+                                <label for="categoriaProduto" id="labelCategoria"> Categoria: </label>
                                 <select name="categoriaProduto" id="CategoriaProduto">
                                     <option value="1">Móveis</option>
-                                    <option value="2">Cadeiras</option>
-                                    <option value="3">Cozinha</option>
-                                    <option value="4">Utensilios</option>
-                                    <option value="5">Aparelhos</option>
+                                    <option value="2">Escritório</option>
+                                    <option value="3">Diversos</option>
                                 </select>
                             </div>
                             

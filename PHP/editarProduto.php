@@ -88,13 +88,11 @@ $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
                         <input type="text" id="nomeProduto" name="nomeProduto" required>
                         <label for="precoProduto">Preço:</label>
                         <input type="number" id="precoProduto" name="precoProduto" required min="1">
-                        <label for="categoriaProduto">Categoria:</label>
+                        <label for="categoriaProduto" id="labelCategoria">Categoria:</label>
                         <select name="categoriaProduto" id="categoriaProduto">
                             <option value="1">Móveis</option>
-                            <option value="2">Cadeiras</option>
-                            <option value="3">Cozinha</option>
-                            <option value="4">Utensílios</option>
-                            <option value="5">Aparelhos</option>
+                            <option value="2">Escritório</option>
+                            <option value="3">Diversos</option>
                         </select>
                     </div>
                 </div>

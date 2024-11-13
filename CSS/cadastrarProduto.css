@@ -230,6 +230,9 @@ nav {
     align-items: flex-start;
 }
 
+#labelCategoria {
+    margin-top: 2vh;
+}
 
 
 .upload-container {

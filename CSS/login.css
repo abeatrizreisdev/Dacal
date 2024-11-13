@@ -102,3 +102,7 @@ text-align: justify;
   font-weight: 700;
   cursor: pointer;
 }
+
+#msgErroLogin {
+  margin-top: 2vh;
+}
