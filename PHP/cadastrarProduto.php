@@ -50,12 +50,12 @@
     </nav>
 </header>
 
-<body class="fundo">
+<body class="fundo" >
     <div class="homepage">
         <div class="menu">
             <br>
             <br>
-            <a class="abas">
+            <a class="abas" href="<?php echo $linkCancelar; ?>">
                 <img src="../IMAGENS/HomeEmpresa/imgUser.png" class="imgPerfil">
                 <div id="info">
                     <p>Bem-vindo(a),</p>
