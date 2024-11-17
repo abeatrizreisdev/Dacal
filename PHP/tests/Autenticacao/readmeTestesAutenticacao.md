@@ -21,7 +21,7 @@ Editar o arquivo "configBanco.php" e atualizar as configurações do banco de da
 
 
 # ESTRUTURA DOS TESTES:
-O arquivo "TesteAutenticacao.php" tem vários métodos de testes para verificar a funcionalidade de autenticação de conta do tipo Empresa(Cliente) e Funcionário. Cada teste foca em diferentes cenários, como autenticações válidas e inválidas.
+O arquivo "TesteAutenticacao.php" tem 8 métodos de testes para verificar a funcionalidade de autenticação de conta do tipo Empresa(Cliente) e Funcionário. Cada teste foca em diferentes cenários, como tentativas de autenticações válidas e inválidas.
 
 
 # DESCRIÇÃO DOS MÉTODOS DE TESTES:
