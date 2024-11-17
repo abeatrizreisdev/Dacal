@@ -2,7 +2,7 @@
 
 
 # OBJETIVO:
-Este documento fornece uma visão detalhada dos testes de edição de produtos implementados no projeto, incluindo os resultados esperados e obtidos para cada teste. O objetivo é garantir que as funcionalidades de edição de produtos estejam funcionando corretamente.
+Este documento fornece uma visão detalhada dos testes de edição de produtos implementados no sistema, incluindo os resultados esperados e obtidos para cada teste. O objetivo é garantir que as funcionalidades de edição de produtos estejam funcionando corretamente.
 
 
 # PRÉ-REQUISITOS:
