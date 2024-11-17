@@ -82,7 +82,7 @@ if ($contaAutenticada !== "cliente" && $contaAutenticada !== "admin" && $contaAu
         <br>
         <hr id="linhaMenu">
         <br>
-        <a class="abas" href="<?php echo $contaAutenticada == 'admin' ? '../perfilAdm.php' : ($contaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
+        <a class="abas" href="<?php echo $contaAutenticada == 'admin' ? './perfilAdm.php' : ($contaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
             <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
             <div id="info">
                 <p class="tituloAbas">Meu Perfil</p>
