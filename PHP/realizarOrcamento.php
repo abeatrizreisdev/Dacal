@@ -5,6 +5,20 @@ require "./sessao/sessao.php";
 
 $sessaoCliente = new Sessao();
 
+$usuarioAutenticado = $sessaoCliente->getValorSessao('tipoConta');
+
+if ($usuarioAutenticado !== "cliente") {
+    // O usuário autenticado que não for admin, será direcionado para a página de acesso não permitido.
+    if ($usuarioAutenticado === "admin" or $usuarioAutenticado === "funcionario") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else { // o usuário que não tiver autenticado, será direcionado para a página de login.
+        header("Location: ../login.php");
+        exit();
+    }
+}
+
+
 
 ?>
 

@@ -6,6 +6,15 @@ $sessaoEmpresa = new Sessao();
 
 $tipoContaAutenticada = $sessaoEmpresa->getValorSessao('tipoConta');
 
+// Redirecionando o usuário para a página de login, caso ele não esteja em uma conta do tipo de Cliente.
+if ($tipoContaAutenticada !== "cliente") {
+    if ($tipoContaAutenticada === "admin" or $tipoContaAutenticada === "funcionario") {
+        header("Location: ./acessoNegado.php");
+    } else {
+        header("Location: ../login.php");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

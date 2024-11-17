@@ -7,9 +7,18 @@ $sessaoFuncionario = new Sessao();
 // Pegando o ID do funcionário da URL 
 $idFuncionario = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-echo $idFuncionario;
-
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+
+if ($tipoContaAutenticada !== "admin") {
+    // O usuário autenticado que não for admin, será direcionado para a página de acesso não permitido.
+    if ($tipoContaAutenticada === "cliente" or $tipoContaAutenticada === "funcionario") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else { // o usuário que não tiver autenticado, será direcionado para a página de login.
+        header("Location: ../login.php");
+        exit();
+    }
+}
 
 ?>
 

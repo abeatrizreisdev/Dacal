@@ -4,6 +4,16 @@ require "./sessao/sessao.php";
 
 $sessaoFuncionario = new Sessao();
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+
+if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario") {
+    if ($tipoContaAutenticada === "cliente") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else {
+        header("Location: ../login.php");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

@@ -8,17 +8,15 @@ require "./entidades/produto.php";
 require "./entidades/orcamento.php";
 
 
-$conexao = new ConexaoBD();
-$conexao->setHostBD(BD_HOST);
-$conexao->setPortaBD(BD_PORTA);
-$conexao->setEschemaBD(BD_ESCHEMA);
-$conexao->setSenhaBD(BD_PASSWORD);
-$conexao->setUsuarioBD(BD_USERNAME);
-$conexao->getConexao();
-
 $sessao = new Sessao();
 
 $contaAutenticada = $sessao->getValorSessao('tipoConta');
+
+// Redirecionando o usuário para a página de login, caso ele não esteja em uma conta autenticada do sistema.
+if ($contaAutenticada !== "cliente" && $contaAutenticada !== "admin" && $contaAutenticada !== "funcionario") {
+    header("Location: ./login.php");
+    exit();
+}
 
 
 
@@ -84,7 +82,7 @@ $contaAutenticada = $sessao->getValorSessao('tipoConta');
         <br>
         <hr id="linhaMenu">
         <br>
-        <a class="abas" href="<?php echo $contaAutenticada == 'admin' ? '../perfilADM.php' : ($contaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
+        <a class="abas" href="<?php echo $contaAutenticada == 'admin' ? '../perfilAdm.php' : ($contaAutenticada == 'funcionario' ? 'perfilFuncionario.php' : 'perfilEmpresa.php'); ?>">
             <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
             <div id="info">
                 <p class="tituloAbas">Meu Perfil</p>

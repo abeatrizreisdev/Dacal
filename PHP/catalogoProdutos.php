@@ -6,6 +6,12 @@ $sessao = new Sessao();
 
 $tipoContaAutenticada = $sessao->getValorSessao('tipoConta');
 
+// Redirecionando o usuário para a página de login, caso ele não esteja em uma conta do tipo "admin" ou "funcionario" ou "cliente".
+if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada && "funcionario" && $tipoContaAutenticada !== "cliente") {
+    header("Location: ../login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

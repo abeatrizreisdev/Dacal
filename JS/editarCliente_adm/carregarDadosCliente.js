@@ -75,6 +75,7 @@
 
         // Submeter o formulário
         this.submit();
+
     });
 
     // Este arquivo js é responsável por carregar os dados de uma conta cliente

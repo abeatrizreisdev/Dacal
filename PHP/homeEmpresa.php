@@ -4,6 +4,17 @@ require "./sessao/sessao.php";
 
 $sessaoCliente = new Sessao();
 
+$usuarioAutenticado = $sessaoCliente->getValorSessao('tipoConta');
+
+// Redirecionando o usuário para a página de login, caso ele não esteja em uma conta do tipo de Cliente.
+if ($usuarioAutenticado !== "cliente") {
+    if ($usuarioAutenticado === "admin" or $usuarioAutenticado === "funcionario") {
+        header("Location: ./acessoNegado.php");
+    } else {
+        header("Location: ../login.php");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

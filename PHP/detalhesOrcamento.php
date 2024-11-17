@@ -1,16 +1,29 @@
 <?php
 
-    require "./sessao/sessao.php";
+require "./sessao/sessao.php";
 
-    $sessaoFuncionario = new Sessao();
+$sessaoFuncionario = new Sessao();
 
-    $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
+$tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
-    if ($tipoContaAutenticada == "admin") {
-        $linkPerfil = "./perfilAdm.php";
-    } elseif ($tipoContaAutenticada == "funcionario") {
-        $linkPerfil = "./perfilFuncionario.php";
+// Redirecionando o usuário para a página de login, caso ele não esteja em uma conta do tipo "admin" ou "funcionario".
+if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario") {
+    if ($tipoContaAutenticada === "cliente") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else {
+        header("Location: ../login.php");
+        exit();
     }
+}
+
+
+
+if ($tipoContaAutenticada == "admin") {
+    $linkPerfil = "./perfilAdm.php";
+} elseif ($tipoContaAutenticada == "funcionario") {
+    $linkPerfil = "./perfilFuncionario.php";
+}
 
 ?>
 

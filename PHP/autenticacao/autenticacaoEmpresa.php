@@ -33,11 +33,11 @@
     };
 
     $conexao = new ConexaoBD();
-    $conexao->setHostBD(host: BD_HOST);
-    $conexao->setPortaBD(porta: BD_PORTA);
-    $conexao->setEschemaBD(eschema: BD_ESCHEMA);
-    $conexao->setSenhaBD(senha: BD_PASSWORD);
-    $conexao->setUsuarioBD(user: BD_USERNAME);
+    $conexao->setHostBD( BD_HOST);
+    $conexao->setPortaBD( BD_PORTA);
+    $conexao->setEschemaBD( BD_ESCHEMA);
+    $conexao->setSenhaBD( BD_PASSWORD);
+    $conexao->setUsuarioBD( BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
 
     $crudCliente = new CrudCliente($conexao);
@@ -68,6 +68,7 @@
             // Passando os dados do cliente autenticado para criar sua sessão no site.
             $sessao->setChaveEValorSessao('idCliente', $clienteAutenticado->getId());
             $sessao->setChaveEValorSessao('nomeFantasia', $clienteAutenticado->getNome());
+            $sessao->setChaveEValorSessao('tipoConta', 'cliente');
             
     
             header("Location: ../homeEmpresa.php");

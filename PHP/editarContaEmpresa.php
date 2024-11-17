@@ -7,6 +7,17 @@ $sessaoCliente = new Sessao();
 
 $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
 
+if ($contaAutenticada !== "admin") {
+    // O usuário autenticado que não for admin, será direcionado para a página de acesso não permitido.
+    if ($contaAutenticada === "cliente" or $contaAutenticada === "funcionario") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else { // o usuário que não tiver autenticado, será direcionado para a página de login.
+        header("Location: ../login.php");
+        exit();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +77,7 @@ $contaAutenticada = $sessaoCliente->getValorSessao('tipoConta');
             <br>
             <hr id="linhaMenu">
             <br>
-            <a class="abas">
+            <a class="abas" href="./perfilAdm.php">
                 <img src="../IMAGENS/HomeEmpresa/imgPerfil.png" class="imgPerfil">
                 <div id="info">
                     <p class="tituloAbas">Meu Perfil</p>

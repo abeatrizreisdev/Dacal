@@ -136,7 +136,7 @@
             <div class="infoPerfil">
             <p class="perfilEmpresa">${empresa.nomeFantasia}</p>
             <button class ="btnExcluir" onclick="excluirPerfilEmpresa('${empresa.idCliente}')"> Excluir Conta </button>
-            <button class ="btnEditar" onclick="editarPerfilEmpresa('${empresa.nomeFantasia}')"> Editar Perfil </button>
+            <button class ="btnEditar" onclick="editarPerfilEmpresa('${empresa.idCliente}')"> Editar Perfil </button>
             </div>
             </div>
             </div>
@@ -146,10 +146,10 @@
 
     };
 
-    // Função para navegar até a página de edição do funcionário.
-    function editarPerfilEmpresa(nome) {
+    // Função para navegar até a página de edição do perfil de cliente.
+    function editarPerfilEmpresa(id) {
 
-        fetch(`../PHP/buscarCliente/buscarClientePeloNome.php?nome=${nome}`)
+        fetch(`../PHP/buscarCliente/buscarClientePeloId.php?idCliente=${id}`)
             .then(resposta => resposta.json())
             .then(dados => {
 

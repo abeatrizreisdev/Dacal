@@ -8,6 +8,17 @@ $id = $sessaoFuncionario->getValorSessao('id');
 
 $tipoContaAutenticada = $sessaoFuncionario->getValorSessao('tipoConta');
 
+if ($tipoContaAutenticada !== "admin") {
+    // O usuário autenticado que não for admin, será direcionado para a página de acesso não permitido.
+    if ($tipoContaAutenticada === "cliente" or $tipoContaAutenticada === "funcionario") {
+        header("Location: ./acessoNegado.php");
+        exit();
+    } else { // o usuário que não tiver autenticado, será direcionado para a página de login.
+        header("Location: ../login.php");
+        exit();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
