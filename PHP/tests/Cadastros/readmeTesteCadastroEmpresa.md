@@ -9,7 +9,7 @@ Este documento fornece uma visão detalhada dos testes de cadastro de clientes i
 Necessário ter o PHP 8.1.25 ou superior no PC; instalar o Composer para gerenciamento de dependências do PHP; e PHPUnit para execução dos testes.
 
 
-# INSTALAR AS DEPENDÊNCIAS DO PROJETO COM O COMPOSER (O PHPUnit será instalado também):
+# INSTALAR AS DEPENDÊNCIAS DO PROJETO COM O COMPOSER (O PHPUnit SERÁ INSTALADO TAMBÉM):
 No diretório raiz do projeto, execute o seguinte comando no terminal (usei no VSCode): composer install
 
 
