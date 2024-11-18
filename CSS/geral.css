@@ -35,10 +35,8 @@ nav {
 
 .informativo_superior {
     background-color: #ff3131;
-    height: 4vh;
     width: 100vw;
     text-align: center;
-    
 }
 
 .informativo_superior p {
@@ -46,7 +44,7 @@ nav {
     text-align: center;
     font-family: "Poppins";
     font-weight: 600;
-
+    font-size: 2vh;
 }
 
 /*Icons no canto superior direito */
