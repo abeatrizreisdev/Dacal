@@ -376,6 +376,7 @@ a {
     flex-direction: row;
     justify-content: center;
     height: 6.5vh;
+    margin-bottom: 1.5vh;
 }
 #btnCancelar1{
     background-color: #a6a6a6;
@@ -503,9 +504,11 @@ a {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 5vh;
-    width: 16vw;
+    height: 4vh;
+    line-height: 4vh;
+    width: 14vw;
     border-radius: 2vh;
+    font-size: 2.2vh;
     font-family: 'Poppins';
     cursor: pointer;
     font-weight: 500;
@@ -517,8 +520,10 @@ a {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 5vh;
+    height: 4vh;
+    line-height: 4vh;
     width: 14vw;
+    font-size: 2.2vh;
     border-radius: 2vh;
     font-family: 'Poppins';
     cursor: pointer;
@@ -530,13 +535,13 @@ a {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 6vh;
-    width: 16vw;
+    height: 5vh;
+    width: 14vw;
     border-radius: 2vh;
     font-family: 'Poppins';
     cursor: pointer;
     font-weight: 500;
-    font-size: 2.5vh;
+    font-size: 2.2vh;
     line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
     text-align: center; /* Centraliza o texto horizontalmente */
     text-overflow: ellipsis; /* Trunca o texto que extrapola */
