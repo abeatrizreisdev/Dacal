@@ -181,9 +181,9 @@
                     } else if (dados.erro) {
 
                         toastr.error(dados.mensagem || 'Erro ao cadastrar o funcionário.');
-                        setTimeout(() => {
-                            window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de erro.
-                        }, 2000); // Espera de 2 segundos antes de redirecionar.
+                       // setTimeout(() => {
+                          //  window.location.href = '../PHP/gerenciarContas.php'; // Redirecionar para a página de erro.
+                      //  }, 2000); // Espera de 2 segundos antes de redirecionar.
 
                     }
 
