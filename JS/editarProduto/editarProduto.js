@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('categoriaProduto').value = produto.categoria;
             document.getElementById('descricaoProduto').value = produto.descricaoProduto;
 
+            console.log(produto.categoria)
+
         })
         .catch(erro => console.log('Erro:', erro));
 

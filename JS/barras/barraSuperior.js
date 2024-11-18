@@ -1,4 +1,5 @@
 function criarBarraSuperior() {
+    
     // Cria o HTML da barra superior
     const barraSuperiorHTML = `
     <div class="informativo_superior">
