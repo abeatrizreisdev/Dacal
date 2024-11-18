@@ -154,6 +154,8 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #containerProdutos > div {
