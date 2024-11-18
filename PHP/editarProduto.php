@@ -22,28 +22,12 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Produto</title>
+    <link rel="stylesheet" href="../CSS/geral.css">
     <link rel="stylesheet" href="../CSS/cadastrarProduto.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <header>
-    <div class="informativo_superior">
-        <p>A EMPRESA QUE AUTOMATIZA O PEDIDO DOS SEUS ORÇAMENTOS</p>
-    </div>
-    <nav class="nav-superior">
-        <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
-        <ul class="nav-list">
-            <li><a href="<?php echo $tipoContaAutenticada == 'admin'? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage</a></li>
-            <li><a href="catalogoProdutos.php">Catálogo</a></li>
-            <li><a href="">Sobre Nós</a></li>
-        </ul>
-        <ul class="icons">
-            <a href="./autenticacao/logout.php">
-                <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-            </button>
-            </a>
-        </ul>
-    </nav>
+    <div id="barraSuperior"></div>
 </header>
 <body class="fundo">
     <div class="homepage">
@@ -124,4 +108,6 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="../JS/editarProduto/editarProduto.js"></script>
+    <script src="../JS/barras/barraSuperior.js"></script>
+
 </html>

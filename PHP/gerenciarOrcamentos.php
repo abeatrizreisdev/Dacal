@@ -27,30 +27,11 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario"
     <meta name="author" content="Beatriz Reis e Valter Filho">
     <meta name="description" content="Site de automoção da Dacal">
     <title>Dacal</title>
+    <link rel="stylesheet" href="../CSS/geral.css">
     <link rel="stylesheet" href="../CSS/gerenciarOrcamentos.css">
 </head>
 <header>
-    <div class="informativo_superior">
-        <p>A EMPRESA QUE AUTOMATIZA O PEDIDO DOS SEUS ORÇAMENTOS</p>
-    </div>
-
-    <nav class="nav-superior">
-        <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
-
-        <ul class="nav-list">
-            <li><a href="<?php echo $tipoContaAutenticada == 'admin' ? 'homeAdm.php' : 'homeFuncionario.php'; ?>">Homepage
-            </li></a>
-            <li><a href="./catalogoProdutos.php">Catálogo</li></a>
-            <li><a href="">Sobre Nós</li></a>
-        </ul>
-        <ul class="icons">
-            <a href="./autenticacao/logout.php">
-                <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
-                    <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
-                </button>
-            </a>
-        </ul>
-    </nav>
+    <div id="barraSuperior"></div>
 </header>
 
 <body class="fundo">
@@ -113,6 +94,7 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario"
 
     <script src="../JS/gerenciarOrcamentos/carregarOrcamentos_adm.js"></script>
     <script src="../JS/gerenciarOrcamentos/buscarOrcamentos.js"></script>
+    <script src="../JS/barras/barraSuperior.js"></script>
 
 </body>
 
