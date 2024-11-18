@@ -34,11 +34,12 @@ body {
     background-color: #7ed957;
     width: 15vw;
     height: 7vh;
-    border-radius: 4vh;
+    border-radius: 3vh;
     border-color: #7ed957;
     font-size: 4vh;
     font-family: "Poppins";
-    font-weight: 700;
+    font-weight: 500;
+    font-size: 4vh;
     cursor: pointer;
 }
 
