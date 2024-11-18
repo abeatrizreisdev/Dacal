@@ -111,7 +111,7 @@ if ($contaAutenticada !== "cliente" && $contaAutenticada !== "admin" && $contaAu
         <?php 
 
             // Se a conta autenticada for um cliente, então vai renderizar as opções de "Orcamento" "Atendimento" na esquerda da tela.
-            if (!$contaAutenticada  == "admin" && !$contaAutenticada  == "funcionario") {
+            if ($contaAutenticada === "cliente") {
 
 
                 echo '<br> 
