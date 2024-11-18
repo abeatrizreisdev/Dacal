@@ -97,10 +97,10 @@
                 const container = document.getElementById('orcamentoContainer');
                 const formContainer = document.getElementById('formOrcamentoContainer');
 
-                if (dados.message) {
+                if (dados.mensagem) {
 
-                    container.innerHTML = `<p>${dados.message}</p>`;
-                    formContainer.innerHTML = `<p>${dados.message}</p>`;
+                    container.innerHTML = `<p>${dados.mensagem}</p>`;
+                    formContainer.innerHTML = `<p>${dados.mensagem}</p>`;
 
                 } else if (dados.produtos && Array.isArray(dados.produtos)) {
 

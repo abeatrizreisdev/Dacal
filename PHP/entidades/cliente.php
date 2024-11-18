@@ -25,22 +25,22 @@
         
         */
 
-        private $id;
-        private $nome;
-        private $razaoSocial;
-        private $cnpj;
-        private $inscricaoEstadual;
-        private $telefone;
-        private $email;
+        private int $id;
+        private string $nome;
+        private string $razaoSocial;
+        private string $cnpj;
+        private string $inscricaoEstadual;
+        private string $telefone;
+        private string $email;
         private $orcamentos = [];
-        private $senha;
-        private $tipoConta;
-        private $logradouro;
-        private $bairro;
-        private $cep;
-        private $estado;
-        private $municipio;
-        private $numeroEndereco;
+        private string $senha;
+        private string $tipoConta;
+        private string $logradouro;
+        private string $bairro;
+        private string $cep;
+        private string $estado;
+        private string $municipio;
+        private int $numeroEndereco;
 
         public function __construct() {
             
