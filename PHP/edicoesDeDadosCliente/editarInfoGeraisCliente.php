@@ -37,7 +37,7 @@
             
             $cliente = new Cliente();
             $cliente->setIdCliente($id);
-            $cliente->setNome($nomeFantasia);
+            $cliente->setNomeFantasia($nomeFantasia);
             $cliente->setCnpj($cnpj);
             $cliente->setRazaoSocial($razaoSocial);
             $cliente->setInscricaoEstadual($inscricaoEstadual);
@@ -52,7 +52,7 @@
             $resultadoEdicao = $crudCliente->editarCliente(
                 $cliente->getId(), [
 
-                    'nomeFantasia' => $cliente->getNome(),
+                    'nomeFantasia' => $cliente->getNomeFantasia(),
                     'razaoSocial' => $cliente->getRazaoSocial(),
                     'cnpj' => $cliente->getCnpj(),
                     'inscricaoEstadual' => $cliente->getInscricaoEstadual(),
@@ -78,7 +78,7 @@
 
                     // Passando os dados do funcionário autenticado para editar os dados da sua sessão no site, após a realização da edição dos dados gerais.
                     $sessaoAtiva->setChaveEValorSessao('idCliente', $cliente->getId());
-                    $sessaoAtiva->setChaveEValorSessao('nomeFantasia', $cliente->getNome());
+                    $sessaoAtiva->setChaveEValorSessao('nomeFantasia', $cliente->getNomeFantasia());
                     
                     
                     header("Location: ../homeEmpresa.php?statusEdicaoContaCliente=sucesso");
