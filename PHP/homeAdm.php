@@ -32,11 +32,15 @@ if ($tipoContaAutenticada !== "admin") {
     <link rel="stylesheet" href="../CSS/geral.css">
     <link rel="stylesheet" href="../CSS/homeFuncionario.css">
 </head>
-<header>
-    <div id="barraSuperior"></div>
-</header>
+
 
 <body class="fundo">
+
+    <div id="tipoConta" data-tipo="<?php echo $tipoContaAutenticada; ?>"></div> 
+    <header> 
+        <div id="barraSuperior"></div> 
+    </header>
+
     <div class="homepage">
         <div class="menu">
             <br>

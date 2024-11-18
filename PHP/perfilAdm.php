@@ -35,11 +35,17 @@ if ($tipoContaAutenticada !== "admin") {
     <link rel="stylesheet" href="../CSS/perfilFuncionario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
-<header>
-    <div id="barraSuperior"></div>
-</header>
+
+
 
 <body class="fundo">
+
+    <div id="tipoConta" data-tipo="<?php echo $sessaoFuncionario->getValorSessao('tipoConta'); ?>"></div> 
+    
+    <header> 
+        <div id="barraSuperior"></div> 
+    </header>
+
     <div class="homepage">
         <div class="menu">
             <br>

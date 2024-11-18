@@ -45,6 +45,12 @@ if ($tipoContaAutenticada == "admin") {
 </header>
 
 <body class="fundo">
+
+    <div id="tipoConta" data-tipo="<?php echo $tipoContaAutenticada; ?>"></div> 
+    <header> 
+        <div id="barraSuperior"></div> 
+    </header>
+
     <div class="homepage">
         <div class="menu">
             <br>

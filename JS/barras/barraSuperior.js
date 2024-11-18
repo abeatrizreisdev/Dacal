@@ -1,4 +1,17 @@
 function criarBarraSuperior() {
+
+    // Obtém o tipo de conta autenticada do elemento HTML.
+    const tipoConta = document.getElementById('tipoConta').getAttribute('data-tipo');
+    
+    // Define o link da homepage com base no tipo de conta.
+    let homepageLink;
+    if (tipoConta === 'admin') {
+        homepageLink = './homeAdm.php';
+    } else if (tipoConta === 'funcionario') {
+        homepageLink = './homeFuncionario.php';
+    } else {
+        homepageLink = './homeEmpresa.php';
+    }
     
     // Cria o HTML da barra superior
     const barraSuperiorHTML = `
@@ -8,24 +21,14 @@ function criarBarraSuperior() {
 
     <nav class="nav-superior">
         <img class="logoDacal" src="../IMAGENS/Homepage/logoDacal.png">
-
         <ul class="nav-list">
-            <li><a href="<?php
-            if ($sessao->getValorSessao('tipoConta') === 'admin') {
-                echo './homeAdm.php';
-            } elseif ($sessao->getValorSessao('tipoConta') === 'funcionario') {
-                echo './homeFuncionario.php';
-            } else {
-                echo './homeEmpresa.php';
-            }
-            ?>">Homepage
-            </li></a>
-            <li><a href="catalogoProdutos.php">Catálogo</li></a>
-            <li><a href="">Sobre Nós</li></a>
+            <li><a href="${homepageLink}">Homepage</a></li>
+            <li><a href="catalogoProdutos.php">Catálogo</a></li>
+            <li><a href="">Sobre Nós</a></li>
         </ul>
         <ul class="icons">
             <a href="./autenticacao/logout.php">
-                <button class="sair" href="/IMAGENS/Homepage/logoDacal.png">
+                <button class="sair">
                     <img src="../IMAGENS/HomeEmpresa/sair.png" class="sair">
                 </button>
             </a>
@@ -33,10 +36,10 @@ function criarBarraSuperior() {
     </nav>
     `;
   
-    // Busca o elemento com o ID "barraSuperior" e insere o HTML
+    // Insere o HTML no elemento com o ID "barraSuperior",
     const barraSuperiorElement = document.getElementById('barraSuperior');
     barraSuperiorElement.innerHTML = barraSuperiorHTML;
-  }
-  
-  // Chama a função para criar a barra superior
-  criarBarraSuperior();
+}
+
+// Chama a função para criar a barra superior.
+criarBarraSuperior();

@@ -36,11 +36,15 @@ if ($contaAutenticada !== "cliente" && $contaAutenticada !== "admin" && $contaAu
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css'>
 </head>
 <body class="fundo">
-<header>
-    <div id="barraSuperior"></div>
-</header>
 
-<div class="homepage">
+    <div id="tipoConta" data-tipo="<?php echo $contaAutenticada; ?>"></div> 
+    <header> 
+        <div id="barraSuperior"></div> 
+    </header>
+
+
+    <div class="homepage">
+    
     <div class="menu">
         <br>
         <br>

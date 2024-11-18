@@ -35,11 +35,15 @@ if ($usuarioAutenticado !== "cliente") {
     <link rel="stylesheet" href="../CSS/perfilEmpresa.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
-<header>
-    <div id="barraSuperior"></div>
-</header>
+
 
 <body class="fundo">
+
+    <div id="tipoConta" data-tipo="<?php echo $usuarioAutenticado; ?>"></div> 
+    <header> 
+        <div id="barraSuperior"></div> 
+    </header>
+
     <div class="homepage">
         <div class="menu">
             <br>
