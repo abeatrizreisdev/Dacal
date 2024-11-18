@@ -144,7 +144,7 @@
 
             try {
 
-                $sql = "SELECT * FROM {$this->tabela} WHERE tipoConta = 'Funcionario'";
+                $sql = "SELECT * FROM {$this->tabela} WHERE tipoConta = 'funcionario'";
 
                 $resultadoConsulta = $this->conexaoBD->queryBanco($sql);
 

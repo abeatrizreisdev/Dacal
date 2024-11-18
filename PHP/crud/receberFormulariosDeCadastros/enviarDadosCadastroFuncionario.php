@@ -1,9 +1,11 @@
 <?php
+
     require "../../conexaoBD/conexaoBD.php";
     require "../crudFuncionario.php";
     require "../../sessao/sessao.php";
     require "../../entidades/funcionario.php";
     require "../../conexaoBD/configBanco.php";
+    require "../../validacoes/funcoesValidacoes.php";
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -17,74 +19,34 @@
     $conexao->setSenhaBD(BD_PASSWORD);
     $conexao->setUsuarioBD(BD_USERNAME);
     $conexao->getConexao(); // Iniciando a conexão com o banco.
+
     $crudFuncionario = new CrudFuncionario($conexao);
 
     header('Content-Type: application/json'); // Define o cabeçalho JSON
 
 
-    function validarCPF($cpf) {
-
-        // Remove qualquer caractere que não seja número
-        $cpf = preg_replace('/[^0-9]/is', '', $cpf);
-    
-        // Verifica se o CPF tem 11 dígitos
-        if (strlen($cpf) != 11) {
-            return false;
-        }
-    
-        // Verifica se todos os dígitos são iguais
-        if (preg_match('/(\d)\1{10}/', $cpf)) {
-            return false;
-        }
-    
-        // Calcula os dígitos verificadores
-        for ($tamanho = 9; $tamanho < 11; $tamanho++) {
-
-            $somaDigitos = 0;
-
-            for ($posicao = 0; $posicao < $tamanho; $posicao++) {
-
-                $somaDigitos += $cpf[$posicao] * (($tamanho + 1) - $posicao);
-
-            }
-
-            $digitoVerificador = ((10 * $somaDigitos) % 11) % 10;
-
-            if ($cpf[$posicao] != $digitoVerificador) {
-
-                return false;
-
-            }
-            
-        }
-    
-        return true;
-    }
-    
-    
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os às suas variáveis.
-        $nome = $_POST['nome'];
-        $telefone = $_POST['telefone'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-        $tipoConta = 'funcionario';
-        $cpf = preg_replace('/[^0-9]/', '', $_POST['cpf']); // remove formatação do CPF.
-        $bairro = $_POST['bairro'];
-        $cep = $_POST['cep'];
-        $estado = $_POST['estado'];
-        $cidade = $_POST['municipio'];
-        $numeroEndereco = $_POST['numeroEndereco'];
-        $logradouro = $_POST['logradouro'];
-
-        if (!validarCPF($cpf)) {
-            echo json_encode(['cpfInvalido' => true, 'mensagem' => 'CPF inválido.']);
-            exit();
-        };
-
         try {
+
+            // Pegando os valores dos campos de entradas do formulário de cadastro de cliente e atribuindo-os às suas variáveis.
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $tipoConta = 'funcionario';
+            $cpf = preg_replace('/[^0-9]/', '', $_POST['cpf']); // remove formatação do CPF.
+            $bairro = $_POST['bairro'];
+            $cep = $_POST['cep'];
+            $estado = $_POST['estado'];
+            $cidade = $_POST['municipio'];
+            $numeroEndereco = $_POST['numeroEndereco'];
+            $logradouro = $_POST['logradouro'];
+
+            if (!validarCPF($cpf)) {
+                echo json_encode(['cpfInvalido' => true, 'mensagem' => 'CPF inválido.']);
+                exit();
+            };
 
             // Instanciando o objeto que representa o funcionário e passando os valores recebidos do formulário de cadastro...
             // para o objeto do tipo Funcionário.
@@ -114,13 +76,13 @@
                 'cidade' => $funcionario->getCidade(),
                 'bairro' => $funcionario->getBairro(),
                 'logradouro' => $funcionario->getLogradouro(),
-                'cep' => $funcionario->getCep()
+                'cep' => $funcionario->getCep(),
+                'numeroEndereco' => $funcionario->getNumeroEndereco()
             ]);
 
             // Se o cadastro foi efetuado com sucesso, então entrará nessa condicional pois será retornado true.
             if ($cadastroRealizado) {
 
-            
                 ob_end_clean(); // Limpa o buffer de saída
 
                 echo json_encode(['sucesso' => true, 'mensagem' => 'Funcionário cadastrado com sucesso.']);
