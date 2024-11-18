@@ -6,11 +6,12 @@ require_once "../sessao/sessao.php";
 
 header('Content-Type: application/json'); 
 $sessaoFuncionario = new Sessao();
-$response = array();
+$resposta = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
 
     try {
+
         $produto = new Produto();
         $produto->setId($_POST['produto_id']);
         $produto->setNome($_POST['nomeProduto']);
@@ -22,25 +23,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['adicionar'])) {
         $orcamento_serializado = $sessaoFuncionario->getValorSessao('orcamento');
 
         if ($orcamento_serializado && is_string($orcamento_serializado)) {
+
             $orcamento = unserialize($orcamento_serializado);
+
         } else {
+
             $orcamento = new Orcamento();
+
         }
 
         $orcamento->adicionarProduto($produto, $quantidade);
         $sessaoFuncionario->setChaveEValorSessao('orcamento', serialize($orcamento));
 
-        $response['success'] = true;
-        $response['message'] = 'Produto adicionado ao orçamento!';
+        $resposta['sucesso'] = true;
+        $resposta['mensagem'] = 'Produto adicionado ao orçamento!';
+
     } catch (Exception $erro) {
-        $response['success'] = false;
-        $response['message'] = 'Erro ao adicionar produto: ' . $erro->getMessage();
+
+        $resposta['sucesso'] = false;
+        $resposta['mensagem'] = 'Erro ao adicionar produto: ' . $erro->getMessage();
     }
 
 } else {
-    $response['success'] = false;
-    $response['message'] = 'Requisição inválida.';
+    $resposta['sucesso'] = false;
+    $resposta['mensagem'] = 'Requisição inválida.';
 }
 
-echo json_encode($response);
-?>
+echo json_encode($resposta);

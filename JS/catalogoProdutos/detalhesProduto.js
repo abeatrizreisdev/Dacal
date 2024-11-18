@@ -156,6 +156,7 @@ function adicionarListeners() {
         formOrcamento.addEventListener('submit', function(event) {
 
             event.preventDefault(); 
+            
             var formData = new FormData(this);
             var botaoAdicionar = document.querySelector('.botaoAdicionar');
             botaoAdicionar.disabled = true;
@@ -174,9 +175,9 @@ function adicionarListeners() {
 
                     dados = JSON.parse(dados);
 
-                    if (dados.success) {
+                    if (dados.sucesso) {
 
-                        toastr.success(dados.message);
+                        toastr.success(dados.mensagem);
                         setTimeout(function() {
                             window.location.href = './realizarOrcamento.php';
                         }, 1500);

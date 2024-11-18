@@ -23,7 +23,6 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         
-
         try {
 
             $produtos = $_POST['produtos'] ?? [];
@@ -72,7 +71,7 @@
                 $cliente = new Cliente();
 
                 // Setando os valores do objeto Cliente que está autenticado e fez o orçamento.
-                $cliente->setNome($dadosCliente['nomeFantasia']);
+                $cliente->setNomeFantasia($dadosCliente['nomeFantasia']);
                 $cliente->setIdCliente($sessao->getValorSessao('idCliente'));
                 $cliente->setRazaoSocial($dadosCliente['razaoSocial']);
                 $cliente->setCnpj($dadosCliente['cnpj']);
@@ -94,7 +93,7 @@
                 // Criando a mensagem que será encaminhada para o número do whatsapp, em que estará incluso todos os dados do formulário e do cliente.
                 $mensagem = "Olá, equipe da Dacal!\n\n";
                 $mensagem .= "Um novo orçamento foi solicitado pelo cliente. Seguem os detalhes:\n\n";
-                $mensagem .= "Nome do Cliente: " . $cliente->getNome() . "\n";
+                $mensagem .= "Nome do Cliente: " . $cliente->getNomeFantasia() . "\n";
                 $mensagem .= "CNPJ: " . $cliente->getCnpj() . "\n";
                 $mensagem .= "Telefone: " . $cliente->getTelefone() . "\n";
                 $mensagem .= "Email: " . $cliente->getEmail() . "\n";

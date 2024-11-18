@@ -156,8 +156,8 @@
                 console.error('Erro ao exibir o orçamento:', erro);
                 const container = document.getElementById('orcamentoContainer');
                 const formContainer = document.getElementById('formOrcamentoContainer');
-                container.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
-                formContainer.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>';
+                container.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>' + erro;
+                formContainer.innerHTML = '<p>Erro ao carregar os produtos do orçamento.</p>' + erro;
 
             });
 

@@ -26,7 +26,7 @@
         */
 
         private int $id;
-        private string $nome;
+        private string $nomeFantasia;
         private string $razaoSocial;
         private string $cnpj;
         private string $inscricaoEstadual;
@@ -46,7 +46,7 @@
             
         }
 
-        public function setIdCliente($id) {
+        public function setIdCliente(int $id) {
 
              // Se for um valor númerico (int, por exemplo) e maior que 0.
              if (is_numeric($id) && $id <= 0) {
@@ -63,7 +63,7 @@
 
         }
 
-        public function setNome($nome) {
+        public function setNomeFantasia(string $nome) {
 
             if (empty($nome)) {
 
@@ -75,11 +75,11 @@
 
             }
 
-            $this->nome = $nome;
+            $this->nomeFantasia = $nome;
 
         }
 
-        public function setRazaoSocial($razaoSocial) {
+        public function setRazaoSocial(string $razaoSocial) {
 
             if (empty($razaoSocial)) {
 
@@ -95,7 +95,7 @@
 
         }
 
-        public function setCnpj($cnpj) {
+        public function setCnpj(string $cnpj) {
 
             if (empty($cnpj)) {
 
@@ -111,7 +111,7 @@
 
         }
 
-        public function setInscricaoEstadual($inscricaoEstadual) {
+        public function setInscricaoEstadual(string $inscricaoEstadual) {
 
             if (empty($inscricaoEstadual)) {
 
@@ -127,7 +127,7 @@
 
         }
 
-        public function setTelefone($telefone) {
+        public function setTelefone(string $telefone) {
 
             if (empty($telefone)) {
 
@@ -143,7 +143,7 @@
 
         }
 
-        public function setEmail($email) {
+        public function setEmail(string $email) {
 
             if (empty($email)) {
 
@@ -159,7 +159,7 @@
 
         }
 
-        public function setOrcamento($orcamento) {
+        public function setOrcamento(Orcamento $orcamento) {
 
             if (is_null($orcamento)) {
 
@@ -172,7 +172,7 @@
         }
 
 
-        public function setSenha($senha) {
+        public function setSenha(string $senha) {
 
             if (empty($senha)) {
 
@@ -188,7 +188,7 @@
 
         }
 
-        public function setTipoConta($tipoConta) {
+        public function setTipoConta(string $tipoConta) {
 
             if (empty($tipoConta)) {
 
@@ -204,7 +204,7 @@
 
         }
 
-        public function setEstado($estado) {
+        public function setEstado(string $estado) {
 
             if (empty($estado)) {
 
@@ -220,7 +220,7 @@
 
         }
 
-        public function setMunicipio($municipio) {
+        public function setMunicipio(string $municipio) {
 
             if (empty($municipio)) {
 
@@ -236,7 +236,7 @@
 
         }
 
-        public function setLogradouro($logradouro) {
+        public function setLogradouro(string $logradouro) {
 
             if (empty($logradouro)) {
 
@@ -252,7 +252,7 @@
 
         }
 
-        public function setBairro ($bairro) {
+        public function setBairro (string $bairro) {
 
             if (empty($bairro)) {
 
@@ -268,7 +268,7 @@
 
         }
 
-        public function setCep($cep) {
+        public function setCep(string $cep) {
             
             if (empty($cep)) {
 
@@ -284,7 +284,7 @@
 
         }
 
-        public function setNumeroEndereco($numeroEndereco) {
+        public function setNumeroEndereco(int $numeroEndereco) {
             
             if (empty($numeroEndereco)) {
 
@@ -300,63 +300,63 @@
 
         }
 
-        public function getId() {
+        public function getId(): int {
             return $this->id;
         }
 
-        public function getNome() {
-            return $this->nome;
+        public function getNomeFantasia(): string {
+            return $this->nomeFantasia;
         }
 
-        public function getEmail() {
+        public function getEmail(): string {
             return $this->email;
         }
 
-        public function getSenha() {
+        public function getSenha(): string {
             return $this->senha;
         }
 
-        public function getRazaoSocial() {
+        public function getRazaoSocial(): string {
             return $this->razaoSocial;
         }
 
-        public function getTelefone() {
+        public function getTelefone(): string {
             return $this->telefone;
         }
 
-        public function getTipoConta() {
+        public function getTipoConta(): string {
             return $this->tipoConta;
         }
 
-        public function getCnpj() {
+        public function getCnpj(): string {
             return $this->cnpj;
         }
 
-        public function getInscricaoEstadual() {
+        public function getInscricaoEstadual(): string {
             return $this->inscricaoEstadual;
         }
 
-        public function getEstado() {
+        public function getEstado(): string {
             return $this->estado;
         }
 
-        public function getMunicipio() {
+        public function getMunicipio(): string {
             return $this->municipio;
         }
 
-        public function getBairro() {
+        public function getBairro(): string {
             return $this->bairro;
         }
 
-        public function getLogradouro() {
+        public function getLogradouro(): string {
             return $this->logradouro;
         }
 
-        public function getCep() {
+        public function getCep(): string {
             return $this->cep;
         }
 
-        public function getNumeroEndereco() {
+        public function getNumeroEndereco(): int {
             return $this->numeroEndereco;
         }
 
@@ -364,7 +364,7 @@
             return $this->orcamentos;
         }
 
-        public function getOrcamento($idOrcamento) {
+        public function getOrcamento(int $idOrcamento): Orcamento {
             return $this->orcamentos[$idOrcamento];
         }
 
@@ -412,4 +412,3 @@
     
     */
 
-?>

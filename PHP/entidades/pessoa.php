@@ -2,26 +2,26 @@
 
     class Pessoa {
 
-        private $id = null;
-        private $nome;
-        private $email;
-        private $senha;
-        private $telefone;
-        private $tipoConta;
-        private $cpf;
-        private $estado;
-        private $cidade;
-        private $bairro;
-        private $logradouro;
-        private $cep;
-        private $numeroEndereco;
+        private int $id ;
+        private string $nome;
+        private string $email;
+        private string $senha;
+        private string $telefone;
+        private string $tipoConta;
+        private string $cpf;
+        private string $estado;
+        private string $cidade;
+        private string $bairro;
+        private string $logradouro;
+        private string $cep;
+        private int $numeroEndereco;
 
 
         public function __construct() {
             
         }
 
-        public function setId($id) {
+        public function setId(int $id): void {
 
             // Se for um valor númerico (int, por exemplo) e maior que 0.
             if (is_numeric($id) && $id <= 0) {
@@ -38,7 +38,7 @@
 
         }
 
-        public function setNome($nome) {
+        public function setNome(string $nome): void {
 
             if (empty($nome)) {
 
@@ -54,7 +54,7 @@
 
         }
 
-        public function setEmail($email) {
+        public function setEmail(string $email) {
 
             if (empty($email)) {
 
@@ -70,7 +70,7 @@
 
         }
 
-        public function setSenha($senha) {
+        public function setSenha(string $senha) {
 
             if (empty($senha)) {
 
@@ -87,7 +87,7 @@
 
         }
 
-        public function setTelefone($telefone) {
+        public function setTelefone(string $telefone) {
 
             if (empty($telefone)) {
 
@@ -103,7 +103,7 @@
 
         }
 
-        public function setTipoConta($tipoConta) {
+        public function setTipoConta(string $tipoConta) {
 
             if (empty($tipoConta)) {
 
@@ -119,7 +119,7 @@
 
         }
 
-        public function setCpf($cpf) {
+        public function setCpf(string $cpf) {
 
             if (empty($cpf)) {
 
@@ -135,7 +135,7 @@
 
         }
 
-        public function setEstado($estado) {
+        public function setEstado(string $estado) {
 
             if (empty($estado)) {
 
@@ -151,7 +151,7 @@
 
         }
 
-        public function setCidade($cidade) {
+        public function setCidade(string $cidade) {
 
             if (empty($cidade)) {
 
@@ -167,7 +167,7 @@
 
         }
 
-        public function setBairro ($bairro) {
+        public function setBairro (string $bairro) {
 
             if (empty($bairro)) {
 
@@ -183,7 +183,7 @@
 
         }
 
-        public function setLogradouro($logradouro) {
+        public function setLogradouro(string $logradouro) {
 
             if (empty($logradouro)) {
 
@@ -200,7 +200,7 @@
         }
 
 
-        public function setCep($cep) {
+        public function setCep(string $cep) {
             
             if (empty($cep)) {
 
@@ -216,7 +216,7 @@
 
         }
 
-        public function setNumeroEndereco($numeroEndereco) {
+        public function setNumeroEndereco(int $numeroEndereco) {
             
             if (empty($numeroEndereco)) {
 
@@ -232,58 +232,57 @@
 
         }
 
-        public function getId() {
+        public function getId(): int {
             return $this->id;
         }
 
-        public function getNome() {
+        public function getNome(): string {
             return $this->nome;
         }
 
-        public function getEmail() {
+        public function getEmail(): string {
             return $this->email;
         }
 
-        public function getSenha() {
+        public function getSenha(): string {
             return $this->senha;
         }
 
-        public function getTelefone() {
+        public function getTelefone(): string {
             return $this->telefone;
         }
 
-        public function getTipoConta() {
+        public function getTipoConta(): string {
             return $this->tipoConta;
         }
 
-        public function getCpf() {
+        public function getCpf(): string {
             return $this->cpf;
         }
 
-        public function getEstado() {
+        public function getEstado(): string {
             return $this->estado;
         }
 
-        public function getCidade() {
+        public function getCidade(): string {
             return $this->cidade;
         }
 
-        public function getBairro() {
+        public function getBairro(): string {
             return $this->bairro;
         }
 
-        public function getLogradouro() {
+        public function getLogradouro(): string {
             return $this->logradouro;
         }
 
-        public function getCep() {
+        public function getCep(): string {
             return $this->cep;
         }
 
-        public function getNumeroEndereco() {
+        public function getNumeroEndereco(): int {
             return $this->numeroEndereco;
         }
 
     }
 
-?>

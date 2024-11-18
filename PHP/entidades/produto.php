@@ -10,23 +10,23 @@
         - nome: String
         - valor: Double
         - descricao: String
-        - imagem: Blob
+        - imagem: String
         - categoria: Int
         
         */
 
-        private $id;
-        private $nome;
-        private $valor;
-        private $descricao;
-        private $categoria;
-        private $imagem;
+        private int $id;
+        private string $nome;
+        private float $valor;
+        private string $descricao;
+        private int $categoria;
+        private string $imagem;
     
         public function __construct() {
             
         }
 
-        public function setId($id) {
+        public function setId(int $id): void {
 
             // Se for um valor númerico (int, por exemplo) e maior que 0.
             if (is_numeric($id) && $id <= 0) {
@@ -43,7 +43,7 @@
             
         }
 
-        public function setNome($nome) {
+        public function setNome(string $nome): void {
 
             if (empty($nome)) {
 
@@ -59,7 +59,7 @@
 
         }
 
-        public function setValor($valor) {
+        public function setValor(float $valor): void {
 
             // Verifica se o valor é numérico.
             if (!is_numeric($valor)) {
@@ -79,7 +79,7 @@
 
         }
 
-        public function setDescricao($descricao) {
+        public function setDescricao(string $descricao): void {
 
             if (empty($descricao)) {
 
@@ -95,7 +95,7 @@
 
         }
 
-        public function setImagem($imagem) {
+        public function setImagem(string $imagem): void {
 
             if ($imagem == null) {
 
@@ -107,7 +107,7 @@
 
         }
 
-        public function setCategoria($categoria) {
+        public function setCategoria(int $categoria) {
 
             if ($categoria == null or !is_numeric($categoria)) {
 
@@ -119,27 +119,27 @@
 
         }
 
-        public function getId() {
+        public function getId(): int {
             return $this->id;
         }
 
-        public function getNome() {
+        public function getNome(): string {
             return $this->nome;
         }
 
-        public function getValor() {
+        public function getValor(): float {
             return $this->valor;
         }
 
-        public function getDescricao() {
+        public function getDescricao(): string {
             return $this->descricao;
         }
 
-        public function getImagem() {
+        public function getImagem(): string {
             return $this->imagem;
         }
 
-        public function getCategoria() {
+        public function getCategoria(): int {
             return $this->categoria;
         }
 
@@ -155,11 +155,10 @@
         + getNome(): String
         + getValor(): Double
         + getDescricao(): String
-        + getImagem(): Blob
+        + getImagem(): String
         + getCategoria(): Int
         
         */
 
     }
 
-?>
