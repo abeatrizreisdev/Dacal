@@ -1,6 +1,7 @@
 <?php 
 
     require "../../conexaoBD/conexaoBD.php";
+    require "../../conexaoBD/configBanco.php";
     require "../crudFuncionario.php";
     require "../../sessao/sessao.php";
     require "../../entidades/funcionario.php";
