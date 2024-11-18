@@ -90,9 +90,9 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada !== "funcionario"
                         <label for="nomeProduto">Nome:</label>
                         <input type="text" id="nomeProduto" name="nomeProduto" required>
                         <label for="precoProduto">Preço:</label>
-                        <input type="number" id="precoProduto" name="precoProduto" required min="1">
+                        <input type="number" id="precoProduto" name="precoProduto" required min="1" step="0.01" required>
                         <label for="categoriaProduto" id="labelCategoria">Categoria:</label>
-                        <select name="categoriaProduto" id="categoriaProduto">
+                        <select name="categoriaProduto" required id="categoriaProduto">
                             <option value="1">Móveis</option>
                             <option value="2">Escritório</option>
                             <option value="3">Diversos</option>

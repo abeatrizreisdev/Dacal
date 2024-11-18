@@ -96,7 +96,7 @@
                                 <input type="text" name="nome" id="nomeProduto" placeholder="Nome do produto." required>
 
                                 <label for="valorProduto">Valor:</label>
-                                <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required min="1">
+                                <input type="number" name="valor" id="valorProduto" placeholder="Valor do produto." required min="1" step="0.01">
 
                                 <label for="categoriaProduto" id="labelCategoria"> Categoria: </label>
                                 <select name="categoriaProduto" id="CategoriaProduto">
