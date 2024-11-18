@@ -18,103 +18,7 @@ a {
     cursor: pointer;
 }
 
-/*Spiriazi roupas em cima */
-/*HEADER COMEÇA AQUI*/
-a:hover {
-    opacity: 0.7;
-}
 
-.logoDacal {
-    letter-spacing: 4px;
-    width: 10vw;
-    height: 9vh;
-}
-
-.nav-superior {
-    width: 100vw;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-family: sans-serif;
-    background-color: transparent;
-    height: 10vh;
-    /* o position transform é responsavel por fizar a barra de pesquisa na parte superior so site */
-    position: static;
-}
-
-/* dar uma estudada em position  'absolute'/*
-  
-  /*
-  ----------------------------------------------------------
-   Parte superior do código onde informa o valor da promoção
-  ----------------------------------------------------------
-  */
-
-.nav-superior {
-    border-bottom: solid 1px black;
-    background-color: white;
-}
-
-.informativo_superior {
-    background-color: #ff3131;
-    height: 4vh;
-    width: 100vw;
-    text-align: center;
-
-}
-
-.informativo_superior p {
-    color: #000000;
-    text-align: center;
-    font-family: "Poppins";
-    font-weight: 600;
-
-}
-
-/*Icons no canto superior direito */
-
-
-.nav-list li:hover {
-    opacity: 0.7;
-}
-
-.nav-list {
-    /*  tirando o estilo da lista (as bolinhas) */
-    list-style: none;
-    display: flex;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-}
-
-.nav-list li {
-    /* é usada para controlar o espaço em branco entre as letras */
-    letter-spacing: 0.5vh;
-    /* Afastar os itens uns dos outros */
-    margin-left: 15vh;
-    color: rgb(3, 3, 3);
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 20px;
-}
-
-#liqui a {
-    color: #B56F2A;
-}
-
-.icons {
-    /*  tirando o estilo da lista (as bolinhas) */
-    list-style: none;
-    display: flex;
-}
-
-.sair {
-    width: 4vw;
-    height: 7vh;
-    border: none;
-    background-color: #ffffff;
-    cursor: pointer;
-}
 
 .fundo {
     background-color: #a6a6a6;
@@ -472,6 +376,7 @@ a:hover {
     flex-direction: row;
     justify-content: center;
     height: 6.5vh;
+    margin-bottom: 1.5vh;
 }
 #btnCancelar1{
     background-color: #a6a6a6;
@@ -599,9 +504,11 @@ a:hover {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 5vh;
-    width: 16vw;
+    height: 4vh;
+    line-height: 4vh;
+    width: 14vw;
     border-radius: 2vh;
+    font-size: 2.2vh;
     font-family: 'Poppins';
     cursor: pointer;
     font-weight: 500;
@@ -613,8 +520,10 @@ a:hover {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 5vh;
+    height: 4vh;
+    line-height: 4vh;
     width: 14vw;
+    font-size: 2.2vh;
     border-radius: 2vh;
     font-family: 'Poppins';
     cursor: pointer;
@@ -626,13 +535,13 @@ a:hover {
     margin: 2vw;
     color: black;
     border: #000000 solid 0.4vh;
-    height: 6vh;
-    width: 16vw;
+    height: 5vh;
+    width: 14vw;
     border-radius: 2vh;
     font-family: 'Poppins';
     cursor: pointer;
     font-weight: 500;
-    font-size: 2.5vh;
+    font-size: 2.2vh;
     line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
     text-align: center; /* Centraliza o texto horizontalmente */
     text-overflow: ellipsis; /* Trunca o texto que extrapola */

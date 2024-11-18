@@ -102,6 +102,7 @@ $sessao->excluirChaveSessao('erro'); // Remove a mensagem de erro após exibi-la
                         <input type="checkbox" id="checkbox" required>
                         Declaro que as informações acima são verdadeiras
                     </label>
+                    <br>
                     <button type="submit" id="btnCadastro">Cadastrar</button>
                     <div>
                     <a href="../login.php" id="btnCancelar">Cancelar</a>
