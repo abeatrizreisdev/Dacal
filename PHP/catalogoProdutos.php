@@ -161,7 +161,6 @@ if ($tipoContaAutenticada !== "admin" && $tipoContaAutenticada && "funcionario" 
     <script src="../JS/catalogoProdutos/excluirProduto.js"></script>
     <script src="../JS/catalogoProdutos/carregarProdutos.js"></script>
     <script src="../JS/catalogoProdutos/buscarProdutoPorNome.js"></script>
-    <script src="../JS/barras/barraSuperior.js"></script>
 
 </body>
 
