@@ -151,9 +151,9 @@ if ($usuarioAutenticado !== "cliente") {
                             method="post">
                             <div id="formOrcamentoContainer"></div>
                             <div class="btnCentrais">
-                                <a id="btnCancelarr" onclick="cancelarOrcamento()">Cancelar Orçamento</a>
-                                <a id="btnVoltarr" type="button" onclick="voltarParaPasso('passo2')">Voltar
-                                    Página</a>
+                                <button id="btn3Cancelar"><a onclick="cancelarOrcamento()">Cancelar Orçamento</a></button>
+                                <button id="btn3Voltar"><a type="button" onclick="voltarParaPasso('passo2')">Voltar
+                                    Página</a></button>
                                 <button id="btnFinalizarr" type="submit">Finalizar Orçamento</button>
                             </div>
                         </form>

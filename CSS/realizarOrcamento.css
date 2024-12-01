@@ -382,7 +382,7 @@ a {
     background-color: #a6a6a6;
     margin: 1vh;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
@@ -399,7 +399,7 @@ a {
     background-color: #7ed957;
     margin: 1vh;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
@@ -423,7 +423,7 @@ a {
     background-color: #f44336;
     margin: 2vw;
     color: black;
-    border: 0.4 solid black;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
@@ -436,7 +436,7 @@ a {
     background-color: #a6a6a6;
     margin: 2vw;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
@@ -453,7 +453,7 @@ a {
     background-color: #7ed957;
     margin: 2vw;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
@@ -503,7 +503,7 @@ a {
     background-color: #f44336;
     margin: 2vw;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 4vh;
     line-height: 4vh;
     width: 14vw;
@@ -519,7 +519,7 @@ a {
     background-color: #a6a6a6;
     margin: 2vw;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 4vh;
     line-height: 4vh;
     width: 14vw;
@@ -534,19 +534,22 @@ a {
     background-color: #7ed957;
     margin: 2vw;
     color: black;
-    border: #000000 solid 0.4vh;
+    border: none;
     height: 5vh;
     width: 14vw;
     border-radius: 2vh;
     font-family: 'Poppins';
     cursor: pointer;
     font-weight: 500;
-    font-size: 2.2vh;
     line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
     text-align: center; /* Centraliza o texto horizontalmente */
     text-overflow: ellipsis; /* Trunca o texto que extrapola */
     white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
 }
+
+
+
+
 
 
 
@@ -557,7 +560,6 @@ a {
 
 button[type="button"] {
     background-color: #f0f0f0;
-    border: 1px solid #ccc;
     padding: 5px;
     cursor: pointer;
 }
@@ -583,7 +585,52 @@ button[type="button"]:hover {
 
 
 
+#btn3Cancelar{
+    background-color: #f44336;
+    margin: 2vw;
+    color: black;
+    border: none;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+}
 
+#btn3Voltar{
+    background-color: #a6a6a6;
+    margin: 2vw;
+    color: black;
+    border: none;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
+
+#btn3Finalizar{
+    background-color: #7ed957;
+    margin: 2vw;
+    color: black;
+    border: none;
+    height: 5vh;
+    width: 14vw;
+    border-radius: 2vh;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 1.2; /* Ajuste a altura da linha conforme necessário */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    text-overflow: ellipsis; /* Trunca o texto que extrapola */
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+}
 
 
 
