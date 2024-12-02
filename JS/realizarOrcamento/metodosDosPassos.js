@@ -293,8 +293,6 @@
 
                 input.value = quantidadeInputPasso2.value;
 
-
-
             }
 
         });

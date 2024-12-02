@@ -121,8 +121,7 @@ if ($usuarioAutenticado !== "cliente") {
                             <!-- Os produtos cadastrados, dependendo da sua categoria, serão exibidos aqui, por meio do arquivo "realizarOrcamento.js" e "buscarProdutosPorCategoria" na pasta "buscarProdutos". -->
                         </div>
                         <div class="btnPasso">
-                            <button class="btn" id="btnCancelar1" onclick="cancelarOrcamento()">Cancelar
-                                Orçamento</button>
+                            <button class="btn" type="button"  id="btnCancelar1" onclick="cancelarOrcamento()">Cancelar Orçamento</button>
                             <button class="btn" id="btnProximo" type="button"
                                 onclick="avancarParaPasso('passo2')">Proximo Passo</button>
                         </div>
@@ -135,7 +134,7 @@ if ($usuarioAutenticado !== "cliente") {
                         <div id="orcamentoContainer"></div>
 
                         <div class="btnCentrais">
-                            <button class="btn" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar
+                            <button class="btn" type="button" id="btnCancelar" onclick="cancelarOrcamento()">Cancelar
                                 Orçamento</button>
                             <button class="btn" id="btnVoltar" type="button"
                                 onclick="voltarParaPasso('passo1')">Voltar Página</button>
@@ -151,8 +150,8 @@ if ($usuarioAutenticado !== "cliente") {
                             method="post">
                             <div id="formOrcamentoContainer"></div>
                             <div class="btnCentrais">
-                                <button id="btn3Cancelar"><a onclick="cancelarOrcamento()">Cancelar Orçamento</a></button>
-                                <button id="btn3Voltar"><a type="button" onclick="voltarParaPasso('passo2')">Voltar
+                                <button type="button" id="btn3Cancelar"><a onclick="cancelarOrcamento()">Cancelar Orçamento</a></button>
+                                <button type="button" id="btn3Voltar"><a onclick="voltarParaPasso('passo2')">Voltar
                                     Página</a></button>
                                 <button id="btnFinalizarr" type="submit">Finalizar Orçamento</button>
                             </div>
